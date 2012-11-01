@@ -113,17 +113,17 @@ include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
 )
  
-add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
- 
-set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
- 
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+#~ add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
+ #~ 
+#~ set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
+ #~ 
+#~ target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
 
 # Create static library
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/lib)
 add_library(OgreBase STATIC ${HDRS} ${SRCS})
-
+target_link_libraries(OgreBase ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
@@ -140,15 +140,15 @@ if(WIN32 AND NOT MINGW)
 		COMMAND copy \"$(TargetPath)\" .\\dist\\bin )
 endif(WIN32 AND NOT MINGW)
 
-if(MINGW OR UNIX)
-	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
-endif(MINGW OR UNIX)
+#~ if(MINGW OR UNIX)
+	#~ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
+#~ endif(MINGW OR UNIX)
  
 if(WIN32)
  
-	install(TARGETS OgreApp
-		RUNTIME DESTINATION bin
-		CONFIGURATIONS All)
+	#~ install(TARGETS OgreApp
+		#~ RUNTIME DESTINATION bin
+		#~ CONFIGURATIONS All)
  
 	install(DIRECTORY ${CMAKE_SOURCE_DIR}/dist/Media
 		DESTINATION ./
@@ -202,9 +202,9 @@ endif(WIN32)
 
 if(UNIX)
  
-	install(TARGETS OgreApp
-		RUNTIME DESTINATION bin
-		CONFIGURATIONS All)
+	#~ install(TARGETS OgreApp
+		#~ RUNTIME DESTINATION bin
+		#~ CONFIGURATIONS All)
  
 	install(DIRECTORY ${CMAKE_SOURCE_DIR}/dist/media
 		DESTINATION ./
