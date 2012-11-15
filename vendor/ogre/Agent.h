@@ -5,30 +5,21 @@ extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
 
 class Agent
 {
+protected:
+		std::map<std::string, Ogre::AnimationState*> mAnims; // master animation list
+		std::map<std::string, bool> mFadingIn;	// which animations are fading in
+		std::map<std::string, bool> mFadingOut;	// which animations are fading out
+		std::string mBaseAnimID;				// current base (full- or lower-body) animation
+		std::string mTopAnimID;					// current top (upper-body) animation
+		Ogre::Real mTimer;						// general timer to see how long animations have been playing
+		Ogre::Real mVerticalVelocity;			// for jumping
+		
 private:
 	Ogre::SceneNode* mBodyNode;
 	Ogre::Entity* mBodyEntity;
 
 	// all of the animations our character has, and a null ID
 	// some of these affect separate body parts and will be blended together
-
-	enum AnimID
-	{
-		ANIM_IDLE_BASE,
-		ANIM_IDLE_TOP,
-		ANIM_RUN_BASE,
-		ANIM_RUN_TOP,
-		ANIM_HANDS_CLOSED,
-		ANIM_HANDS_RELAXED,
-		ANIM_DRAW_SWORDS,
-		ANIM_SLICE_VERTICAL,
-		ANIM_SLICE_HORIZONTAL,
-		ANIM_DANCE,
-		ANIM_JUMP_START,
-		ANIM_JUMP_LOOP,
-		ANIM_JUMP_END,
-		ANIM_NONE
-	};
 
 	// for locomotion
 	Ogre::Real mDistance;					// The distance the agent has left to travel
@@ -49,20 +40,18 @@ public:
 	~Agent();
 
 	void update(Ogre::Real deltaTime);		// update the agent
-
-	Ogre::AnimationState* mAnims[13];		// master animation list
-	AnimID mBaseAnimID;						// current base (full- or lower-body) animation
-	AnimID mTopAnimID;						// current top (upper-body) animation
-	bool mFadingIn[13];						// which animations are fading in
-	bool mFadingOut[13];					// which animations are fading out
-	Ogre::Real mTimer;						// general timer to see how long animations have been playing
-	Ogre::Real mVerticalVelocity;			// for jumping
-
+	
 	void setupAnimations();
-	void setBaseAnimation(AnimID id, bool reset = false);
-	void setTopAnimation(AnimID id, bool reset = false);
+	void setBaseAnimation(std::string id, bool reset = false);
+	void setTopAnimation(std::string id, bool reset = false);
 	void fadeAnimations(Ogre::Real deltaTime);
 	void updateAnimations(Ogre::Real deltaTime);
+	
+			
+	// Time
+	Ogre::Real getAnimationTime();			// Get the current animation timer
+	void resetAnimationTime();
+
 	
 	void getObjects();						// Move to each object in turn, and pick it up
 };

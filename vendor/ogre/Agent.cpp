@@ -16,6 +16,14 @@ Agent::Agent(std::string name, std::string filename)
 
 	mWalkSpeed = 35.0f;
 	mDirection = Ogre::Vector3::ZERO;
+	
+	
+	
+	mTopAnimID = "";
+	mBaseAnimID = "";
+	
+	mTimer = 0;
+	mVerticalVelocity = 0;
 }
 
 Agent::~Agent(){}
@@ -31,37 +39,36 @@ Agent::update(Ogre::Real deltaTime)
 void 
 Agent::setupAnimations()
 {
-	this->mTimer = 0;
-	this->mVerticalVelocity = 0;
-	
 	// this is very important due to the nature of the exported animations
 	mBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
 	
-	Ogre::String animNames[] =
-		{"IdleBase", "IdleTop", "RunBase", "RunTop", "HandsClosed", "HandsRelaxed", "DrawSwords",
-		"SliceVertical", "SliceHorizontal", "Dance", "JumpStart", "JumpLoop", "JumpEnd"};
-
 	// populate our animation list
-	for (int i = 0; i < 13; i++)
+	Ogre::AnimationStateSet* aSet = mBodyEntity->getAllAnimationStates();
+	Ogre::AnimationStateIterator iter = aSet->getAnimationStateIterator();
+	while (iter.hasMoreElements())
 	{
-		mAnims[i] = mBodyEntity->getAnimationState(animNames[i]);
-		mAnims[i]->setLoop(true);
-		mFadingIn[i] = false;
-		mFadingOut[i] = false;
+		Ogre::AnimationState* a = iter.getNext();
+		
+		// std::cout << a->getAnimationName() << std::endl;
+		
+		mAnims[a->getAnimationName()] = a;
+		a->setLoop(true);
+		mFadingIn[a->getAnimationName()] = false;
+		mFadingOut[a->getAnimationName()] = false;
 	}
 
 	// start off in the idle state (top and bottom together)
-	setBaseAnimation(ANIM_IDLE_BASE);
-	setTopAnimation(ANIM_IDLE_TOP);
+	//~ setIdleAnimation();
 
 	// relax the hands since we're not holding anything
-	mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
+	//~ setHandsOpen();
 }
 
+
 void 
-Agent::setBaseAnimation(AnimID id, bool reset)
+Agent::setBaseAnimation(std::string id, bool reset)
 {
-	if (mBaseAnimID >= 0 && mBaseAnimID < 13)
+	if (mFadingIn.count(mBaseAnimID) > 0)
 	{
 		// if we have an old animation, fade it out
 		mFadingIn[mBaseAnimID] = false;
@@ -70,7 +77,7 @@ Agent::setBaseAnimation(AnimID id, bool reset)
 
 	mBaseAnimID = id;
 
-	if (id != ANIM_NONE)
+	if (mAnims.count(id) > 0)
 	{
 		// if we have a new animation, enable it and fade it in
 		mAnims[id]->setEnabled(true);
@@ -81,9 +88,10 @@ Agent::setBaseAnimation(AnimID id, bool reset)
 	}
 }
 	
-void Agent::setTopAnimation(AnimID id, bool reset)
+void
+Agent::setTopAnimation(std::string id, bool reset)
 {
-	if (mTopAnimID >= 0 && mTopAnimID < 13)
+	if (mFadingIn.count(mTopAnimID) > 0)
 	{
 		// if we have an old animation, fade it out
 		mFadingIn[mTopAnimID] = false;
@@ -92,7 +100,7 @@ void Agent::setTopAnimation(AnimID id, bool reset)
 
 	mTopAnimID = id;
 
-	if (id != ANIM_NONE)
+	if (mAnims.count(id) > 0)
 	{
 		// if we have a new animation, enable it and fade it in
 		mAnims[id]->setEnabled(true);
@@ -110,17 +118,21 @@ Agent::updateAnimations(Ogre::Real deltaTime)
 
 	Real baseAnimSpeed = 1;
 	Real topAnimSpeed = 1;
-
+	
 	mTimer += deltaTime;
 
-	if (mTimer >= mAnims[mTopAnimID]->getLength())
-	{
-		
-	}
+	//~ if (this->mTimer >= (*mAnims)[mTopAnimID]->getLength())
+	//~ {
+		//~ 
+	//~ }
 	
 	// increment the current base and top animation times
-	if (mBaseAnimID != ANIM_NONE) mAnims[mBaseAnimID]->addTime(deltaTime * baseAnimSpeed);
-	if (mTopAnimID != ANIM_NONE) mAnims[mTopAnimID]->addTime(deltaTime * topAnimSpeed);
+	// TODO: Refactor to better check existence of key
+	// consider taking advantage of the fact that != 0 is true, and only one value can be stored per key
+	if (mAnims.count(mBaseAnimID) > 0)
+		mAnims[mBaseAnimID]->addTime(deltaTime * baseAnimSpeed);
+	if (mAnims.count(mTopAnimID) > 0)
+		mAnims[mTopAnimID]->addTime(deltaTime * topAnimSpeed);
 
 	// apply smooth transitioning between our animations
 	fadeAnimations(deltaTime);
@@ -131,28 +143,46 @@ Agent::fadeAnimations(Ogre::Real deltaTime)
 {
 	using namespace Ogre;
 
-	for (int i = 0; i < 13; i++)
+	std::map<std::string, AnimationState*>::iterator iter;
+	iter = mAnims.begin();
+	for (int i = 0; i < mAnims.size(); i++)
 	{
-		if (mFadingIn[i])
+		std::string key = iter->first;
+		iter++;
+		
+		if (mFadingIn[key])
 		{
 			// slowly fade this animation in until it has full weight
-			Real newWeight = mAnims[i]->getWeight() + deltaTime * 7.5f; //ANIM_FADE_SPEED;
-			mAnims[i]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));
-			if (newWeight >= 1) mFadingIn[i] = false;
+			Real newWeight = mAnims[key]->getWeight() + deltaTime * 7.5f; //ANIM_FADE_SPEED;
+			mAnims[key]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));
+			if (newWeight >= 1) mFadingIn[key] = false;
 		}
-		else if (mFadingOut[i])
+		else if (mFadingOut[key])
 		{
 			// slowly fade this animation out until it has no weight, and then disable it
-			Real newWeight = mAnims[i]->getWeight() - deltaTime * 7.5f; //ANIM_FADE_SPEED;
-			mAnims[i]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));
+			Real newWeight = mAnims[key]->getWeight() - deltaTime * 7.5f; //ANIM_FADE_SPEED;
+			mAnims[key]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));
 			if (newWeight <= 0)
 			{
-				mAnims[i]->setEnabled(false);
-				mFadingOut[i] = false;
+				mAnims[key]->setEnabled(false);
+				mFadingOut[key] = false;
 			}
 		}
 	}
 }
+
+Ogre::Real
+Agent::getAnimationTime()
+{
+	return mTimer;
+}
+
+void
+Agent::resetAnimationTime()
+{
+	mTimer = 0;
+}
+
 
 // Processes the next place the entity should head towards
 // Includes processing how far away such a target is.
@@ -178,44 +208,44 @@ Agent::nextLocation()
 void 
 Agent::updateLocomote(Ogre::Real deltaTime)
 {
-	if (mDirection == Ogre::Vector3::ZERO) 
-	{
-		if (nextLocation())
-		{
-			// Set walking animation
-			setTopAnimation(ANIM_RUN_TOP, false);
-			setBaseAnimation(ANIM_RUN_BASE, false);
+	// if (mDirection == Ogre::Vector3::ZERO) 
+	// {
+	// 	if (nextLocation())
+	// 	{
+	// 		// Set walking animation
+	// 		setTopAnimation(ANIM_RUN_TOP, false);
+	// 		setBaseAnimation(ANIM_RUN_BASE, false);
 			
-			faceForward();
-		}
-	}
-	else
-	{
-		Ogre::Real move = mWalkSpeed * deltaTime;
-		mDistance -= move;
+	// 		faceForward();
+	// 	}
+	// }
+	// else
+	// {
+	// 	Ogre::Real move = mWalkSpeed * deltaTime;
+	// 	mDistance -= move;
 		
-		if (mDistance <= 0.0f)
-		{
-			mBodyNode->setPosition(mDestination);
-			mDirection = Ogre::Vector3::ZERO;
+	// 	if (mDistance <= 0.0f)
+	// 	{
+	// 		mBodyNode->setPosition(mDestination);
+	// 		mDirection = Ogre::Vector3::ZERO;
 		
-			if (!nextLocation())
-			{
-				// Set Idle animation                     
-				setTopAnimation(ANIM_IDLE_BASE, true);
-				setBaseAnimation(ANIM_IDLE_TOP, true);
-			}
-			else
-			{
-				// Correct rotation towards the next node
-				faceForward();
-			}
-		}
-		else
-		{
-			mBodyNode->translate(mDirection * move);
-		}
-	}
+	// 		if (!nextLocation())
+	// 		{
+	// 			// Set Idle animation                     
+	// 			setTopAnimation(ANIM_IDLE_BASE, true);
+	// 			setBaseAnimation(ANIM_IDLE_TOP, true);
+	// 		}
+	// 		else
+	// 		{
+	// 			// Correct rotation towards the next node
+	// 			faceForward();
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		mBodyNode->translate(mDirection * move);
+	// 	}
+	// }
 }
 
 void
@@ -242,68 +272,68 @@ Agent::faceForward()
 bool
 Agent::bendOver(Ogre::Real deltaTime)
 {
-	Ogre::SkeletonInstance* skeleton = mBodyEntity->getSkeleton();
-	Ogre::Bone* waist = skeleton->getBone("Waist");
+	// Ogre::SkeletonInstance* skeleton = mBodyEntity->getSkeleton();
+	// Ogre::Bone* waist = skeleton->getBone("Waist");
 	
-	if(!waist->isManuallyControlled())
-	{
-		setBaseAnimation(ANIM_IDLE_BASE, true);
-		setTopAnimation(ANIM_IDLE_TOP, true);
-		waist->setManuallyControlled(true);
-	}
-	else
-	{
-		Ogre::Degree targetRotation = Ogre::Degree(45);
-		if(waist->getOrientation().getPitch() < targetRotation) // animation not yet complete
-		{
-			waist->pitch(targetRotation * deltaTime);
-		}
-		else // animation complete
-		{
-			//~ waist->setManuallyControlled(false);
-			//~ runAnimationBendOver = false;
-			return true;
-		}
-	}
+	// if(!waist->isManuallyControlled())
+	// {
+	// 	setBaseAnimation(ANIM_IDLE_BASE, true);
+	// 	setTopAnimation(ANIM_IDLE_TOP, true);
+	// 	waist->setManuallyControlled(true);
+	// }
+	// else
+	// {
+	// 	Ogre::Degree targetRotation = Ogre::Degree(45);
+	// 	if(waist->getOrientation().getPitch() < targetRotation) // animation not yet complete
+	// 	{
+	// 		waist->pitch(targetRotation * deltaTime);
+	// 	}
+	// 	else // animation complete
+	// 	{
+	// 		//~ waist->setManuallyControlled(false);
+	// 		//~ runAnimationBendOver = false;
+	// 		return true;
+	// 	}
+	// }
 	
-	return false;
+	// return false;
 }
 
 bool
 Agent::bendToStand(Ogre::Real deltaTime)
 {
-	// Bone should be set to manually controlled at this point, because of bendOver()
-	Ogre::SkeletonInstance* skeleton = mBodyEntity->getSkeleton();
-	Ogre::Bone* waist = skeleton->getBone("Waist");
+	// // Bone should be set to manually controlled at this point, because of bendOver()
+	// Ogre::SkeletonInstance* skeleton = mBodyEntity->getSkeleton();
+	// Ogre::Bone* waist = skeleton->getBone("Waist");
 	
-	if(waist->isManuallyControlled()){
-		Ogre::Degree targetRotation = Ogre::Degree(0);
+	// if(waist->isManuallyControlled()){
+	// 	Ogre::Degree targetRotation = Ogre::Degree(0);
 		
-		if(waist->getOrientation().getPitch() > targetRotation) // animation not yet complete
-		{
+	// 	if(waist->getOrientation().getPitch() > targetRotation) // animation not yet complete
+	// 	{
 			
-			waist->pitch(Ogre::Degree(-45) * deltaTime);
-		}
-		else // animation complete, return control of bone back to animation system
-		{
-			waist->setManuallyControlled(false);
-			mTimer = 0;
+	// 		waist->pitch(Ogre::Degree(-45) * deltaTime);
+	// 	}
+	// 	else // animation complete, return control of bone back to animation system
+	// 	{
+	// 		waist->setManuallyControlled(false);
+	// 		mTimer = 0;
 			
-			// If you have a destination to go to, run there, else return to idle
-			if(mDestination.positionEquals(mBodyNode->getPosition()))
-			{
-				setTopAnimation(ANIM_IDLE_TOP, true);
-				setBaseAnimation(ANIM_IDLE_BASE, true);
-			}
-			else
-			{
-				setTopAnimation(ANIM_RUN_TOP, true);
-				setBaseAnimation(ANIM_RUN_BASE, true);
-			}
-		}
+	// 		// If you have a destination to go to, run there, else return to idle
+	// 		if(mDestination.positionEquals(mBodyNode->getPosition()))
+	// 		{
+	// 			setTopAnimation(ANIM_IDLE_TOP, true);
+	// 			setBaseAnimation(ANIM_IDLE_BASE, true);
+	// 		}
+	// 		else
+	// 		{
+	// 			setTopAnimation(ANIM_RUN_TOP, true);
+	// 			setBaseAnimation(ANIM_RUN_BASE, true);
+	// 		}
+	// 	}
 		
-		return false;
-	}
+	// 	return false;
+	// }
 	
-	return true;
+	// return true;
 }
