@@ -3,14 +3,12 @@
 
 #include "BaseApplication.h"
 #include "Agent.h"
-#include "Item.h"
 //#include <vector>
 
 class GameApplication : public BaseApplication
 {
 private:
 	Agent* agent;			// store a pointer to the character
-	Item** items;			// list of all items in the scene
 
 public:
     GameApplication(void);

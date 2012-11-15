@@ -1,6 +1,6 @@
 #include "Agent.h"
 
-Agent::Agent(std::string name, std::string filename, Item** items)
+Agent::Agent(std::string name, std::string filename)
 {
 	using namespace Ogre;
 	if (sceneMgr == NULL)
@@ -12,13 +12,10 @@ Agent::Agent(std::string name, std::string filename, Item** items)
 
 	mBodyNode->translate(0,5,0); // make the Ogre stand on the plane
 	
-	setupAnimations();
+	// setupAnimations();
 
 	mWalkSpeed = 35.0f;
 	mDirection = Ogre::Vector3::ZERO;
-
-	mItems = items;
-	mHeldItem = NULL;
 }
 
 Agent::~Agent(){}
@@ -26,11 +23,8 @@ Agent::~Agent(){}
 void
 Agent::update(Ogre::Real deltaTime)
 {
-	this->updateAnimations(deltaTime);
-	if(this->updatePickup(deltaTime))
-	{
-		this->updateLocomote(deltaTime);
-	}
+	// this->updateAnimations(deltaTime);
+	// this->updateLocomote(deltaTime);
 }
 
 
@@ -158,118 +152,6 @@ Agent::fadeAnimations(Ogre::Real deltaTime)
 			}
 		}
 	}
-}
-
-void
-Agent::getObjects()
-{
-	for(int i=0; i<5; i++) // all objects
-	{
-		Item* pickup = mItems[i];
-		this->pickUpObject(pickup);
-	}
-}
-
-void
-Agent::pickUpObject(Item* pickup)
-{
-	// Turn to face pickup
-	Ogre::Real height = 5; // height of Sinbad
-	
-	Ogre::Vector3 pos = pickup->getPosition();
-	mWalkList.push_back(Ogre::Vector3(pos.x, height, pos.z));
-	mShoppingList.push_back(pickup);
-}
-
-bool
-Agent::updatePickup(Ogre::Real deltaTime)
-{
-	// TODO: Optimize branching conditions to remove blank branches
-	// Note: Needs to be called every frame
-	
-	if(mShoppingList.empty())
-	{
-		return bendToStand(deltaTime);
-	}
-	else
-	{
-		Item* pickup = mShoppingList.front();
-		Ogre::Vector3 pickupPosition = pickup->getPosition();
-		Ogre::Vector3 bodyPosition = mBodyNode->getPosition();
-		
-		// Only pickup target item
-		// NOTE: Does not take elevation into account
-		if(pickupPosition.x == bodyPosition.x &&
-		pickupPosition.z == bodyPosition.z)
-		{
-			// Bend over
-			bendOver(deltaTime);
-			if(mTimer > 2)
-			{
-				// Hide last item in hand, if any
-				//~ if(!mInventory.empty()){
-					//~ mInventory.back()->hide();
-				//~ }
-				if(mHeldItem != NULL){
-					mHeldItem->hide();
-					mHeldItem = pickup;
-				}
-				
-				
-				// Pick it up
-				mInventory.push_back(pickup);
-				pickup->equipTo(mBodyEntity, "Hand.R");
-				
-				// Close hand
-				mAnims[ANIM_HANDS_CLOSED]->setEnabled(true);
-				mAnims[ANIM_HANDS_RELAXED]->setEnabled(false);
-				
-				// Adjust positional properties based on which object is equipped.
-				if(pickup->getName() == "fish"){
-					pickup->translate(0, 0.5, 0);
-				}
-				else if(pickup->getName() == "9mm"){
-					pickup->roll(Ogre::Degree(90));
-					pickup->pitch(Ogre::Degree(180));
-					
-					pickup->translate(-0.2, 1.3, -0.3);
-				}
-				else if(pickup->getName() == "38pistol"){
-					pickup->yaw(Ogre::Degree(180));
-					
-					pickup->translate(0, 1.3, 0);
-				}
-				else if(pickup->getName() == "briefcase"){
-					pickup->roll(Ogre::Degree(180));
-					
-					pickup->translate(0, 1.8, 0);
-				}
-				else if(pickup->getName() == "thermos"){
-					pickup->roll(Ogre::Degree(90));
-					pickup->yaw(Ogre::Degree(180));
-					
-					pickup->translate(2.1, 1.4, -0.25);
-				}
-				
-				// Turn item in hand invisible, if any
-				//~ if(mHeldItem != NULL){
-					//~ mHeldItem->hide();
-				//~ }
-				//~ mHeldItem = pickup;
-				
-				// Remove from shopping list
-				mShoppingList.pop_front();
-			}
-			
-			return false;
-		}
-		else
-		{
-			return bendToStand(deltaTime);
-		}
-	}
-	
-	return true;
 }
 
 // Processes the next place the entity should head towards

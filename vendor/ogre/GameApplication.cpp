@@ -9,7 +9,6 @@ GameApplication::GameApplication(void)
 GameApplication::~GameApplication(void)
 {
 	delete agent;
-	delete [] items;
 }
 
 //-------------------------------------------------------------------------------------
@@ -68,28 +67,12 @@ GameApplication::loadObjects()
 	//~ items = new std::vector<Item>();
 	//~ vector<Item> items(5);
 	//~ Item items[5];
-	items = new Item*[5];
-	items[0] = new Item("fish", "fish.mesh", 0.5, true);
-	items[0]->translate(-30,0,0);
-	
-	items[1] = new Item("9mm", "9mm.mesh", 0.1, true);
-	items[1]->translate(-25,0,5);
-	
-	items[2] = new Item("38pistol", "38pistol.mesh", 0.1, true);
-	items[2]->translate(0,0,0);
-	
-	items[3] = new Item("briefcase", "briefcase.mesh", 0.5, true);
-	items[3]->translate(25,0,-5);
-	
-	items[4] = new Item("thermos", "thermos.mesh", 0.1);
-	items[4]->translate(40,0,0);
 }
 
 void // Load actors, agents, characters
 GameApplication::loadCharacters()
 {
-	agent = new Agent("Sinbad", "Sinbad.mesh", items);
-	agent->getObjects();
+	agent = new Agent("Golem", "Golem.mesh");
 }
 
 void
@@ -97,12 +80,4 @@ GameApplication::addTime(Ogre::Real deltaTime)
 {
 	if (agent != NULL)
 		agent->update(deltaTime);
-	//~ for(vector<Item>::iterator item = items.begin(); item != items.end(); item++){
-	for(int i=0; i<5; i++){
-		Item* item = items[i];
-		
-		if(item != NULL){
-			item->update(deltaTime);
-		}
-	}
 }

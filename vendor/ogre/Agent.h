@@ -1,5 +1,4 @@
 #include "BaseApplication.h"
-#include "Item.h"
 #include <deque>
 
 extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
@@ -41,18 +40,12 @@ private:
 	void updateLocomote(Ogre::Real deltaTime);			// update the character's walking
 	void faceForward();
 							
-	// for inventory management
-	std::deque<Item*> mShoppingList;		// List of items that need to be picked up
-	std::deque<Item*> mInventory;			// List of items held by Sinbad
-	Item* mHeldItem;						// Pointer to item currently equipped
-	Item** mItems;							// Pointer to array of all items
 	// bend animation methods return true IFF the animation has completed
 	bool bendOver(Ogre::Real deltaTime);	// Bend at the waist. Used to pick up items on the ground.
 	bool bendToStand(Ogre::Real deltaTime);	// Return from bent over to the standing position
-	bool updatePickup(Ogre::Real deltaTime); // Return true when pickup is not active (safe to move) 
 
 public:
-	Agent(std::string name, std::string filename, Item** items);
+	Agent(std::string name, std::string filename);
 	~Agent();
 
 	void update(Ogre::Real deltaTime);		// update the agent
@@ -72,5 +65,4 @@ public:
 	void updateAnimations(Ogre::Real deltaTime);
 	
 	void getObjects();						// Move to each object in turn, and pick it up
-	void pickUpObject(Item* pickup);			// Pick up the one specified object
 };
