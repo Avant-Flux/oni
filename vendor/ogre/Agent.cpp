@@ -12,8 +12,7 @@ Agent::Agent(std::string name, std::string filename)
 
 	mBodyNode->translate(0,5,0); // make the Ogre stand on the plane
 	
-	// setupAnimations();
-
+	
 	mWalkSpeed = 35.0f;
 	mDirection = Ogre::Vector3::ZERO;
 	
@@ -24,6 +23,10 @@ Agent::Agent(std::string name, std::string filename)
 	
 	mTimer = 0;
 	mVerticalVelocity = 0;
+	
+	setupAnimations();
+	
+	setTopAnimation("my_animation");
 }
 
 Agent::~Agent(){}
@@ -31,7 +34,7 @@ Agent::~Agent(){}
 void
 Agent::update(Ogre::Real deltaTime)
 {
-	// this->updateAnimations(deltaTime);
+	this->updateAnimations(deltaTime);
 	// this->updateLocomote(deltaTime);
 }
 
