@@ -52,7 +52,7 @@ Agent::setupAnimations()
 	{
 		Ogre::AnimationState* a = iter.getNext();
 		
-		// std::cout << a->getAnimationName() << std::endl;
+		std::cout << "=======" << a->getAnimationName() << std::endl;
 		
 		mAnims[a->getAnimationName()] = a;
 		a->setLoop(true);
