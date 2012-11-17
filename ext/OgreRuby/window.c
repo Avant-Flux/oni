@@ -10,14 +10,17 @@ VALUE Init_OgreWindow(VALUE outer){
 
 static VALUE initialize(int argc, VALUE *argv, VALUE klass){
 	OGRE_TYPE Agent = Ogre_Agent(); // MUST free memory later
+	
+	// Allocate space for a OGRE_WINDOW (pointer)
+	// Initialize the window
 }
 
 static VALUE finalize(int argc, VALUE *argv, VALUE klass){
-	
+	// Free space used by the window
 }
 
 static VALUE show(VALUE klass){
-	
+	// Run the window
 }
 
 static VALUE add_time(VALUE klass, VALUE dt){
