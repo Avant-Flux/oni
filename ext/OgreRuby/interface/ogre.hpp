@@ -1,0 +1,1 @@
+typedef void* OGRE_TYPE;

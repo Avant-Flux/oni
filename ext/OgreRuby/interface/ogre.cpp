@@ -1,3 +1,4 @@
+#include "ogre.hpp"
 // This is C++ code
 
 // Declare f(int,char,float) using extern "C":
@@ -37,9 +38,6 @@ extern "C" void* Agent::setBaseAnimation(AnimID id, bool reset = false){
 	
 }
 
-
-
-typedef void* OGRE_TYPE;
 
 extern "C" OGRE_TYPE Ogre_Agent(){
 	return (OGRE_TYPE) new Agent();
