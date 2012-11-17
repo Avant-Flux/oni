@@ -9,7 +9,7 @@ void Init_ogre(){
 	VALUE module = rb_define_module("Ogre");
 	
 	Init_OgreWindow(module);
-	Init_OgreAgent(module);		
+	Init_OgreAgent(module);
 }
 
 
