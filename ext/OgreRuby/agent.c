@@ -7,11 +7,17 @@ VALUE Init_OgreAgent(VALUE outer){
 }
 
 static VALUE initialize(int argc, VALUE *argv, VALUE klass){
-	OGRE_TYPE Agent = Ogre_Agent(); // MUST free memory later
+	// Ruby interface: Agent.new(window, "name", "name.mesh")
+	
+	// OGRE_TYPE Agent = Ogre_Agent(); // MUST free memory later
+	
+	
 }
 
 static VALUE finalize(int argc, VALUE *argv, VALUE klass){
-	
+	// Remove Agent from GameApplication collection
+	// Free that element as it leaves the collection <-- can just use RAII
+	// Set pointer to null
 }
 
 
