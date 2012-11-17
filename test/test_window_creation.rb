@@ -12,6 +12,8 @@ class Window < Ogre::Window
 		
 	end
 	
+	# Ideally, would be able to draw in a 2D context
+	# on top of Ogre3D rendering in this method.
 	def draw
 		
 	end
