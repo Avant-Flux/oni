@@ -1,5 +1,6 @@
 require 'rake/testtask'
 require 'rake/clean'
+require 'open3'
 
 # generate depend file for gcc dependencies
 # sh "gcc -MM *.c > depend"
@@ -24,30 +25,47 @@ def build_c_extension(name)
 	end
 end
 
-if ENABLE_C_EXTENSION
-	# make the :test task depend on the shared
-	# object, so it will be built automatically
-	# before running the tests
-	c_library = "lib/#{NAME}/#{NAME}.so"
+# if ENABLE_C_EXTENSION
+# 	# make the :test task depend on the shared
+# 	# object, so it will be built automatically
+# 	# before running the tests
+# 	c_library = "lib/#{NAME}/#{NAME}.so"
 	
-	file c_library do
-		build_c_extension NAME
-	end
+# 	file c_library do
+# 		build_c_extension NAME
+# 	end
 	
-	task :test => c_library
+# 	task :test => c_library
 	
 	
-	# use 'rake clean' and 'rake clobber' to
-	# easily delete generated files
-	CLEAN.include('ext/**/*{.o,.log,.so}')
-	CLEAN.include('ext/**/Makefile')
-	CLOBBER.include('lib/**/*.so')
-end
+# 	# use 'rake clean' and 'rake clobber' to
+# 	# easily delete generated files
+# 	CLEAN.include('ext/**/*{.o,.log,.so}')
+# 	CLEAN.include('ext/**/Makefile')
+# 	CLOBBER.include('lib/**/*.so')
+# end
 
 # the same as before
 Rake::TestTask.new do |t|
   t.libs << 'test'
 end
 
+
+Dir.chdir "./vendor/build_ogre/" do
+	stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make -j4"
+	
+	output = nil
+	begin
+		output = stdout_and_stderr.gets
+		puts output
+	end while output
+	
+	stdin.close
+	stdout_and_stderr.close
+end
+
+
 desc "Run tests"
 task :default => :test
+# task :default => ["./vendor/build_ogre/dist/lib/libOgreBase.a", :test]
+task :default => ["./vendor/build_ogre/dist/lib/libOgreBase.a"]
