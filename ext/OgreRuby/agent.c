@@ -3,7 +3,7 @@
 VALUE Init_OgreAgent(VALUE outer){
 	VALUE klass = rb_define_class_under(module, "Agent", rb_cObject);
 	
-	rb_define_method(klass, "initialize");
+	rb_define_method(klass, "initialize", initialize, -1);
 }
 
 static VALUE initialize(int argc, VALUE *argv, VALUE klass){

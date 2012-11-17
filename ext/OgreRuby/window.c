@@ -3,7 +3,8 @@
 VALUE Init_OgreWindow(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Window", rb_cObject);
 	
-	rb_define_method(klass, "show")
+	rb_define_method(klass, "initialize", initialize, -1);
+	rb_define_method(klass, "show", show, -1);
 }
 
 static VALUE initialize(int argc, VALUE *argv, VALUE klass){
