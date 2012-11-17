@@ -8,7 +8,7 @@ class Window < Ogre::Window
 		
 	end
 	
-	def update
+	def add_time(dt)
 		
 	end
 	
