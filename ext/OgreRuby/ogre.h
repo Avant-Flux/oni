@@ -1,0 +1,1 @@
+static VALUE initialize(int argc, VALUE *argv, VALUE klass)

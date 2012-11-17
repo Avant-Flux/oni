@@ -3,30 +3,15 @@
 #include <ruby.h>
 
 #include "ogre.h"
+#include "window.h"
 
 void Init_ogre(){
 	VALUE module = rb_define_module("Ogre");
 	
-	VALUE klass = rb_define_class_under(module, "Agent", rb_cObject);
-	
-	rb_define_method(klass, "initialize")
-	
-	
-	
-	
+	Init_OgreWindow(module);
+	Init_OgreAgent(module);		
 }
 
-static VALUE initialize(int argc, VALUE *argv, VALUE klass){
-	OGRE_TYPE Agent = Ogre_Agent(); // MUST free memory later
-}
-
-static VALUE finalize(int argc, VALUE *argv, VALUE klass){
-	
-}
-
-static VALUE setBaseAnimation(){
-	Ogre_Agent_setBaseAnimation();
-}
 
 
 // Metacode level (aka ruby acess)
