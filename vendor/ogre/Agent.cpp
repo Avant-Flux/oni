@@ -12,17 +12,12 @@ Agent::Agent(std::string name, std::string filename)
 
 	mBodyNode->translate(0,5,0); // make the Ogre stand on the plane
 	
-	
-	mWalkSpeed = 35.0f;
 	mDirection = Ogre::Vector3::ZERO;
-	
-	
 	
 	mTopAnimID = "";
 	mBaseAnimID = "";
 	
 	mTimer = 0;
-	mVerticalVelocity = 0;
 	
 	setupAnimations();
 	
@@ -186,71 +181,6 @@ Agent::resetAnimationTime()
 	mTimer = 0;
 }
 
-
-// Processes the next place the entity should head towards
-// Includes processing how far away such a target is.
-bool 
-Agent::nextLocation()
-{
-	if(mWalkList.empty())
-	{
-		return false;
-	}
-	
-	// Get next point from the queue
-	mDestination = mWalkList.front();
-	mWalkList.pop_front();
-	
-	mDirection = mDestination - mBodyNode->getPosition();
-	
-	mDistance = mDirection.normalise(); // Normalize direction in-place, and return length
-	
-	return true;
-}
-
-void 
-Agent::updateLocomote(Ogre::Real deltaTime)
-{
-	// if (mDirection == Ogre::Vector3::ZERO) 
-	// {
-	// 	if (nextLocation())
-	// 	{
-	// 		// Set walking animation
-	// 		setTopAnimation(ANIM_RUN_TOP, false);
-	// 		setBaseAnimation(ANIM_RUN_BASE, false);
-			
-	// 		faceForward();
-	// 	}
-	// }
-	// else
-	// {
-	// 	Ogre::Real move = mWalkSpeed * deltaTime;
-	// 	mDistance -= move;
-		
-	// 	if (mDistance <= 0.0f)
-	// 	{
-	// 		mBodyNode->setPosition(mDestination);
-	// 		mDirection = Ogre::Vector3::ZERO;
-		
-	// 		if (!nextLocation())
-	// 		{
-	// 			// Set Idle animation                     
-	// 			setTopAnimation(ANIM_IDLE_BASE, true);
-	// 			setBaseAnimation(ANIM_IDLE_TOP, true);
-	// 		}
-	// 		else
-	// 		{
-	// 			// Correct rotation towards the next node
-	// 			faceForward();
-	// 		}
-	// 	}
-	// 	else
-	// 	{
-	// 		mBodyNode->translate(mDirection * move);
-	// 	}
-	// }
-}
-
 void
 Agent::faceForward()
 {
@@ -270,73 +200,4 @@ Agent::faceForward()
 		Ogre::Quaternion quat = src.getRotationTo(mDirection);
 		mBodyNode->rotate(quat);
 	} // else
-}
-
-bool
-Agent::bendOver(Ogre::Real deltaTime)
-{
-	// Ogre::SkeletonInstance* skeleton = mBodyEntity->getSkeleton();
-	// Ogre::Bone* waist = skeleton->getBone("Waist");
-	
-	// if(!waist->isManuallyControlled())
-	// {
-	// 	setBaseAnimation(ANIM_IDLE_BASE, true);
-	// 	setTopAnimation(ANIM_IDLE_TOP, true);
-	// 	waist->setManuallyControlled(true);
-	// }
-	// else
-	// {
-	// 	Ogre::Degree targetRotation = Ogre::Degree(45);
-	// 	if(waist->getOrientation().getPitch() < targetRotation) // animation not yet complete
-	// 	{
-	// 		waist->pitch(targetRotation * deltaTime);
-	// 	}
-	// 	else // animation complete
-	// 	{
-	// 		//~ waist->setManuallyControlled(false);
-	// 		//~ runAnimationBendOver = false;
-	// 		return true;
-	// 	}
-	// }
-	
-	// return false;
-}
-
-bool
-Agent::bendToStand(Ogre::Real deltaTime)
-{
-	// // Bone should be set to manually controlled at this point, because of bendOver()
-	// Ogre::SkeletonInstance* skeleton = mBodyEntity->getSkeleton();
-	// Ogre::Bone* waist = skeleton->getBone("Waist");
-	
-	// if(waist->isManuallyControlled()){
-	// 	Ogre::Degree targetRotation = Ogre::Degree(0);
-		
-	// 	if(waist->getOrientation().getPitch() > targetRotation) // animation not yet complete
-	// 	{
-			
-	// 		waist->pitch(Ogre::Degree(-45) * deltaTime);
-	// 	}
-	// 	else // animation complete, return control of bone back to animation system
-	// 	{
-	// 		waist->setManuallyControlled(false);
-	// 		mTimer = 0;
-			
-	// 		// If you have a destination to go to, run there, else return to idle
-	// 		if(mDestination.positionEquals(mBodyNode->getPosition()))
-	// 		{
-	// 			setTopAnimation(ANIM_IDLE_TOP, true);
-	// 			setBaseAnimation(ANIM_IDLE_BASE, true);
-	// 		}
-	// 		else
-	// 		{
-	// 			setTopAnimation(ANIM_RUN_TOP, true);
-	// 			setBaseAnimation(ANIM_RUN_BASE, true);
-	// 		}
-	// 	}
-		
-	// 	return false;
-	// }
-	
-	// return true;
 }
