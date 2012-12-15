@@ -72,7 +72,7 @@ GameApplication::loadObjects()
 void // Load actors, agents, characters
 GameApplication::loadCharacters()
 {
-	agent = new Agent("Golem", "Golem.mesh");
+	agent = new Agent("Cube", "Cube.mesh");
 }
 
 void
