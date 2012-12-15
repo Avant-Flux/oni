@@ -1,16 +1,9 @@
 #include "Agent.h"
 
 Agent::Agent(std::string name, std::string filename)
+	: GraphicsObject(name, filename)
 {
-	using namespace Ogre;
-	if (sceneMgr == NULL)
-		return;
-
-	mBodyNode = sceneMgr->getRootSceneNode()->createChildSceneNode();
-	mBodyEntity = sceneMgr->createEntity(name, filename);
-	mBodyNode->attachObject(mBodyEntity);
-
-	mBodyNode->translate(0,5,0); // make the Ogre stand on the plane
+	mNode->translate(0,5,0); // make the Ogre stand on the plane
 	
 	mDirection = Ogre::Vector3::ZERO;
 	
@@ -41,10 +34,10 @@ void
 Agent::setupAnimations()
 {
 	// this is very important due to the nature of the exported animations
-	mBodyEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
+	mEntity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
 	
 	// populate our animation list
-	Ogre::AnimationStateSet* aSet = mBodyEntity->getAllAnimationStates();
+	Ogre::AnimationStateSet* aSet = mEntity->getAllAnimationStates();
 	Ogre::AnimationStateIterator iter = aSet->getAnimationStateIterator();
 	while (iter.hasMoreElements())
 	{
@@ -188,10 +181,10 @@ void
 Agent::faceForward()
 {
 	// This variant accounts for 180 degree turns
-	Ogre::Vector3 src = mBodyNode->getOrientation() * Ogre::Vector3::UNIT_Z;
+	Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_Z;
 	if ((1.0f + src.dotProduct(mDirection)) < 0.0001f) 
 	{
-		mBodyNode->yaw(Ogre::Degree(180));
+		mNode->yaw(Ogre::Degree(180));
 	}
 	else
 	{
@@ -201,69 +194,6 @@ Agent::faceForward()
 		Ogre::Real mDistance = mDirection.normalise();	// Both vectors modified so renormalize them
 		
 		Ogre::Quaternion quat = src.getRotationTo(mDirection);
-		mBodyNode->rotate(quat);
+		mNode->rotate(quat);
 	} // else
-}
-
-// Position
-void
-Agent::setPosition(const Ogre::Vector3 &pos)
-{
-	mBodyNode->setPosition(pos);
-}
-
-void
-Agent::setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z)
-{
-	mBodyNode->setPosition(x,y,z);
-}
-
-
-void
-Agent::translate(const Ogre::Vector3 &d, Ogre::Node::TransformSpace relativeTo)
-{
-	// Moves the node along the Cartesian axes. 
-	mBodyNode->translate(d, relativeTo);
-}
-
-void
-Agent::translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
-{
-	// Moves the node along the Cartesian axes. 
-	mBodyNode->translate(x,y,z, relativeTo);
-}
-
-void
-Agent::translate(const Ogre::Matrix3 &axes, const Ogre::Vector3 &move, Ogre::Node::TransformSpace relativeTo)
-{
-	// Moves the node along arbitrary axes. 
-	mBodyNode->translate(axes, move, relativeTo);
-}
-
-void
-Agent::translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
-{
-	// Moves the node along arbitrary axes. 
-	mBodyNode->translate(axes, x,y,z, relativeTo);
-}
-	
-
-
-// Rotation
-void
-Agent::pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
-{
-	
-}
-
-void
-Agent::yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
-{
-	
-}
-
-void
-Agent::roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
-{
-	
 }

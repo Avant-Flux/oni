@@ -2,11 +2,15 @@
 #define AGENT_H
 
 #include "BaseApplication.h"
+
+#include "GraphicsObject.h"
+
 #include <deque>
 
 extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
 
-class Agent
+class Agent :
+	public GraphicsObject
 {
 protected:
 		std::map<std::string, Ogre::AnimationState*> mAnims; // master animation list
@@ -32,7 +36,7 @@ public:
 	Agent(std::string name, std::string filename);
 	virtual ~Agent();
 
-	void update(Ogre::Real deltaTime);		// update the agent
+	virtual void update(Ogre::Real deltaTime);		// update the agent
 	
 	void setupAnimations();
 	void setBaseAnimation(std::string id, bool reset = false);
@@ -40,22 +44,6 @@ public:
 	void fadeAnimations(Ogre::Real deltaTime);
 	void updateAnimations(Ogre::Real deltaTime);
 	
-	// Position
-	void setPosition(const Ogre::Vector3 &pos);
-	void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z);
-	
-	void translate(const Ogre::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
-	void translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
-	void translate(const Ogre::Matrix3 &axes, const Ogre::Vector3 &move, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
-	void translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
-	
-	// Rotation
-	void pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
-	void yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
-	void roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
-	
-	
-			
 	// Time
 	Ogre::Real getAnimationTime();			// Get the current animation timer
 	void resetAnimationTime();

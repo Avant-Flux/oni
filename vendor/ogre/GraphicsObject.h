@@ -2,7 +2,6 @@
 #define GRAPHICS_OBJECT_H
 
 #include "BaseApplication.h"
-#include <deque>
 
 extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
 
