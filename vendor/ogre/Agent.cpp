@@ -59,9 +59,9 @@ Agent::setBaseAnimation(std::string id, bool reset)
 		mFadingIn[mBaseAnimID] = false;
 		mFadingOut[mBaseAnimID] = true;
 	}
-
+	
 	mBaseAnimID = id;
-
+	
 	if (mAnims.count(id) > 0)
 	{
 		// if we have a new animation, enable it and fade it in
@@ -82,9 +82,9 @@ Agent::setTopAnimation(std::string id, bool reset)
 		mFadingIn[mTopAnimID] = false;
 		mFadingOut[mTopAnimID] = true;
 	}
-
+	
 	mTopAnimID = id;
-
+	
 	if (mAnims.count(id) > 0)
 	{
 		// if we have a new animation, enable it and fade it in
@@ -100,12 +100,12 @@ void
 Agent::updateAnimations(Ogre::Real deltaTime)
 {
 	using namespace Ogre;
-
+	
 	Real baseAnimSpeed = 1;
 	Real topAnimSpeed = 1;
 	
 	mTimer += deltaTime;
-
+	
 	//~ if (this->mTimer >= (*mAnims)[mTopAnimID]->getLength())
 	//~ {
 		//~ 
@@ -118,7 +118,7 @@ Agent::updateAnimations(Ogre::Real deltaTime)
 		mAnims[mBaseAnimID]->addTime(deltaTime * baseAnimSpeed);
 	if (mAnims.count(mTopAnimID) > 0)
 		mAnims[mTopAnimID]->addTime(deltaTime * topAnimSpeed);
-
+	
 	// apply smooth transitioning between our animations
 	fadeAnimations(deltaTime);
 }
@@ -127,7 +127,7 @@ void
 Agent::fadeAnimations(Ogre::Real deltaTime)
 {
 	using namespace Ogre;
-
+	
 	std::map<std::string, AnimationState*>::iterator iter;
 	iter = mAnims.begin();
 	for (int i = 0; i < mAnims.size(); i++)
