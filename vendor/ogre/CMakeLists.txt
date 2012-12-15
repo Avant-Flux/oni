@@ -97,6 +97,7 @@ endif()
 set(HDRS
 	./BaseApplication.h
 	./GameApplication.h
+	./Agent.h
 )
  
 set(SRCS
