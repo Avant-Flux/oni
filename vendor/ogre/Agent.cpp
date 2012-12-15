@@ -26,9 +26,7 @@ void
 Agent::update(Ogre::Real deltaTime)
 {
 	this->updateAnimations(deltaTime);
-	// this->updateLocomote(deltaTime);
 }
-
 
 void 
 Agent::setupAnimations()
@@ -50,14 +48,7 @@ Agent::setupAnimations()
 		mFadingIn[a->getAnimationName()] = false;
 		mFadingOut[a->getAnimationName()] = false;
 	}
-
-	// start off in the idle state (top and bottom together)
-	//~ setIdleAnimation();
-
-	// relax the hands since we're not holding anything
-	//~ setHandsOpen();
 }
-
 
 void 
 Agent::setBaseAnimation(std::string id, bool reset)
