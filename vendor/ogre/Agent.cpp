@@ -201,3 +201,66 @@ Agent::faceForward()
 		mBodyNode->rotate(quat);
 	} // else
 }
+
+// Position
+void
+Agent::setPosition(const Ogre::Vector3 &pos)
+{
+	mBodyNode->setPosition(pos);
+}
+
+void
+Agent::setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z)
+{
+	mBodyNode->setPosition(x,y,z);
+}
+
+
+void
+Agent::translate(const Ogre::Vector3 &d, Ogre::Node::TransformSpace relativeTo)
+{
+	// Moves the node along the Cartesian axes. 
+	mBodyNode->translate(d, relativeTo);
+}
+
+void
+Agent::translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
+{
+	// Moves the node along the Cartesian axes. 
+	mBodyNode->translate(x,y,z, relativeTo);
+}
+
+void
+Agent::translate(const Ogre::Matrix3 &axes, const Ogre::Vector3 &move, Ogre::Node::TransformSpace relativeTo)
+{
+	// Moves the node along arbitrary axes. 
+	mBodyNode->translate(axes, move, relativeTo);
+}
+
+void
+Agent::translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
+{
+	// Moves the node along arbitrary axes. 
+	mBodyNode->translate(axes, x,y,z, relativeTo);
+}
+	
+
+
+// Rotation
+void
+Agent::pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
+{
+	
+}
+
+void
+Agent::yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
+{
+	
+}
+
+void
+Agent::roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
+{
+	
+}

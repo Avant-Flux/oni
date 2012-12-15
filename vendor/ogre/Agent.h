@@ -38,13 +38,18 @@ public:
 	void updateAnimations(Ogre::Real deltaTime);
 	
 	// Position
-	void setPosition();
-	void translate();
+	void setPosition(const Ogre::Vector3 &pos);
+	void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z);
+	
+	void translate(const Ogre::Vector3 &d, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
+	void translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
+	void translate(const Ogre::Matrix3 &axes, const Ogre::Vector3 &move, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
+	void translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
 	
 	// Rotation
-	void pitch();
-	void yaw();
-	void roll();
+	void pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
+	void yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
+	void roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
 	
 	
 			
