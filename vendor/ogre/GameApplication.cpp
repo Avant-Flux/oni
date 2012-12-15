@@ -1,5 +1,7 @@
 #include "GameApplication.h"
 
+#include <cmath>
+
 //-------------------------------------------------------------------------------------
 GameApplication::GameApplication(void)
 {
@@ -11,8 +13,22 @@ GameApplication::~GameApplication(void)
 	delete agent;
 }
 
+bool
+GameApplication::setup()
+{
+	if(!BaseApplication::setup())
+	{
+		return false;
+	}
+	
+	setFOV(110);
+	
+	return true;
+}
+
 //-------------------------------------------------------------------------------------
-void GameApplication::createScene(void)
+void
+GameApplication::createScene(void)
 {
     loadEnv();
 	setupEnv();
@@ -80,4 +96,11 @@ GameApplication::addTime(Ogre::Real deltaTime)
 {
 	if (agent != NULL)
 		agent->update(deltaTime);
+}
+
+void
+GameApplication::setFOV(Ogre::Real x_angle)
+{
+	// Assume given measure is in degrees, must convert to radians first
+	mCamera->setFOVy(Ogre::Degree(x_angle)/mCamera->getAspectRatio());
 }
