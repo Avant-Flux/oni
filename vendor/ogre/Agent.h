@@ -1,3 +1,6 @@
+#ifndef AGENT_H
+#define AGENT_H
+
 #include "BaseApplication.h"
 #include <deque>
 
@@ -57,3 +60,5 @@ public:
 	Ogre::Real getAnimationTime();			// Get the current animation timer
 	void resetAnimationTime();
 };
+
+#endif /* AGENT_H */
