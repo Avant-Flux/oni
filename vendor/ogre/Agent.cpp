@@ -24,7 +24,10 @@ Agent::Agent(std::string name, std::string filename)
 	setTopAnimation("my_animation");
 }
 
-Agent::~Agent(){}
+Agent::~Agent()
+{
+	
+}
 
 void
 Agent::update(Ogre::Real deltaTime)
