@@ -97,6 +97,8 @@ endif()
 set(HDRS
 	./BaseApplication.h
 	./GameApplication.h
+	
+	./GraphicsObject.h
 	./Agent.h
 )
  
@@ -104,6 +106,8 @@ set(SRCS
 	./main.cpp
 	./BaseApplication.cpp
 	./GameApplication.cpp
+	
+	./GraphicsObject.cpp
 	./Agent.cpp
 )
 
