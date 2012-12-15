@@ -30,7 +30,7 @@ private:
 
 public:
 	Agent(std::string name, std::string filename);
-	~Agent();
+	virtual ~Agent();
 
 	void update(Ogre::Real deltaTime);		// update the agent
 	
