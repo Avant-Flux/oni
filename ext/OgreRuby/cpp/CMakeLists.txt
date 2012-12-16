@@ -94,29 +94,29 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
  
-set(HDRS
+set(CORE_HDRS
 	./cpp_core/BaseApplication.h
 	./cpp_core/GameApplication.h
 	
 	./cpp_core/GraphicsObject.h
 	./cpp_core/Agent.h
-	
-	
-	
-	./cpp_interface/ogre.cpp
 )
- 
-set(SRCS
+
+set(CORE_SRCS
 	./cpp_core/main.cpp
 	./cpp_core/BaseApplication.cpp
 	./cpp_core/GameApplication.cpp
 	
 	./cpp_core/GraphicsObject.cpp
 	./cpp_core/Agent.cpp
-	
-	
-	
+)
+
+set(INTERFACE_HDRS
 	./cpp_interface/ogre.h
+)
+
+set(INTERFACE_SRCS
+	./cpp_interface/ogre.cpp
 )
 
 include_directories( ${OIS_INCLUDE_DIRS}
@@ -124,7 +124,7 @@ include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
 )
  
-add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
+add_executable(OgreApp WIN32 ${CORE_HDRS} ${CORE_SRCS})
  
 set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
  
@@ -133,7 +133,7 @@ target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
 # Create static library
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/lib)
-add_library(OgreBase STATIC ${HDRS} ${SRCS})
+add_library(OgreBase STATIC ${CORE_HDRS} ${INTERFACE_HDRS} ${CORE_SRCS} ${INTERFACE_SRCS})
 target_link_libraries(OgreBase ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
  
