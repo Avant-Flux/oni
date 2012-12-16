@@ -29,4 +29,4 @@ protected:
     virtual void createScene(void);
 };
 
-#endif // #ifndef __TutorialApplication_h_
+#endif // #ifndef __GameApplication_h_
