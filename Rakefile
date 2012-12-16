@@ -66,12 +66,8 @@ Rake::TestTask.new do |t|
   t.libs << 'test/test_window_creation.rb'
 end
 
-task :cpp_base do
-	build_with_make "./vendor/build_ogre/", "-j4"
-end
-
-task :cpp_interface do
-	build_with_make "./ext/OgreRuby/cpp_interface_build/", "-j4"
+task :cpp do
+	build_with_make "./ext/OgreRuby/cpp/build_linux/", "-j4"
 end
 
 # CLOBBER.include('vendor/build_ogre/dist/bin/OgreApp')
@@ -81,6 +77,4 @@ end
 # CLOBBER.include('vendor/build_ogre/dist/lib/*')
 
 desc "Run tests"
-# task :default => :test
-# task :default => ["./vendor/build_ogre/dist/lib/libOgreBase.a", :test]
-task :default => [:cpp_base, :cpp_interface, :test]
+task :default => [:cpp, :test]

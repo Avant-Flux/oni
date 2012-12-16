@@ -3,7 +3,8 @@
 
 #ifdef __cplusplus
 
-#include <Agent.h>
+#include "../cpp_core/GameApplication.h"
+#include "../cpp_core/Agent.h"
 
 #endif /* __cplusplus */
 
@@ -20,14 +21,13 @@ extern "C" {
 	Ogre_WindowPtr Ogre_Window_new();
 	void Ogre_Window_delete(Ogre_WindowPtr window);
 
-	void Ogre_Window_run(Ogre_WindowPtr window);
+	int Ogre_Window_run(Ogre_WindowPtr window);
     
 // Ogre::Agent
-	Ogre_AgentPtr Ogre_Agent_new();
+	Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename);
 	void Ogre_Agent_delete(Ogre_AgentPtr agent);
 	
 	void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, std::string id, bool reset = false);
-	void Ogre_Agent_addTime(Ogre_AgentPtr agent, double dt);
 
 #ifdef __cplusplus
 }

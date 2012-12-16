@@ -6,7 +6,7 @@ extern "C" {
 
 // Ogre::Window
     Ogre_WindowPtr Ogre_Window_new(){
-        GameApplication game = new GameApplication;
+        GameApplication* game = new GameApplication();
         return (Ogre_WindowPtr)game;
     }
     
@@ -15,7 +15,7 @@ extern "C" {
         delete game;
     }
     
-    void Ogre_Window_run(Ogre_WindowPtr window){
+    int Ogre_Window_run(Ogre_WindowPtr window){
         GameApplication* game = (GameApplication*)(window);
         
         try {
@@ -33,32 +33,28 @@ extern "C" {
     }
 
 // Ogre::Agent
-    Ogre_AgentPtr Ogre_Agent_new(){
-        return (Ogre_AgentPtr) new Agent();
+    Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename){
+        
+        std::string cpp_name(name); 
+        std::string cpp_filename(filename);
+        
+        return (Ogre_AgentPtr) new Agent(cpp_name, cpp_filename);
     }
     
     void Ogre_Agent_delete(Ogre_AgentPtr agent){
-        Ogre::Agent* obj = (Ogre::Agent*)(agent);
+        Agent* obj = (Agent*)(agent);
         
         delete obj;
     }
     
-    void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, std::string id, bool reset = false){
-        Agent* agent = (Agent* )obj;
+    void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, std::string id, bool reset){
+        Agent* agent = (Agent*)obj;
         agent->setBaseAnimation(id, reset);
-    }
-    
-    void Ogre_Agent_addTime(Ogre_AgentPtr agent, double dt){
-        Ogre::Agent* obj = (Ogre::Agent*)(agent);
-        
-        obj->addTime(dt);
     }
 
 #ifdef __cplusplus
 }
 #endif
-
-}
 
 
 /*

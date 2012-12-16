@@ -1,3 +1,2 @@
 # Do not track files that are created by the build system
-vendor/build_ogre
-ext/OgreRuby/cpp_interface_build
+ext/OgreRuby/cpp/build_linux
