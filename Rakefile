@@ -47,25 +47,47 @@ end
 
 # the same as before
 Rake::TestTask.new do |t|
-  t.libs << 'test'
+  # t.libs << 'test'
+  t.libs << 'test/test_window_creation.rb'
 end
 
-
-Dir.chdir "./vendor/build_ogre/" do
-	stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make -j4"
-	
-	output = nil
-	begin
-		output = stdout_and_stderr.gets
-		puts output
-	end while output
-	
-	stdin.close
-	stdout_and_stderr.close
+task :cpp_base do
+	Dir.chdir "./vendor/build_ogre/" do
+		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make -j4"
+		
+		output = nil
+		begin
+			output = stdout_and_stderr.gets
+			puts output
+		end while output
+		
+		stdin.close
+		stdout_and_stderr.close
+	end
 end
 
+task :cpp_interface do
+	Dir.chdir "./ext/OgreRuby/cpp_interface_build/" do
+		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make -j4"
+		
+		output = nil
+		begin
+			output = stdout_and_stderr.gets
+			puts output
+		end while output
+		
+		stdin.close
+		stdout_and_stderr.close
+	end
+end
+
+# CLOBBER.include('vendor/build_ogre/dist/bin/OgreApp')
+# CLOBBER.include('vendor/build_ogre/dist/bin/ogre.cfg')
+# CLOBBER.include('vendor/build_ogre/dist/bin/ogre.log')
+# CLOBBER.include('vendor/build_ogre/dist/bin/Ogre.log')
+# CLOBBER.include('vendor/build_ogre/dist/lib/*')
 
 desc "Run tests"
-task :default => :test
+# task :default => :test
 # task :default => ["./vendor/build_ogre/dist/lib/libOgreBase.a", :test]
-task :default => ["./vendor/build_ogre/dist/lib/libOgreBase.a"]
+task :default => [:cpp_base, :cpp_interface, :test]
