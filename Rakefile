@@ -25,6 +25,21 @@ def build_c_extension(name)
 	end
 end
 
+def build_with_make(path, flags="")
+	Dir.chdir path do
+		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make " + flags
+		
+		output = nil
+		begin
+			output = stdout_and_stderr.gets
+			puts output
+		end while output
+		
+		stdin.close
+		stdout_and_stderr.close
+	end
+end
+
 # if ENABLE_C_EXTENSION
 # 	# make the :test task depend on the shared
 # 	# object, so it will be built automatically
@@ -52,33 +67,11 @@ Rake::TestTask.new do |t|
 end
 
 task :cpp_base do
-	Dir.chdir "./vendor/build_ogre/" do
-		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make -j4"
-		
-		output = nil
-		begin
-			output = stdout_and_stderr.gets
-			puts output
-		end while output
-		
-		stdin.close
-		stdout_and_stderr.close
-	end
+	build_with_make "./vendor/build_ogre/", "-j4"
 end
 
 task :cpp_interface do
-	Dir.chdir "./ext/OgreRuby/cpp_interface_build/" do
-		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make -j4"
-		
-		output = nil
-		begin
-			output = stdout_and_stderr.gets
-			puts output
-		end while output
-		
-		stdin.close
-		stdout_and_stderr.close
-	end
+	build_with_make "./ext/OgreRuby/cpp_interface_build/", "-j4"
 end
 
 # CLOBBER.include('vendor/build_ogre/dist/bin/OgreApp')
