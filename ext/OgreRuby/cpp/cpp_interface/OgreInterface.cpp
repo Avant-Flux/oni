@@ -1,4 +1,4 @@
-#include "ogre.h"
+#include "OgreInterface.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -47,9 +47,11 @@ extern "C" {
         delete obj;
     }
     
-    void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, std::string id, bool reset){
+    void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset){
         Agent* agent = (Agent*)obj;
-        agent->setBaseAnimation(id, reset);
+        
+        std::string cpp_id(id); 
+        agent->setBaseAnimation(cpp_id, reset);
     }
 
 #ifdef __cplusplus

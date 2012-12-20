@@ -6,7 +6,7 @@ require 'open3'
 # sh "gcc -MM *.c > depend"
 
 NAME = 'OgreRuby'
-ENABLE_C_EXTENSION = false
+ENABLE_C_EXTENSION = true
 
 def build_with_make(path, flags="")
 	Dir.chdir path do

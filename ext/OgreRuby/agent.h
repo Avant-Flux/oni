@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ruby.h>
+
 VALUE Init_OgreAgent(VALUE outer);
 
 static VALUE initialize(int argc, VALUE *argv, VALUE klass);

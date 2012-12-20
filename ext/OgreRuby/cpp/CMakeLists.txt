@@ -112,11 +112,11 @@ set(CORE_SRCS
 )
 
 set(INTERFACE_HDRS
-	./cpp_interface/ogre.h
+	./cpp_interface/OgreInterface.h
 )
 
 set(INTERFACE_SRCS
-	./cpp_interface/ogre.cpp
+	./cpp_interface/OgreInterface.cpp
 )
 
 include_directories( ${OIS_INCLUDE_DIRS}
