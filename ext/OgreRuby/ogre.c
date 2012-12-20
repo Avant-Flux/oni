@@ -4,9 +4,9 @@
 
 #include <OgreInterface.h>
 
-// #include "ogre.h"
-// #include "window.h"
-// #include "agent.h"
+#include "ogre.h"
+#include "window.h"
+#include "agent.h"
 
 void Init_ogre(){
 	VALUE module = rb_define_module("Ogre");
