@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <ruby.h>
 
-#include <ogre.h>
-// extern Ogre_WindowPtr;
-// extern Ogre_Window_new();
+#include <OgreInterface.h>
+
 
 VALUE Init_OgreWindow(VALUE outer);
 
 VALUE OgreWindow_new(VALUE class);
+static VALUE allocate(VALUE class);
 
 static VALUE initialize(int argc, VALUE *argv, VALUE klass);
 static VALUE finalize(int argc, VALUE *argv, VALUE klass);
