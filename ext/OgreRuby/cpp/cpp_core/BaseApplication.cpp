@@ -18,7 +18,7 @@ This source file is part of the
 
 //-------------------------------------------------------------------------------------
 
-extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
+// extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
 
 
 BaseApplication::BaseApplication(void)
@@ -75,7 +75,7 @@ void BaseApplication::chooseSceneManager(void)
 {
     // Get the SceneManager, in this case a generic one
     mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC);
-	sceneMgr = mSceneMgr;	// store a pointer globally
+	// sceneMgr = mSceneMgr;	// store a pointer globally
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createCamera(void)
