@@ -3,9 +3,10 @@
 VALUE Init_OgreWindow(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Window", rb_cObject);
 	
+	Ogre_cpp_test();
 	// rb_define_alloc_function(klass, allocate);
 	
-	rb_define_singleton_method(klass, "new", OgreWindow_new, 1);
+	// rb_define_singleton_method(klass, "new", OgreWindow_new, 1);
 	rb_define_method(klass, "initialize", initialize, -1);
 	
 	rb_define_method(klass, "show", show, 0);
@@ -22,8 +23,9 @@ static VALUE allocate(VALUE class){
 }
 
 VALUE OgreWindow_new(VALUE class){
+	// printf("===== making new window\n");
 	/* VALUE class, void (*mark)(), void (*free)(), void *ptr */
-	Ogre_WindowPtr window = Ogre_Window_new();
+	// Ogre_WindowPtr window = Ogre_Window_new();
 	// VALUE data = Data_Wrap_Struct(class, NULL, Ogre_Window_delete, window);
 	
 	// // /* class, argc, *argv, */

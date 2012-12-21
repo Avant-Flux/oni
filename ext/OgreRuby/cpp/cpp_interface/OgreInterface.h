@@ -18,6 +18,8 @@ typedef void* Ogre_AgentPtr;
 #ifdef __cplusplus
 extern "C" {
 #endif
+	void Ogre_cpp_test();
+	
 	Ogre_WindowPtr Ogre_Window_new();
 	void Ogre_Window_delete(Ogre_WindowPtr window);
 

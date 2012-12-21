@@ -6,7 +6,6 @@ require 'open3'
 # sh "gcc -MM *.c > depend"
 
 NAME = 'OgreRuby'
-ENABLE_C_EXTENSION = true
 
 def build_with_make(path, flags="")
 	Dir.chdir path do
@@ -48,39 +47,37 @@ task :cpp_library do
 	build_with_make "./ext/#{NAME}/cpp/build_linux/", "-j4"
 end
 
-task :c_extension do
-	if ENABLE_C_EXTENSION
-		# make the :test task depend on the shared
-		# object, so it will be built automatically
-		# before running the tests
-		
-		# rule to build the extension: this says
-		# that the extension should be rebuilt
-		# after any change to the files in ext
-		c_library = "lib/#{NAME}/#{NAME}.so"
-		
-		file c_library =>
-	    Dir.glob("ext/#{NAME}/*{.rb,.c}") do
-			Dir.chdir("ext/#{NAME}") do
-				# this does essentially the same thing
-				# as what RubyGems does
-				ruby "extconf.rb"
-				sh "make"
-			end
-			
-			cp "ext/#{NAME}/#{NAME}.so", "lib/#{NAME}"
-		end
-		
-		task :test => c_library
-		
-		
-		# use 'rake clean' and 'rake clobber' to
-		# easily delete generated files
-		CLEAN.include('ext/**/*{.o,.log,.so}')
-		CLEAN.include('ext/**/Makefile')
-		CLOBBER.include('lib/**/*.so')
+
+# make the :test task depend on the shared
+# object, so it will be built automatically
+# before running the tests
+
+# rule to build the extension: this says
+# that the extension should be rebuilt
+# after any change to the files in ext
+c_library = "lib/#{NAME}/#{NAME}.so"
+
+file c_library => Dir.glob("ext/#{NAME}/*{.rb,.c}") + ["ext/#{NAME}/extconf.rb"] do
+	Dir.chdir("ext/#{NAME}") do
+		# this does essentially the same thing
+		# as what RubyGems does
+		ruby "extconf.rb"
+		sh "make"
 	end
+	
+	cp "ext/#{NAME}/#{NAME}.so", "lib/#{NAME}"
 end
+# task c_library => :cpp_library
+
+
+task :test => c_library
+
+
+# use 'rake clean' and 'rake clobber' to
+# easily delete generated files
+CLEAN.include('ext/**/*{.o,.log,.so}')
+CLEAN.include('ext/**/Makefile')
+CLOBBER.include('lib/**/*.so')
 
 # CLOBBER.include('vendor/build_ogre/dist/bin/OgreApp')
 # CLOBBER.include('vendor/build_ogre/dist/bin/ogre.cfg')
@@ -89,4 +86,4 @@ end
 # CLOBBER.include('vendor/build_ogre/dist/lib/*')
 
 desc "Run tests"
-task :default => [:cpp_library, :c_extension, :test]
+task :default => [:cpp_library, :test]

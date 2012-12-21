@@ -1,10 +1,15 @@
 #include "OgreInterface.h"
 
-#ifdef __cplusplus
+// #ifdef __cplusplus
 extern "C" {
-#endif
-
+// #endif
+    void Ogre_cpp_test(){
+        std::cout << "testing c++ level call" << std::endl;
+    }
+    
 // Ogre::Window
+    
+    
     Ogre_WindowPtr Ogre_Window_new(){
         GameApplication* game = new GameApplication();
         
@@ -55,9 +60,9 @@ extern "C" {
     //     agent->setBaseAnimation(cpp_id, reset);
     // }
 
-#ifdef __cplusplus
+// #ifdef __cplusplus
 }
-#endif
+// #endif
 
 
 /*
