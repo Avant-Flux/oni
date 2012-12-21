@@ -3,7 +3,9 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-class Window < Ogre::Window
+require 'OgreRuby'
+
+class Window < OgreRuby::Window
 	def initialize
 		
 	end
@@ -19,4 +21,5 @@ class Window < Ogre::Window
 	end
 end
 
-Window.new.show
+# Window.new.show
+# Window.new

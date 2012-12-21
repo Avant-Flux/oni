@@ -3,12 +3,12 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-class Window < Ogre::Window
+class Window < OgreRuby::Window
 	def initialize
-		x = Agent.new("name", "name.mesh")
+		# x = Agent.new("name", "name.mesh")
 		
-		x.reset_animations = true
-		x.animation = x.animation_names[0]
+		# x.reset_animations = true
+		# x.animation = x.animation_names[0]
 	end
 	
 	def update
@@ -20,4 +20,4 @@ class Window < Ogre::Window
 	end
 end
 
-Window.new.show
+# Window.new.show

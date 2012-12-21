@@ -3,9 +3,9 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-class Window < Ogre::Window
+class Window < OgreRuby::Window
 	def initialize
-		q = Ogre::Plane.new()
+		# q = Ogre::Plane.new()
 	end
 	
 	def update
@@ -17,4 +17,4 @@ class Window < Ogre::Window
 	end
 end
 
-Window.new.show
+# Window.new.show
