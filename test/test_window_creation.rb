@@ -5,21 +5,22 @@ require 'glu'
 
 require 'OgreRuby'
 
-class Window < OgreRuby::Window
-	def initialize
+# class Window < OgreRuby::Window
+# 	def initialize
 		
-	end
+# 	end
 	
-	def add_time(dt)
+# 	def add_time(dt)
 		
-	end
+# 	end
 	
-	# Ideally, would be able to draw in a 2D context
-	# on top of Ogre3D rendering in this method.
-	def draw
+# 	# Ideally, would be able to draw in a 2D context
+# 	# on top of Ogre3D rendering in this method.
+# 	def draw
 		
-	end
-end
+# 	end
+# end
 
 # Window.new.show
 # Window.new
+OgreRuby::Window.new.show

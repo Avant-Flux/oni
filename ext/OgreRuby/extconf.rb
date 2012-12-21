@@ -23,6 +23,7 @@ find_header "OgreInterface.h", File.expand_path("./cpp/cpp_interface/")
 
 have_library("stdc++")
 have_library("OgreMain")
+have_library("OIS")
 have_library("OgreBase")
 
 
