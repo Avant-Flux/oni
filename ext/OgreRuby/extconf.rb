@@ -4,18 +4,20 @@
 require 'mkmf'
 
 # Might want to use have_library() to check for libraries before adding them
-# $LIBS << " -lstdc++ -lc"
+$LIBS << " -lc -lOgreBase"
 # $CC = "g++"
 
-# $CFLAGS = " "
-# $LFLAGS = 
-# $CXXFLAGS = ""
+# $CFLAGS = " -fPIC"
+# $LFLAGS = " -fPIC"
+$CXXFLAGS = " -fPIC"
 # $CPPFLAGS = "" # preprocessor options, but also passed to compiler
-
-$LDFLAGS = " -L#{File.expand_path("./cpp/build_linux/dist/lib")}"
+$LDFLAGS << " -L#{File.expand_path("./cpp/build_linux/dist/lib")}"
+# $LDFLAGS << " -L/home/ravenskrag/Code/GameDev/Libraries/ogre/Samples/Common/include"
 
 # set all object files to $objs before create_makefile.
 # $objs = ["my_ext.o", "utils/utils.o"]
+
+puts "CPP LIBRARY FOUND" if have_library("OgreBase")
 
 find_header "OgreInterface.h", File.expand_path("./cpp/cpp_interface/")
 

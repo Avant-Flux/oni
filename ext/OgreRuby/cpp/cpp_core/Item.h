@@ -1,10 +1,8 @@
-#include "BaseApplication.h"
-#include "OgreTagPoint.h"
-
 #ifndef ITEM_H
 #define ITEM_H
 
-extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
+#include "BaseApplication.h"
+#include "OgreTagPoint.h"
 
 class Item
 {
@@ -14,7 +12,7 @@ class Item
 		Ogre::TagPoint* mEquipNode;
 	
 	public:
-		Item(std::string name, std::string filename, Ogre::Real scale, bool originIsOnCenter=false);
+		Item(Ogre::SceneManager* sceneMgr, std::string name, std::string filename, Ogre::Real scale, bool originIsOnCenter=false);
 		virtual ~Item();
 		
 		void update(Ogre::Real deltaTime);		// update the Item

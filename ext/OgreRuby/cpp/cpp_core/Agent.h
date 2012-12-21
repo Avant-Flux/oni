@@ -2,12 +2,9 @@
 #define AGENT_H
 
 #include "BaseApplication.h"
-
 #include "GraphicsObject.h"
 
 #include <deque>
-
-extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
 
 class Agent :
 	public GraphicsObject
@@ -33,7 +30,7 @@ private:
 	void faceForward();
 
 public:
-	Agent(std::string name, std::string filename);
+	Agent(Ogre::SceneManager* sceneMgr, std::string name, std::string filename);
 	virtual ~Agent();
 
 	virtual void update(Ogre::Real deltaTime);		// update the agent

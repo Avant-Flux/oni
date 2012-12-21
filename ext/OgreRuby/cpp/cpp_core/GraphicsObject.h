@@ -3,12 +3,10 @@
 
 #include "BaseApplication.h"
 
-extern Ogre::SceneManager* sceneMgr;	// Defined in main.cpp
-
 class GraphicsObject
 {
 public:
-	GraphicsObject(std::string name, std::string filename);
+	GraphicsObject(Ogre::SceneManager* sceneMgr, std::string name, std::string filename);
 	virtual ~GraphicsObject();
 	
 	virtual void update(Ogre::Real deltaTime);		// update the game object

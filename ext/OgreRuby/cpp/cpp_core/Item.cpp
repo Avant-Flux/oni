@@ -1,11 +1,9 @@
 #include "Item.h"
 
 
-Item::Item(std::string name, std::string filename, Ogre::Real scale, bool originIsOnCenter)
+Item::Item(Ogre::SceneManager* sceneMgr, std::string name, std::string filename, Ogre::Real scale, bool originIsOnCenter)
 {
 	using namespace Ogre;
-	if (sceneMgr == NULL)
-		return;
 	
 	mEquipNode = NULL;	// Should I be freeing this?
 	

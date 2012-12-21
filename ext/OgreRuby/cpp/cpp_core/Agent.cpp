@@ -1,7 +1,7 @@
 #include "Agent.h"
 
-Agent::Agent(std::string name, std::string filename)
-	: GraphicsObject(name, filename)
+Agent::Agent(Ogre::SceneManager* sceneMgr, std::string name, std::string filename)
+	: GraphicsObject(sceneMgr, name, filename)
 {
 	mNode->translate(0,5,0); // make the Ogre stand on the plane
 	

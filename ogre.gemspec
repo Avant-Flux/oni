@@ -1,12 +1,12 @@
 # TODO: use name of this file as name of package
 
-require File.expand_path("../lib/ogre/version", __FILE__)
+require File.expand_path("../lib/OgreRuby/version", __FILE__)
 
 ENABLE_C_EXTENSION = true
 
 Gem::Specification.new do |s|
-	s.name        = "ogre"
-	s.version     = Ogre::VERSION
+	s.name        = "ogre-ruby"
+	s.version     = OgreRuby::VERSION
 	s.date        = '2012-09-29'
 	s.platform    = Gem::Platform::RUBY
 	s.authors     = ["Raven"]
