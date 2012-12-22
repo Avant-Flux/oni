@@ -1,6 +1,8 @@
 #include "GraphicsObject.h"
 
-GraphicsObject::GraphicsObject(Ogre::SceneManager* sceneMgr, std::string name, std::string filename)
+extern Ogre::SceneManager* sceneMgr;
+
+GraphicsObject::GraphicsObject(std::string name, std::string filename)
 {
 	using namespace Ogre;
 	

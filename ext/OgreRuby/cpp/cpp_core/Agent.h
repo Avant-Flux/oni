@@ -30,7 +30,7 @@ private:
 	void faceForward();
 
 public:
-	Agent(Ogre::SceneManager* sceneMgr, std::string name, std::string filename);
+	Agent(std::string name, std::string filename);
 	virtual ~Agent();
 
 	virtual void update(Ogre::Real deltaTime);		// update the agent

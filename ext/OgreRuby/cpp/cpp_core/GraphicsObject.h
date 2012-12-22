@@ -6,7 +6,7 @@
 class GraphicsObject
 {
 public:
-	GraphicsObject(Ogre::SceneManager* sceneMgr, std::string name, std::string filename);
+	GraphicsObject(std::string name, std::string filename);
 	virtual ~GraphicsObject();
 	
 	virtual void update(Ogre::Real deltaTime);		// update the game object

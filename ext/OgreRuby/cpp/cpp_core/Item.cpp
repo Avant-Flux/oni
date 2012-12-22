@@ -1,7 +1,8 @@
 #include "Item.h"
 
+extern Ogre::SceneManager* sceneMgr;
 
-Item::Item(Ogre::SceneManager* sceneMgr, std::string name, std::string filename, Ogre::Real scale, bool originIsOnCenter)
+Item::Item(std::string name, std::string filename, Ogre::Real scale, bool originIsOnCenter)
 {
 	using namespace Ogre;
 	
