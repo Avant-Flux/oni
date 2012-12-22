@@ -31,8 +31,7 @@ end
 
 # the same as before
 Rake::TestTask.new do |t|
-  # t.libs << 'test'
-  t.libs << 'test/test_window_creation.rb'
+  t.libs << 'test'
 end
 
 task :cpp_library do
@@ -75,9 +74,11 @@ task :test => c_library
 
 # use 'rake clean' and 'rake clobber' to
 # easily delete generated files
-CLEAN.include('ext/**/*{.o,.log,.so}')
-CLEAN.include('ext/**/Makefile')
-CLOBBER.include('lib/**/*.so')
+# CLEAN.include('ext/**/*{.o,.log,.so}')
+# CLEAN.include('ext/**/Makefile')
+# CLOBBER.include('lib/**/*.so')
+
+
 
 # CLOBBER.include('vendor/build_ogre/dist/bin/OgreApp')
 # CLOBBER.include('vendor/build_ogre/dist/bin/ogre.cfg')
