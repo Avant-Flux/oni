@@ -29,6 +29,7 @@ extern "C" {
 	Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename);
 	void Ogre_Agent_delete(Ogre_AgentPtr agent);
 	
+	void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z);
 	void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset);
 
 #ifdef __cplusplus
