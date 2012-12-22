@@ -26,10 +26,10 @@ extern "C" {
 	int Ogre_Window_run(Ogre_WindowPtr window);
     
 // Ogre::Agent
-	// Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename);
-	// void Ogre_Agent_delete(Ogre_AgentPtr agent);
+	Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename);
+	void Ogre_Agent_delete(Ogre_AgentPtr agent);
 	
-	// void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset);
+	void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset);
 
 #ifdef __cplusplus
 }

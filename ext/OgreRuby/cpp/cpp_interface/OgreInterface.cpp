@@ -39,26 +39,26 @@ extern "C" {
     }
 
 // Ogre::Agent
-    // Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename){
+    Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename){
         
-    //     std::string cpp_name(name); 
-    //     std::string cpp_filename(filename);
+        std::string cpp_name(name); 
+        std::string cpp_filename(filename);
         
-    //     return (Ogre_AgentPtr) new Agent(cpp_name, cpp_filename);
-    // }
+        return (Ogre_AgentPtr) new Agent(cpp_name, cpp_filename);
+    }
     
-    // void Ogre_Agent_delete(Ogre_AgentPtr agent){
-    //     Agent* obj = (Agent*)(agent);
+    void Ogre_Agent_delete(Ogre_AgentPtr obj){
+        Agent* agent = (Agent*)(obj);
         
-    //     delete obj;
-    // }
+        delete agent;
+    }
     
-    // void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset){
-    //     Agent* agent = (Agent*)obj;
+    void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset){
+        Agent* agent = (Agent*)obj;
         
-    //     std::string cpp_id(id); 
-    //     agent->setBaseAnimation(cpp_id, reset);
-    // }
+        std::string cpp_id(id); 
+        agent->setBaseAnimation(cpp_id, reset);
+    }
 
 // #ifdef __cplusplus
 }
