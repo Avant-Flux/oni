@@ -3,15 +3,13 @@
 VALUE Init_OgreWindow(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Window", rb_cObject);
 	
-	Ogre_cpp_test();
-	
-	rb_define_alloc_func(klass, OgreWindow_new);
+	rb_define_alloc_func(klass, alloc);
 	
 	rb_define_method(klass, "show", show, 0);
 	rb_define_method(klass, "add_time", add_time, 1);
 }
 
-VALUE OgreWindow_new(VALUE class){
+static VALUE alloc(VALUE class){
 	/* VALUE class, void (*mark)(), void (*free)(), void *ptr */
 	Ogre_WindowPtr window = Ogre_Window_new();
 	VALUE data = Data_Wrap_Struct(class, NULL, Ogre_Window_delete, window);
@@ -20,11 +18,6 @@ VALUE OgreWindow_new(VALUE class){
 	// rb_obj_call_init(data, 0, NULL);
 	
 	return data;
-}
-
-static VALUE finalize(int argc, VALUE *argv, VALUE self){
-	// Free space used by the window
-	return Qnil;
 }
 
 static VALUE show(VALUE self){

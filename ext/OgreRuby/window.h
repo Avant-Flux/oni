@@ -7,9 +7,7 @@
 
 VALUE Init_OgreWindow(VALUE outer);
 
-VALUE OgreWindow_new(VALUE class);
-
-static VALUE finalize(int argc, VALUE *argv, VALUE klass);
+static VALUE alloc(VALUE class);
 
 static VALUE show(VALUE klass);
 static VALUE add_time(VALUE klass, VALUE dt);
