@@ -54,9 +54,11 @@ end
 # rule to build the extension: this says
 # that the extension should be rebuilt
 # after any change to the files in ext
+static_lib = "./ext/#{NAME}/cpp/build_linux/dist/lib/libOgreBase.a"
+
 c_library = "lib/#{NAME}/#{NAME}.so"
 
-file c_library => Dir.glob("ext/#{NAME}/*{.rb,.c}") + ["ext/#{NAME}/extconf.rb"] do
+file c_library => Dir.glob("ext/#{NAME}/*{.rb,.c}") + ["ext/#{NAME}/extconf.rb", static_lib] do
 	Dir.chdir("ext/#{NAME}") do
 		# this does essentially the same thing
 		# as what RubyGems does
