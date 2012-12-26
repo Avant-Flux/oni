@@ -1,17 +1,11 @@
 #include "OgreInterface.h"
 
-// Ogre::SceneManager* sceneMgr;
-
-// #ifdef __cplusplus
 extern "C" {
-// #endif
     void Ogre_cpp_test(){
         std::cout << "testing c++ level call" << std::endl;
     }
     
 // Ogre::Window
-    
-    
     Ogre_WindowPtr Ogre_Window_new(){
         GameApplication* game = new GameApplication();
         std::cout << "START NEW WINDOW" << std::endl;
@@ -79,36 +73,4 @@ extern "C" {
         std::string cpp_id(id); 
         agent->setBaseAnimation(cpp_id, reset);
     }
-
-// #ifdef __cplusplus
 }
-// #endif
-
-
-/*
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-#define WIN32_LEAN_AND_MEAN
-// #include "windows.h"
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
-    {
-       
-    }
-
-#ifdef __cplusplus
-}
-#endif
-*/
-
-
-/*
-x = OgreWindow.new
-    x.setup <-- setup should be called by OgreWindow.new at the C level
-x.show
-
-*/
