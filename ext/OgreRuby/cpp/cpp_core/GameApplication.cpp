@@ -88,7 +88,10 @@ GameApplication::loadObjects()
 void // Load actors, agents, characters
 GameApplication::loadCharacters()
 {
-	agent = new Agent("Cube", "Cube.mesh");
+	agent = new Agent();
+	std::string agent_name = "Cube";
+	std::string agent_mesh = "Cube.mesh";
+	agent->initialize(mSceneMgr, agent_name, agent_mesh);
 }
 
 void

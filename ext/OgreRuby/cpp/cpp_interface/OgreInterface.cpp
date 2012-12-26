@@ -1,5 +1,7 @@
 #include "OgreInterface.h"
 
+// Ogre::SceneManager* sceneMgr;
+
 // #ifdef __cplusplus
 extern "C" {
 // #endif
@@ -12,7 +14,8 @@ extern "C" {
     
     Ogre_WindowPtr Ogre_Window_new(){
         GameApplication* game = new GameApplication();
-        
+        std::cout << "START NEW WINDOW" << std::endl;
+                
         return (Ogre_WindowPtr)game;
     }
     
@@ -39,18 +42,28 @@ extern "C" {
     }
 
 // Ogre::Agent
-    Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename){
+    Ogre_AgentPtr Ogre_Agent_new(){
+        Agent* agent = new Agent();
         
-        std::string cpp_name(name); 
-        std::string cpp_filename(filename);
-        
-        return (Ogre_AgentPtr) new Agent(cpp_name, cpp_filename);
+        return (Ogre_AgentPtr)agent;
     }
     
     void Ogre_Agent_delete(Ogre_AgentPtr obj){
         Agent* agent = (Agent*)(obj);
         
         delete agent;
+    }
+    
+    void Ogre_Agent_initialize(Ogre_AgentPtr obj, Ogre_WindowPtr obj2, char* name, char* filename){
+        Agent* agent = (Agent*)(obj);
+        GameApplication* game = (GameApplication*)obj2;
+        
+        std::string cpp_name(name);
+        std::string cpp_filename(filename);
+        
+        // std::cout << "==================" << name << " " << filename << std::endl;
+        
+        agent->initialize(game->getSceneMgr(), cpp_name, cpp_filename);
     }
     
     void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z){

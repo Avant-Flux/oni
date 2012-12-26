@@ -1,10 +1,21 @@
 #include "Agent.h"
 
-extern Ogre::SceneManager* sceneMgr;
-
-Agent::Agent(std::string name, std::string filename)
-	: GraphicsObject(name, filename)
+Agent::Agent()
+	: GraphicsObject()
 {
+	
+}
+
+Agent::~Agent()
+{
+	
+}
+
+void
+Agent::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
+{
+	GraphicsObject::initialize(sceneMgr, name, filename);
+	
 	mNode->translate(0,5,0); // make the Ogre stand on the plane
 	
 	mDirection = Ogre::Vector3::ZERO;
@@ -17,11 +28,6 @@ Agent::Agent(std::string name, std::string filename)
 	setupAnimations();
 	
 	setTopAnimation("my_animation");
-}
-
-Agent::~Agent()
-{
-	
 }
 
 void

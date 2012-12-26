@@ -2,7 +2,18 @@
 
 extern Ogre::SceneManager* sceneMgr;
 
-GraphicsObject::GraphicsObject(std::string name, std::string filename)
+GraphicsObject::GraphicsObject()
+{
+	
+}
+
+GraphicsObject::~GraphicsObject()
+{
+	
+}
+
+void
+GraphicsObject::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
 {
 	using namespace Ogre;
 	
@@ -11,11 +22,6 @@ GraphicsObject::GraphicsObject(std::string name, std::string filename)
 	mNode->attachObject(mEntity);
 	
 	mNode->setPosition(0,0,0); // make the Ogre stand on the plane
-}
-
-GraphicsObject::~GraphicsObject()
-{
-	
 }
 
 void

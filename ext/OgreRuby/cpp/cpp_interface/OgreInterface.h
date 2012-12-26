@@ -26,8 +26,9 @@ extern "C" {
 	int Ogre_Window_run(Ogre_WindowPtr window);
     
 // Ogre::Agent
-	Ogre_AgentPtr Ogre_Agent_new(char* name, char* filename);
+	Ogre_AgentPtr Ogre_Agent_new();
 	void Ogre_Agent_delete(Ogre_AgentPtr agent);
+	void Ogre_Agent_initialize(Ogre_AgentPtr obj, Ogre_WindowPtr obj2, char* name, char* filename);
 	
 	void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z);
 	void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset);
