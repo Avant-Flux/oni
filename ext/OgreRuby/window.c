@@ -6,7 +6,7 @@ VALUE Init_OgreWindow(VALUE outer){
 	rb_define_alloc_func(klass, alloc);
 	
 	rb_define_method(klass, "show", show, 0);
-	rb_define_method(klass, "add_time", add_time, 1);
+	rb_define_method(klass, "update", update, 1);
 }
 
 static VALUE alloc(VALUE class){
@@ -26,13 +26,15 @@ static VALUE show(VALUE self){
 	Ogre_WindowPtr ptr;
 	Data_Get_Struct(self, Ogre_WindowPtr, ptr);
 	
+	rb_funcall(self, rb_intern("setup"), 0);
+	
 	Ogre_Window_run(ptr);
 	
 	return Qnil;
 } 
 
-static VALUE add_time(VALUE self, VALUE dt){
-	// rb_funcall(self, rb_intern("add_time"), 1, dt);
+static VALUE update(VALUE self, VALUE dt){
+	// rb_funcall(self, rb_intern("update"), 1, dt);
 	
 	return Qnil;
 }

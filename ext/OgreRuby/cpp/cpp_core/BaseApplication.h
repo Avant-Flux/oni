@@ -42,11 +42,11 @@ public:
     virtual ~BaseApplication(void);
 
     virtual void go(void);
+    virtual bool setup();
     
     Ogre::SceneManager* getSceneMgr(){return mSceneMgr;};
 
 protected:
-    virtual bool setup();
     virtual bool configure(void);
     virtual void chooseSceneManager(void);
     virtual void createCamera(void);

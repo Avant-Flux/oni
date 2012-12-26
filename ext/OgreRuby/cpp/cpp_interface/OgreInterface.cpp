@@ -9,7 +9,8 @@ extern "C" {
     Ogre_WindowPtr Ogre_Window_new(){
         GameApplication* game = new GameApplication();
         std::cout << "START NEW WINDOW" << std::endl;
-                
+        game->setup();
+        
         return (Ogre_WindowPtr)game;
     }
     

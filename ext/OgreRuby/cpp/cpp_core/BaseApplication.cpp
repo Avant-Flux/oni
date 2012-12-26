@@ -191,16 +191,8 @@ void BaseApplication::loadResources(void)
 //-------------------------------------------------------------------------------------
 void BaseApplication::go(void)
 {
-#ifdef _DEBUG
-    mResourcesCfg = "resources_d.cfg";
-    mPluginsCfg = "plugins_d.cfg";
-#else
-    mResourcesCfg = "resources.cfg";
-    mPluginsCfg = "plugins.cfg";
-#endif
-
-    if (!setup())
-        return;
+    // if (!setup())
+    //     return;
 
     mRoot->startRendering();
 
@@ -210,6 +202,14 @@ void BaseApplication::go(void)
 //-------------------------------------------------------------------------------------
 bool BaseApplication::setup(void)
 {
+#ifdef _DEBUG
+    mResourcesCfg = "resources_d.cfg";
+    mPluginsCfg = "plugins_d.cfg";
+#else
+    mResourcesCfg = "resources.cfg";
+    mPluginsCfg = "plugins.cfg";
+#endif
+    
     mRoot = new Ogre::Root(mPluginsCfg);
 
     setupResources();
@@ -235,7 +235,7 @@ bool BaseApplication::setup(void)
     createFrameListener();
 
     return true;
-};
+}
 //-------------------------------------------------------------------------------------
 bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {

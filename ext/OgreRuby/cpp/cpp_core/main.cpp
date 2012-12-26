@@ -1,7 +1,5 @@
 #include "GameApplication.h"
 
-Ogre::SceneManager* sceneMgr; // many classes will need to access the scene manager (init BaseApplication::chooseSceneManager)
-
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN

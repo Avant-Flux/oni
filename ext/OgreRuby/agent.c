@@ -22,35 +22,17 @@ static VALUE alloc(VALUE class){
 	return data;
 }
 
-static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE filename){
-	printf("%s\n", rb_obj_classname(window));
-	
-	// if(rb_obj_classname(window) != "Window")
-	// {
-	// 	printf("ERROR: ARGV[0] must be of type OgreRuby::Window\n");
-	// 	return Qnil;
-	// }
-	
-	
+static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE filename){	
 	Ogre_AgentPtr ptr_agent;
 	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
 	
 	Ogre_WindowPtr ptr_window;
-	Data_Get_Struct(self, Ogre_WindowPtr, ptr_window);
-	
-	printf("===========");
-	const char* out1 = rb_obj_classname(self);
-	const char* out2 = rb_obj_classname(name);
-	const char* out3 = rb_obj_classname(filename);
-	
-	printf("%s %s %s ", out1, out2, out3);	
-	
-	printf("\n");
+	Data_Get_Struct(window, Ogre_WindowPtr, ptr_window);
 	
 	char* string_name = StringValueCStr(name);
 	char* string_filename = StringValueCStr(filename);
 	
-	// Ogre_Agent_initialize(ptr_agent, ptr_window, string_name, string_filename);
+	Ogre_Agent_initialize(ptr_agent, ptr_window, string_name, string_filename);
 	
 	return Qnil;
 }
@@ -64,7 +46,7 @@ static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
 	double pos_y = NUM2DBL(y);
 	double pos_z = NUM2DBL(z);
 	
-	// Ogre_Agent_translate(ptr, pos_x, pos_y, pos_z);
+	Ogre_Agent_translate(ptr, pos_x, pos_y, pos_z);
 	
 	return Qnil;
 }
