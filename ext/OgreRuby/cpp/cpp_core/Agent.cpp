@@ -36,6 +36,12 @@ Agent::update(Ogre::Real deltaTime)
 	this->updateAnimations(deltaTime);
 }
 
+void
+Agent::setVisible(bool visible)
+{
+	mEntity->setVisible(visible);
+}
+
 void 
 Agent::setupAnimations()
 {

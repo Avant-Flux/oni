@@ -32,10 +32,10 @@ private:
 public:
 	Agent();
 	virtual ~Agent();
-	
 	virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
-
 	virtual void update(Ogre::Real deltaTime);		// update the agent
+	
+	void setVisible(bool visible);
 	
 	void setupAnimations();
 	void setBaseAnimation(std::string id, bool reset = false);

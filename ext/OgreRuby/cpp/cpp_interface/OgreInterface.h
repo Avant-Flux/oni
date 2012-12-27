@@ -35,6 +35,8 @@ extern "C" {
 	void Ogre_Agent_initialize(Ogre_AgentPtr obj, Ogre_WindowPtr obj2, char* name, char* filename);
 	void Ogre_Agent_update(Ogre_AgentPtr obj, double dt);
 	
+	void Ogre_Agent_setVisible(Ogre_AgentPtr obj, int visible);
+	
 	void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z);
 	void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset);
 
