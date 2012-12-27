@@ -5,6 +5,7 @@ VALUE Init_OgreAgent(VALUE outer){
 	
 	rb_define_alloc_func(klass, alloc);
 	rb_define_method(klass, "initialize", initialize, 3);
+	rb_define_method(klass, "update", update, 1);
 	
 	rb_define_method(klass, "translate", translate, 3);
 	
@@ -37,7 +38,15 @@ static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE filename){
 	return Qnil;
 }
 
-// static VALUE translate(int argc, VALUE *argv, VALUE self){
+static VALUE update(VALUE self, VALUE dt){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	double double_dt = NUM2DBL(dt);
+	
+	Ogre_Agent_update(ptr_agent, double_dt);
+}
+
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
 	Ogre_AgentPtr ptr;
 	Data_Get_Struct(self, Ogre_AgentPtr, ptr);

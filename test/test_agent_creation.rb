@@ -8,12 +8,16 @@ class Window < OgreRuby::Window
 		@a = OgreRuby::Agent.new(self, "Golem", "Golem.mesh")
 		@a.translate(50, 0, 0)
 		
-		@a = OgreRuby::Agent.new(self, "Golem2", "Golem.mesh")
-		@a.translate(-50, 0, 0)
+		@b = OgreRuby::Agent.new(self, "Golem2", "Golem.mesh")
+		@b.translate(-50, 0, 0)
+		
+		@b = nil
 	end
 	
 	def update(dt)
+		puts dt
 		
+		@a.update dt
 	end
 	
 	def draw

@@ -6,12 +6,12 @@ VALUE Init_OgreWindow(VALUE outer){
 	rb_define_alloc_func(klass, alloc);
 	
 	rb_define_method(klass, "show", show, 0);
-	rb_define_method(klass, "update", update, 1);
+	// rb_define_method(klass, "update", update, 1);
 }
 
 static VALUE alloc(VALUE class){
 	/* VALUE class, void (*mark)(), void (*free)(), void *ptr */
-	Ogre_WindowPtr window = Ogre_Window_new();
+	Ogre_WindowPtr window = Ogre_Window_new(updater);
 	VALUE data = Data_Wrap_Struct(class, NULL, Ogre_Window_delete, window);
 	
 	/* class, argc, *argv, */
@@ -28,13 +28,27 @@ static VALUE show(VALUE self){
 	
 	rb_funcall(self, rb_intern("setup"), 0);
 	
+	updater(1, self);
+	
 	Ogre_Window_run(ptr);
 	
 	return Qnil;
 } 
 
-static VALUE update(VALUE self, VALUE dt){
-	// rb_funcall(self, rb_intern("update"), 1, dt);
+// PRIVATE
+
+static void updater(double dt, void* ruby_window){	
+	static VALUE rb_window = NULL;
+	if(ruby_window != NULL)
+	{
+		// Only set the value, then get out
+		// This is in lieu of function overloading
+		rb_window = (VALUE)ruby_window;
+		return;
+	}
 	
-	return Qnil;
+	if(rb_window != NULL)
+	{
+		rb_funcall(rb_window, rb_intern("update"), 1, rb_float_new(dt));
+	}
 }

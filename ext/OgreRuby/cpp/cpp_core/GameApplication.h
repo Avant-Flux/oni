@@ -5,13 +5,15 @@
 #include "Agent.h"
 //#include <vector>
 
+extern "C" typedef void (*updateCallback)(double dt, void* data);
+
 class GameApplication : public BaseApplication
 {
 private:
 	Agent* agent;			// store a pointer to the character
 
 public:
-    GameApplication(void);
+    GameApplication(updateCallback callback);
     virtual ~GameApplication(void);
     
     virtual bool setup();
@@ -26,6 +28,8 @@ public:
 	void setFOV(Ogre::Real x_angle);
 
 protected:
+	updateCallback mUpdateCallback;
+	
     virtual void createScene(void);
 };
 

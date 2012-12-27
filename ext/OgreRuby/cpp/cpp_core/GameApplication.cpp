@@ -3,8 +3,9 @@
 #include <cmath>
 
 //-------------------------------------------------------------------------------------
-GameApplication::GameApplication(void)
+GameApplication::GameApplication(updateCallback callback)
 {
+	mUpdateCallback = callback;
 	agent = NULL;
 }
 //-------------------------------------------------------------------------------------
@@ -97,6 +98,9 @@ GameApplication::loadCharacters()
 void
 GameApplication::addTime(Ogre::Real deltaTime)
 {
+	mUpdateCallback(deltaTime, NULL);
+	
+	
 	if (agent != NULL)
 		agent->update(deltaTime);
 }

@@ -6,8 +6,8 @@ extern "C" {
     }
     
 // Ogre::Window
-    Ogre_WindowPtr Ogre_Window_new(){
-        GameApplication* game = new GameApplication();
+    Ogre_WindowPtr Ogre_Window_new(updateCallback callback){
+        GameApplication* game = new GameApplication(callback);
         std::cout << "START NEW WINDOW" << std::endl;
         game->setup();
         
@@ -59,6 +59,12 @@ extern "C" {
         // std::cout << "==================" << name << " " << filename << std::endl;
         
         agent->initialize(game->getSceneMgr(), cpp_name, cpp_filename);
+    }
+    
+    void Ogre_Agent_update(Ogre_AgentPtr obj, double dt){
+        Agent* agent = (Agent*)(obj);
+        
+        agent->update(dt);
     }
     
     void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z){
