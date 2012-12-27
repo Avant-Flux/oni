@@ -9,7 +9,13 @@ extern "C" {
     Ogre_WindowPtr Ogre_Window_new(updateCallback callback){
         GameApplication* game = new GameApplication(callback);
         std::cout << "START NEW WINDOW" << std::endl;
-        game->setup();
+        bool carryOn = game->setup();
+        
+        if(!carryOn)
+        {
+            delete game;
+            return NULL;
+        }
         
         return (Ogre_WindowPtr)game;
     }

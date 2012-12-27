@@ -11,7 +11,14 @@ VALUE Init_OgreWindow(VALUE outer){
 
 static VALUE alloc(VALUE class){
 	/* VALUE class, void (*mark)(), void (*free)(), void *ptr */
-	Ogre_WindowPtr window = Ogre_Window_new(updater);
+	Ogre_WindowPtr window = Ogre_Window_new(update);
+	
+	if(window == NULL)
+	{
+		// Throw exception
+		rb_raise(rb_eException, "Window could not be opened.");
+	}
+	
 	VALUE data = Data_Wrap_Struct(class, NULL, Ogre_Window_delete, window);
 	
 	/* class, argc, *argv, */
