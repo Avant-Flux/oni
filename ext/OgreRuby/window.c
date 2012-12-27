@@ -28,16 +28,16 @@ static VALUE show(VALUE self){
 	
 	rb_funcall(self, rb_intern("setup"), 0);
 	
-	updater(1, self);
+	update(1, (void*)self); // Assumed that VALUE is some sort of typedef-ed pointer
 	
 	Ogre_Window_run(ptr);
 	
 	return Qnil;
-} 
+}
 
 // PRIVATE
 
-static void updater(double dt, void* ruby_window){	
+static void update(double dt, void* ruby_window){	
 	static VALUE rb_window = NULL;
 	if(ruby_window != NULL)
 	{
