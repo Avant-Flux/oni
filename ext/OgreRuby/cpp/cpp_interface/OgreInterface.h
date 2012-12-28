@@ -42,7 +42,9 @@ extern "C" {
 	void Ogre_Agent_setVisible(Ogre_AgentPtr obj, int visible);
 	
 	void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z);
+	
 	void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset);
+	void Ogre_Agent_setTopAnimation(Ogre_AgentPtr obj, char* id, int reset);
 
 #ifdef __cplusplus
 }

@@ -16,8 +16,6 @@ Agent::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& 
 {
 	GraphicsObject::initialize(sceneMgr, name, filename);
 	
-	mNode->translate(0,5,0); // make the Ogre stand on the plane
-	
 	mDirection = Ogre::Vector3::ZERO;
 	
 	mTopAnimID = "";
@@ -26,8 +24,6 @@ Agent::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& 
 	mTimer = 0;
 	
 	setupAnimations();
-	
-	setTopAnimation("my_animation");
 }
 
 void

@@ -116,4 +116,11 @@ extern "C" {
         std::string cpp_id(id); 
         agent->setBaseAnimation(cpp_id, reset);
     }
+    
+    void Ogre_Agent_setTopAnimation(Ogre_AgentPtr obj, char* id, int reset){
+        Agent* agent = (Agent*)obj;
+        
+        std::string cpp_id(id); 
+        agent->setTopAnimation(cpp_id, reset);
+    }
 }

@@ -12,7 +12,8 @@ VALUE Init_OgreAgent(VALUE outer){
 	
 	rb_define_method(klass, "translate", translate, 3);
 	
-	rb_define_method(klass, "set_base_animation", setBaseAnimation, 0);
+	rb_define_method(klass, "base_animation=", setBaseAnimation, -1);
+	rb_define_method(klass, "top_animation=", setTopAnimation, -1);
 	rb_define_method(klass, "animation_names", animation_names, 1);
 }
 
@@ -89,10 +90,63 @@ static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
 }
 
 static VALUE setBaseAnimation(int argc, VALUE *argv, VALUE self){
-	Ogre_AgentPtr ptr;
-	Data_Get_Struct(self, Ogre_AgentPtr, ptr);
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
 	
-	Ogre_Agent_setBaseAnimation(ptr, "", 0);
+	VALUE name;
+	VALUE reset;
+	if(argc == 1)
+	{
+		// Set default for "reset"
+		name = argv[0];
+		reset = Qfalse;
+	}
+	else if(argc == 2)
+	{
+		// Use provided "reset" value
+		name = argv[0];
+		reset = argv[1];
+	}
+	else
+	{
+		rb_raise(rb_eArgError, "ERROR: Argument mismatch - Agent#base_animation=(name, reset=false)");
+	}
+	
+	char* string_name = StringValueCStr(name);
+	int int_reset = RTEST(reset);
+	
+	Ogre_Agent_setBaseAnimation(ptr_agent, string_name, int_reset);
+	
+	return Qnil;
+}
+
+static VALUE setTopAnimation(int argc, VALUE *argv, VALUE self){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	VALUE name;
+	VALUE reset;
+	if(argc == 1)
+	{
+		// Set default for "reset"
+		name = argv[0];
+		reset = Qfalse;
+	}
+	else if(argc == 2)
+	{
+		// Use provided "reset" value
+		name = argv[0];
+		reset = argv[1];
+	}
+	else
+	{
+		rb_raise(rb_eArgError, "ERROR: Argument mismatch - Agent#top_animation=(name, reset=false)");
+	}
+	
+	char* string_name = StringValueCStr(name);
+	int int_reset = RTEST(reset);
+	
+	Ogre_Agent_setTopAnimation(ptr_agent, string_name, int_reset);
 	
 	return Qnil;
 }
