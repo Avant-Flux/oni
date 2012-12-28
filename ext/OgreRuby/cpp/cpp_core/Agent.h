@@ -35,6 +35,7 @@ public:
 	virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
 	virtual void update(Ogre::Real deltaTime);		// update the agent
 	
+	bool getVisible();
 	void setVisible(bool visible);
 	
 	void setupAnimations();

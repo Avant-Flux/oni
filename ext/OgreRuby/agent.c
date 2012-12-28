@@ -8,6 +8,7 @@ VALUE Init_OgreAgent(VALUE outer){
 	rb_define_method(klass, "update", update, 1);
 	
 	rb_define_method(klass, "visible=", setVisible, 1);
+	rb_define_method(klass, "visible", getVisible, 0);
 	
 	rb_define_method(klass, "translate", translate, 3);
 	
@@ -47,6 +48,21 @@ static VALUE update(VALUE self, VALUE dt){
 	double double_dt = NUM2DBL(dt);
 	
 	Ogre_Agent_update(ptr_agent, double_dt);
+}
+
+static VALUE getVisible(VALUE self)
+{
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	if(Ogre_Agent_getVisible(ptr_agent))
+	{
+		return Qtrue;
+	}
+	else
+	{
+		return Qfalse;
+	}
 }
 
 static VALUE setVisible(VALUE self, VALUE visible)

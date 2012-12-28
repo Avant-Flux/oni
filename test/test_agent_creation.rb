@@ -20,6 +20,7 @@ class Window < OgreRuby::Window
 		# puts dt
 		
 		@a.update dt
+		puts @a.visible
 	end
 	
 	def draw

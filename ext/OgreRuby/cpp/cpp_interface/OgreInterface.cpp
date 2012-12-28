@@ -73,6 +73,20 @@ extern "C" {
         agent->update(dt);
     }
     
+    int Ogre_Agent_getVisible(Ogre_AgentPtr obj)
+    {
+        Agent* agent = (Agent*)(obj);
+        
+        if(agent->getVisible())
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    
     void Ogre_Agent_setVisible(Ogre_AgentPtr obj, int visible)
     {
         Agent* agent = (Agent*)(obj);
