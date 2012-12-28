@@ -11,7 +11,7 @@ VALUE Init_OgreWindow(VALUE outer){
 
 static VALUE alloc(VALUE class){
 	/* VALUE class, void (*mark)(), void (*free)(), void *ptr */
-	Ogre_WindowPtr window = Ogre_Window_new(update);
+	Ogre_WindowPtr window = Ogre_Window_new(update, buttonDown, buttonUp);
 	
 	if(window == NULL)
 	{
@@ -35,14 +35,22 @@ static VALUE show(VALUE self){
 	
 	rb_funcall(self, rb_intern("setup"), 0);
 	
-	update(1, (void*)self); // Assumed that VALUE is some sort of typedef-ed pointer
+	// Assumed that VALUE is some sort of typedef-ed pointer
+	update(1, (void*)self);
+	buttonDown(1, (void*)self);
+	buttonUp(1, (void*)self);
 	
 	Ogre_Window_run(ptr);
 	
 	return Qnil;
 }
 
-// PRIVATE
+//      _________    __    __    ____  ___   ________ _______
+//	   / ____/   |  / /   / /   / __ )/   | / ____/ //_/ ___/
+//	  / /   / /| | / /   / /   / __  / /| |/ /   / ,<  \__ \ 
+//	 / /___/ ___ |/ /___/ /___/ /_/ / ___ / /___/ /| |___/ / 
+//	 \____/_/  |_/_____/_____/_____/_/  |_\____/_/ |_/____/  
+	                                                        
 
 static void update(double dt, void* ruby_window){	
 	static VALUE rb_window = NULL;
@@ -57,5 +65,39 @@ static void update(double dt, void* ruby_window){
 	if(rb_window != NULL)
 	{
 		rb_funcall(rb_window, rb_intern("update"), 1, rb_float_new(dt));
+	}
+}
+
+static void buttonDown(unsigned int key_id, void* ruby_window)
+{
+	static VALUE rb_window = NULL;
+	if(ruby_window != NULL)
+	{
+		// Only set the value, then get out
+		// This is in lieu of function overloading
+		rb_window = (VALUE)ruby_window;
+		return;
+	}
+	
+	if(rb_window != NULL)
+	{
+		rb_funcall(rb_window, rb_intern("button_down"), 1, INT2NUM(key_id));
+	}
+}
+
+static void buttonUp(unsigned int key_id, void* ruby_window)
+{
+	static VALUE rb_window = NULL;
+	if(ruby_window != NULL)
+	{
+		// Only set the value, then get out
+		// This is in lieu of function overloading
+		rb_window = (VALUE)ruby_window;
+		return;
+	}
+	
+	if(rb_window != NULL)
+	{
+		rb_funcall(rb_window, rb_intern("button_up"), 1, INT2NUM(key_id));
 	}
 }

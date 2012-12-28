@@ -4,10 +4,12 @@ extern "C" {
     void Ogre_cpp_test(){
         std::cout << "testing c++ level call" << std::endl;
     }
+
     
 // Ogre::Window
-    Ogre_WindowPtr Ogre_Window_new(updateCallback callback){
-        GameApplication* game = new GameApplication(callback);
+    Ogre_WindowPtr Ogre_Window_new(updateCallback update_callback, 
+                                    keyDownCallback down_callback, keyUpCallback up_callback){
+        GameApplication* game = new GameApplication(update_callback, down_callback, up_callback);
         std::cout << "START NEW WINDOW" << std::endl;
         bool carryOn = game->setup();
         

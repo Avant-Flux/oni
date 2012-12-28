@@ -3,9 +3,13 @@
 #include <cmath>
 
 //-------------------------------------------------------------------------------------
-GameApplication::GameApplication(updateCallback callback)
+GameApplication::GameApplication(updateCallback update_callback,
+								keyDownCallback down_callback, keyUpCallback up_callback)
 {
-	mUpdateCallback = callback;
+	mUpdateCallback = update_callback;
+	mKeyDownCallback = down_callback;
+	mKeyUpCallback = up_callback;
+	
 	agent = NULL;
 }
 //-------------------------------------------------------------------------------------
@@ -80,29 +84,19 @@ GameApplication::setupEnv()
 void // Load other props or objects
 GameApplication::loadObjects()
 {
-	using namespace Ogre;
-	//~ items = new std::vector<Item>();
-	//~ vector<Item> items(5);
-	//~ Item items[5];
+	
 }
 
 void // Load actors, agents, characters
 GameApplication::loadCharacters()
 {
-	agent = new Agent();
-	std::string agent_name = "Cube";
-	std::string agent_mesh = "Cube.mesh";
-	agent->initialize(mSceneMgr, agent_name, agent_mesh);
+	
 }
 
 void
 GameApplication::addTime(Ogre::Real deltaTime)
 {
 	mUpdateCallback(deltaTime, NULL);
-	
-	
-	if (agent != NULL)
-		agent->update(deltaTime);
 }
 
 void
@@ -110,4 +104,47 @@ GameApplication::setFOV(Ogre::Real x_angle)
 {
 	// Assume given measure is in degrees, must convert to radians first
 	mCamera->setFOVy(Ogre::Degree(x_angle)/mCamera->getAspectRatio());
+}
+
+// TODO: Separate input handler from window and move into separate class and file
+bool
+GameApplication::keyPressed( const OIS::KeyEvent &arg )
+{
+    BaseApplication::keyPressed(arg);
+    mKeyDownCallback(arg.key, NULL);
+    
+    return true;
+}
+
+bool
+GameApplication::keyReleased( const OIS::KeyEvent &arg )
+{
+    BaseApplication::keyReleased(arg);
+    mKeyUpCallback(arg.key, NULL);
+    
+    return true;
+}
+
+bool
+GameApplication::mouseMoved( const OIS::MouseEvent &arg )
+{
+    BaseApplication::mouseMoved(arg);
+    
+    return true;
+}
+
+bool
+GameApplication::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
+{
+    BaseApplication::mousePressed(arg, id);
+    
+    return true;
+}
+
+bool
+GameApplication::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
+{
+    BaseApplication::mouseReleased(arg, id);
+    
+    return true;
 }

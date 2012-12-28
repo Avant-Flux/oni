@@ -20,13 +20,16 @@ typedef void* Ogre_AgentPtr;
 extern "C" {
 #endif
 	typedef void (*updateCallback)(double dt, void* data);
+	typedef void (*keyDownCallback)(unsigned int key_id, void* ruby_window);
+	typedef void (*keyUpCallback)(unsigned int key_id, void* ruby_window);
 
 // Ogre::Window
 	void Ogre_cpp_test();
 	
-	Ogre_WindowPtr Ogre_Window_new(updateCallback callback);
+	Ogre_WindowPtr Ogre_Window_new(updateCallback update_callback, 
+                                    keyDownCallback down_callback, keyUpCallback up_callback);
 	void Ogre_Window_delete(Ogre_WindowPtr window);
-
+	
 	int Ogre_Window_run(Ogre_WindowPtr window);
     
 // Ogre::Agent

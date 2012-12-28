@@ -5,7 +5,13 @@
 #include "Agent.h"
 //#include <vector>
 
-extern "C" typedef void (*updateCallback)(double dt, void* data);
+extern "C"
+{
+	typedef void (*updateCallback)(double dt, void* data);
+	typedef void (*keyDownCallback)(unsigned int key_id, void* ruby_window);
+	typedef void (*keyUpCallback)(unsigned int key_id, void* ruby_window);
+}
+
 
 class GameApplication : public BaseApplication
 {
@@ -13,7 +19,8 @@ private:
 	Agent* agent;			// store a pointer to the character
 
 public:
-    GameApplication(updateCallback callback);
+    GameApplication(updateCallback update_callback,
+					keyDownCallback down_callback, keyUpCallback up_callback);
     virtual ~GameApplication(void);
     
     virtual bool setup();
@@ -26,9 +33,17 @@ public:
 	void addTime(Ogre::Real deltaTime);		// update the game state
 	
 	void setFOV(Ogre::Real x_angle);
+	
+	bool keyPressed( const OIS::KeyEvent &arg );
+	bool keyReleased( const OIS::KeyEvent &arg );
+	bool mouseMoved( const OIS::MouseEvent &arg );
+	bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
+	bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
 
 protected:
 	updateCallback mUpdateCallback;
+	keyDownCallback mKeyDownCallback;
+	keyUpCallback mKeyUpCallback;
 	
     virtual void createScene(void);
 };
