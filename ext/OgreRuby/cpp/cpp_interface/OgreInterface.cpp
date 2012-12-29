@@ -110,6 +110,20 @@ extern "C" {
         agent->translate(x,y,z);
     }
     
+    const char* Ogre_Agent_getBaseAnimation(Ogre_AgentPtr obj)
+    {
+        Agent* agent = (Agent*)(obj);
+        
+        return agent->getBaseAnimation().c_str();
+    }
+    
+    const char* Ogre_Agent_getTopAnimation(Ogre_AgentPtr obj)
+    {
+        Agent* agent = (Agent*)(obj);
+        
+        return agent->getTopAnimation().c_str();
+    }
+    
     void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset){
         Agent* agent = (Agent*)obj;
         

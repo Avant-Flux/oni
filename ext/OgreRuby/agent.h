@@ -17,5 +17,7 @@ static VALUE setVisible(VALUE self, VALUE visible);
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z);
 
 static VALUE setBaseAnimation(int argc, VALUE *argv, VALUE self);
+static VALUE getBaseAnimation(VALUE self);
+static VALUE getTopAnimation(VALUE self);
 static VALUE setTopAnimation(int argc, VALUE *argv, VALUE self);
 static VALUE animation_names(int argc, VALUE *argv, VALUE self);

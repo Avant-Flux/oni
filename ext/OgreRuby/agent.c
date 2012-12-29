@@ -12,6 +12,8 @@ VALUE Init_OgreAgent(VALUE outer){
 	
 	rb_define_method(klass, "translate", translate, 3);
 	
+	rb_define_method(klass, "base_animation", getBaseAnimation, 0);
+	rb_define_method(klass, "top_animation", getTopAnimation, 0);
 	rb_define_method(klass, "base_animation=", setBaseAnimation, -1);
 	rb_define_method(klass, "top_animation=", setTopAnimation, -1);
 	rb_define_method(klass, "animation_names", animation_names, 1);
@@ -87,6 +89,30 @@ static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
 	Ogre_Agent_translate(ptr, pos_x, pos_y, pos_z);
 	
 	return Qnil;
+}
+
+static VALUE getBaseAnimation(VALUE self)
+{
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	const char* str_animation_name = Ogre_Agent_getBaseAnimation(ptr_agent);
+	
+	VALUE name = rb_str_new2(str_animation_name);
+	
+	return name;
+}
+
+static VALUE getTopAnimation(VALUE self)
+{
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	const char* str_animation_name = Ogre_Agent_getTopAnimation(ptr_agent);
+	
+	VALUE name = rb_str_new2(str_animation_name);
+	
+	return name;
 }
 
 static VALUE setBaseAnimation(int argc, VALUE *argv, VALUE self){

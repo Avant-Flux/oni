@@ -39,8 +39,10 @@ public:
 	void setVisible(bool visible);
 	
 	void setupAnimations();
+	std::string getBaseAnimation(){return mBaseAnimID;};
 	void setBaseAnimation(std::string id, bool reset = false);
 	void setTopAnimation(std::string id, bool reset = false);
+	std::string getTopAnimation(){return mTopAnimID;};
 	void fadeAnimations(Ogre::Real deltaTime);
 	void updateAnimations(Ogre::Real deltaTime);
 	

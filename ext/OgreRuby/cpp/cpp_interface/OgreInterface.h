@@ -43,7 +43,9 @@ extern "C" {
 	
 	void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z);
 	
+	const char* Ogre_Agent_getBaseAnimation(Ogre_AgentPtr obj);
 	void Ogre_Agent_setBaseAnimation(Ogre_AgentPtr obj, char* id, int reset);
+	const char* Ogre_Agent_getTopAnimation(Ogre_AgentPtr obj);
 	void Ogre_Agent_setTopAnimation(Ogre_AgentPtr obj, char* id, int reset);
 
 #ifdef __cplusplus

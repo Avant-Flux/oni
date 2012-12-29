@@ -4,21 +4,25 @@ require 'gl'
 require 'glu'
 
 class Window < OgreRuby::Window
-	def initialize
-		# x = Agent.new("name", "name.mesh")
+	def setup
+		@a = OgreRuby::Agent.new(self, "Golem", "Golem.mesh")
+		@a.translate(0, 0, 0)
 		
-		# x.animation_names.each do |name|
-		# 	puts name
-		# end
+		@a.top_animation = "my_animation"
+		# @a.top_animation = ""
 	end
 	
-	def update
+	def update(dt)
+		@a.update dt
 		
+		puts "top: #{@a.top_animation}"
+		puts "base: #{@a.base_animation}"
 	end
 	
 	def draw
-		
+		# 2D drawing system with OpenGL
+		# Useful for drawing UI and such;
 	end
 end
 
-# Window.new.show
+Window.new.show
