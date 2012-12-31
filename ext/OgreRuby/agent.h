@@ -14,6 +14,7 @@ static VALUE update(VALUE self, VALUE dt);
 static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 
+static VALUE setPosition(VALUE self, VALUE pos);
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z);
 
 static VALUE setBaseAnimation(int argc, VALUE *argv, VALUE self);

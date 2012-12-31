@@ -41,6 +41,7 @@ extern "C" {
 	int Ogre_Agent_getVisible(Ogre_AgentPtr obj);
 	void Ogre_Agent_setVisible(Ogre_AgentPtr obj, int visible);
 	
+	void Ogre_Agent_setPosition(Ogre_AgentPtr obj, double x, double y, double z);
 	void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z);
 	
 	const char* Ogre_Agent_getBaseAnimation(Ogre_AgentPtr obj);

@@ -10,6 +10,7 @@ VALUE Init_OgreAgent(VALUE outer){
 	rb_define_method(klass, "visible=", setVisible, 1);
 	rb_define_method(klass, "visible", getVisible, 0);
 	
+	rb_define_method(klass, "position=", setPosition, 1);
 	rb_define_method(klass, "translate", translate, 3);
 	
 	rb_define_method(klass, "base_animation", getBaseAnimation, 0);
@@ -24,7 +25,7 @@ static VALUE alloc(VALUE class){
 	
 	// OGRE_TYPE Agent = Ogre_Agent(); // MUST free memory later
 	Ogre_AgentPtr agent = Ogre_Agent_new();
-	VALUE data = Data_Wrap_Struct(class, NULL, Ogre_Agent_delete, agent);
+	VALUE data = Data_Wrap_Struct(class, Ogre_Agent_markgc, Ogre_Agent_delete, agent);
 	
 	return data;
 }
@@ -76,6 +77,25 @@ static VALUE setVisible(VALUE self, VALUE visible)
 	Ogre_Agent_setVisible(ptr_agent, RTEST(visible));
 	
 	return Qnil;
+}
+
+static VALUE setPosition(VALUE self, VALUE pos)
+{
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	
+	// TODO: Take single argument of one array - interpreted as a vector
+	// RARRAY(pos)->ptr[0];
+	VALUE x = rb_ary_entry(pos, 0);
+	VALUE y = rb_ary_entry(pos, 1);
+	VALUE z = rb_ary_entry(pos, 2);
+	
+	double pos_x = NUM2DBL(x);
+	double pos_y = NUM2DBL(y);
+	double pos_z = NUM2DBL(z);
+	
+	Ogre_Agent_setPosition(ptr_agent, pos_x, pos_y, pos_z);
 }
 
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){

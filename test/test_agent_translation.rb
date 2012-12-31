@@ -33,6 +33,10 @@ class Window < OgreRuby::Window
 		# 		@a.translate(-1,0,0)
 		# end
 		
+		case button_id_to_sym id
+			when :kb_x
+				@a.position = [0,0,0]
+		end
 		
 		case id
 			when 205 # right

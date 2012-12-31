@@ -103,6 +103,12 @@ extern "C" {
         }
     }
     
+    void Ogre_Agent_setPosition(Ogre_AgentPtr obj, double x, double y, double z){
+        Agent* agent = (Agent*)(obj);
+        
+        agent->setPosition(x,y,z);
+    }
+    
     void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z){
         // void translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
         Agent* agent = (Agent*)(obj);
