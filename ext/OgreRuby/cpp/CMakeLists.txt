@@ -117,10 +117,17 @@ set(CORE_SRCS
 
 set(INTERFACE_HDRS
 	./cpp_interface/OgreInterface.h
+	./cpp_interface/OgreInterfaceBase.h
+	
+	./cpp_interface/Window.h
+	./cpp_interface/Agent.h
 )
 
 set(INTERFACE_SRCS
 	./cpp_interface/OgreInterface.cpp
+	
+	./cpp_interface/Window.cpp
+	./cpp_interface/Agent.cpp
 )
 
 include_directories( ${OIS_INCLUDE_DIRS}
@@ -220,7 +227,11 @@ if(UNIX)
 	#install(TARGETS OgreApp
 	#	RUNTIME DESTINATION bin
 	#	CONFIGURATIONS All)
- 
+ 	
+ 	install(TARGETS OgreBase
+		ARCHIVE DESTINATION lib
+		CONFIGURATIONS All)
+ 	
 	install(DIRECTORY ${CMAKE_SOURCE_DIR}/dist/media
 		DESTINATION ./
 		CONFIGURATIONS Release RelWithDebInfo Debug
