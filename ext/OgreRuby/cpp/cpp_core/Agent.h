@@ -39,6 +39,9 @@ public:
 	void setVisible(bool visible);
 	
 	void setupAnimations();
+	
+	Ogre::AnimationStateIterator getAnimationNames();
+	
 	std::string getBaseAnimation(){return mBaseAnimID;};
 	void setBaseAnimation(std::string id, bool reset = false);
 	void setTopAnimation(std::string id, bool reset = false);

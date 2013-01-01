@@ -17,7 +17,7 @@ VALUE Init_OgreAgent(VALUE outer){
 	rb_define_method(klass, "top_animation", getTopAnimation, 0);
 	rb_define_method(klass, "base_animation=", setBaseAnimation, -1);
 	rb_define_method(klass, "top_animation=", setTopAnimation, -1);
-	rb_define_method(klass, "animation_names", animation_names, 1);
+	rb_define_method(klass, "animations", animation_names, 0);
 }
 
 static VALUE alloc(VALUE class){
@@ -197,8 +197,33 @@ static VALUE setTopAnimation(int argc, VALUE *argv, VALUE self){
 	return Qnil;
 }
 
-// Return list of animation names
-// Return: array of strings
-static VALUE animation_names(int argc, VALUE *argv, VALUE self){
-	return Qnil;
+// Return list of animation names (array of strings)
+// If no animations found, returns an empty array
+static VALUE animation_names(VALUE self){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	// Get an array of c-level strings
+	// Array is NULL terminated, so a size is not necessary
+	char** str_array = Ogre_Agent_getAnimationNames(ptr_agent);
+	
+	// Create a ruby array
+	VALUE array = rb_ary_new();
+	
+	// Fill it with ruby strings
+	int i;
+	for(i=0; str_array[i] != NULL; i++)
+	{
+		VALUE string = rb_str_new2(str_array[i]);
+		rb_ary_store(array, i, string);
+		
+		// Free memory as the array is traversed
+		free(str_array[i]);
+	}
+	
+	// Free c array returned by Ogre interface call
+	free(str_array);
+	
+	
+	return array;
 }

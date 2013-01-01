@@ -66,6 +66,15 @@ Agent::setupAnimations()
 	}
 }
 
+Ogre::AnimationStateIterator
+Agent::getAnimationNames()
+{
+	Ogre::AnimationStateSet* aSet = mEntity->getAllAnimationStates();
+	Ogre::AnimationStateIterator iter = aSet->getAnimationStateIterator();
+	
+	return iter;
+}
+
 void 
 Agent::setBaseAnimation(std::string id, bool reset)
 {

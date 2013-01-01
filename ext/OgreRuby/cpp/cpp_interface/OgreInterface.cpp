@@ -116,6 +116,47 @@ extern "C" {
         agent->translate(x,y,z);
     }
     
+    char** Ogre_Agent_getAnimationNames(Ogre_AgentPtr obj){
+        // DANGER:  Liable to be a source of memory leaks, as it allocates memory
+        //          but expects the caller to deal with the consequences
+        
+        Agent* agent = (Agent*)(obj);
+        
+        Ogre::AnimationStateIterator iter = agent->getAnimationNames();
+        
+        int animation_count = 0;
+        while (iter.hasMoreElements())
+        {
+            Ogre::AnimationState* a = iter.getNext();
+            
+            animation_count++;
+        }
+        
+        // Can't know animation count at compile time
+        // Must use dynamic memory allocation
+        char** string_array = new char* [animation_count+1]; // Leave space for null at the end
+        
+        // Fill the array
+        iter = agent->getAnimationNames();
+        int i;
+        for(i=0; iter.hasMoreElements(); i++)
+        {
+            Ogre::AnimationState* a = iter.getNext();
+            
+            std::string name = a->getAnimationName();
+            
+            char* cstr = new char [name.size()+1]; // Add one for the null terminator
+            strcpy (cstr, name.c_str());
+
+            string_array[i] = cstr;
+        }
+        
+        // Set the last element in the array to NULL
+        string_array[animation_count] = NULL;
+        
+        return string_array;
+    }
+    
     const char* Ogre_Agent_getBaseAnimation(Ogre_AgentPtr obj)
     {
         Agent* agent = (Agent*)(obj);
