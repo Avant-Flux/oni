@@ -3,6 +3,8 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
+require 'OgreRuby'
+
 class Window < OgreRuby::Window
 	def setup
 		@a = OgreRuby::Agent.new(self, "Golem", "Golem.mesh")
