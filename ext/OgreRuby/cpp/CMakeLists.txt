@@ -107,7 +107,6 @@ set(CORE_HDRS
 )
 
 set(CORE_SRCS
-	./cpp_core/main.cpp
 	./cpp_core/BaseApplication.cpp
 	./cpp_core/GameApplication.cpp
 	
