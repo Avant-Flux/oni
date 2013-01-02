@@ -8,9 +8,7 @@ class GraphicsObject
 public:
 	GraphicsObject();
 	virtual ~GraphicsObject();
-	
 	virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
-	
 	virtual void update(Ogre::Real deltaTime);		// update the game object
 	
 	// Position
@@ -28,6 +26,8 @@ public:
 	void roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
 
 protected:
+	Ogre::SceneManager* mSceneMgr; // TODO: Consider optimizing using flyweight pattern
+	
 	Ogre::SceneNode* mNode;
 	Ogre::Entity* mEntity;
 };

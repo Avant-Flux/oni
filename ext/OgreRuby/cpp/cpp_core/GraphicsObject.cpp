@@ -1,10 +1,7 @@
 #include "GraphicsObject.h"
 
-extern Ogre::SceneManager* sceneMgr;
-
 GraphicsObject::GraphicsObject()
 {
-	
 }
 
 GraphicsObject::~GraphicsObject()
@@ -16,6 +13,8 @@ void
 GraphicsObject::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
 {
 	using namespace Ogre;
+	
+	mSceneMgr = sceneMgr;
 	
 	mNode = sceneMgr->getRootSceneNode()->createChildSceneNode();
 	mEntity = sceneMgr->createEntity(name, filename);
