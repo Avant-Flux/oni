@@ -2,3 +2,4 @@ TODO: Use static_cast<>() instead of C-style casting for dealing with opaque typ
 	If possible.  They may be at C-level, where that function does not exist.
 TODO: Clean up OgreInterface.h GameApplication.h function callback declaration
 	Should only be declared in one way, in one place
+TODO: Use define guards in C headers
