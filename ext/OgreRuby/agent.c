@@ -23,7 +23,6 @@ VALUE Init_OgreAgent(VALUE outer){
 static VALUE alloc(VALUE class){
 	// Ruby interface: Agent.new(window, "name", "name.mesh")
 	
-	// OGRE_TYPE Agent = Ogre_Agent(); // MUST free memory later
 	Ogre_AgentPtr agent = Ogre_Agent_new();
 	VALUE data = Data_Wrap_Struct(class, Ogre_Agent_markgc, Ogre_Agent_delete, agent);
 	

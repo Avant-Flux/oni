@@ -28,8 +28,6 @@ extern "C" {
         std::string cpp_name(name);
         std::string cpp_filename(filename);
         
-        // std::cout << "==================" << name << " " << filename << std::endl;
-        
         agent->initialize(game->getSceneMgr(), cpp_name, cpp_filename);
     }
     
