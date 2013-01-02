@@ -12,8 +12,6 @@ GraphicsObject::~GraphicsObject()
 void
 GraphicsObject::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
 {
-	using namespace Ogre;
-	
 	mSceneMgr = sceneMgr;
 	
 	mNode = sceneMgr->getRootSceneNode()->createChildSceneNode();
