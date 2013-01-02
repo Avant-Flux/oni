@@ -20,7 +20,7 @@ GraphicsObject::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std:
 	mEntity = sceneMgr->createEntity(name, filename);
 	mNode->attachObject(mEntity);
 	
-	mNode->setPosition(0,0,0); // make the Ogre stand on the plane
+	mNode->setPosition(0,0,0); // Spawn all objects at the origin
 }
 
 void
