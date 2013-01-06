@@ -31,7 +31,19 @@ end
 
 # the same as before
 Rake::TestTask.new do |t|
-  t.libs << 'test'
+	# t.libs << 'test'
+	# t.test_files = FileList['test/test*.rb']
+	t.test_files = ["test/test_window_creation.rb"]
+	
+	t.test_files = ["test/test_quad_creation.rb"]
+	t.test_files = ["test/test_keyboard_input.rb"]
+	
+	t.test_files = ["test/test_agent_creation.rb"]
+	t.test_files = ["test/test_agent_translation.rb"]
+	
+	t.test_files = ["test/test_set_animation.rb"]
+	t.test_files = ["test/test_get_animation.rb"]
+	
 end
 
 task :cpp_library do
