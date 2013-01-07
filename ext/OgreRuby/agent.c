@@ -13,6 +13,11 @@ VALUE Init_OgreAgent(VALUE outer){
 	rb_define_method(klass, "position=", setPosition, 1);
 	rb_define_method(klass, "translate", translate, 3);
 	
+	rb_define_method(klass, "pitch", pitch, 1);
+	rb_define_method(klass, "yaw", yaw, 1);
+	rb_define_method(klass, "roll", roll, 1);
+	rb_define_method(klass, "rotate_to", rotateTo, 3);
+	
 	rb_define_method(klass, "base_animation", getBaseAnimation, 0);
 	rb_define_method(klass, "top_animation", getTopAnimation, 0);
 	rb_define_method(klass, "base_animation=", setBaseAnimation, -1);
@@ -90,22 +95,65 @@ static VALUE setPosition(VALUE self, VALUE pos)
 	VALUE y = rb_ary_entry(pos, 1);
 	VALUE z = rb_ary_entry(pos, 2);
 	
-	double pos_x = NUM2DBL(x);
-	double pos_y = NUM2DBL(y);
-	double pos_z = NUM2DBL(z);
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
 	
-	Ogre_Agent_setPosition(ptr_agent, pos_x, pos_y, pos_z);
+	Ogre_Agent_setPosition(ptr_agent, dbl_x, dbl_y, dbl_z);
 }
 
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
 	Ogre_AgentPtr ptr;
 	Data_Get_Struct(self, Ogre_AgentPtr, ptr);
 	
-	double pos_x = NUM2DBL(x);
-	double pos_y = NUM2DBL(y);
-	double pos_z = NUM2DBL(z);
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
 	
-	Ogre_Agent_translate(ptr, pos_x, pos_y, pos_z);
+	Ogre_Agent_translate(ptr, dbl_x, dbl_y, dbl_z);
+	
+	return Qnil;
+}
+
+static VALUE pitch(VALUE self, VALUE radians){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	double dbl_radians = NUM2DBL(radians);
+	Ogre_Agent_pitch(ptr_agent, dbl_radians);
+	
+	return Qnil;
+}
+
+static VALUE yaw(VALUE self, VALUE radians){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	double dbl_radians = NUM2DBL(radians);
+	Ogre_Agent_yaw(ptr_agent, dbl_radians);
+	
+	return Qnil;
+}
+
+static VALUE roll(VALUE self, VALUE radians){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	double dbl_radians = NUM2DBL(radians);
+	Ogre_Agent_roll(ptr_agent, dbl_radians);
+	
+	return Qnil;
+}
+
+static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Ogre_Agent_rotateTo(ptr_agent, dbl_x,dbl_y,dbl_z);
 	
 	return Qnil;
 }

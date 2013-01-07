@@ -27,6 +27,13 @@ extern "C" {
 	void Ogre_Agent_setPosition(Ogre_AgentPtr obj, double x, double y, double z);
 	void Ogre_Agent_translate(Ogre_AgentPtr obj, double x, double y, double z);
 	
+	void Ogre_Agent_pitch(Ogre_AgentPtr obj, double radians);
+	void Ogre_Agent_yaw(Ogre_AgentPtr obj, double radians);
+	void Ogre_Agent_roll(Ogre_AgentPtr obj, double radians);
+	
+	// Rotate to face the given vector
+	void Ogre_Agent_rotateTo(Ogre_AgentPtr obj, double x, double y, double z);
+	
 	char** Ogre_Agent_getAnimationNames(Ogre_AgentPtr obj);
 	
 	const char* Ogre_Agent_getBaseAnimation(Ogre_AgentPtr obj);

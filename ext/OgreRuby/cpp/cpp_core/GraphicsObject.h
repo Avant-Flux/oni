@@ -24,6 +24,9 @@ public:
 	void pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
 	void yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
 	void roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
+	
+	void rotateTo(const Ogre::Vector3 &vec);
+	void rotateTo(double x, double y, double z);
 
 protected:
 	Ogre::SceneManager* mSceneMgr; // TODO: Consider optimizing using flyweight pattern

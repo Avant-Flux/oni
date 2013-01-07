@@ -78,6 +78,30 @@ extern "C" {
         agent->translate(x,y,z);
     }
     
+    void Ogre_Agent_pitch(Ogre_AgentPtr obj, double radians){
+        Agent* agent = (Agent*)(obj);
+        
+        agent->pitch(Ogre::Radian(radians));
+    }
+    
+    void Ogre_Agent_yaw(Ogre_AgentPtr obj, double radians){
+        Agent* agent = (Agent*)(obj);
+        
+        agent->yaw(Ogre::Radian(radians));
+    }
+    
+    void Ogre_Agent_roll(Ogre_AgentPtr obj, double radians){
+        Agent* agent = (Agent*)(obj);
+        
+        agent->roll(Ogre::Radian(radians));
+    }
+    
+    void Ogre_Agent_rotateTo(Ogre_AgentPtr obj, double x, double y, double z){
+        Agent* agent = (Agent*)(obj);
+        
+        agent->rotateTo(x,y,z);
+    }
+    
     char** Ogre_Agent_getAnimationNames(Ogre_AgentPtr obj){
         // DANGER:  Liable to be a source of memory leaks, as it allocates memory
         //          but expects the caller to deal with the consequences
