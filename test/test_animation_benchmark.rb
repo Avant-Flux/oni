@@ -49,27 +49,13 @@ class Window < OgreRuby::Window
 		@models.each do |m|
 			case button_id_to_sym(id)
 				when :kb_1
-					m.rotate_to 1,0,0
+					m.rotation = 0.degrees
 				when :kb_2
-					m.rotate_to -1,0,0
+					m.rotation = 90.degrees
 				when :kb_3
-					m.rotate_to 0,0,1
+					m.rotation = 180.degrees
 				when :kb_4
-					m.rotate_to 0,0,-1
-				
-				when :kb_x
-					m.pitch 20.degrees
-				when :kb_y
-					m.yaw 20.degrees
-				when :kb_z
-					m.roll 20.degrees
-				
-				when :kb_a
-					m.pitch -20.degrees
-				when :kb_b
-					m.yaw -20.degrees
-				when :kb_c
-					m.roll -20.degrees
+					m.rotation = 270.degrees
 			end	
 		end
 		

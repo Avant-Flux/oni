@@ -31,8 +31,11 @@ extern "C" {
 	void Ogre_Agent_yaw(Ogre_AgentPtr obj, double radians);
 	void Ogre_Agent_roll(Ogre_AgentPtr obj, double radians);
 	
-	// Rotate to face the given vector
+	// Rotate to face the given vector - DEPRECIATED
 	void Ogre_Agent_rotateTo(Ogre_AgentPtr obj, double x, double y, double z);
+	
+	// Set rotation in horizontal plane
+	void Ogre_Agent_setRotation(Ogre_AgentPtr obj, double radians);
 	
 	char** Ogre_Agent_getAnimationNames(Ogre_AgentPtr obj);
 	

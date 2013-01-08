@@ -18,6 +18,8 @@ VALUE Init_OgreAgent(VALUE outer){
 	rb_define_method(klass, "roll", roll, 1);
 	rb_define_method(klass, "rotate_to", rotateTo, 3);
 	
+	rb_define_method(klass, "rotation=", setRotation, 1);
+	
 	rb_define_method(klass, "base_animation", getBaseAnimation, 0);
 	rb_define_method(klass, "top_animation", getTopAnimation, 0);
 	rb_define_method(klass, "base_animation=", setBaseAnimation, -1);
@@ -156,6 +158,15 @@ static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z){
 	Ogre_Agent_rotateTo(ptr_agent, dbl_x,dbl_y,dbl_z);
 	
 	return Qnil;
+}
+
+static VALUE setRotation(VALUE self, VALUE radians){
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
+	
+	double dbl_radians = NUM2DBL(radians);
+	
+	Ogre_Agent_setRotation(ptr_agent, dbl_radians);
 }
 
 static VALUE getBaseAnimation(VALUE self)

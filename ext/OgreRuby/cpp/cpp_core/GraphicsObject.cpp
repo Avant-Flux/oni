@@ -106,3 +106,15 @@ GraphicsObject::rotateTo(double x, double y, double z)
 	Ogre::Vector3 vec = Ogre::Vector3(x,y,z);
 	GraphicsObject::rotateTo(vec);
 }
+
+void
+GraphicsObject::setHorizontalPlaneRotation(const Ogre::Radian &angle)
+{
+	// Reset orientation, and set again
+	mNode->resetOrientation();
+	
+	Ogre::Quaternion quat = Ogre::Quaternion(angle, Ogre::Vector3::UNIT_Y);
+	mNode->setOrientation(quat);
+	
+	// mNode->getOrientation().getYaw(); // get rotation around Y axis
+}

@@ -98,8 +98,14 @@ extern "C" {
     
     void Ogre_Agent_rotateTo(Ogre_AgentPtr obj, double x, double y, double z){
         Agent* agent = (Agent*)(obj);
-        
+
         agent->rotateTo(x,y,z);
+    }
+    
+    void Ogre_Agent_setRotation(Ogre_AgentPtr obj, double radians){
+        Agent* agent = (Agent*)(obj);
+        
+        agent->setHorizontalPlaneRotation(Ogre::Radian(radians));
     }
     
     char** Ogre_Agent_getAnimationNames(Ogre_AgentPtr obj){

@@ -23,6 +23,8 @@ static VALUE roll(VALUE self, VALUE radians);
 
 static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z);
 
+static VALUE setRotation(VALUE self, VALUE radians);
+
 static VALUE setBaseAnimation(int argc, VALUE *argv, VALUE self);
 static VALUE getBaseAnimation(VALUE self);
 static VALUE getTopAnimation(VALUE self);

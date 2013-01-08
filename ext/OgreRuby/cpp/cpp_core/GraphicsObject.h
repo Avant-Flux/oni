@@ -27,6 +27,10 @@ public:
 	
 	void rotateTo(const Ogre::Vector3 &vec);
 	void rotateTo(double x, double y, double z);
+	
+	// Set rotation in the horizontal plane (ie, around the y axis)
+	// Transformation uses quaternions and is always local
+	void setHorizontalPlaneRotation(const Ogre::Radian &angle);
 
 protected:
 	Ogre::SceneManager* mSceneMgr; // TODO: Consider optimizing using flyweight pattern
