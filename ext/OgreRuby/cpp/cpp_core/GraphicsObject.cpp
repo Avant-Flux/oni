@@ -93,9 +93,11 @@ GraphicsObject::roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relat
 void
 GraphicsObject::rotateTo(const Ogre::Vector3 &vec)
 {
-	Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
-	Ogre::Quaternion quat = src.getRotationTo(vec); 
-	mNode->rotate(quat);
+	// Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
+	mNode->resetOrientation();
+	
+	Ogre::Quaternion quat = Ogre::Vector3::UNIT_X.getRotationTo(vec); 
+	mNode->setOrientation(quat);
 }
 
 void
