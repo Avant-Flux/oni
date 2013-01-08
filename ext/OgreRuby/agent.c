@@ -29,7 +29,7 @@ static VALUE alloc(VALUE class){
 	// Ruby interface: Agent.new(window, "name", "name.mesh")
 	
 	Ogre_AgentPtr agent = Ogre_Agent_new();
-	VALUE data = Data_Wrap_Struct(class, Ogre_Agent_markgc, Ogre_Agent_delete, agent);
+	VALUE data = Data_Wrap_Struct(class, NULL, Ogre_Agent_delete, agent);
 	
 	return data;
 }
