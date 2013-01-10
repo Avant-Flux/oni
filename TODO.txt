@@ -3,3 +3,5 @@ TODO: Use static_cast<>() instead of C-style casting for dealing with opaque typ
 TODO: Clean up OgreInterface.h GameApplication.h function callback declaration
 	Should only be declared in one way, in one place
 TODO: Use define guards in C headers
+TODO: Split agent.c into two separate ruby classes - GraphicsObject and Agent (with w/o animation)
+TODO: Find out why key IDs fall outside of the expected range (much larger)
