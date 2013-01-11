@@ -11,10 +11,9 @@ class Window < OgreRuby::Window
 		
 		@models = []
 		120.times do |i|
-			model = OgreRuby::Agent.new(self, "Charater_#{i}", "MainCharacter.mesh")
+			model = OgreRuby::Agent.new(self, "Human_#{i}", "Human_Male.mesh")
 			
-			model.base_animation = "walkywalky"
-			model.top_animation = "flippyfloppy"
+			model.base_animation = "my_animation"
 			
 			distance = 45
 			
