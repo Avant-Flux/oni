@@ -68,9 +68,6 @@ GameApplication::setupEnv()
 	mSceneMgr->setShadowTextureSize(1024);
 	mSceneMgr->setShadowTextureCount(1);
 
-	// disable default camera control so the character can do its own 
-	mCameraMan->setStyle(OgreBites::CS_FREELOOK); // CS_FREELOOK, CS_ORBIT, CS_MANUAL
-
 	// use small amount of ambient lighting
 	mSceneMgr->setAmbientLight(ColourValue(0.3f, 0.3f, 0.3f));
 
