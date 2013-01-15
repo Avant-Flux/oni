@@ -105,14 +105,14 @@ static VALUE setPosition(VALUE self, VALUE pos)
 }
 
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
-	Ogre_AgentPtr ptr;
-	Data_Get_Struct(self, Ogre_AgentPtr, ptr);
+	Ogre_AgentPtr ptr_agent;
+	Data_Get_Struct(self, Ogre_AgentPtr, ptr_agent);
 	
 	double dbl_x = NUM2DBL(x);
 	double dbl_y = NUM2DBL(y);
 	double dbl_z = NUM2DBL(z);
 	
-	Ogre_Agent_translate(ptr, dbl_x, dbl_y, dbl_z);
+	Ogre_Agent_translate(ptr_agent, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
 }
