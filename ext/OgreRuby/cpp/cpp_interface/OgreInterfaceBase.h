@@ -13,6 +13,7 @@ typedef void* VALUE; // Mimic the ruby VALUE type
 
 typedef void* Ogre_WindowPtr;
 typedef void* Ogre_AgentPtr;
+typedef void* Ogre_CameraPtr;
 
 #ifdef __cplusplus
 extern "C" {

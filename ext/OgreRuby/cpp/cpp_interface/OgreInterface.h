@@ -5,6 +5,7 @@
 
 #include "Window.h"
 #include "Agent.h"
+#include "Camera.h"
 
 
 #endif /* OGRE_C_INTERFACE */
