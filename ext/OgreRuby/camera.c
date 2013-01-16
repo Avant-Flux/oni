@@ -31,12 +31,13 @@ static VALUE initialize(VALUE self, VALUE window, VALUE name){
 	char* string_name = StringValueCStr(name);
 	
 	// Create camera
-	Ogre_CameraPtr ptr_camera = Ogre_Camera_new(window, string_name);
+	Ogre_CameraPtr ptr_camera = Ogre_Camera_new(ptr_window, string_name);
 	
 	// Initialize camera - establish viewport
 	Ogre_Camera_initialize(ptr_camera, ptr_window);
 	
 	// Wrap camera so it is visible to Ruby
+	VALUE class = rb_obj_class(self);
 	VALUE data = Data_Wrap_Struct(class, NULL, Ogre_Camera_delete, ptr_camera);
 	
 	return Qnil;

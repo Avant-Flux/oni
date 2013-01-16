@@ -45,6 +45,7 @@ public:
     virtual bool setup();
     
     Ogre::SceneManager* getSceneMgr(){return mSceneMgr;};
+    Ogre::RenderWindow* getWindow(){return mWindow;};
 
 protected:
     virtual bool configure(void);

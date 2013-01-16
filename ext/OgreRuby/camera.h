@@ -11,9 +11,9 @@ static VALUE initialize(VALUE self, VALUE window, VALUE name);
 
 static VALUE follow(VALUE self, VALUE entity);
 
-static VALUE getFOV();
-static VALUE setFOV();
-static VALUE getPosition();
-static VALUE setPosition();
-static VALUE lookAt();
-static VALUE nearClipDistance();
+static VALUE getFOV(VALUE self);
+static VALUE setFOV(VALUE self, VALUE fov);
+static VALUE getPosition(VALUE self);
+static VALUE setPosition(VALUE self, VALUE pos);
+static VALUE lookAt(VALUE self, VALUE vector);
+static VALUE nearClipDistance(VALUE self);	

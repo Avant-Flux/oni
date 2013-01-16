@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-	Ogre_CameraPtr Ogre_Camera_new();
+	Ogre_CameraPtr Ogre_Camera_new(Ogre_WindowPtr window, char* name);
 	void Ogre_Camera_delete(Ogre_CameraPtr obj);
 	void Ogre_Camera_initialize(Ogre_CameraPtr obj, Ogre_WindowPtr obj2);
 
