@@ -1,8 +1,29 @@
 # The primary purpose of this file is to control the building of the
 # interface between the C++ backend and the Ruby codebase.
 
-require 'mkmf'
+require 'open3'
 
+`cmake  -H"./cpp/" -B"./cpp/build_linux"`
+
+def build_cpp_makefile(path, flags="")
+	Dir.chdir path do
+		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make " + flags
+		
+		output = nil
+		begin
+			output = stdout_and_stderr.gets
+			puts output
+		end while output
+		
+		stdin.close
+		stdout_and_stderr.close
+	end
+end
+
+build_cpp_makefile "./cpp/build_linux/", "-j4"
+
+
+require 'mkmf'
 # Might want to use have_library() to check for libraries before adding them
 # $LIBS << " -lstdc++ -lOgreBase"
 # $CC = "g++"

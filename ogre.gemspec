@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
 	Similarly, "Gosu" is used to describe high-level Korean Starcraft players, a modern
 	strategy game.
 EOS
-	
+
 	s.required_rubygems_version = ">= 1.3.6"
 	
 	# lol - required for validation

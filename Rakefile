@@ -7,39 +7,16 @@ require 'open3'
 
 NAME = 'OgreRuby'
 
-def build_with_make(path, flags="")
-	Dir.chdir path do
-		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make " + flags
-		
-		output = nil
-		begin
-			output = stdout_and_stderr.gets
-			puts output
-		end while output
-		
-		stdin.close
-		stdout_and_stderr.close
-		
-		
-		# IO.popen("make " + flags) do |io|
-		# 	puts io.read
-		# end
-	end
-end
-
-
-
 # the same as before
 Rake::TestTask.new do |t|
 	# t.libs << 'test'
 	# t.test_files = FileList['test/test*.rb']
 	
-	
 	# t.test_files = ["test/test_window_creation.rb"]
 	
 	# t.test_files = ["test/test_quad_creation.rb"]
 	# t.test_files = ["test/test_keyboard_input.rb"]
-
+	
 	# t.test_files = ["test/test_agent_creation.rb"]
 	# t.test_files = ["test/test_agent_translation.rb"]
 	# t.test_files = ["test/test_agent_rotation.rb"]
@@ -49,21 +26,8 @@ Rake::TestTask.new do |t|
 	t.test_files = ["test/test_camera.rb"]
 	
 	# t.test_files = ["test/test_animation_benchmark.rb"]
-	
-	
 end
 
-task :cpp_library do
-	# Configure CMAKE if build directory does not yet exist
-		# Create build dir
-		# Set up CMAKE
-	
-	# Make sure CMAKE files will be cleaned up
-	# CLEAN.include "./ext/#{NAME}/cpp/build_linux"
-	
-	# Run make
-	build_with_make "./ext/#{NAME}/cpp/build_linux/", "-j4"
-end
 
 
 # make the :test task depend on the shared
@@ -87,8 +51,6 @@ file c_library => Dir.glob("ext/#{NAME}/*{.rb,.c}") + ["ext/#{NAME}/extconf.rb",
 	
 	cp "ext/#{NAME}/#{NAME}.so", "lib/#{NAME}"
 end
-# task c_library => :cpp_library
-
 
 task :test => c_library
 
@@ -108,4 +70,4 @@ CLOBBER.include('lib/**/*.so')
 # CLOBBER.include('vendor/build_ogre/dist/lib/*')
 
 desc "Run tests"
-task :default => [:cpp_library, :test]
+task :default => [:test]
