@@ -7,6 +7,8 @@ VALUE Init_OgreWindow(VALUE outer){
 	
 	rb_define_method(klass, "show", show, 0);
 	// rb_define_method(klass, "update", update, 1);
+	
+	return Qnil;
 }
 
 static VALUE alloc(VALUE class){

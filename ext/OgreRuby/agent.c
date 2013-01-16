@@ -25,6 +25,8 @@ VALUE Init_OgreAgent(VALUE outer){
 	rb_define_method(klass, "base_animation=", setBaseAnimation, -1);
 	rb_define_method(klass, "top_animation=", setTopAnimation, -1);
 	rb_define_method(klass, "animations", animation_names, 0);
+	
+	return Qnil;
 }
 
 static VALUE alloc(VALUE class){
@@ -58,6 +60,8 @@ static VALUE update(VALUE self, VALUE dt){
 	double double_dt = NUM2DBL(dt);
 	
 	Ogre_Agent_update(ptr_agent, double_dt);
+	
+	return Qnil;
 }
 
 static VALUE getVisible(VALUE self)
@@ -102,6 +106,8 @@ static VALUE setPosition(VALUE self, VALUE pos)
 	double dbl_z = NUM2DBL(z);
 	
 	Ogre_Agent_setPosition(ptr_agent, dbl_x, dbl_y, dbl_z);
+	
+	return Qnil;
 }
 
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
@@ -167,6 +173,8 @@ static VALUE setRotation(VALUE self, VALUE radians){
 	double dbl_radians = NUM2DBL(radians);
 	
 	Ogre_Agent_setRotation(ptr_agent, dbl_radians);
+	
+	return Qnil;
 }
 
 static VALUE getBaseAnimation(VALUE self)
