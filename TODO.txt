@@ -5,3 +5,6 @@ TODO: Clean up OgreInterface.h GameApplication.h function callback declaration
 TODO: Use define guards in C headers
 TODO: Split agent.c into two separate ruby classes - GraphicsObject and Agent (with w/o animation)
 TODO: Find out why key IDs fall outside of the expected range (much larger)
+TODO: Consider increasing scale of all objects if shadows are scale-dependent
+	Currently, shadows are very pixelated
+TODO: Move as much of window setup as possible into BaseApplication.setup() and not go()

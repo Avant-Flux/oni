@@ -17,7 +17,16 @@ class Window < OgreRuby::Window
 		@camera = OgreRuby::Camera.new(self, "main_camera", 0) # TODO: Make z_order=0 by default
 		
 		@camera.fov = 110
-		@camera.position = [0,5,3]
+		
+		scale = 1.5
+		
+		r = 3*scale
+		angle = 22.degrees
+		
+		x = r*Math.sin(angle)
+		z = r*Math.cos(angle)
+		@camera.position = [x,4*scale,z]
+
 		@camera.look_at [0,0,0]
 		@camera.near_clip_distance = 1
 	end
