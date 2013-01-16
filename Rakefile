@@ -37,11 +37,17 @@ end
 # rule to build the extension: this says
 # that the extension should be rebuilt
 # after any change to the files in ext
-static_lib = "./ext/#{NAME}/cpp/build_linux/dist/lib/libOgreBase.a"
 
 c_library = "lib/#{NAME}/#{NAME}.so"
 
-file c_library => Dir.glob("ext/#{NAME}/*{.rb,.c}") + ["ext/#{NAME}/extconf.rb", static_lib] do
+source_files = Array.new
+source_files += Dir.glob("ext/#{NAME}/*{.rb,.c}")
+source_files += ["ext/#{NAME}/extconf.rb"]
+
+source_files += Dir.glob("ext/#{NAME}/cpp/cpp_core/*{.cpp,.h}")
+source_files += Dir.glob("ext/#{NAME}/cpp/cpp_interface/*{.cpp,.h}")
+
+file c_library => source_files do
 	Dir.chdir("ext/#{NAME}") do
 		# this does essentially the same thing
 		# as what RubyGems does
@@ -60,14 +66,6 @@ task :test => c_library
 CLEAN.include('ext/**/*{.o,.log,.so}')
 # CLEAN.include('ext/**/Makefile')
 CLOBBER.include('lib/**/*.so')
-
-
-
-# CLOBBER.include('vendor/build_ogre/dist/bin/OgreApp')
-# CLOBBER.include('vendor/build_ogre/dist/bin/ogre.cfg')
-# CLOBBER.include('vendor/build_ogre/dist/bin/ogre.log')
-# CLOBBER.include('vendor/build_ogre/dist/bin/Ogre.log')
-# CLOBBER.include('vendor/build_ogre/dist/lib/*')
 
 desc "Run tests"
 task :default => [:test]
