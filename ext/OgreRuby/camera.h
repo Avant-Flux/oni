@@ -7,7 +7,7 @@
 VALUE Init_OgreCamera(VALUE outer);
 
 // static VALUE alloc(VALUE class);
-static VALUE initialize(VALUE self, VALUE window, VALUE name);
+static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE z_order);
 
 static VALUE follow(VALUE self, VALUE entity);
 

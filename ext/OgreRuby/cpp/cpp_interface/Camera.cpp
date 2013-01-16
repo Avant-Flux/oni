@@ -22,13 +22,13 @@ extern "C" {
 		delete camera;
 	}
 	
-	void Ogre_Camera_initialize(Ogre_CameraPtr obj, Ogre_WindowPtr obj2){
+	void Ogre_Camera_initialize(Ogre_CameraPtr obj, Ogre_WindowPtr obj2, int z_order){
 		Ogre::Camera* camera = (Ogre::Camera*)obj;
 		BaseApplication* game = (BaseApplication*)obj2;
 		
 		// ===== Create viewport
 		// Create one viewport, entire window
-	    Ogre::Viewport* vp = game->getWindow()->addViewport(camera);
+	    Ogre::Viewport* vp = game->getWindow()->addViewport(camera, z_order);
 	    vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
 
 	    // Alter the camera aspect ratio to match the viewport

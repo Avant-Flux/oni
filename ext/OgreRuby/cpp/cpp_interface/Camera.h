@@ -16,7 +16,7 @@ extern "C" {
 
 	Ogre_CameraPtr Ogre_Camera_new(Ogre_WindowPtr window, char* name);
 	void Ogre_Camera_delete(Ogre_CameraPtr obj);
-	void Ogre_Camera_initialize(Ogre_CameraPtr obj, Ogre_WindowPtr obj2);
+	void Ogre_Camera_initialize(Ogre_CameraPtr obj, Ogre_WindowPtr obj2, int z_order);
 
 
 #ifdef __cplusplus

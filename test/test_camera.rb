@@ -14,7 +14,7 @@ class Window < OgreRuby::Window
 		
 		# Implies that this is where the camera is made
 		# This only creates a handle for the camera
-		@camera = OgreRuby::Camera.new(self, "main_camera")
+		@camera = OgreRuby::Camera.new(self, "main_camera", 1)
 		
 		@camera.fov = 110
 		@camera.position = [0,0,0]

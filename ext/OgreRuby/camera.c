@@ -4,7 +4,7 @@ VALUE Init_OgreCamera(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Camera", rb_cObject);
 	
 	// rb_define_alloc_func(klass, alloc);
-	rb_define_method(klass, "initialize", initialize, 2);
+	rb_define_method(klass, "initialize", initialize, 3);
 	
 	rb_define_method(klass, "fov", getFOV, 0);
 	rb_define_method(klass, "fov=", setFOV, 1);
@@ -20,7 +20,7 @@ VALUE Init_OgreCamera(VALUE outer){
 // 	return Qnil;
 // }
 
-static VALUE initialize(VALUE self, VALUE window, VALUE name){
+static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE z_order){
 	// Camera.new(window, name)
 	
 	// Get window
@@ -34,7 +34,8 @@ static VALUE initialize(VALUE self, VALUE window, VALUE name){
 	Ogre_CameraPtr ptr_camera = Ogre_Camera_new(ptr_window, string_name);
 	
 	// Initialize camera - establish viewport
-	Ogre_Camera_initialize(ptr_camera, ptr_window);
+	int int_z_order = FIX2INT(z_order); // NOTE: Assumes number is integral
+	Ogre_Camera_initialize(ptr_camera, ptr_window, int_z_order);
 	
 	// Wrap camera so it is visible to Ruby
 	VALUE class = rb_obj_class(self);
