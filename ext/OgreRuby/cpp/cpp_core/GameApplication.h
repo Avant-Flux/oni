@@ -32,8 +32,6 @@ public:
 
 	void addTime(Ogre::Real deltaTime);		// update the game state
 	
-	void setFOV(Ogre::Real x_angle);
-	
 	bool keyPressed( const OIS::KeyEvent &arg );
 	bool keyReleased( const OIS::KeyEvent &arg );
 	bool mouseMoved( const OIS::MouseEvent &arg );

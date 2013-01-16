@@ -26,8 +26,6 @@ GameApplication::setup()
 		return false;
 	}
 	
-	setFOV(110);
-	
 	return true;
 }
 
@@ -94,13 +92,6 @@ void
 GameApplication::addTime(Ogre::Real deltaTime)
 {
 	mUpdateCallback(deltaTime, NULL);
-}
-
-void
-GameApplication::setFOV(Ogre::Real x_angle)
-{
-	// Assume given measure is in degrees, must convert to radians first
-	mCamera->setFOVy(Ogre::Degree(x_angle)/mCamera->getAspectRatio());
 }
 
 // TODO: Separate input handler from window and move into separate class and file

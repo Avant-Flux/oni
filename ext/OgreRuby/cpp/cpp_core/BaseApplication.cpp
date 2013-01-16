@@ -20,7 +20,6 @@ This source file is part of the
 
 BaseApplication::BaseApplication(void)
     : mRoot(0),
-    mCamera(0),
     mSceneMgr(0),
     mWindow(0),
     mResourcesCfg(Ogre::StringUtil::BLANK),
@@ -70,17 +69,6 @@ void BaseApplication::chooseSceneManager(void)
 {
     // Get the SceneManager, in this case a generic one
     mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC);
-}
-//-------------------------------------------------------------------------------------
-void BaseApplication::createCamera(void)
-{
-    // Create the camera
-    mCamera = mSceneMgr->createCamera("PlayerCam");
-
-    mCamera->setPosition(Ogre::Vector3(0,20,50));
-    // Look back along -Z
-    mCamera->lookAt(Ogre::Vector3(0,0,0));
-    mCamera->setNearClipDistance(5);
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createFrameListener(void)
@@ -137,17 +125,6 @@ void BaseApplication::createFrameListener(void)
 //-------------------------------------------------------------------------------------
 void BaseApplication::destroyScene(void)
 {
-}
-//-------------------------------------------------------------------------------------
-void BaseApplication::createViewports(void)
-{
-    // Create one viewport, entire window
-    Ogre::Viewport* vp = mWindow->addViewport(mCamera);
-    vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
-
-    // Alter the camera aspect ratio to match the viewport
-    mCamera->setAspectRatio(
-        Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::setupResources(void)
@@ -214,8 +191,6 @@ bool BaseApplication::setup(void)
     if (!carryOn) return false;
 
     chooseSceneManager();
-    createCamera();
-    createViewports();
 
     // Set default mipmap level (NB some APIs ignore this)
     Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
@@ -252,13 +227,13 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
     {
         if (mDetailsPanel->isVisible())   // if details panel is visible, then update its contents
         {
-            mDetailsPanel->setParamValue(0, Ogre::StringConverter::toString(mCamera->getDerivedPosition().x));
-            mDetailsPanel->setParamValue(1, Ogre::StringConverter::toString(mCamera->getDerivedPosition().y));
-            mDetailsPanel->setParamValue(2, Ogre::StringConverter::toString(mCamera->getDerivedPosition().z));
-            mDetailsPanel->setParamValue(4, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().w));
-            mDetailsPanel->setParamValue(5, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().x));
-            mDetailsPanel->setParamValue(6, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().y));
-            mDetailsPanel->setParamValue(7, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().z));
+            // mDetailsPanel->setParamValue(0, Ogre::StringConverter::toString(mCamera->getDerivedPosition().x));
+            // mDetailsPanel->setParamValue(1, Ogre::StringConverter::toString(mCamera->getDerivedPosition().y));
+            // mDetailsPanel->setParamValue(2, Ogre::StringConverter::toString(mCamera->getDerivedPosition().z));
+            // mDetailsPanel->setParamValue(4, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().w));
+            // mDetailsPanel->setParamValue(5, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().x));
+            // mDetailsPanel->setParamValue(6, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().y));
+            // mDetailsPanel->setParamValue(7, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().z));
         }
     }
 
@@ -321,26 +296,26 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
     }
     else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
     {
-        Ogre::String newVal;
-        Ogre::PolygonMode pm;
+        // Ogre::String newVal;
+        // Ogre::PolygonMode pm;
 
-        switch (mCamera->getPolygonMode())
-        {
-        case Ogre::PM_SOLID:
-            newVal = "Wireframe";
-            pm = Ogre::PM_WIREFRAME;
-            break;
-        case Ogre::PM_WIREFRAME:
-            newVal = "Points";
-            pm = Ogre::PM_POINTS;
-            break;
-        default:
-            newVal = "Solid";
-            pm = Ogre::PM_SOLID;
-        }
+        // switch (mCamera->getPolygonMode())
+        // {
+        // case Ogre::PM_SOLID:
+        //     newVal = "Wireframe";
+        //     pm = Ogre::PM_WIREFRAME;
+        //     break;
+        // case Ogre::PM_WIREFRAME:
+        //     newVal = "Points";
+        //     pm = Ogre::PM_POINTS;
+        //     break;
+        // default:
+        //     newVal = "Solid";
+        //     pm = Ogre::PM_SOLID;
+        // }
 
-        mCamera->setPolygonMode(pm);
-        mDetailsPanel->setParamValue(10, newVal);
+        // mCamera->setPolygonMode(pm);
+        // mDetailsPanel->setParamValue(10, newVal);
     }
     else if(arg.key == OIS::KC_F5)   // refresh all textures
     {

@@ -14,12 +14,12 @@ class Window < OgreRuby::Window
 		
 		# Implies that this is where the camera is made
 		# This only creates a handle for the camera
-		@camera = OgreRuby::Camera.new(self, "main_camera", 1)
+		@camera = OgreRuby::Camera.new(self, "main_camera", 0) # TODO: Make z_order=0 by default
 		
 		@camera.fov = 110
-		@camera.position = [0,0,0]
+		@camera.position = [0,5,3]
 		@camera.look_at [0,0,0]
-		@camera.near_clip_distance = 5
+		@camera.near_clip_distance = 1
 	end
 	
 	def update(dt)
