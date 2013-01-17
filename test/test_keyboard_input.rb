@@ -20,11 +20,11 @@ class Window < OgreRuby::Window
 	end
 	
 	def button_down(id)
-		puts "down: #{button_id_to_sym(id)}"
+		puts "down: #{id} - #{button_id_to_sym(id)}"
 	end
 	
 	def button_up(id)
-		puts "up: #{button_id_to_sym(id)}"
+		puts "up: #{id} - #{button_id_to_sym(id)}"
 	end
 end
 

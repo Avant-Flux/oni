@@ -13,8 +13,8 @@ class Window < OgreRuby::Window
 		@b = OgreRuby::Agent.new(self, "Golem2", "Golem.mesh")
 		@b.translate(-50, 0, 0)
 		
-		# @b = nil
-		@b.visible = false
+		@b = nil
+		# @b.visible = false
 		# @b.visible = true
 	end
 	
