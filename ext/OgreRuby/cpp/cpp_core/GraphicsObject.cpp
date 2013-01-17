@@ -6,7 +6,9 @@ GraphicsObject::GraphicsObject()
 
 GraphicsObject::~GraphicsObject()
 {
-	
+	// mNode->detachObject(mEntity);
+	// mSceneMgr->destroyEntity(mEntity);
+	// mSceneMgr->destroySceneNode(mNode);
 }
 
 void
