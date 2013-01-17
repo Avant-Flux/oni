@@ -41,7 +41,7 @@ $LDFLAGS << " -L#{File.expand_path("./cpp/build_linux/dist/lib")}"
 puts "CPP LIBRARY FOUND" if have_library("OgreBase")
 
 find_header "OgreInterface.h", File.expand_path("./cpp/cpp_interface/")
-
+ 
 have_library("stdc++")
 have_library("OgreMain")
 have_library("OIS")
