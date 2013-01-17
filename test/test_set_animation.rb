@@ -3,9 +3,11 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-class Window < OgreRuby::Window
+require 'oni'
+
+class Window < Oni::Window
 	def setup
-		@a = OgreRuby::Agent.new(self, "MainCharacter", "MainCharacter.mesh")
+		@a = Oni::Agent.new(self, "MainCharacter", "MainCharacter.mesh")
 		@a.translate(0, 0, 0)
 		
 		# @a.top_animation = "my_animation"

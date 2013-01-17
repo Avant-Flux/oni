@@ -3,15 +3,15 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-require 'OgreRuby'
+require 'oni'
 
-class Window < OgreRuby::Window
+class Window < Oni::Window
 	def setup
 		@move_forward = false
 		
 		@models = []
 		120.times do |i|
-			model = OgreRuby::Agent.new(self, "Human_#{i}", "Human_Male.mesh")
+			model = Oni::Agent.new(self, "Human_#{i}", "Human_Male.mesh")
 			
 			model.base_animation = "my_animation"
 			

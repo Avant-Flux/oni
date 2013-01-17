@@ -1,6 +1,9 @@
 # Do not track files that are created by the build system
-ext/OgreRuby/cpp/build_linux
-/ext/OgreRuby/Makefile
+ext/oni/cpp/build_linux
+/ext/oni/Makefile
 
 # Do not track test resources
 media
+
+# Do not track Ogre config files
+*.cfg

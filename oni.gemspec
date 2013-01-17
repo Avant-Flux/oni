@@ -1,26 +1,23 @@
 # TODO: use name of this file as name of package
 
-require File.expand_path("../lib/OgreRuby/version", __FILE__)
+require File.expand_path("../lib/oni/version", __FILE__)
 
 ENABLE_C_EXTENSION = true
 
 Gem::Specification.new do |s|
-	s.name        = "ogre-ruby"
-	s.version     = OgreRuby::VERSION
-	s.date        = '2012-09-29'
+	s.name        = "oni"
+	s.version     = Oni::VERSION
+	s.date        = '2013-1-17'
 	s.platform    = Gem::Platform::RUBY
 	s.authors     = ["Raven"]
 	s.email       = 'AvantFlux.Raven@gmail.com'
 	s.homepage    = 'https://github.com/RavensKrag'
 	
-	s.summary     = "2D game library inspired by Gosu."
+	s.summary     = "3D game rendering framework built on the Ogre3D rendering engine"
 	s.description = <<EOS
-	Inspired heavily by Gosu.  The word "Gosu" is Korean, meaning something like
-	"master", describing someone who posseses great skill.  The name "Meijin"
-	was selected because it is similar.  "Meijin" literally means "famous person,"
-	but is a title often given to persons of great skill, like high-ranking Go players.
-	Similarly, "Gosu" is used to describe high-level Korean Starcraft players, a modern
-	strategy game.
+	Oni attempts to build a simple Ruby interface around commonly used Ogre3D rendering
+	capabilities, as well as providing input and sound. It is intended to be used in
+	conjunction with other C/C++ libraries, as well as Ruby libraries.
 EOS
 
 	s.required_rubygems_version = ">= 1.3.6"
@@ -34,8 +31,8 @@ EOS
 	s.files = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
 	
 	if ENABLE_C_EXTENSION
-		s.files      += Dir["{ext}/**/*.{c,h,rb}", "{ext}/**/*.{txt}"]
-		s.extensions = ['ext/meijin/extconf.rb']
+		s.files      += Dir["{ext}/**/*.{c,cpp,h,rb}", "{ext}/**/*.{txt}"]
+		s.extensions = ['ext/oni/extconf.rb']
 	else
 		
 	end

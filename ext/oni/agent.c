@@ -1,6 +1,6 @@
 #include "agent.h"
 
-VALUE Init_OgreAgent(VALUE outer){
+VALUE Init_Oni_Agent(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Agent", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);

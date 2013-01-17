@@ -3,9 +3,9 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-require 'OgreRuby'
+require 'oni'
 
-class Window < OgreRuby::Window
+class Window < Oni::Window
 	def setup
 		
 	end

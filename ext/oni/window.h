@@ -4,7 +4,7 @@
 
 #include <OgreInterface.h>
 
-VALUE Init_OgreWindow(VALUE outer);
+VALUE Init_Oni_Window(VALUE outer);
 
 static VALUE alloc(VALUE class);
 

@@ -1,6 +1,6 @@
 #include "window.h"
 
-VALUE Init_OgreWindow(VALUE outer){
+VALUE Init_Oni_Window(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Window", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);

@@ -3,6 +3,6 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-require 'OgreRuby'
+require 'oni'
 
-OgreRuby::Window.new.show
+Oni::Window.new.show

@@ -4,7 +4,7 @@
 
 #include <OgreInterface.h>
 
-VALUE Init_OgreAgent(VALUE outer);
+VALUE Init_Oni_Agent(VALUE outer);
 
 static VALUE alloc(VALUE class);
 

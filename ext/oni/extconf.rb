@@ -48,4 +48,4 @@ have_library("OIS")
 have_library("OgreBase")
 
 
-create_makefile('OgreRuby/OgreRuby')
+create_makefile('oni/oni')

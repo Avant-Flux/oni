@@ -3,7 +3,9 @@ require 'rubygems'
 require 'gl'
 require 'glu'
 
-class Window < OgreRuby::Window
+require 'oni'
+
+class Window < Oni::Window
 	def initialize
 		# q = Ogre::Plane.new()
 	end

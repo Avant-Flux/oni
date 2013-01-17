@@ -5,7 +5,7 @@ require 'open3'
 # generate depend file for gcc dependencies
 # sh "gcc -MM *.c > depend"
 
-NAME = 'OgreRuby'
+NAME = 'oni'
 
 # the same as before
 Rake::TestTask.new do |t|

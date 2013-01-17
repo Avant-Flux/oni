@@ -2,7 +2,7 @@
 
 // TODO: Fix "warning: assignment from incompatible pointer type" on Data_Get_Struct
 
-VALUE Init_OgreCamera(VALUE outer){
+VALUE Init_Oni_Camera(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Camera", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
