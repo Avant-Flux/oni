@@ -9,6 +9,7 @@ TODO: Consider increasing scale of all objects if shadows are scale-dependent
 	Currently, shadows are very pixelated
 TODO: Move as much of window setup as possible into BaseApplication.setup() and not go()
 
+TODO: Default Agent to face down Y Axis, not X-Axis
 
 ====MAKE IT SO GEMS CAN BE BUILT
 NOTE: Currently supporting only Ubuntu Linux and Windows with mingw ruby (ruby-installer version)
