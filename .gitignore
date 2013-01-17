@@ -7,3 +7,6 @@ media
 
 # Do not track Ogre config files
 *.cfg
+
+# Packaged gems
+*.gem

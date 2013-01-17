@@ -3,11 +3,12 @@
 require File.expand_path("../lib/oni/version", __FILE__)
 
 ENABLE_C_EXTENSION = true
+NAME = "oni"
 
 Gem::Specification.new do |s|
-	s.name        = "oni"
+	s.name        = NAME
 	s.version     = Oni::VERSION
-	s.date        = '2013-1-17'
+	s.date        = '2013-01-17'
 	s.platform    = Gem::Platform::RUBY
 	s.authors     = ["Raven"]
 	s.email       = 'AvantFlux.Raven@gmail.com'
@@ -31,8 +32,15 @@ EOS
 	s.files = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
 	
 	if ENABLE_C_EXTENSION
-		s.files      += Dir["{ext}/**/*.{c,cpp,h,rb}", "{ext}/**/*.{txt}"]
-		s.extensions = ['ext/oni/extconf.rb']
+		# C code
+		s.files      += Dir["{ext}/#{NAME}/*.{c,h,rb}"]
+		
+		# C++ code
+		s.files      += Dir["{ext}/#{NAME}/cpp/*.{txt}"]
+		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_core/*.{c,cpp,h}"]
+		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_interface/*.{c,cpp,h}"]
+		
+		s.extensions = ["ext/#{NAME}/extconf.rb"]
 	else
 		
 	end
