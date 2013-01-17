@@ -9,6 +9,8 @@ NAME = 'oni'
 
 # the same as before
 Rake::TestTask.new do |t|
+	# t.test_files = []
+	
 	# t.libs << 'test'
 	# t.test_files = FileList['test/test*.rb']
 	
@@ -60,6 +62,10 @@ end
 
 task :test => c_library
 
+task :build_gem => c_library do
+	sh "gem build oni.gemspec"
+end
+
 
 # use 'rake clean' and 'rake clobber' to
 # easily delete generated files
@@ -68,4 +74,4 @@ CLEAN.include('ext/**/*{.o,.log,.so}')
 CLOBBER.include('lib/**/*.so')
 
 desc "Run tests"
-task :default => [:test]
+task :default => [:test, :build_gem]
