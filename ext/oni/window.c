@@ -44,6 +44,34 @@ static VALUE show(VALUE self){
 	
 	Ogre_Window_run(ptr);
 	
+	// NOTE: Assuming game is done when window closes
+	// Destroy all Ruby-level instance variables for self
+	
+	// Mark all instance variables for GC
+	VALUE ruby_variables = rb_obj_instance_variables(self);
+	long number_of_variables = RARRAY_LEN(ruby_variables);
+		printf("var count: %d\n", number_of_variables);
+	long i;
+	for(i=0; i < number_of_variables; i++){ // Iterate over a list of instance variable names
+		printf("%d\n", i);
+		
+		VALUE var_name = RARRAY_PTR(ruby_variables)[i];
+		
+		VALUE ivar = rb_funcall(self, rb_intern("instance_variable_get"), 1, var_name);
+		
+		VALUE rString_klass = rb_any_to_s(ivar);
+		char* str_klass = StringValueCStr(rString_klass);
+		printf("%s\n", str_klass);
+		
+		if(!(TYPE(ivar) == T_TRUE || TYPE(ivar) == T_FALSE ||  TYPE(ivar) == T_NIL)){
+			rb_gc_force_recycle(ivar);
+		}
+	}
+	
+	printf("START GC\n");
+	// Force GC
+	rb_gc_start();
+	
 	return Qnil;
 }
 

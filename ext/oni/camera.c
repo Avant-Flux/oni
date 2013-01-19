@@ -22,7 +22,7 @@ VALUE Init_Oni_Camera(VALUE outer){
 static VALUE alloc(VALUE class){
 	// Do nothing, as all memory allocation is handled by Ogre internally
 	cameraContainer* container = ALLOC(cameraContainer);
-	VALUE data = Data_Wrap_Struct(class, NULL, delete, container);
+	VALUE data = Data_Wrap_Struct(class, NULL, delete_camera, container);
 	
 	return data;
 }
@@ -157,8 +157,9 @@ static VALUE setNearClipDistance(VALUE self, VALUE distance){
 	return Qnil;
 }
 
-static void delete(cameraContainer* container){
-	// TODO: Fix segfault on exit
+static void delete_camera(cameraContainer* container){
+	// TODO: EXAMINE - Seems like destructor is not being called.
+	printf("---C-EXTENSION!!! Delete camera\n");
 	Ogre_Camera_delete(container->camera);
 	free(container);
 }

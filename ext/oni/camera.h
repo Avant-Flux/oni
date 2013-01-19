@@ -24,4 +24,4 @@ static VALUE lookAt(VALUE self, VALUE vector);
 static VALUE getNearClipDistance(VALUE self);
 static VALUE setNearClipDistance(VALUE self, VALUE distance);
 
-static void delete(cameraContainer* container);
+static void delete_camera(cameraContainer* container);

@@ -12,6 +12,7 @@ extern "C" {
 	}
 	
 	void Ogre_Camera_delete(Ogre_CameraPtr obj){
+		printf("======DELETING CAMERA\n");
 		Ogre::Camera* camera = (Ogre::Camera*)obj;
 		
 		delete camera;
