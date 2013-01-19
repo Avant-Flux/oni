@@ -40,6 +40,9 @@ EOS
 		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_core/*.{c,cpp,h}"]
 		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_interface/*.{c,cpp,h}"]
 		
+		# Licensing
+		s.files      += Dir["legal/*.{txt}"]
+		
 		s.extensions = ["ext/#{NAME}/extconf.rb"]
 	else
 		
