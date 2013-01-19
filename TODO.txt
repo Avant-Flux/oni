@@ -17,5 +17,4 @@ NOTE: Currently supporting only Ubuntu Linux and Windows with mingw ruby (ruby-i
 TODO: Allow for cross-compiling of Windows gems
 TODO: Pass correct cmake parameters when compiling for Windows
 TODO: Warn when attempting to build gem natively on Windows
-TODO: re-name folders and files as necessary to give gem a decent name
 TODO: Make all include paths in CMakeLists based on paths that apply to all users

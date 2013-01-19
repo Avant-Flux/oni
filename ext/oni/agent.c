@@ -8,7 +8,7 @@ VALUE Init_Oni_Agent(VALUE outer){
 	rb_define_method(klass, "update", update, 1);
 	
 	rb_define_method(klass, "visible=", setVisible, 1);
-	rb_define_method(klass, "visible", getVisible, 0);
+	rb_define_method(klass, "visible?", getVisible, 0);
 	
 	rb_define_method(klass, "position=", setPosition, 1);
 	rb_define_method(klass, "translate", translate, 3);
