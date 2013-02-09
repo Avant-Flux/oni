@@ -18,15 +18,24 @@ namespace Oni
 	void
 	ModelDecorator::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
 	{
-		// TODO: Check if this is unnecessary
-		mDecoratedModel->initialize(sceneMgr, name, filename);
+		// Chaining the initializer is unnecessary
+		// That would make this very similar to inheritance,
+		// but in this design the components can be initialized separately
+		// 
+		// Think of it like the Builder pattern
+		
+		// mDecoratedModel->initialize(sceneMgr, name, filename);
 	}
 	
 	void
 	ModelDecorator::update(Ogre::Real deltaTime)
 	{
-		// TODO: Check if this is unnecessary
-		mDecoratedModel->update(deltaTime);
+		// TODO: Check if this necessary
+		// Probably should not chain because that would make update order dependent on
+		// chaining order.  Update order may or may not be important, but should not
+		// decide here.
+		
+		// mDecoratedModel->update(deltaTime);
 	}
 	
 	Ogre::Entity*
