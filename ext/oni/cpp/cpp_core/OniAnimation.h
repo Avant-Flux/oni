@@ -2,17 +2,16 @@
 #define ONI_ANIMATION_H
 
 #include "BaseApplication.h"
-#include "OniModelDecorator.h"
+#include "OniModel.h"
 
 #include <deque>
 
 namespace Oni
 {
-	class Animation :
-		ModelDecorator
+	class Animation
 	{
 	public:
-		Animation(Oni::AbstractModel* model);
+		Animation(Oni::Model* model);
 		virtual ~Animation();
 		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
 		virtual void update(Ogre::Real deltaTime);		// update the agent
@@ -44,10 +43,7 @@ namespace Oni
 		Ogre::Real mTimer;						// general timer to see how long animations have been playing
 			
 	private:
-		
-		
-		Ogre::SceneNode* mBodyNode;
-		Ogre::Entity* mBodyEntity;
+		Oni::Model* mModel;
 
 		// all of the animations our character has, and a null ID
 		// some of these affect separate body parts and will be blended together

@@ -2,12 +2,10 @@
 #define ONI_MODEL_H
 
 #include "BaseApplication.h"
-#include "OniAbstractModel.h"
 
 namespace Oni
 {
-	class Model :
-		AbstractModel
+	class Model
 	{
 	public:
 		Model();
@@ -19,8 +17,9 @@ namespace Oni
 		void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
 		void update(Ogre::Real deltaTime);		// update the game object
 		
-		// Necessary for extensibility - ie model decorators
-		virtual Ogre::Entity* getEntity();
+		// Necessary for extensibility
+		// May want to use Friend classes instead
+		Ogre::Entity* getEntity();
 		
 		// Visibility
 		bool getVisible();

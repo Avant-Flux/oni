@@ -3,7 +3,6 @@
 namespace Oni
 {
 	Model::Model()
-		: AbstractModel()
 	{
 		
 	}

@@ -2,10 +2,9 @@
 
 namespace Oni
 {
-	Animation::Animation(Oni::AbstractModel* model)
-		: ModelDecorator(model)
+	Animation::Animation(Oni::Model* model)
 	{
-		
+		mModel = model;
 	}
 
 	Animation::~Animation()
@@ -27,14 +26,13 @@ namespace Oni
 	void
 	Animation::update(Ogre::Real deltaTime)
 	{
-		Oni::ModelDecorator::update(deltaTime);
 		this->updateAnimations(deltaTime);
 	}
 	
 	void 
 	Animation::setupAnimations()
 	{
-		Ogre::Entity* entity = mDecoratedModel->getEntity();
+		Ogre::Entity* entity = mModel->getEntity();
 		
 		// this is very important due to the nature of the exported animations
 		entity->getSkeleton()->setBlendMode(Ogre::ANIMBLEND_CUMULATIVE);
@@ -56,7 +54,7 @@ namespace Oni
 	Ogre::AnimationStateIterator
 	Animation::getAnimationNames()
 	{
-		Ogre::Entity* entity = mDecoratedModel->getEntity();
+		Ogre::Entity* entity = mModel->getEntity();
 		
 		Ogre::AnimationStateSet* aSet = entity->getAllAnimationStates();
 		Ogre::AnimationStateIterator iter = aSet->getAnimationStateIterator();
