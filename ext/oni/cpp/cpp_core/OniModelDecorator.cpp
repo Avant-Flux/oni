@@ -15,29 +15,6 @@ namespace Oni
 	// All interface methods should be declared virtual,
 	// so that decorators can subclass from this class and add functionality
 	
-	void
-	ModelDecorator::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
-	{
-		// Chaining the initializer is unnecessary
-		// That would make this very similar to inheritance,
-		// but in this design the components can be initialized separately
-		// 
-		// Think of it like the Builder pattern
-		
-		// mDecoratedModel->initialize(sceneMgr, name, filename);
-	}
-	
-	void
-	ModelDecorator::update(Ogre::Real deltaTime)
-	{
-		// TODO: Check if this necessary
-		// Probably should not chain because that would make update order dependent on
-		// chaining order.  Update order may or may not be important, but should not
-		// decide here.
-		
-		// mDecoratedModel->update(deltaTime);
-	}
-	
 	Ogre::Entity*
 	ModelDecorator::getEntity()
 	{
