@@ -15,6 +15,9 @@ typedef void* Ogre_WindowPtr;
 typedef void* Ogre_AgentPtr;
 typedef void* Ogre_CameraPtr;
 
+typedef void* Oni_ModelPtr;
+typedef void* Oni_AnimationPtr;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
