@@ -104,6 +104,11 @@ set(CORE_HDRS
 	
 	./cpp_core/GraphicsObject.h
 	./cpp_core/Agent.h
+	
+	./cpp_core/OniAbstractModel.h
+	./cpp_core/OniModelDecorator.h
+	./cpp_core/OniModel.h
+	./cpp_core/OniAnimation.h
 )
 
 set(CORE_SRCS
@@ -112,6 +117,11 @@ set(CORE_SRCS
 	
 	./cpp_core/GraphicsObject.cpp
 	./cpp_core/Agent.cpp
+	
+	./cpp_core/OniAbstractModel.cpp
+	./cpp_core/OniModelDecorator.cpp
+	./cpp_core/OniModel.cpp
+	./cpp_core/OniAnimation.cpp
 )
 
 set(INTERFACE_HDRS
