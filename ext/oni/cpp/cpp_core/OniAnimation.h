@@ -19,8 +19,6 @@ namespace Oni
 		bool getVisible();
 		void setVisible(bool visible);
 		
-		void setupAnimations();
-		
 		Ogre::AnimationStateIterator getAnimationNames();
 		
 		std::string getBaseAnimation(){return mBaseAnimID;};
@@ -28,7 +26,6 @@ namespace Oni
 		void setTopAnimation(std::string id, bool reset = false);
 		std::string getTopAnimation(){return mTopAnimID;};
 		void fadeAnimations(Ogre::Real deltaTime);
-		void updateAnimations(Ogre::Real deltaTime);
 		
 		// Time
 		Ogre::Real getAnimationTime();			// Get the current animation timer

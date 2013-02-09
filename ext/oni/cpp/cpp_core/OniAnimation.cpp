@@ -20,18 +20,7 @@ namespace Oni
 		
 		mTimer = 0;
 		
-		setupAnimations();
-	}
-
-	void
-	Animation::update(Ogre::Real deltaTime)
-	{
-		this->updateAnimations(deltaTime);
-	}
-	
-	void 
-	Animation::setupAnimations()
-	{
+		
 		Ogre::Entity* entity = mModel->getEntity();
 		
 		// this is very important due to the nature of the exported animations
@@ -49,6 +38,33 @@ namespace Oni
 			mFadingIn[a->getAnimationName()] = false;
 			mFadingOut[a->getAnimationName()] = false;
 		}
+	}
+
+	void
+	Animation::update(Ogre::Real deltaTime)
+	{
+		using namespace Ogre;
+		
+		Real baseAnimSpeed = 1;
+		Real topAnimSpeed = 1;
+		
+		mTimer += deltaTime;
+		
+		//~ if (this->mTimer >= (*mAnims)[mTopAnimID]->getLength())
+		//~ {
+			//~ 
+		//~ }
+		
+		// increment the current base and top animation times
+		// TODO: Refactor to better check existence of key
+		// consider taking advantage of the fact that != 0 is true, and only one value can be stored per key
+		if (mAnims.count(mBaseAnimID) > 0)
+			mAnims[mBaseAnimID]->addTime(deltaTime * baseAnimSpeed);
+		if (mAnims.count(mTopAnimID) > 0)
+			mAnims[mTopAnimID]->addTime(deltaTime * topAnimSpeed);
+		
+		// apply smooth transitioning between our animations
+		fadeAnimations(deltaTime);
 	}
 
 	Ogre::AnimationStateIterator
@@ -107,34 +123,7 @@ namespace Oni
 			if (reset) mAnims[id]->setTimePosition(0);
 		}
 	}
-
-	void 
-	Animation::updateAnimations(Ogre::Real deltaTime)
-	{
-		using namespace Ogre;
-		
-		Real baseAnimSpeed = 1;
-		Real topAnimSpeed = 1;
-		
-		mTimer += deltaTime;
-		
-		//~ if (this->mTimer >= (*mAnims)[mTopAnimID]->getLength())
-		//~ {
-			//~ 
-		//~ }
-		
-		// increment the current base and top animation times
-		// TODO: Refactor to better check existence of key
-		// consider taking advantage of the fact that != 0 is true, and only one value can be stored per key
-		if (mAnims.count(mBaseAnimID) > 0)
-			mAnims[mBaseAnimID]->addTime(deltaTime * baseAnimSpeed);
-		if (mAnims.count(mTopAnimID) > 0)
-			mAnims[mTopAnimID]->addTime(deltaTime * topAnimSpeed);
-		
-		// apply smooth transitioning between our animations
-		fadeAnimations(deltaTime);
-	}
-
+	
 	void 
 	Animation::fadeAnimations(Ogre::Real deltaTime)
 	{
