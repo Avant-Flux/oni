@@ -6,7 +6,7 @@
 #ifdef __cplusplus
 
 #include "../cpp_core/GameApplication.h"
-#include "../cpp_core/Agent.h"
+#include "../cpp_core/OniModel.h"
 
 #endif /* __cplusplus */
 

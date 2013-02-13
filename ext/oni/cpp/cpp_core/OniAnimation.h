@@ -13,12 +13,9 @@ namespace Oni
 	public:
 		Animation(Oni::Model* model);
 		virtual ~Animation();
-		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
+		virtual void initialize();
 		virtual void update(Ogre::Real deltaTime);		// update the agent
-		
-		bool getVisible();
-		void setVisible(bool visible);
-		
+				
 		Ogre::AnimationStateIterator getAnimationNames();
 		
 		std::string getBaseAnimation(){return mBaseAnimID;};

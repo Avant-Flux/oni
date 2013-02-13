@@ -2,46 +2,46 @@
 
 
 extern "C" {
-	Oni_ModelPtr Oni_Model_new(Oni_ModelPtr model){
-		Agent* agent = new Agent();
+	Oni_ModelPtr Oni_Model_new(){
+		Oni::Model* model = new Oni::Model();
 		
-		return (Ogre_AgentPtr)agent;
+		return (Oni_ModelPtr)model;
 	}
 
-	void Oni_Model_delete(Oni_ModelPtr agent){
+	void Oni_Model_delete(Oni_ModelPtr obj){
 		printf("======DELETING AGENT\n");
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		delete agent;
+		delete model;
 	}
 
 	void Oni_Model_markgc(Oni_ModelPtr obj){
 		printf("======MARK FOR COLLECTION\n");
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->setVisible(false);
+		model->setVisible(false);
 	}
 
-	void Oni_Model_initialize(Oni_ModelPtr obj, Ogre_WindowPtr obj2, char* name, char* filename);{
-		Agent* agent = (Agent*)(obj);
+	void Oni_Model_initialize(Oni_ModelPtr obj, Ogre_WindowPtr obj2, char* name, char* filename){
+		Oni::Model* model = (Oni::Model*)(obj);
 		GameApplication* game = (GameApplication*)obj2;
 		
 		std::string cpp_name(name);
 		std::string cpp_filename(filename);
 		
-		agent->initialize(game->getSceneMgr(), cpp_name, cpp_filename);
+		model->initialize(game->getSceneMgr(), cpp_name, cpp_filename);
 	}
 
 	void Oni_Model_update(Oni_ModelPtr obj, double dt){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->update(dt);
+		model->update(dt);
 	}
 
 	int Oni_Model_getVisible(Oni_ModelPtr obj){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		if(agent->getVisible())
+		if(model->getVisible())
 		{
 			return 1;
 		}
@@ -52,65 +52,65 @@ extern "C" {
 	}
 	
 	void Oni_Model_setVisible(Oni_ModelPtr obj, int visible){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
 		if(visible)
 		{
-			agent->setVisible(true);
+			model->setVisible(true);
 		}
 		else
 		{
-			agent->setVisible(false);
+			model->setVisible(false);
 		}
 	}
 	
 	
 	void Oni_Model_setPosition(Oni_ModelPtr obj, double x, double y, double z){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->setPosition(x,y,z);
+		model->setPosition(x,y,z);
 	}
 	
 	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z){
 		// void translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->translate(x,y,z);
+		model->translate(x,y,z);
 	}
 	
 	
 	void Oni_Model_pitch(Oni_ModelPtr obj, double radians){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->pitch(Ogre::Radian(radians));
+		model->pitch(Ogre::Radian(radians));
 	}
 	
 	void Oni_Model_yaw(Oni_ModelPtr obj, double radians){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->yaw(Ogre::Radian(radians));
+		model->yaw(Ogre::Radian(radians));
 	}
 	
 	void Oni_Model_roll(Oni_ModelPtr obj, double radians){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->roll(Ogre::Radian(radians));
+		model->roll(Ogre::Radian(radians));
 	}
 	
 	
 	// Rotate to face the given vector - DEPRECIATED
 	void Oni_Model_rotateTo(Oni_ModelPtr obj, double x, double y, double z){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->rotateTo(x,y,z);
+		model->rotateTo(x,y,z);
 	}
 	
 	
 	// Set rotation in horizontal plane
 	void Oni_Model_setRotation(Oni_ModelPtr obj, double radians){
-		Agent* agent = (Agent*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj);
 		
-		agent->setHorizontalPlaneRotation(Ogre::Radian(radians));
+		model->setHorizontalPlaneRotation(Ogre::Radian(radians));
 	}
 	
 }

@@ -13,7 +13,7 @@ namespace Oni
 	}
 
 	void
-	Animation::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
+	Animation::initialize()
 	{
 		mTopAnimID = "";
 		mBaseAnimID = "";
