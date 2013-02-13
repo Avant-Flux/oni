@@ -4,8 +4,9 @@
 // Convenience header which loads the headers which form the OgreInterface
 
 #include "Window.h"
-#include "Agent.h"
 #include "Camera.h"
 
+#include "Model.h"
+#include "Animation.h"
 
 #endif /* OGRE_C_INTERFACE */

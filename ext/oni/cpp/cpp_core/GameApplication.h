@@ -2,7 +2,6 @@
 #define __GameApplication_h_
 
 #include "BaseApplication.h"
-#include "Agent.h"
 //#include <vector>
 
 extern "C"
@@ -15,8 +14,6 @@ extern "C"
 
 class GameApplication : public BaseApplication
 {
-private:
-	Agent* agent;			// store a pointer to the character
 
 public:
     GameApplication(updateCallback update_callback,

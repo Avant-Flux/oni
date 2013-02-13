@@ -9,13 +9,10 @@ GameApplication::GameApplication(updateCallback update_callback,
 	mUpdateCallback = update_callback;
 	mKeyDownCallback = down_callback;
 	mKeyUpCallback = up_callback;
-	
-	agent = NULL;
 }
 //-------------------------------------------------------------------------------------
 GameApplication::~GameApplication(void)
 {
-	delete agent;
 }
 
 bool
