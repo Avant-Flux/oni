@@ -11,11 +11,8 @@ namespace Oni
 		Model();
 		virtual ~Model();
 		
-		// All interface methods should be declared virtual,
-		// so that decorators can subclass from this class and add functionality
-		
-		void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
-		void update(Ogre::Real deltaTime);		// update the game object
+		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
+		virtual void update(Ogre::Real deltaTime);		// update the game object
 		
 		// Necessary for extensibility
 		// May want to use Friend classes instead
