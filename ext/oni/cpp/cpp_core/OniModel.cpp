@@ -65,14 +65,7 @@ namespace Oni
 		// Moves the node along the Cartesian axes. 
 		mNode->translate(x,y,z, relativeTo);
 	}
-
-	void
-	Model::translate(const Ogre::Matrix3 &axes, const Ogre::Vector3 &move, Ogre::Node::TransformSpace relativeTo)
-	{
-		// Moves the node along arbitrary axes. 
-		mNode->translate(axes, move, relativeTo);
-	}
-
+	
 	void
 	Model::translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
 	{
