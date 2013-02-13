@@ -7,10 +7,11 @@ require 'oni'
 
 class Window < Oni::Window
 	def setup
-		@a = Oni::Agent.new(self, "Human_Male", "Human_Male.mesh")
+		@a = Oni::Model.new(self, "Human_Male", "Human_Male.mesh")
 		@a.translate(0, 0, 0)
 		
-		@a.base_animation = "my_animation"
+		@b = Oni::Animation.new(@a)
+		@b.base_animation = "my_animation"
 		
 		# Implies that this is where the camera is made
 		# This only creates a handle for the camera
@@ -34,6 +35,7 @@ class Window < Oni::Window
 	def update(dt)
 		# puts dt
 		@a.update dt
+		@b.update dt
 	end
 	
 	def draw

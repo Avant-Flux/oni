@@ -18,4 +18,7 @@ void Init_oni(){
 	Init_Oni_Camera(module);
 	
 	Init_Oni_Agent(module);
+	
+	Init_Oni_Model(module);
+	Init_Oni_Animation(module);
 }

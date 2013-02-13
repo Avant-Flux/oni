@@ -26,10 +26,11 @@ class Window < Oni::Window
 		@camera.near_clip_distance = 1
 		
 		
-		@a = Oni::Agent.new(self, "Human_Male", "Human_Male.mesh")
+		@a = Oni::Model.new(self, "Human_Male", "Human_Male.mesh")
 		@a.translate(0, 0, 0)
 		
-		@a.base_animation = "my_animation"
+		@b = Oni::Animation.new(@a)
+		@b.base_animation = "my_animation"
 		# @a.base_animation = "walkywalky"
 		# @a.top_animation = "flippyfloppy"
 		

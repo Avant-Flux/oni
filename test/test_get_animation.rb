@@ -7,17 +7,19 @@ require 'oni'
 
 class Window < Oni::Window
 	def setup
-		@a = Oni::Agent.new(self, "Golem", "Golem.mesh")
+		@a = Oni::Model.new(self, "Golem", "Golem.mesh")
 		@a.translate(0, 0, 0)
 		
-		@a.top_animation = "my_animation"
+		@b = Oni::Animation.new(@a)
+		@b.top_animation = "my_animation"
 		# @a.top_animation = ""
 		
-		puts "animation list: #{@a.animations}"
+		puts "animation list: #{@b.animations}"
 	end
 	
 	def update(dt)
 		@a.update dt
+		@b.update dt
 		
 		# puts "top: #{@a.top_animation}"
 		# puts "base: #{@a.base_animation}"

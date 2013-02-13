@@ -13,10 +13,10 @@ class Window < Oni::Window
 		@camera.look_at [0,0,0]
 		@camera.near_clip_distance = 5
 		
-		@a = Oni::Agent.new(self, "Golem", "Golem.mesh")
+		@a = Oni::Model.new(self, "Golem", "Golem.mesh")
 		@a.translate(50, 0, 0)
 		
-		@b = Oni::Agent.new(self, "Golem2", "Golem.mesh")
+		@b = Oni::Model.new(self, "Golem2", "Golem.mesh")
 		@b.translate(-50, 0, 0)
 		
 		@b = nil

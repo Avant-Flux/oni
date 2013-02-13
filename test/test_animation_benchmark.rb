@@ -16,10 +16,12 @@ class Window < Oni::Window
 		@move_forward = false
 		
 		@models = []
+		@animations = []
 		120.times do |i|
-			model = Oni::Agent.new(self, "Human_#{i}", "Human_Male.mesh")
+			model = Oni::Model.new(self, "Human_#{i}", "Human_Male.mesh")
 			
-			model.base_animation = "my_animation"
+			animation = Oni::Animation.new(model)
+			animation.base_animation = "my_animation"
 			
 			distance = 45
 			
@@ -28,6 +30,7 @@ class Window < Oni::Window
 			model.position = [x, 0, z]
 			
 			@models << model
+			@animations << animation
 		end
 	end
 	
@@ -36,6 +39,10 @@ class Window < Oni::Window
 			m.update dt
 			
 			m.translate 0,0,0.2 if @move_forward
+		end
+		
+		@animations.each do |a|
+			a.update dt
 		end
 	end
 	

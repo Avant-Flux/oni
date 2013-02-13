@@ -7,11 +7,12 @@ require 'oni'
 
 class Window < Oni::Window
 	def setup
-		@a = Oni::Agent.new(self, "MainCharacter", "MainCharacter.mesh")
+		@a = Oni::Model.new(self, "MainCharacter", "MainCharacter.mesh")
 		@a.translate(0, 0, 0)
 		
-		@a.base_animation = "walkywalky"
-		@a.top_animation = "flippyfloppy"
+		@b = Oni::Animation.new(@a)
+		@b.base_animation = "walkywalky"
+		@b.top_animation = "flippyfloppy"
 		
 		@move_forward = false
 	end
