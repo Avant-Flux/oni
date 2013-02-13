@@ -11,9 +11,9 @@ namespace Oni
 	class Animation
 	{
 	public:
-		Animation(Oni::Model* model);
+		Animation();
 		virtual ~Animation();
-		virtual void initialize();
+		virtual void initialize(Oni::Model* model);
 		virtual void update(Ogre::Real deltaTime);		// update the agent
 				
 		Ogre::AnimationStateIterator getAnimationNames();

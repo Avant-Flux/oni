@@ -2,9 +2,9 @@
 
 namespace Oni
 {
-	Animation::Animation(Oni::Model* model)
+	Animation::Animation()
 	{
-		mModel = model;
+		
 	}
 
 	Animation::~Animation()
@@ -13,8 +13,11 @@ namespace Oni
 	}
 
 	void
-	Animation::initialize()
+	Animation::initialize(Oni::Model* model)
 	{
+		mModel = model;
+		
+		
 		mTopAnimID = "";
 		mBaseAnimID = "";
 		

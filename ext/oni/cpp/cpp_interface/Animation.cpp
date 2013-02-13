@@ -1,9 +1,8 @@
 #include "Animation.h"
 
 extern "C" {
-	Oni_AnimationPtr Oni_Animation_new(Oni_ModelPtr obj){
-		Oni::Model* model = (Oni::Model*)(obj);
-		Oni::Animation* animation = new Oni::Animation(model);
+	Oni_AnimationPtr Oni_Animation_new(){
+		Oni::Animation* animation = new Oni::Animation();
 		
 		return (Ogre_AgentPtr)animation;
 	}
@@ -21,10 +20,11 @@ extern "C" {
 		
 	}
 
-	void Oni_Animation_initialize(Oni_AnimationPtr obj){
+	void Oni_Animation_initialize(Oni_AnimationPtr obj, Oni_ModelPtr obj2){
 		Oni::Animation* animation = (Oni::Animation*)(obj);
+		Oni::Model* model = (Oni::Model*)(obj2);
 		
-		animation->initialize();
+		animation->initialize(model);
 	}
 
 	void Oni_Animation_update(Oni_AnimationPtr obj, double dt){

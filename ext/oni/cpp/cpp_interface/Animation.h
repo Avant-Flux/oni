@@ -15,10 +15,10 @@
 extern "C" {
 #endif
 
-	Oni_AnimationPtr Oni_Animation_new(Oni_ModelPtr obj);
+	Oni_AnimationPtr Oni_Animation_new();
 	void Oni_Animation_delete(Oni_AnimationPtr agent);
 	void Oni_Animation_markgc(Oni_AnimationPtr obj);
-	void Oni_Animation_initialize(Oni_AnimationPtr obj);
+	void Oni_Animation_initialize(Oni_AnimationPtr obj, Oni_ModelPtr obj2);
 	void Oni_Animation_update(Oni_AnimationPtr obj, double dt);
 	
 	char** Oni_Animation_getAnimationNames(Oni_AnimationPtr obj);
