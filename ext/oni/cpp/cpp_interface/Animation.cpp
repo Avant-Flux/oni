@@ -4,7 +4,7 @@ extern "C" {
 	Oni_AnimationPtr Oni_Animation_new(){
 		Oni::Animation* animation = new Oni::Animation();
 		
-		return (Ogre_AgentPtr)animation;
+		return (Oni_AnimationPtr)animation;
 	}
 
 	void Oni_Animation_delete(Oni_AnimationPtr obj){

@@ -1,5 +1,5 @@
-#ifndef ONI_INTERFACE_MODEL
-#define ONI_INTERFACE_MODEL
+#ifndef ONI_INTERFACE_ANIMATION
+#define ONI_INTERFACE_ANIMATION
 
 #include "OgreInterfaceBase.h"
 
@@ -33,4 +33,4 @@ extern "C" {
 #endif
 
 
-#endif /* ONI_INTERFACE_MODEL */
+#endif /* ONI_INTERFACE_ANIMATION */

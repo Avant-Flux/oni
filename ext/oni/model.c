@@ -1,5 +1,4 @@
 #include "model.h"
-#include "Model.h" // CPP interface header - suggested rename i_OniModel (i for "interface")
 
 VALUE Init_Oni_Model(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Model", rb_cObject);

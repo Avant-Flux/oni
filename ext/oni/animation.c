@@ -1,5 +1,4 @@
 #include "animation.h"
-#include "Animation.h" // CPP interface header
 
 VALUE Init_Oni_Animation(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Animation", rb_cObject);
