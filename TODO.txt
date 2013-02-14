@@ -11,6 +11,10 @@ TODO: Move as much of window setup as possible into BaseApplication.setup() and 
 
 TODO: Default Agent to face down Y Axis, not X-Axis
 
+TODO: Depreciate Oni::Window#setup in favor of just using initialize()
+	Initialize will always be called after the window is set up, as that happens in the
+	call to Ogre_Window_new
+
 ====MAKE IT SO GEMS CAN BE BUILT
 NOTE: Currently supporting only Ubuntu Linux and Windows with mingw ruby (ruby-installer version)
 
