@@ -8,5 +8,6 @@
 
 #include "Model.h"
 #include "Animation.h"
+#include "AnimationTrack.h"
 
 #endif /* OGRE_C_INTERFACE */
