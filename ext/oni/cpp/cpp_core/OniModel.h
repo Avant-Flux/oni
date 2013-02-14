@@ -12,7 +12,7 @@ namespace Oni
 		virtual ~Model();
 		
 		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
-		virtual void update(Ogre::Real deltaTime);		// update the game object
+		virtual void update(Ogre::Real deltaTime);
 		
 		// Necessary for extensibility
 		// May want to use Friend classes instead
