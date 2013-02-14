@@ -18,12 +18,6 @@ namespace Oni
 		mModel = model;
 		
 		
-		mTopAnimID = "";
-		mBaseAnimID = "";
-		
-		mTimer = 0;
-		
-		
 		Ogre::Entity* entity = mModel->getEntity();
 		
 		// this is very important due to the nature of the exported animations
@@ -36,38 +30,34 @@ namespace Oni
 		{
 			Ogre::AnimationState* a = iter.getNext();
 			
-			mAnims[a->getAnimationName()] = a;
-			a->setLoop(true);
-			mFadingIn[a->getAnimationName()] = false;
-			mFadingOut[a->getAnimationName()] = false;
+			Oni::AnimationTrack* track = new Oni::AnimationTrack();
+			track->initialize(a);
+			
+			track->setLoop(true);
+			
+			track->setFadeInTime(0);
+			track->setFadeOutTime(0);
+			
+			mAnims[a->getAnimationName()] = track;
 		}
 	}
 
 	void
 	Animation::update(Ogre::Real deltaTime)
 	{
-		using namespace Ogre;
-		
-		Real baseAnimSpeed = 1;
-		Real topAnimSpeed = 1;
-		
-		mTimer += deltaTime;
-		
-		//~ if (this->mTimer >= (*mAnims)[mTopAnimID]->getLength())
-		//~ {
-			//~ 
-		//~ }
-		
 		// increment the current base and top animation times
-		// TODO: Refactor to better check existence of key
-		// consider taking advantage of the fact that != 0 is true, and only one value can be stored per key
-		if (mAnims.count(mBaseAnimID) > 0)
-			mAnims[mBaseAnimID]->addTime(deltaTime * baseAnimSpeed);
-		if (mAnims.count(mTopAnimID) > 0)
-			mAnims[mTopAnimID]->addTime(deltaTime * topAnimSpeed);
+		for(
+			std::map<std::string, Oni::AnimationTrack*>::iterator iter = mAnims.begin();
+			iter != mAnims.end();
+			iter++
+		)
+		{
+			(*iter).second->update(deltaTime);
+		}
+		
 		
 		// apply smooth transitioning between our animations
-		fadeAnimations(deltaTime);
+		// fadeAnimations(deltaTime);
 	}
 
 	Ogre::AnimationStateIterator
@@ -84,94 +74,19 @@ namespace Oni
 	void 
 	Animation::setBaseAnimation(std::string id, bool reset)
 	{
-		if (mFadingIn.count(mBaseAnimID) > 0)
-		{
-			// if we have an old animation, fade it out
-			mFadingIn[mBaseAnimID] = false;
-			mFadingOut[mBaseAnimID] = true;
-		}
+		// Fade out old animation
+		// no longer relevant, as there are no longer strict animation slots
 		
-		mBaseAnimID = id;
-		
-		if (mAnims.count(id) > 0)
-		{
-			// if we have a new animation, enable it and fade it in
-			mAnims[id]->setEnabled(true);
-			mAnims[id]->setWeight(0);
-			mFadingOut[id] = false;
-			mFadingIn[id] = true;
-			if (reset) mAnims[id]->setTimePosition(0);
-		}
+		// Fade in new animation
+		mAnims[id]->setEnabled(true);
+		mAnims[id]->setWeight(0);
+		mAnims[id]->setFadeOutTime(0);
+		mAnims[id]->setFadeInTime(3000);
 	}
 		
 	void
 	Animation::setTopAnimation(std::string id, bool reset)
 	{
-		if (mFadingIn.count(mTopAnimID) > 0)
-		{
-			// if we have an old animation, fade it out
-			mFadingIn[mTopAnimID] = false;
-			mFadingOut[mTopAnimID] = true;
-		}
 		
-		mTopAnimID = id;
-		
-		if (mAnims.count(id) > 0)
-		{
-			// if we have a new animation, enable it and fade it in
-			mAnims[id]->setEnabled(true);
-			mAnims[id]->setWeight(0);
-			mFadingOut[id] = false;
-			mFadingIn[id] = true;
-			if (reset) mAnims[id]->setTimePosition(0);
-		}
-	}
-	
-	void 
-	Animation::fadeAnimations(Ogre::Real deltaTime)
-	{
-		using namespace Ogre;
-		
-		std::map<std::string, AnimationState*>::iterator iter;
-		iter = mAnims.begin();
-		for (int i = 0; i < mAnims.size(); i++)
-		{
-			std::string key = iter->first;
-			iter++;
-			
-			if (mFadingIn[key])
-			{
-				// slowly fade this animation in until it has full weight
-				// Fade speed is in additional weight per second
-				Real newWeight = mAnims[key]->getWeight() + deltaTime * 7.5f; //ANIM_FADE_SPEED;
-				// Insure weight is normalized
-				mAnims[key]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));	
-				if (newWeight >= 1) mFadingIn[key] = false;
-			}
-			else if (mFadingOut[key])
-			{
-				// slowly fade this animation out until it has no weight, and then disable it
-				Real newWeight = mAnims[key]->getWeight() - deltaTime * 7.5f; //ANIM_FADE_SPEED;
-				// Insure weight is normalized
-				mAnims[key]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));
-				if (newWeight <= 0)
-				{
-					mAnims[key]->setEnabled(false);
-					mFadingOut[key] = false;
-				}
-			}
-		}
-	}
-
-	Ogre::Real
-	Animation::getAnimationTime()
-	{
-		return mTimer;
-	}
-
-	void
-	Animation::resetAnimationTime()
-	{
-		mTimer = 0;
 	}
 }

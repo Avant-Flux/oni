@@ -4,7 +4,9 @@ namespace Oni
 {
 	AnimationTrack::AnimationTrack()
 	{
-		
+		mPlaybackRate = 1.0;
+		mFadeInTime = 0.0f;
+		mFadeOutTime = 0.0f;
 	}
 
 	AnimationTrack::~AnimationTrack()
@@ -60,5 +62,17 @@ namespace Oni
 	AnimationTrack::getPlaybackRate()
 	{
 		return mPlaybackRate;
+	}
+	
+	void
+	AnimationTrack::setFadeInTime(Ogre::Real fadeTime)
+	{
+		mFadeInTime = fadeTime;
+	}
+	
+	void
+	AnimationTrack::setFadeOutTime(Ogre::Real fadeTime)
+	{
+		mFadeOutTime = fadeTime;
 	}
 }

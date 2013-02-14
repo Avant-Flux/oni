@@ -4,6 +4,8 @@
 #include "BaseApplication.h"
 #include "OniModel.h"
 
+#include "OniAnimationTrack.h"
+
 #include <deque>
 
 namespace Oni
@@ -14,31 +16,19 @@ namespace Oni
 		Animation();
 		virtual ~Animation();
 		virtual void initialize(Oni::Model* model);
-		virtual void update(Ogre::Real deltaTime);		// update the agent
+		virtual void update(Ogre::Real deltaTime);
 				
 		Ogre::AnimationStateIterator getAnimationNames();
 		
-		std::string getBaseAnimation(){return mBaseAnimID;};
 		void setBaseAnimation(std::string id, bool reset = false);
+		std::string getBaseAnimation(){return "mBaseAnimID";};
 		void setTopAnimation(std::string id, bool reset = false);
-		std::string getTopAnimation(){return mTopAnimID;};
-		void fadeAnimations(Ogre::Real deltaTime);
-		
-		// Time
-		Ogre::Real getAnimationTime();			// Get the current animation timer
-		void resetAnimationTime();
-
-	protected:
-		std::map<std::string, Ogre::AnimationState*> mAnims; // master animation list
-		std::map<std::string, bool> mFadingIn;	// which animations are fading in
-		std::map<std::string, bool> mFadingOut;	// which animations are fading out
-		std::string mBaseAnimID;				// current base (full- or lower-body) animation
-		std::string mTopAnimID;					// current top (upper-body) animation
-		Ogre::Real mTimer;						// general timer to see how long animations have been playing
-			
+		std::string getTopAnimation(){return "mTopAnimID";};
+	
 	private:
 		Oni::Model* mModel;
 
+		std::map<std::string, Oni::AnimationTrack*> mAnims; // TODO: Try to make values non-pointers
 		// all of the animations our character has, and a null ID
 		// some of these affect separate body parts and will be blended together
 	};
