@@ -112,6 +112,7 @@ set(CORE_SRCS
 	
 	./cpp_core/OniModel.cpp
 	./cpp_core/OniAnimation.cpp
+	./cpp_core/OniAnimationTrack.cpp
 )
 
 set(INTERFACE_HDRS
@@ -123,6 +124,7 @@ set(INTERFACE_HDRS
 	
 	./cpp_interface/Model.h
 	./cpp_interface/Animation.h
+	./cpp_core/OniAnimationTrack.h
 )
 
 set(INTERFACE_SRCS
