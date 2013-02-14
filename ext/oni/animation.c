@@ -1,4 +1,5 @@
 #include "animation.h"
+#include "animation_track.h"
 
 VALUE Init_Oni_Animation(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Animation", rb_cObject);
@@ -12,6 +13,9 @@ VALUE Init_Oni_Animation(VALUE outer){
 	rb_define_method(klass, "base_animation=", setBaseAnimation, -1);
 	rb_define_method(klass, "top_animation=", setTopAnimation, -1);
 	rb_define_method(klass, "animations", animation_names, 0);
+	
+	// Nested class
+	Init_Oni_AnimationTrack(klass);
 	
 	return Qnil;
 }
