@@ -35,4 +35,12 @@ module Oni
 			return KEY_ID[id]
 		end
 	end
+	
+	class Animation
+		class Track
+			def playing?
+				return !ended?
+			end
+		end
+	end
 end

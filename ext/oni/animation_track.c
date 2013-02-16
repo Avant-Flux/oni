@@ -23,7 +23,8 @@ void Init_Oni_Animation_Track(VALUE outer){
 	
 	rb_define_method(klass, "enabled?", getEnabled, 0);
 	rb_define_method(klass, "ended?", hasEnded, 0);
-	rb_define_method(klass, "playing?", getPlaying, 0);
+	// defined at ruby level, because it's easier
+	// rb_define_method(klass, "playing?", getPlaying, 0);
 	
 	// Aliases
 	rb_define_alias(klass, "duration", "length");
@@ -83,6 +84,9 @@ static VALUE setWeight(VALUE self, VALUE weight){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
+	double dbl_weight = NUM2DBL(weight);
+	Oni_Animation_Track_setWeight(ptr_animation_track, dbl_weight);
+	
 	return Qnil;
 }
 
@@ -90,12 +94,18 @@ static VALUE getWeight(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	return Qnil;
+	double dbl_weight = Oni_Animation_Track_getWeight(ptr_animation_track);
+	VALUE weight = rb_float_new(dbl_weight);
+	
+	return weight;
 }
 
 static VALUE setTime(VALUE self, VALUE time){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
+	
+	double dbl_time = rb_float_new(time);
+	Oni_Animation_Track_setTime(ptr_animation_track, dbl_time);
 	
 	return Qnil;
 }
@@ -104,12 +114,18 @@ static VALUE getTime(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	return Qnil;
+	double dbl_time = Oni_Animation_Track_getTime(ptr_animation_track);
+	VALUE time = rb_float_new(dbl_time);
+	
+	return time;
 }
 
 static VALUE setLoop(VALUE self, VALUE loop){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
+	
+	int int_loop = RTEST(loop);
+	Oni_Animation_Track_setLoop(ptr_animation_track, int_loop);
 	
 	return Qnil;
 }
@@ -118,20 +134,28 @@ static VALUE getLoop(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	return Qnil;
+	int int_loop = Oni_Animation_Track_getLoop(ptr_animation_track);
+	VALUE loop = int_loop ? Qtrue : Qfalse;
+	
+	return loop;
 }
 
 static VALUE getLength(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	return Qnil;
+	double dbl_length = Oni_Animation_Track_getLength(ptr_animation_track);
+	VALUE length = rb_float_new(dbl_length);
 	
+	return length;
 }
 
 static VALUE setPlaybackRate(VALUE self, VALUE rate){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
+	
+	double dbl_rate = NUM2DBL(rate);
+	Oni_Animation_Track_setPlaybackRate(ptr_animation_track, dbl_rate);
 	
 	return Qnil;
 }
@@ -140,12 +164,18 @@ static VALUE getPlaybackRate(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	return Qnil;
+	double dbl_rate = Oni_Animation_Track_getPlaybackRate(ptr_animation_track);
+	VALUE rate = rb_float_new(dbl_rate);
+	
+	return rate;
 }
 
 static VALUE setEnabled(VALUE self, VALUE enabled){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
+	
+	int int_enabled = RTEST(enabled);
+	Oni_Animation_Track_setEnabled(ptr_animation_track, int_enabled);
 	
 	return Qnil;
 }
@@ -154,7 +184,10 @@ static VALUE getEnabled(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	return Qnil;
+	int int_enabled = Oni_Animation_Track_getEnabled(ptr_animation_track);
+	VALUE enabled = int_enabled ? Qtrue : Qfalse;
+	
+	return enabled;
 }
 
 static VALUE hasEnded(VALUE self){
@@ -162,14 +195,8 @@ static VALUE hasEnded(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	return Qnil;
+	int int_ended = Oni_Animation_Track_(ptr_animation_track);
+	VALUE ended = int_ended ? Qtrue : Qfalse;
 	
-}
-static VALUE getPlaying(VALUE self){
-	// Inverse of hasEnded()
-	Oni_Animation_TrackPtr ptr_animation_track;
-	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
-	
-	return Qnil;
-	
+	return ended;
 }
