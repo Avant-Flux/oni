@@ -35,15 +35,17 @@ class Window < Oni::Window
 		end
 		
 		@animation["test"].weight = 1.0
-		@animation["test"].start_time = 0.0
+		@animation["test"].time = 0.0
 		@animation["test"].enabled = true
 		@animation["test"].rate = 1.0
 		@animation["test"].loop = true # loop is a method, not a real Ruby reserved word
 		
 		@animation["test"].playing?
+		@animation["test"].ended?
 		@animation["test"].enabled?
 		puts @animation["test"].weight
 		puts @animation["test"].rate
+		puts @animation["test"].time
 		puts @animation["test"].length
 	end
 	
