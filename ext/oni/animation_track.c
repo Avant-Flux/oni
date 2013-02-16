@@ -24,6 +24,10 @@ void Init_Oni_Animation_Track(VALUE outer){
 	rb_define_method(klass, "enabled?", getEnabled, 0);
 	rb_define_method(klass, "ended?", hasEnded, 0);
 	rb_define_method(klass, "playing?", getPlaying, 0);
+	
+	// Aliases
+	rb_define_alias(klass, "duration", "length");
+	rb_define_alias(klass, "size", "length");
 }
 
 VALUE rb_Oni_Animation_Track_new(Oni_Animation_TrackPtr ptr_track){
@@ -118,7 +122,6 @@ static VALUE getLoop(VALUE self){
 }
 
 static VALUE getLength(VALUE self){
-	// Alias: duration
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
