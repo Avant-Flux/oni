@@ -15,8 +15,6 @@ extern "C" {
 #endif
 
 	void Oni_Animation_Track_update(Oni_Animation_TrackPtr obj, double dt);
-	
-	
 
 #ifdef __cplusplus
 }
