@@ -14,6 +14,10 @@ VALUE Init_Oni_Animation(VALUE outer){
 	rb_define_method(klass, "top_animation=", setTopAnimation, -1);
 	rb_define_method(klass, "animations", animation_names, 0);
 	
+	// Add easing equations
+	Init_Oni_AnimationEasing(klass);
+	
+	
 	// Nested class
 	Init_Oni_AnimationTrack(klass);
 	
