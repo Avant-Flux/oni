@@ -11,9 +11,6 @@ typedef void* VALUE; // Mimic the ruby VALUE type
 
 #endif /* __cplusplus */
 
-typedef void* Ogre_AnimationStatePtr;
-
-
 typedef void* Ogre_WindowPtr;
 typedef void* Ogre_CameraPtr;
 
