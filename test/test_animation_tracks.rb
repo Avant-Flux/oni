@@ -18,28 +18,33 @@ class Window < Oni::Window
 		@model = Oni::Model.new(self, "Human_Male", "Human_Male.mesh")
 		@animation = Oni::Animation.new(@model)
 		
-		@animation.load(0, "my_animation")
-		# Fade as soon as fade call is made
-		@animation.track(0).fade_out(5.frames) do |influence, time|
+		
+		@animation["my_animation"].fade_in(5.frames) do |influence, time|
 			# influence = Current influence [0..1]
 			# time = milliseconds since the fade started [0..timeout]
 			
 			# Result of this block becomes the influence for the next frame
 			
 			# After the time specified, this track will be disabled
-		end
-		
-		# @animation.track(0).fade_in(100, &Oni::Animation::LINEAR_IN)-
-		@animation.load(1, "walk")
-		@animation.track(1).fade_in(200, &Oni::Animation::QuadraticFade.new(some, params))
-		
-		
-		
-		
-		
-		@animation["my_animation"].fade_in(5.frames) do |influence, time|
 			
+			# beginning, change, duration
+			b = 1
+			c = 1
+			d = 1
+			Oni::Animation.ease_in_cubic(influence, time, b,c,d)
 		end
+		
+		@animation["test"].weight = 1.0
+		@animation["test"].start_time = 0.0
+		@animation["test"].enabled = true
+		@animation["test"].rate = 1.0
+		@animation["test"].loop = true # loop is a method, not a real Ruby reserved word
+		
+		@animation["test"].playing?
+		@animation["test"].enabled?
+		puts @animation["test"].weight
+		puts @animation["test"].rate
+		puts @animation["test"].length
 	end
 	
 	def update(dt)
