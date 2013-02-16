@@ -4,7 +4,7 @@
 
 #include <OgreInterface.h>
 
-VALUE Init_Oni_AnimationEasing(VALUE module);
+void Init_Oni_AnimationEasing(VALUE module);
 
 /* Easing equations ported from jQuery easing v1.3, originally in JavaScript
  * ============================================================

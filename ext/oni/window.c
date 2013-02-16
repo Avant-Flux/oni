@@ -1,14 +1,12 @@
 #include "window.h"
 
-VALUE Init_Oni_Window(VALUE outer){
+void Init_Oni_Window(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Window", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
 	
 	rb_define_method(klass, "show", show, 0);
 	// rb_define_method(klass, "update", update, 1);
-	
-	return Qnil;
 }
 
 static VALUE alloc(VALUE class){

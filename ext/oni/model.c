@@ -1,6 +1,6 @@
 #include "model.h"
 
-VALUE Init_Oni_Model(VALUE outer){
+void Init_Oni_Model(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Model", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
@@ -19,8 +19,6 @@ VALUE Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "rotate_to", rotateTo, 3);
 	
 	rb_define_method(klass, "rotation=", setRotation, 1);
-	
-	return Qnil;
 }
 
 static VALUE alloc(VALUE class){

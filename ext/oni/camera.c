@@ -2,7 +2,7 @@
 
 // TODO: Fix "warning: assignment from incompatible pointer type" on Data_Get_Struct
 
-VALUE Init_Oni_Camera(VALUE outer){
+void Init_Oni_Camera(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Camera", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
@@ -15,8 +15,6 @@ VALUE Init_Oni_Camera(VALUE outer){
 	rb_define_method(klass, "look_at", lookAt, 1);
 	rb_define_method(klass, "near_clip_distance", getNearClipDistance, 0);
 	rb_define_method(klass, "near_clip_distance=", setNearClipDistance, 1);
-	
-	return Qnil;
 }
 
 static VALUE alloc(VALUE class){

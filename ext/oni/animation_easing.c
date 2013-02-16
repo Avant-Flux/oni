@@ -1,6 +1,6 @@
 #include "animation_easing.h"
 
-VALUE Init_Oni_AnimationEasing(VALUE module){
+void Init_Oni_AnimationEasing(VALUE module){
 	// Create methods as class methods, to be used in a functional-style
 	
 	rb_define_singleton_method(module, "foo", foo, 0);

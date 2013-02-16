@@ -6,7 +6,7 @@
 
 #include "animation_easing.h"
 
-VALUE Init_Oni_Animation(VALUE outer);
+void Init_Oni_Animation(VALUE outer);
 
 static VALUE alloc(VALUE class);
 

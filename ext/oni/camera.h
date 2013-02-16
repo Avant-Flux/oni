@@ -9,7 +9,7 @@ typedef struct cameraContainer{
 } cameraContainer;
 
 
-VALUE Init_Oni_Camera(VALUE outer);
+void Init_Oni_Camera(VALUE outer);
 
 static VALUE alloc(VALUE class);
 static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE z_order);

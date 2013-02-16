@@ -1,7 +1,7 @@
 #include "animation.h"
 #include "animation_track.h"
 
-VALUE Init_Oni_Animation(VALUE outer){
+void Init_Oni_Animation(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Animation", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
@@ -22,8 +22,6 @@ VALUE Init_Oni_Animation(VALUE outer){
 	
 	// Nested class
 	Init_Oni_Animation_Track(klass);
-	
-	return Qnil;
 }
 
 static VALUE alloc(VALUE class){

@@ -3,7 +3,7 @@
 // This class exists only as a Ruby-level handle to a C++ made and managed resource
 // All memory management etc for these objects will be handled at the C++ level.
 
-VALUE Init_Oni_Animation_Track(VALUE outer){
+void Init_Oni_Animation_Track(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Track", rb_cObject);
 	
 	rb_define_method(klass, "update", update, 1);
@@ -24,8 +24,6 @@ VALUE Init_Oni_Animation_Track(VALUE outer){
 	rb_define_method(klass, "enabled?", getEnabled, 0);
 	rb_define_method(klass, "ended?", hasEnded, 0);
 	rb_define_method(klass, "playing?", getPlaying, 0);
-	
-	return Qnil;
 }
 
 VALUE rb_Oni_Animation_Track_new(Oni_Animation_TrackPtr ptr_track){

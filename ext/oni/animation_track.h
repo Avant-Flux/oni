@@ -4,7 +4,7 @@
 
 #include <OgreInterface.h>
 
-VALUE Init_Oni_Animation_Track(VALUE outer);
+void Init_Oni_Animation_Track(VALUE outer);
 
 VALUE rb_Oni_Animation_Track_new(Oni_Animation_TrackPtr ptr_track);
 
