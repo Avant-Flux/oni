@@ -21,7 +21,7 @@ VALUE Init_Oni_Animation(VALUE outer){
 	
 	
 	// Nested class
-	Init_Oni_AnimationTrack(klass);
+	Init_Oni_Animation_Track(klass);
 	
 	return Qnil;
 }
@@ -184,10 +184,10 @@ static VALUE getAnimationTrack(VALUE self, VALUE track_name){
 	char* str_name = StringValueCStr(track_name);
 	
 	// Process call
-	Oni_AnimationTrackPtr ptr_track = Oni_Animation_getAnimationTrack(ptr_animation, str_name);
+	Oni_Animation_TrackPtr ptr_track = Oni_Animation_getAnimationTrack(ptr_animation, str_name);
 	
 	// Wrap into Ruby object
-	VALUE track = rb_AnimationTrack_new(ptr_track);
+	VALUE track = rb_Oni_Animation_Track_new(ptr_track);
 	
 	return track;
 }

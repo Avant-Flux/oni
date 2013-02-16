@@ -76,13 +76,13 @@ extern "C" {
 		return string_array;
 	}
 	
-	Oni_AnimationTrackPtr Oni_Animation_getAnimationTrack(Oni_AnimationPtr obj, char* name){
+	Oni_Animation_TrackPtr Oni_Animation_getAnimationTrack(Oni_AnimationPtr obj, char* name){
 		Oni::Animation* animation = (Oni::Animation*)(obj);
 		
 		std::string cpp_name(name);
 		Oni::AnimationTrack* track = animation->getAnimationTrack(cpp_name);
 		
-		Oni_AnimationTrackPtr ptr_track = (Oni_AnimationTrackPtr)track;
+		Oni_Animation_TrackPtr ptr_track = (Oni_Animation_TrackPtr)track;
 		
 		return ptr_track;
 	}

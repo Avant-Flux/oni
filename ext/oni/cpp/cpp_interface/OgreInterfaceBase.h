@@ -19,7 +19,7 @@ typedef void* Ogre_CameraPtr;
 
 typedef void* Oni_ModelPtr;
 typedef void* Oni_AnimationPtr;
-typedef void* Oni_AnimationTrackPtr;
+typedef void* Oni_Animation_TrackPtr;
 
 #ifdef __cplusplus
 extern "C" {

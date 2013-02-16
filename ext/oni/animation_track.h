@@ -4,9 +4,9 @@
 
 #include <OgreInterface.h>
 
-VALUE Init_Oni_AnimationTrack(VALUE outer);
+VALUE Init_Oni_Animation_Track(VALUE outer);
 
-VALUE rb_AnimationTrack_new(Oni_AnimationTrackPtr ptr_track);
+VALUE rb_Oni_Animation_Track_new(Oni_Animation_TrackPtr ptr_track);
 
 static VALUE update(VALUE self, VALUE dt);
 
