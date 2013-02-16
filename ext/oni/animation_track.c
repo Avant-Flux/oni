@@ -1,10 +1,11 @@
 #include "animation_track.h"
 
+// This class exists only as a Ruby-level handle to a C++ made and managed resource
+// All memory management etc for these objects will be handled at the C++ level.
+
 VALUE Init_Oni_AnimationTrack(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "AnimationTrack", rb_cObject);
 	
-	rb_define_alloc_func(klass, alloc);
-	rb_define_method(klass, "initialize", initialize, 1);
 	rb_define_method(klass, "update", update, 1);
 	
 	rb_define_method(klass, "fade_in", fadeIn, 2);
@@ -27,23 +28,20 @@ VALUE Init_Oni_AnimationTrack(VALUE outer){
 	return Qnil;
 }
 
-static VALUE alloc(VALUE class){
-	Oni_AnimationTrackPtr animation = Oni_AnimationTrack_new();
-	VALUE data = Data_Wrap_Struct(class, NULL, Oni_Animation_delete, animation);
+VALUE rb_AnimationTrack_new(Oni_AnimationTrackPtr ptr_track){
+	// Should only be visible at C level
+	// This class should essentially be a private nested class
+	// It is merely a handle for things managed by Oni::Animation
 	
-	return data;
-}
-
-static VALUE initialize(VALUE self, VALUE animation_state){
-	Oni_AnimationTrackPtr ptr_animation_track;
-	Data_Get_Struct(self, Oni_AnimationTrackPtr, ptr_animation_track);
+	// TODO: Consider making this function "inline"
 	
-	Ogre_AnimationStatePtr ptr_animation_state;
-	Data_Get_Struct(animation_state, Ogre_AnimationStatePtr, ptr_animation_state);
+	VALUE module = rb_const_get(rb_cObject, rb_intern("Oni"));
+	VALUE outer_end = rb_const_get(module, rb_intern("Animation"));
+	VALUE class = rb_const_get(outer_end, rb_intern("AnimationTrack"));
 	
-	Oni_AnimationTrack_initialize(ptr_animation_track, ptr_animation_state);
+	VALUE track = Data_Wrap_Struct(class, NULL, NULL, ptr_track);
 	
-	return Qnil;
+	return track;
 }
 
 static VALUE update(VALUE self, VALUE dt){

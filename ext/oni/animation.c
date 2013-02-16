@@ -14,6 +14,8 @@ VALUE Init_Oni_Animation(VALUE outer){
 	rb_define_method(klass, "top_animation=", setTopAnimation, -1);
 	rb_define_method(klass, "animations", animation_names, 0);
 	
+	rb_define_method(klass, "[]", getAnimationTrack, 1);
+	
 	// Add easing equations
 	Init_Oni_AnimationEasing(klass);
 	
@@ -27,6 +29,9 @@ VALUE Init_Oni_Animation(VALUE outer){
 static VALUE alloc(VALUE class){
 	Oni_AnimationPtr animation = Oni_Animation_new();
 	VALUE data = Data_Wrap_Struct(class, NULL, Oni_Animation_delete, animation);
+	
+	// TODO: Consider force-GCing all Ruby-level AnimationTrack objects when a related Animation object is GCed.  If they are not GCed, then using them will result in a segfault, as the underlying C++ resources no longer exist.
+	// TODO: Consider if it is possible to hold on to a AnimationTrack, while losing an Animation.  This is the only situation where the GC problem will happen.  It might actually be better to leave that bug in, as this warping of who has what is probably an indicator of poor design.
 	
 	return data;
 }
@@ -169,4 +174,20 @@ static VALUE animation_names(VALUE self){
 	
 	
 	return array;
+}
+
+static VALUE getAnimationTrack(VALUE self, VALUE track_name){
+	Oni_AnimationPtr ptr_animation;
+	Data_Get_Struct(self, Oni_AnimationPtr, ptr_animation);
+	
+	// Allocate memory
+	char* str_name = StringValueCStr(track_name);
+	
+	// Process call
+	Oni_AnimationTrackPtr ptr_track = Oni_Animation_getAnimationTrack(ptr_animation, str_name);
+	
+	// Wrap into Ruby object
+	VALUE track = rb_AnimationTrack_new(ptr_track);
+	
+	return track;
 }

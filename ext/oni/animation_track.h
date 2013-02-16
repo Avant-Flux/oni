@@ -6,9 +6,8 @@
 
 VALUE Init_Oni_AnimationTrack(VALUE outer);
 
-static VALUE alloc(VALUE class);
+VALUE rb_AnimationTrack_new(Oni_AnimationTrackPtr ptr_track);
 
-static VALUE initialize(VALUE self, VALUE model);
 static VALUE update(VALUE self, VALUE dt);
 
 static VALUE fadeIn(VALUE self, VALUE time, VALUE block);

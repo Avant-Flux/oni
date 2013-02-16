@@ -15,6 +15,10 @@ TODO: Depreciate Oni::Window#setup in favor of just using initialize()
 	Initialize will always be called after the window is set up, as that happens in the
 	call to Ogre_Window_new
 
+TODO: Optimize - Consider making C++-level things use char* instead of std::string, so that no conversion has to be done
+	Conversion is pretty pointless, considering one of the main objectives of this engine is to get away from C++ as much as possible, in favor of Ruby and C.
+	Conversion happens a lot in Oni::Animation, and may be a source of optimization in the future.
+
 ====MAKE IT SO GEMS CAN BE BUILT
 NOTE: Currently supporting only Ubuntu Linux and Windows with mingw ruby (ruby-installer version)
 

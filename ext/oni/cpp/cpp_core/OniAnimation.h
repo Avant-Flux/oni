@@ -20,6 +20,8 @@ namespace Oni
 				
 		Ogre::AnimationStateIterator getAnimationNames();
 		
+		Oni::AnimationTrack* getAnimationTrack(std::string name);
+		
 		void setBaseAnimation(std::string id, bool reset = false);
 		std::string getBaseAnimation(){return "mBaseAnimID";};
 		void setTopAnimation(std::string id, bool reset = false);

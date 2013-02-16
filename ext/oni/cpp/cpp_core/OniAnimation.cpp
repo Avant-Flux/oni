@@ -9,7 +9,7 @@ namespace Oni
 
 	Animation::~Animation()
 	{
-		
+		// TODO: Memory - Delete all Oni::AnimationTrack objects in mAnims
 	}
 
 	void
@@ -69,6 +69,11 @@ namespace Oni
 		Ogre::AnimationStateIterator iter = aSet->getAnimationStateIterator();
 		
 		return iter;
+	}
+	
+	Oni::AnimationTrack*
+	Animation::getAnimationTrack(std::string name){
+		return mAnims[name];
 	}
 
 	void 

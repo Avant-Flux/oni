@@ -1,4 +1,5 @@
 #include "Animation.h"
+#include "../cpp_core/OniAnimationTrack.h"
 
 extern "C" {
 	Oni_AnimationPtr Oni_Animation_new(){
@@ -73,6 +74,17 @@ extern "C" {
 		string_array[animation_count] = NULL;
 		
 		return string_array;
+	}
+	
+	Oni_AnimationTrackPtr Oni_Animation_getAnimationTrack(Oni_AnimationPtr obj, char* name){
+		Oni::Animation* animation = (Oni::Animation*)(obj);
+		
+		std::string cpp_name(name);
+		Oni::AnimationTrack* track = animation->getAnimationTrack(cpp_name);
+		
+		Oni_AnimationTrackPtr ptr_track = (Oni_AnimationTrackPtr)track;
+		
+		return ptr_track;
 	}
 	
 	const char* Oni_Animation_getBaseAnimation(Oni_AnimationPtr obj){

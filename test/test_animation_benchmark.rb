@@ -22,6 +22,7 @@ class Window < Oni::Window
 			
 			animation = Oni::Animation.new(model)
 			animation.base_animation = "my_animation"
+			puts animation["my_animation"]
 			
 			distance = 45
 			
