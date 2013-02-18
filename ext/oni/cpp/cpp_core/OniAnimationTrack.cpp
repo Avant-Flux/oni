@@ -37,7 +37,7 @@ namespace Oni
 			mAnimationState->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));	
 			
 			// Stop blending if at any time the value becomes 1
-			if (newWeight >= 1) mFadeInTime = 0;
+			if (newWeight == 1) mFadeInTime = 0;
 		}
 		else if (mFadeOutTime > 0)
 		{
@@ -46,8 +46,8 @@ namespace Oni
 			// Insure weight is normalized
 			mAnimationState->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
 			
-			// Stop blending if at any time the value becomes 1
-			if (newWeight <= 0)
+			// Stop blending if at any time the value becomes 0
+			if (newWeight == 0)
 			{
 				mAnimationState->setEnabled(false);
 				mFadeOutTime = 0;
