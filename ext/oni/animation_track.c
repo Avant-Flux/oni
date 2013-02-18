@@ -105,7 +105,7 @@ static VALUE setTime(VALUE self, VALUE time){
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
 	double dbl_time = rb_float_new(time);
-	Oni_Animation_Track_setTime(ptr_animation_track, dbl_time);
+	Oni_Animation_Track_setTimePosition(ptr_animation_track, dbl_time);
 	
 	return Qnil;
 }
@@ -114,7 +114,7 @@ static VALUE getTime(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	double dbl_time = Oni_Animation_Track_getTime(ptr_animation_track);
+	double dbl_time = Oni_Animation_Track_getTimePosition(ptr_animation_track);
 	VALUE time = rb_float_new(dbl_time);
 	
 	return time;
