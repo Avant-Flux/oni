@@ -53,7 +53,7 @@ static VALUE update(VALUE self, VALUE dt){
 	
 	double double_dt = NUM2DBL(dt);
 	
-	Oni_AnimationTrack_update(ptr_animation_track, double_dt);
+	Oni_Animation_Track_update(ptr_animation_track, double_dt);
 	
 	return Qnil;
 }
@@ -195,7 +195,7 @@ static VALUE hasEnded(VALUE self){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	int int_ended = Oni_Animation_Track_(ptr_animation_track);
+	int int_ended = Oni_Animation_Track_hasEnded(ptr_animation_track);
 	VALUE ended = int_ended ? Qtrue : Qfalse;
 	
 	return ended;

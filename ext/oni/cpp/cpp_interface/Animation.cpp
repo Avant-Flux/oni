@@ -18,7 +18,6 @@ extern "C" {
 	void Oni_Animation_markgc(Oni_AnimationPtr obj){
 		printf("======MARK FOR COLLECTION\n");
 		Oni::Animation* animation = (Oni::Animation*)(obj);
-		
 	}
 
 	void Oni_Animation_initialize(Oni_AnimationPtr obj, Oni_ModelPtr obj2){
