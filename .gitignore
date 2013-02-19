@@ -1,6 +1,7 @@
 # Do not track files that are created by the build system
 ext/oni/cpp/build_*
 /ext/oni/Makefile
+*.o
 
 # Do not track test resources
 media
