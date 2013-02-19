@@ -2,6 +2,12 @@
 ext/oni/cpp/build_*
 /ext/oni/Makefile
 *.o
+*.log
+*.def
+
+# Ignore files needed to build Windows pre-compiled gem
+*.dll
+*.a
 
 # Do not track test resources
 media
