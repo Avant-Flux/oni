@@ -65,9 +65,9 @@ def build_cpp_makefile(path, flags="")
 	end
 end
 
-def cmake_build()
+def cmake_build(platform)
 	opts = if RUBY_PLATFORM.downcase.include?("linux")
-		`cmake  -H"./cpp/" -B"./cpp/build_linux"`
+		`cmake  -H"./cpp/" -B"./cpp/build_#{platform}"`
 	elsif RUBY_PLATFORM.downcase.include?("mswin32")
 
 	elsif RUBY_PLATFORM.downcase.include?("mingw")
@@ -83,7 +83,7 @@ platform = define_platform()
 set_library_paths platform
 
 # Run cmake
-cmake_build()
+cmake_build platform
 
 
 
