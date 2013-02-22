@@ -1,4 +1,10 @@
 puts "load C code..."
+
+if defined? RUBY_PLATFORM and
+    %w(-win32 win32- mswin mingw32).any? { |s| RUBY_PLATFORM.include? s } then
+  ENV['PATH'] = "#{File.dirname(__FILE__)};#{ENV['PATH']}"
+end
+
 require 'oni/oni'
 puts "loading ruby code"
 
