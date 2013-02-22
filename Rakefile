@@ -54,7 +54,9 @@ file c_library => source_files do
 		# this does essentially the same thing
 		# as what RubyGems does
 		ruby "extconf.rb"
-		sh "make"
+		#sh "make"
+		# `mingw32-make`
+		`make`
 	end
 	
 	cp "ext/#{NAME}/#{NAME}.so", "lib/#{NAME}"
@@ -63,7 +65,8 @@ end
 task :test => c_library
 
 task :build_gem => c_library do
-	sh "gem build oni.gemspec"
+	# sh "gem build oni.gemspec"
+	`gem build oni.gemspec`
 end
 
 

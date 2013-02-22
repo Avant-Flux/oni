@@ -68,6 +68,9 @@ if(NOT OIS_FOUND)
 endif()
  
 # Find Boost
+set(Boost_USE_STATIC_LIBS TRUE)
+
+
 if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	if (WIN32 OR APPLE)
 		set(Boost_USE_STATIC_LIBS TRUE)
@@ -80,6 +83,10 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 		# boost libraries with name libboost_*, but CMake already prefixes library
 		# search names with "lib". This is the workaround.
 		set(CMAKE_FIND_LIBRARY_PREFIXES ${CMAKE_FIND_LIBRARY_PREFIXES} "")
+
+		find_package(Boost COMPONENTS thread date_time program_options filesystem system REQUIRED)
+		#set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
+		include_directories(${Boost_INCLUDE_DIR})
 	endif ()
 	set(Boost_ADDITIONAL_VERSIONS "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40" "1.39.0" "1.39" "1.38.0" "1.38" "1.37.0" "1.37" )
 	# Components that need linking (NB does not include header-only components like bind)
@@ -97,6 +104,8 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	add_definitions(-DBOOST_ALL_NO_LIB)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
+
+
  
 set(CORE_HDRS
 	./cpp_core/BaseApplication.h

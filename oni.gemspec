@@ -40,6 +40,10 @@ EOS
 		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_core/*.{c,cpp,h}"]
 		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_interface/*.{c,cpp,h}"]
 		
+		# WINDOWS ONLY
+		# TODO: REMOVE WHEN CMAKE DEPENDECY IS REMOVED
+		s.files      += Dir["{ext}/#{NAME}/cpp/lib/*"]
+
 		# Licensing
 		s.files      += Dir["legal/*.{txt}"]
 		
