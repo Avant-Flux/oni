@@ -1,8 +1,9 @@
 puts "load C code..."
 
+# Stolen from Gosu's code to load the dynamic library
 if defined? RUBY_PLATFORM and
-    %w(-win32 win32- mswin mingw32).any? { |s| RUBY_PLATFORM.include? s } then
-  ENV['PATH'] = "#{File.dirname(__FILE__)};#{ENV['PATH']}"
+%w(-win32 win32- mswin mingw32).any? { |s| RUBY_PLATFORM.include? s } then
+	ENV['PATH'] = "#{File.dirname(__FILE__)};#{ENV['PATH']}"
 end
 
 require 'oni/oni'
