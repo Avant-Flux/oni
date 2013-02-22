@@ -44,7 +44,7 @@ EOS
 		%w(-win32 win32- mswin mingw32).any? { |s| RUBY_PLATFORM.include? s } then
 			# WINDOWS ONLY
 			# TODO: REMOVE WHEN CMAKE DEPENDECY IS REMOVED
-			s.files      += Dir["{ext}/#{NAME}/cpp/lib/*"]
+			s.files      += Dir["{ext}/#{NAME}/cpp/lib/*.a"]
 			s.files      += Dir["{lib}/*.dll"]
 		end
 
