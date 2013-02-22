@@ -17,3 +17,7 @@ media
 
 # Packaged gems
 *.gem
+
+# Compiled extension binaries
+*.so
+*.bundle
