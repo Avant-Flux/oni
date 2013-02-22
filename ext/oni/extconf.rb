@@ -71,7 +71,7 @@ def cmake_build(platform)
 	elsif RUBY_PLATFORM.downcase.include?("mswin32")
 
 	elsif RUBY_PLATFORM.downcase.include?("mingw")
-		# `cmake -G"MSYS Makefiles" -H"./cpp/" -B"./cpp/build_#{platform}"`
+		`cmake -G"MSYS Makefiles" -H"./cpp/" -B"./cpp/build_#{platform}"`
 		build_cpp_makefile "./cpp/build_#{platform}/", "-j4"
 	elsif RUBY_PLATFORM.downcase.include?("darwin")
 
@@ -83,7 +83,7 @@ platform = define_platform()
 set_library_paths platform
 
 # Run cmake
-cmake_build platform
+# cmake_build platform
 
 
 
