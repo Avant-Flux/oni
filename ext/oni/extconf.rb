@@ -103,30 +103,6 @@ cmake_build platform
 
 # $LDFLAGS << " -L#{File.expand_path("./cpp/lib")}"
 
-# Missing symbol: _Unwind_Resume
-# Missing symbol: _gxx_personality_v0
-
-# Missing symbol: __cxa_guard_acquire <-- c++ threading lock mechanism
-# Missing symbol: __cxa_guard_release <-- c++ threading lock mechanism
-# Missing symbol: __gxx_personality_v0
-# Missing symbol: _Unwind_Resume
-
-# dir_config(
-# 	"boost",
-# 	"C:/ogre/lib/boost/boost/",
-# 	"C:/ogre/lib/boost/lib"
-# )
-
-# Wait - shouldn't be linking CPP libs into C code!
-# Why are these libs not in the CPP interface library?
-# boost_version = "1_49"
-# gcc_version = "mgw45"
-
-# ["system", "date_time", "filesystem", "program_options", "system", "thread",
-# "exception", "iostreams", "atomic"].each do |lib|
-# 	have_library("boost_#{lib}-#{gcc_version}-mt-#{boost_version}")
-# end
-
 # puts "CPP LIBRARY FOUND" if have_library("OgreBase")
 
 find_header "OgreInterface.h", File.expand_path("./cpp/cpp_interface/")
