@@ -1,5 +1,3 @@
-ENV['PATH'] = ENV['PATH'] + ';' + File.expand_path(File.dirname(__FILE__) + '/libs')
-
 puts "load C code..."
 require 'oni/oni'
 puts "loading ruby code"
