@@ -162,8 +162,8 @@ include_directories( ${OIS_INCLUDE_DIRS}
 
 # Create static library
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/lib)
-add_library(OgreBase STATIC ${CORE_HDRS} ${INTERFACE_HDRS} ${CORE_SRCS} ${INTERFACE_SRCS})
-target_link_libraries(OgreBase ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+add_library(OniBase STATIC ${CORE_HDRS} ${INTERFACE_HDRS} ${CORE_SRCS} ${INTERFACE_SRCS})
+target_link_libraries(OniBase ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
@@ -246,7 +246,7 @@ if(UNIX)
 	#	RUNTIME DESTINATION bin
 	#	CONFIGURATIONS All)
  	
- 	install(TARGETS OgreBase
+ 	install(TARGETS OniBase
 		ARCHIVE DESTINATION lib
 		CONFIGURATIONS All)
  	

@@ -37,13 +37,13 @@ def set_library_paths(platform)
 		dir_config(
 			"OgreMain", 
 			"C:/ogre/lib/ogre/include/OGRE", 
-			"C:/ogre/lib/ogre/lib/release", 
+			"C:/ogre/lib/ogre/bin/release", # Ogre DLLs
 		)
 		
 		dir_config(
-			"OgreBase",
+			"OniBase",
 			File.expand_path("./cpp/cpp_interface"),
-			File.expand_path("./cpp/lib")
+			File.expand_path("./cpp/lib") # C++ level libraries
 		)
 	elsif RUBY_PLATFORM.downcase.include?("darwin")
 
@@ -88,7 +88,7 @@ set_library_paths platform
 
 
 # Might want to use have_library() to check for libraries before adding them
-# $LIBS << " -lstdc++ -lOgreBase"
+# $LIBS << " -lstdc++ -lOniBase"
 # CONFIG['CC'] = "g++"
 
 # $CFLAGS = " -fPIC"
@@ -103,14 +103,14 @@ set_library_paths platform
 
 # $LDFLAGS << " -L#{File.expand_path("./cpp/lib")}"
 
-# puts "CPP LIBRARY FOUND" if have_library("OgreBase")
+# puts "CPP LIBRARY FOUND" if have_library("OniBase")
 
 find_header "OgreInterface.h", File.expand_path("./cpp/cpp_interface/")
 
 have_library("stdc++")
 have_library("OgreMain")
 have_library("OIS")
-have_library("OgreBase")
+have_library("OniBase")
 
 
 create_makefile('oni/oni')
