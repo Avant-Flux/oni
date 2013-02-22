@@ -21,7 +21,8 @@ def define_platform()
 	elsif RUBY_PLATFORM.downcase.include?("mswin32")
 
 	elsif RUBY_PLATFORM.downcase.include?("mingw")
-		"windows-mingw32"
+		# "windows-mingw32"
+		"windows-mingw-msys"
 	elsif RUBY_PLATFORM.downcase.include?("darwin")
 
 	end
@@ -49,27 +50,9 @@ def set_library_paths(platform)
 	end
 end
 
-def run_cmake()
-	opts = if RUBY_PLATFORM.downcase.include?("linux")
-		
-	elsif RUBY_PLATFORM.downcase.include?("mswin32")
-
-	elsif RUBY_PLATFORM.downcase.include?("mingw")
-		
-	elsif RUBY_PLATFORM.downcase.include?("darwin")
-
-	end
-end
-
 def build_cpp_makefile(path, flags="")
 	Dir.chdir path do
-		# windows - mingw32
-		# make_command = "mingw32-make"
-		
-		# linux
-		make_command = "make"
-		
-		stdin, stdout_and_stderr, wait_thr = Open3.popen2e make_command+ " " + flags
+		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make " + flags
 		
 		output = nil
 		begin
@@ -82,16 +65,26 @@ def build_cpp_makefile(path, flags="")
 	end
 end
 
+def cmake_build()
+	opts = if RUBY_PLATFORM.downcase.include?("linux")
+		`cmake  -H"./cpp/" -B"./cpp/build_linux"`
+	elsif RUBY_PLATFORM.downcase.include?("mswin32")
+
+	elsif RUBY_PLATFORM.downcase.include?("mingw")
+		# `cmake -G"MSYS Makefiles" -H"./cpp/" -B"./cpp/build_#{platform}"`
+		build_cpp_makefile "./cpp/build_#{platform}/", "-j4"
+	elsif RUBY_PLATFORM.downcase.include?("darwin")
+
+	end
+end
+
+
 platform = define_platform()
 set_library_paths platform
 
 # Run cmake
-# Linux
-# `cmake  -H"./cpp/" -B"./cpp/build_linux"`
-# windows
-# `cmake -G"MinGW Makefiles" -H"./cpp/" -B"./cpp/build_#{platform}"`
+cmake_build()
 
-# build_cpp_makefile "./cpp/build_#{platform}/", "-j4"
 
 
 # Might want to use have_library() to check for libraries before adding them
