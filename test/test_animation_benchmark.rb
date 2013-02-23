@@ -21,10 +21,9 @@ class Window < Oni::Window
 			model = Oni::Model.new(self, "Human_#{i}", "Human_Male.mesh")
 			
 			animation = Oni::Animation.new(model)
-			# animation.base_animation = "my_animation"
-			animation["my_animation"].enabled = true
-			animation["my_animation"].weight = 1.0
-			puts animation["my_animation"]
+			animation["idle"].enabled = true
+			animation["idle"].weight = 1.0
+			puts animation["idle"]
 			
 			distance = 45
 			
