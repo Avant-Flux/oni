@@ -30,7 +30,7 @@ class Window < Oni::Window
 		@a.translate(0, 0, 0)
 		
 		@b = Oni::Animation.new(@a)
-		@b.base_animation = "my_animation"
+		# @b.base_animation = "my_animation"
 		# @a.base_animation = "walkywalky"
 		# @a.top_animation = "flippyfloppy"
 		

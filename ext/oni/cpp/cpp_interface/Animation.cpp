@@ -85,30 +85,4 @@ extern "C" {
 		
 		return ptr_track;
 	}
-	
-	const char* Oni_Animation_getBaseAnimation(Oni_AnimationPtr obj){
-		Oni::Animation* animation = (Oni::Animation*)(obj);
-		
-		return animation->getBaseAnimation().c_str();
-	}
-
-	void Oni_Animation_setBaseAnimation(Oni_AnimationPtr obj, char* id, int reset){
-		Oni::Animation* animation = (Oni::Animation*)(obj);
-		
-		std::string cpp_id(id); 
-		animation->setBaseAnimation(cpp_id, reset);
-	}
-
-	const char* Oni_Animation_getTopAnimation(Oni_AnimationPtr obj){
-		Oni::Animation* animation = (Oni::Animation*)(obj);
-		
-		return animation->getTopAnimation().c_str();
-	}
-
-	void Oni_Animation_setTopAnimation(Oni_AnimationPtr obj, char* id, int reset){
-		Oni::Animation* animation = (Oni::Animation*)(obj);
-		
-		std::string cpp_id(id); 
-		animation->setTopAnimation(cpp_id, reset);
-	}
 }

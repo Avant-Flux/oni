@@ -24,11 +24,6 @@ extern "C" {
 	char** Oni_Animation_getAnimationNames(Oni_AnimationPtr obj);
 	
 	Oni_Animation_TrackPtr Oni_Animation_getAnimationTrack(Oni_AnimationPtr obj, char* name);
-	
-	const char* Oni_Animation_getBaseAnimation(Oni_AnimationPtr obj);
-	void Oni_Animation_setBaseAnimation(Oni_AnimationPtr obj, char* id, int reset);
-	const char* Oni_Animation_getTopAnimation(Oni_AnimationPtr obj);
-	void Oni_Animation_setTopAnimation(Oni_AnimationPtr obj, char* id, int reset);
 
 #ifdef __cplusplus
 }

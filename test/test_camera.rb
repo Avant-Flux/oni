@@ -11,7 +11,7 @@ class Window < Oni::Window
 		@a.translate(0, 0, 0)
 		
 		@b = Oni::Animation.new(@a)
-		@b.base_animation = "my_animation"
+		# @b.base_animation = "my_animation"
 		
 		# Implies that this is where the camera is made
 		# This only creates a handle for the camera

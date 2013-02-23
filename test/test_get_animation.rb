@@ -11,7 +11,7 @@ class Window < Oni::Window
 		@a.translate(0, 0, 0)
 		
 		@b = Oni::Animation.new(@a)
-		@b.top_animation = "my_animation"
+		# @b.top_animation = "my_animation"
 		# @a.top_animation = ""
 		
 		puts "animation list: #{@b.animations}"

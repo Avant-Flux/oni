@@ -11,8 +11,8 @@ class Window < Oni::Window
 		@a.translate(0, 0, 0)
 		
 		@b = Oni::Animation.new(@a)
-		@b.base_animation = "walkywalky"
-		@b.top_animation = "flippyfloppy"
+		# @b.base_animation = "walkywalky"
+		# @b.top_animation = "flippyfloppy"
 		
 		@move_forward = false
 	end

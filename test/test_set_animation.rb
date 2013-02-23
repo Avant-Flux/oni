@@ -12,8 +12,8 @@ class Window < Oni::Window
 		
 		@b = Oni::Animation.new(@a)
 		# @a.top_animation = "my_animation"
-		@b.base_animation = "walkywalky"
-		@b.top_animation = "flippyfloppy"
+		# @b.base_animation = "walkywalky"
+		# @b.top_animation = "flippyfloppy"
 	end
 	
 	def update(dt)
