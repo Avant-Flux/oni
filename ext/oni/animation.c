@@ -92,7 +92,13 @@ static VALUE getAnimationTrack(VALUE self, VALUE track_name){
 	char* str_name = StringValueCStr(track_name);
 	
 	// Process call
+	// Can be NULL
 	Oni_Animation_TrackPtr ptr_track = Oni_Animation_getAnimationTrack(ptr_animation, str_name);
+	if(ptr_track == NULL)
+	{
+		return Qnil;
+	}
+	
 	
 	// Wrap into Ruby object
 	VALUE track = rb_Oni_Animation_Track_new(ptr_track);

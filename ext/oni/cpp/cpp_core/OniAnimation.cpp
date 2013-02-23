@@ -73,7 +73,17 @@ namespace Oni
 	
 	Oni::AnimationTrack*
 	Animation::getAnimationTrack(std::string name){
-		return mAnims[name];
+		std::map<std::string, Oni::AnimationTrack*>::iterator track_iter = mAnims.find(name);
+		
+		// Return legit value, or NULL, must check for iter being end
+		if(track_iter == mAnims.end())
+		{
+			// Does not exist
+			return NULL;
+		}
+		
+		// Does exist
+		return track_iter->second;
 	}
 
 	void 
