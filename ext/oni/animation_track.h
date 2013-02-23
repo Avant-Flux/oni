@@ -10,6 +10,9 @@ VALUE rb_Oni_Animation_Track_new(Oni_Animation_TrackPtr ptr_track);
 
 static VALUE update(VALUE self, VALUE dt);
 
+static VALUE enable(VALUE self);
+static VALUE disable(VALUE self);
+
 static VALUE fadeIn(VALUE self, VALUE time, VALUE block);
 static VALUE fadeOut(VALUE self, VALUE time, VALUE block);
 

@@ -8,8 +8,12 @@ void Init_Oni_Animation_Track(VALUE outer){
 	
 	rb_define_method(klass, "update", update, 1);
 	
+	rb_define_method(klass, "enable", enable, 0);
+	rb_define_method(klass, "disable", disable, 0);
+	
 	rb_define_method(klass, "fade_in", fadeIn, 2);
 	rb_define_method(klass, "fade_out", fadeOut, 2);
+	
 	rb_define_method(klass, "weight=", setWeight, 1);
 	rb_define_method(klass, "weight", getWeight, 0);
 	rb_define_method(klass, "time=", setTime, 1);
@@ -57,6 +61,25 @@ static VALUE update(VALUE self, VALUE dt){
 	
 	return Qnil;
 }
+
+static VALUE enable(VALUE self){
+	Oni_Animation_TrackPtr ptr_animation_track;
+	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
+	
+	Oni_Animation_Track_setEnabled(ptr_animation_track, 1);
+	
+	return Qnil;
+}
+
+static VALUE disable(VALUE self){
+	Oni_Animation_TrackPtr ptr_animation_track;
+	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
+	
+	Oni_Animation_Track_setEnabled(ptr_animation_track, 0);
+	
+	return Qnil;
+}
+
 
 static VALUE fadeIn(VALUE self, VALUE time, VALUE block){
 	Oni_Animation_TrackPtr ptr_animation_track;
