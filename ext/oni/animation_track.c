@@ -21,8 +21,8 @@ void Init_Oni_Animation_Track(VALUE outer){
 	rb_define_method(klass, "rate", getPlaybackRate, 0);
 	rb_define_method(klass, "enabled=", setEnabled, 1);
 	
-	rb_define_method(klass, "enabled?", getEnabled, 0);
-	rb_define_method(klass, "ended?", hasEnded, 0);
+	rb_define_method(klass, "enabled?", getEnabled, 0);	// Will the track apply influence?
+	rb_define_method(klass, "ended?", hasEnded, 0);		// Has the track completed it's playback?
 	// defined at ruby level, because it's easier
 	// rb_define_method(klass, "playing?", getPlaying, 0);
 	
