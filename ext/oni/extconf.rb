@@ -39,12 +39,6 @@ def set_library_paths(platform)
 			"C:/ogre/lib/ogre/include/OGRE", 
 			"C:/ogre/lib/ogre/bin/release", # Ogre DLLs
 		)
-		
-		dir_config(
-			"OniBase",
-			File.expand_path("./cpp/cpp_interface"),
-			File.expand_path("./cpp/lib") # C++ level libraries
-		)
 	elsif RUBY_PLATFORM.downcase.include?("darwin")
 
 	end
@@ -52,7 +46,7 @@ end
 
 def build_cpp_makefile(path, flags="")
 	Dir.chdir path do
-		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make " + flags
+		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make install " + flags
 		
 		output = nil
 		begin
@@ -72,10 +66,11 @@ def cmake_build(platform)
 
 	elsif RUBY_PLATFORM.downcase.include?("mingw")
 		`cmake -G"MSYS Makefiles" -H"./cpp/" -B"./cpp/build_#{platform}"`
-		build_cpp_makefile "./cpp/build_#{platform}/", "-j4"
 	elsif RUBY_PLATFORM.downcase.include?("darwin")
 
 	end
+	
+	build_cpp_makefile "./cpp/build_#{platform}/", "-j4"
 end
 
 
@@ -83,7 +78,7 @@ platform = define_platform()
 set_library_paths platform
 
 # Run cmake
-# cmake_build platform
+cmake_build platform
 
 
 
@@ -103,9 +98,11 @@ set_library_paths platform
 
 # $LDFLAGS << " -L#{File.expand_path("./cpp/lib")}"
 
-# puts "CPP LIBRARY FOUND" if have_library("OniBase")
-
-find_header "OgreInterface.h", File.expand_path("./cpp/cpp_interface/")
+dir_config(
+	"OniBase",
+	File.expand_path("./cpp/cpp_interface"),
+	File.expand_path("./cpp/lib/") # C++ interface in C
+)
 
 have_library("stdc++")
 have_library("OgreMain")
