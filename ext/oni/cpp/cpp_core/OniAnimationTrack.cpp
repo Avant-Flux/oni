@@ -23,35 +23,39 @@ namespace Oni
 	void
 	AnimationTrack::update(Ogre::Real deltaTime)
 	{
-		mAnimationState->addTime(deltaTime * mPlaybackRate);
-		
-		Ogre::Real blendRate = 7.5f;
-		
-		// Control fading
-		if(mFadeInTime > 0)
+		if(mAnimationState->getEnabled())
 		{
-			// slowly fade this animation in until it has full weight
-			// Fade speed is in additional weight per second
-			Ogre::Real newWeight = mAnimationState->getWeight() + deltaTime * blendRate; //ANIM_FADE_SPEED;
-			// Insure weight is normalized
-			mAnimationState->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));	
+			mAnimationState->addTime(deltaTime * mPlaybackRate);
 			
-			// Stop blending if at any time the value becomes 1
-			if (newWeight == 1) mFadeInTime = 0;
-		}
-		else if (mFadeOutTime > 0)
-		{
-			// slowly fade this animation out until it has no weight, and then disable it
-			Ogre::Real newWeight = mAnimationState->getWeight() - deltaTime * blendRate; //ANIM_FADE_SPEED;
-			// Insure weight is normalized
-			mAnimationState->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
+			Ogre::Real blendRate = 7.5f;
 			
-			// Stop blending if at any time the value becomes 0
-			if (newWeight == 0)
+			// Control fading
+			if(mFadeInTime > 0)
 			{
-				mAnimationState->setEnabled(false);
-				mFadeOutTime = 0;
+				// slowly fade this animation in until it has full weight
+				// Fade speed is in additional weight per second
+				Ogre::Real newWeight = mAnimationState->getWeight() + deltaTime * blendRate; //ANIM_FADE_SPEED;
+				// Insure weight is normalized
+				mAnimationState->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));	
+				
+				// Stop blending if at any time the value becomes 1
+				if (newWeight == 1) mFadeInTime = 0;
 			}
+			else if (mFadeOutTime > 0)
+			{
+				// slowly fade this animation out until it has no weight, and then disable it
+				Ogre::Real newWeight = mAnimationState->getWeight() - deltaTime * blendRate; //ANIM_FADE_SPEED;
+				// Insure weight is normalized
+				mAnimationState->setWeight(Ogre::Math::Clamp<Ogre::Real>(newWeight, 0, 1));
+				
+				// Stop blending if at any time the value becomes 0
+				if (newWeight == 0)
+				{
+					mAnimationState->setEnabled(false);
+					mFadeOutTime = 0;
+				}
+			}
+			
 		}
 	}
 	
