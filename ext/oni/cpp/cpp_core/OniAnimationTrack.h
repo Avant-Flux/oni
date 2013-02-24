@@ -35,7 +35,7 @@ namespace Oni
 
 		bool hasEnded(void){return mAnimationState->hasEnded();};
 
-		bool getEnabled(void){mAnimationState->getEnabled();};
+		bool getEnabled(void){return mAnimationState->getEnabled();};
 		void setEnabled(bool enabled){mAnimationState->setEnabled(enabled);};
 
 		// bool operator==(const Ogre::AnimationState& rhs) const;
