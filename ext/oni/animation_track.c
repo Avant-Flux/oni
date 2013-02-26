@@ -8,6 +8,8 @@ void Init_Oni_Animation_Track(VALUE outer){
 	
 	rb_define_method(klass, "update", update, 1);
 	
+	rb_define_method(klass, "name", getName, 0);
+	
 	rb_define_method(klass, "enable", enable, 0);
 	rb_define_method(klass, "disable", disable, 0);
 	
@@ -161,6 +163,18 @@ static VALUE getLoop(VALUE self){
 	VALUE loop = int_loop ? Qtrue : Qfalse;
 	
 	return loop;
+}
+
+static VALUE getName(VALUE self){
+	Oni_Animation_TrackPtr ptr_animation_track;
+	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
+	
+	// TODO: Check if memory needs to be freed
+	char* char_name = Oni_Animation_Track_getAnimationName(ptr_animation_track);
+	
+	VALUE name = rb_str_new2(char_name);
+	
+	return name;
 }
 
 static VALUE getLength(VALUE self){

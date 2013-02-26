@@ -26,6 +26,7 @@ static VALUE setLoop(VALUE self, VALUE loop);
 static VALUE getLoop(VALUE self);
 
 
+static VALUE getName(VALUE self);
 
 static VALUE getLength(VALUE self);
 // Alias: duration
