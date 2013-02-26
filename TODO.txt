@@ -19,6 +19,8 @@ TODO: Optimize - Consider making C++-level things use char* instead of std::stri
 	Conversion is pretty pointless, considering one of the main objectives of this engine is to get away from C++ as much as possible, in favor of Ruby and C.
 	Conversion happens a lot in Oni::Animation, and may be a source of optimization in the future.
 
+TODO: Windows - make sure windows builds with Zip support
+
 ====MAKE IT SO GEMS CAN BE BUILT
 NOTE: Currently supporting only Ubuntu Linux and Windows with mingw ruby (ruby-installer version)
 
