@@ -27,7 +27,8 @@ Rake::TestTask.new do |t|
 	
 	# t.test_files = ["test/test_camera.rb"]
 	
-	t.test_files = ["test/test_animation_benchmark.rb"]
+	# t.test_files = ["test/test_animation_benchmark.rb"]
+	t.test_files = ["test/test_animation_time.rb"]
 end
 
 
