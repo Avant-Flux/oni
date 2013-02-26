@@ -125,11 +125,11 @@ static VALUE getWeight(VALUE self){
 	return weight;
 }
 
-static VALUE setTime(VALUE self, VALUE time){
+static VALUE setTime(VALUE self, VALUE t){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	double dbl_time = rb_float_new(time);
+	double dbl_time = NUM2DBL(t);
 	Oni_Animation_Track_setTimePosition(ptr_animation_track, dbl_time);
 	
 	return Qnil;

@@ -19,7 +19,7 @@ static VALUE fadeOut(VALUE self, VALUE time, VALUE block);
 static VALUE setWeight(VALUE self, VALUE weight);
 static VALUE getWeight(VALUE self);
 
-static VALUE setTime(VALUE self, VALUE time);
+static VALUE setTime(VALUE self, VALUE t);
 static VALUE getTime(VALUE self);
 
 static VALUE setLoop(VALUE self, VALUE loop);
