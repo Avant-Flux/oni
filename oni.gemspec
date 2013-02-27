@@ -45,6 +45,7 @@ EOS
 			# WINDOWS ONLY
 			# TODO: REMOVE WHEN CMAKE DEPENDECY IS REMOVED
 			s.files      += Dir["{ext}/#{NAME}/cpp/lib/*.a"]
+			s.files      += Dir["{lib}/#{NAME}/*.so"]
 			s.files      += Dir["{lib}/*.dll"]
 		end
 
