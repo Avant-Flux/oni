@@ -13,4 +13,6 @@ static VALUE update(VALUE self, VALUE dt);
 
 static VALUE setType(VALUE self, VALUE light_type);
 static VALUE setPosition(VALUE self, VALUE pos);
+
+static VALUE setDiffuseColor(VALUE self, VALUE color);
 static VALUE setSpecularColor(VALUE self, VALUE color);

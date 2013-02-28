@@ -9,6 +9,8 @@ void Init_Oni_Light(VALUE outer){
 	
 	rb_define_method(klass, "type=", setType, 1);
 	rb_define_method(klass, "position=", setPosition, 1);
+	
+	rb_define_method(klass, "diffuse=", setDiffuseColor, 1);
 	rb_define_method(klass, "specular=", setSpecularColor, 1);
 }
 
@@ -86,6 +88,26 @@ static VALUE setPosition(VALUE self, VALUE pos){
 	
 	return Qnil;
 }
+
+static VALUE setDiffuseColor(VALUE self, VALUE color){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	// TODO: Take single argument of one array - interpreted as a vector
+	// RARRAY(color)->ptr[0];
+	VALUE x = rb_ary_entry(color, 0);
+	VALUE y = rb_ary_entry(color, 1);
+	VALUE z = rb_ary_entry(color, 2);
+	
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Light_setDiffuseColor(ptr_light, dbl_x, dbl_y, dbl_z);
+	
+	return Qnil;
+}
+
 
 static VALUE setSpecularColor(VALUE self, VALUE color){
 	Oni_LightPtr ptr_light;

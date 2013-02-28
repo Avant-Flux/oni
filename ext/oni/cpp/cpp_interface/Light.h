@@ -22,6 +22,8 @@ extern "C" {
 	
 	void Oni_Light_setType(Oni_LightPtr obj, int light_type);
 	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z);
+	
+	void Oni_Light_setDiffuseColor(Oni_LightPtr obj, double r, double g, double b);
 	void Oni_Light_setSpecularColor(Oni_LightPtr obj, double r, double g, double b);
 
 #ifdef __cplusplus

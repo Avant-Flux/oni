@@ -57,6 +57,12 @@ extern "C" {
 		light->setPosition(x,y,z);
 	}
 	
+	void Oni_Light_setDiffuseColor(Oni_LightPtr obj, double r, double g, double b){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setDiffuseColour(r,g,b);
+	}
+	
 	void Oni_Light_setSpecularColor(Oni_LightPtr obj, double r, double g, double b){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
