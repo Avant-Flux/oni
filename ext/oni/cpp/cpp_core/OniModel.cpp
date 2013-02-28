@@ -117,4 +117,19 @@ namespace Oni
 		
 		// mNode->getOrientation().getYaw(); // get rotation around Y axis
 	}
+	
+	// Scale
+	void
+	Model::scale(double x, double y, double z)
+	{
+		// Adjust scale
+		mNode->scale(x,y,z);
+	}
+	
+	void
+	Model::setScale(double x, double y, double z)
+	{
+		// Set scale to specified value
+		mNode->setScale(x,y,z);
+	}
 }

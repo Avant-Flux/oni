@@ -19,6 +19,9 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "rotate_to", rotateTo, 3);
 	
 	rb_define_method(klass, "rotation=", setRotation, 1);
+	
+	rb_define_method(klass, "scale", scale, 3);
+	rb_define_method(klass, "scale=", setScale, 1);
 }
 
 static VALUE alloc(VALUE class){
@@ -165,6 +168,38 @@ static VALUE setRotation(VALUE self, VALUE radians){
 	double dbl_radians = NUM2DBL(radians);
 	
 	Oni_Model_setRotation(ptr_model, dbl_radians);
+	
+	return Qnil;
+}
+
+static VALUE scale(VALUE self, VALUE x, VALUE y, VALUE z){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Model_scale(ptr_model, dbl_x, dbl_y, dbl_z);
+	
+	return Qnil;
+}
+
+static VALUE setScale(VALUE self, VALUE scale){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	// TODO: Take single argument of one array - interpreted as a vector
+	// RARRAY(scale)->ptr[0];
+	VALUE x = rb_ary_entry(scale, 0);
+	VALUE y = rb_ary_entry(scale, 1);
+	VALUE z = rb_ary_entry(scale, 2);
+	
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Model_setScale(ptr_model, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
 }

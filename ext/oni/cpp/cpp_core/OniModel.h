@@ -38,6 +38,11 @@ namespace Oni
 		// Set rotation in the horizontal plane (ie, around the y axis)
 		// Transformation uses quaternions and is always local
 		void setHorizontalPlaneRotation(const Ogre::Radian &angle);
+		
+		
+		// Scale
+		void scale(double x, double y, double z);
+		void setScale(double x, double y, double z);
 
 	protected:
 		Ogre::SceneManager* mSceneMgr; // TODO: Consider optimizing using flyweight pattern

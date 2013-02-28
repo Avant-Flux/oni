@@ -22,13 +22,14 @@ Rake::TestTask.new do |t|
 	# t.test_files = ["test/test_agent_creation.rb"]
 	# t.test_files = ["test/test_agent_translation.rb"]
 	# t.test_files = ["test/test_agent_rotation.rb"]
+	t.test_files = ["test/test_agent_scale.rb"]
 	# t.test_files = ["test/test_set_animation.rb"]
 	# t.test_files = ["test/test_get_animation.rb"]
 	
 	# t.test_files = ["test/test_camera.rb"]
 	
 	# t.test_files = ["test/test_animation_benchmark.rb"]
-	t.test_files = ["test/test_animation_time.rb"]
+	# t.test_files = ["test/test_animation_time.rb"]
 end
 
 

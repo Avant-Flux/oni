@@ -78,6 +78,17 @@ extern "C" {
 		model->translate(x,y,z);
 	}
 	
+	void Oni_Model_scale(Oni_ModelPtr obj, double x, double y, double z){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		model->scale(x,y,z);
+	}
+	
+	void Oni_Model_setScale(Oni_ModelPtr obj, double x, double y, double z){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		model->setScale(x,y,z);
+	}
 	
 	void Oni_Model_pitch(Oni_ModelPtr obj, double radians){
 		Oni::Model* model = (Oni::Model*)(obj);
