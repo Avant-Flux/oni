@@ -40,16 +40,18 @@ void // Load the buildings or ground plane, etc
 GameApplication::loadEnv()
 {
 	using namespace Ogre;
+	
+	// TODO: Create Oni::Plane class based off of this snippet
+	// NOTE: May be unnecessary with Ogre's projective texture / billboarding support
+	// //create a floor mesh resource
+	// MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
+	// 	Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
-	//create a floor mesh resource
-	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
-		Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
-
-	//create a floor entity, give it material, and place it at the origin
-	Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-	floor->setMaterialName("Examples/Rockwall");
-	floor->setCastShadows(false);
-	mSceneMgr->getRootSceneNode()->attachObject(floor);
+	// //create a floor entity, give it material, and place it at the origin
+	// Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+	// floor->setMaterialName("Examples/Rockwall");
+	// floor->setCastShadows(false);
+	// mSceneMgr->getRootSceneNode()->attachObject(floor);
 }
 
 void // Set up lights, shadows, etc
