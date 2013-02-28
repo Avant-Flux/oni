@@ -116,6 +116,8 @@ set(CORE_HDRS
 	./cpp_core/BaseApplication.h
 	./cpp_core/GameApplication.h
 	
+	./cpp_core/OniLight.h
+	
 	./cpp_core/OniModel.h
 	./cpp_core/OniAnimation.h
 	./cpp_core/OniAnimationTrack.h
@@ -124,6 +126,8 @@ set(CORE_HDRS
 set(CORE_SRCS
 	./cpp_core/BaseApplication.cpp
 	./cpp_core/GameApplication.cpp
+	
+	./cpp_core/OniLight.cpp
 	
 	./cpp_core/OniModel.cpp
 	./cpp_core/OniAnimation.cpp
@@ -137,6 +141,8 @@ set(INTERFACE_HDRS
 	./cpp_interface/Window.h
 	./cpp_interface/Camera.h
 	
+	./cpp_interface/Light.h
+	
 	./cpp_interface/Model.h
 	./cpp_interface/Animation.h
 	./cpp_interface/AnimationTrack.h
@@ -147,6 +153,8 @@ set(INTERFACE_SRCS
 	
 	./cpp_interface/Window.cpp
 	./cpp_interface/Camera.cpp
+	
+	./cpp_interface/Light.cpp
 	
 	./cpp_interface/Model.cpp
 	./cpp_interface/Animation.cpp

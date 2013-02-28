@@ -64,15 +64,9 @@ GameApplication::setupEnv()
 	mSceneMgr->setShadowColour(ColourValue(0.5, 0.5, 0.5));
 	mSceneMgr->setShadowTextureSize(1024);
 	mSceneMgr->setShadowTextureCount(1);
-
+	
 	// use small amount of ambient lighting
 	mSceneMgr->setAmbientLight(ColourValue(0.3f, 0.3f, 0.3f));
-
-	// add a bright light above the scene
-	Light* light = mSceneMgr->createLight();
-	light->setType(Light::LT_POINT);
-	light->setPosition(-10, 40, 20);
-	light->setSpecularColour(ColourValue::White);
 }
 
 void // Load other props or objects
