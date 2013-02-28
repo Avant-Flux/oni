@@ -4,7 +4,7 @@
 
 #include <OgreInterface.h>
 
-void Init_Oni_AnimationEasing(VALUE module);
+void Init_Oni_AnimationEasing(VALUE outer);
 
 /* Easing equations ported from jQuery easing v1.3, originally in JavaScript
  * ============================================================
@@ -18,47 +18,46 @@ void Init_Oni_AnimationEasing(VALUE module);
  * ======================================================== */
  // t: current time, b: begInnIng value, c: change In value, d: duration
  
-static VALUE foo();
+static VALUE ease_in_quad(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_quad(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_quad(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 
-// static VALUE ease_in_quad(x, t, b, c, d);
-// static VALUE ease_out_quad(x, t, b, c, d);
-// static VALUE ease_in_out_quad(x, t, b, c, d);
+static VALUE ease_in_cubic(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_cubic(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_cubic(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 
-// static VALUE ease_in_cubic(x, t, b, c, d);
-// static VALUE ease_out_cubic(x, t, b, c, d);
-// static VALUE ease_in_out_cubic(x, t, b, c, d);
+static VALUE ease_in_quart(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_quart(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_quart(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 
-// static VALUE ease_in_quart(x, t, b, c, d);
-// static VALUE ease_out_quart(x, t, b, c, d);
-// static VALUE ease_in_out_quart(x, t, b, c, d);
+static VALUE ease_in_quint(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_quint(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_quint(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 
-// static VALUE ease_in_quint(x, t, b, c, d);
-// static VALUE ease_out_quint(x, t, b, c, d);
-// static VALUE ease_in_out_quint(x, t, b, c, d);
 
-// static VALUE ease_in_sine(x, t, b, c, d);
-// static VALUE ease_out_sine(x, t, b, c, d);
-// static VALUE ease_in_out_sine(x, t, b, c, d);
+static VALUE ease_in_sine(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_sine(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_sine(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 
-// static VALUE ease_in_expo(x, t, b, c, d);
-// static VALUE ease_in_out_expo(x, t, b, c, d);
-// static VALUE ease_in_out_expo(x, t, b, c, d);
+static VALUE ease_in_expo(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_expo(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_expo(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 
-// static VALUE ease_in_circ(x, t, b, c, d);
-// static VALUE ease_out_circ(x, t, b, c, d);
-// static VALUE ease_in_out_circ(x, t, b, c, d);
+static VALUE ease_in_circ(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_circ(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_circ(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 
-// static VALUE ease_in_elastic(x, t, b, c, d);
-// static VALUE ease_out_elastic(x, t, b, c, d);
-// static VALUE ease_in_out_elastic(x, t, b, c, d);
+static VALUE ease_in_elastic(int argc, VALUE *argv, VALUE self);
+static VALUE ease_out_elastic(int argc, VALUE *argv, VALUE self);
+static VALUE ease_in_out_elastic(int argc, VALUE *argv, VALUE self);
 
-// static VALUE ease_in_back(x, t, b, c, d, s);
-// static VALUE ease_out_back(x, t, b, c, d, s);
-// static VALUE ease_in_out_back(x, t, b, c, d, s);
+static VALUE ease_in_back(int argc, VALUE *argv, VALUE self);
+static VALUE ease_out_back(int argc, VALUE *argv, VALUE self);
+static VALUE ease_in_out_back(int argc, VALUE *argv, VALUE self);
 
-// static VALUE ease_in_bounce(x, t, b, c, d);
-// static VALUE ease_out_bounce(x, t, b, c, d);
-// static VALUE ease_in_out_bounce(x, t, b, c, d);
+static VALUE ease_in_bounce(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_out_bounce(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
+static VALUE ease_in_out_bounce(VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 	
 /*
  *

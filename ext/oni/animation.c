@@ -18,6 +18,7 @@ void Init_Oni_Animation(VALUE outer){
 	
 	// Nested class
 	Init_Oni_Animation_Track(klass);
+	Init_Oni_AnimationEasing(klass);
 }
 
 static VALUE alloc(VALUE class){
