@@ -13,10 +13,10 @@ class Window < Oni::Window
 		@camera.look_at [0,0,0]
 		@camera.near_clip_distance = 5
 		
-		@light = Oni::Light.new self
-		# mLight->setType(Ogre::Light::LT_POINT);
-		# mLight->setPosition(-10, 40, 20);
-		# mLight->setSpecularColour(Ogre::ColourValue::White);
+		@light = Oni::Light.new self, "Light"
+		@light.type = :point
+		@light.position = [-10, 40, 20]
+		@light.specular = [1.0, 1.0, 1.0]
 		
 		@move_forward = false
 		

@@ -10,3 +10,7 @@ static VALUE alloc(VALUE class);
 
 static VALUE initialize(VALUE self, VALUE window, VALUE name);
 static VALUE update(VALUE self, VALUE dt);
+
+static VALUE setType(VALUE self, VALUE light_type);
+static VALUE setPosition(VALUE self, VALUE pos);
+static VALUE setSpecularColor(VALUE self, VALUE color);

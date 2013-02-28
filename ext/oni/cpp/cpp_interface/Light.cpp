@@ -36,4 +36,30 @@ extern "C" {
 		
 		light->update(dt);
 	}
+	
+	void Oni_Light_setType(Oni_LightPtr obj, int light_type){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		Ogre::Light::LightTypes type;
+		if(light_type == 0){
+			type = Ogre::Light::LT_POINT;
+		}else if(light_type == 1){
+			type = Ogre::Light::LT_DIRECTIONAL;
+		}else if(light_type == 2){
+			type = Ogre::Light::LT_SPOTLIGHT;
+		}
+		light->setType(type);
+	}
+	
+	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setPosition(x,y,z);
+	}
+	
+	void Oni_Light_setSpecularColor(Oni_LightPtr obj, double r, double g, double b){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setSpecularColour(r,g,b);
+	}
 }
