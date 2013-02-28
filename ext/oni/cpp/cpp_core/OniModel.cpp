@@ -57,8 +57,8 @@ namespace Oni
 	{
 		mNode->setPosition(x,y,z);
 	}
-
-
+	
+	
 	void
 	Model::translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
 	{
@@ -72,9 +72,7 @@ namespace Oni
 		// Moves the node along arbitrary axes. 
 		mNode->translate(axes, x,y,z, relativeTo);
 	}
-		
-
-
+	
 	// Rotation
 	void Model::resetOrientation()
 	{
