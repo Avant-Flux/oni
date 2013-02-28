@@ -8,5 +8,5 @@ void Init_Oni_Light(VALUE outer);
 
 static VALUE alloc(VALUE class);
 
-static VALUE initialize(VALUE self, VALUE window);
+static VALUE initialize(VALUE self, VALUE window, VALUE name);
 static VALUE update(VALUE self, VALUE dt);
