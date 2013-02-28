@@ -11,8 +11,9 @@ namespace Oni
 		Light();
 		virtual ~Light();
 		
-		virtual void initialize(Ogre::SceneManager* sceneMgr);
+		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name);
 		virtual void update(Ogre::Real deltaTime);
+
 	
 	private:
 		Ogre::Light* mLight;

@@ -22,11 +22,13 @@ extern "C" {
 		// light->setVisible(false);
 	}
 
-	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2){
+	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2, char* name){
 		Oni::Light* light = (Oni::Light*)(obj);
 		GameApplication* game = (GameApplication*)obj2;
 		
-		light->initialize(game->getSceneMgr());
+		std::string cpp_name(name);
+		
+		light->initialize(game->getSceneMgr(), cpp_name);
 	}
 
 	void Oni_Light_update(Oni_LightPtr obj, double dt){
