@@ -108,7 +108,6 @@ static VALUE setDiffuseColor(VALUE self, VALUE color){
 	return Qnil;
 }
 
-
 static VALUE setSpecularColor(VALUE self, VALUE color){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
