@@ -90,6 +90,13 @@ extern "C" {
 		model->setScale(x,y,z);
 	}
 	
+	void Oni_Model_resetOrientation(Oni_ModelPtr obj)
+	{
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		model->resetOrientation();
+	}
+	
 	void Oni_Model_pitch(Oni_ModelPtr obj, double radians){
 		Oni::Model* model = (Oni::Model*)(obj);
 		

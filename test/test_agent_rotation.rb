@@ -7,6 +7,12 @@ require 'oni'
 
 class Window < Oni::Window
 	def setup
+		@camera = Oni::Camera.new(self, "main_camera", 0) # TODO: Make z_order=0 by default
+		@camera.fov = 110
+		@camera.position = [0,30,40]
+		@camera.look_at [0,0,0]
+		@camera.near_clip_distance = 5
+		
 		@a = Oni::Model.new(self, "MainCharacter", "MainCharacter.mesh")
 		@a.translate(0, 0, 0)
 		
@@ -37,13 +43,7 @@ class Window < Oni::Window
 				@move_forward = !@move_forward
 			
 			when :kb_1
-				@a.rotate_to 1,0,0
-			when :kb_2
-				@a.rotate_to -1,0,0
-			when :kb_3
-				@a.rotate_to 0,0,1
-			when :kb_4
-				@a.rotate_to 0,0,-1
+				@a.rotation_3D = [20,20,20]
 			
 			when :kb_x
 				@a.pitch 20.degrees

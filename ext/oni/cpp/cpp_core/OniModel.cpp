@@ -76,6 +76,11 @@ namespace Oni
 
 
 	// Rotation
+	void Model::resetOrientation()
+	{
+		mNode->resetOrientation();
+	}
+	
 	void
 	Model::pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
 	{

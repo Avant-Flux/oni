@@ -16,9 +16,10 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "pitch", pitch, 1);
 	rb_define_method(klass, "yaw", yaw, 1);
 	rb_define_method(klass, "roll", roll, 1);
-	rb_define_method(klass, "rotate_to", rotateTo, 3);
 	
+	// Note: should probably flip this to rotation_2d and rotation
 	rb_define_method(klass, "rotation=", setRotation, 1);
+	rb_define_method(klass, "rotation_3D=", setRotation3D, 1);
 	
 	rb_define_method(klass, "scale", scale, 3);
 	rb_define_method(klass, "scale=", setScale, 1);
@@ -168,6 +169,32 @@ static VALUE setRotation(VALUE self, VALUE radians){
 	double dbl_radians = NUM2DBL(radians);
 	
 	Oni_Model_setRotation(ptr_model, dbl_radians);
+	
+	return Qnil;
+}
+
+static VALUE setRotation3D(VALUE self, VALUE euler_rotation){
+	// Convenience method
+	// Only for snapping to a given orientation
+	// Do not attempt to use with any sort of interpolation
+	
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	// TODO: Take single argument of one array - interpreted as a vector
+	// RARRAY(euler_rotation)->ptr[0];
+	VALUE x = rb_ary_entry(euler_rotation, 0);
+	VALUE y = rb_ary_entry(euler_rotation, 1);
+	VALUE z = rb_ary_entry(euler_rotation, 2);
+	
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Model_resetOrientation(ptr_model);
+	Oni_Model_pitch(ptr_model, dbl_x);
+	Oni_Model_yaw(ptr_model, dbl_y);
+	Oni_Model_roll(ptr_model, dbl_z);
 	
 	return Qnil;
 }

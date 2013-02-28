@@ -26,6 +26,7 @@ extern "C" {
 	void Oni_Model_setPosition(Oni_ModelPtr obj, double x, double y, double z);
 	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z);
 	
+	void Oni_Model_resetOrientation(Oni_ModelPtr obj);
 	void Oni_Model_pitch(Oni_ModelPtr obj, double radians);
 	void Oni_Model_yaw(Oni_ModelPtr obj, double radians);
 	void Oni_Model_roll(Oni_ModelPtr obj, double radians);
