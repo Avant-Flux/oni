@@ -33,12 +33,12 @@ void Init_Oni_AnimationEasing(VALUE outer){
 	rb_define_singleton_method(module, "in_back", 			ease_in_back,			-1);
 	rb_define_singleton_method(module, "out_back", 			ease_out_back,			-1);
 	rb_define_singleton_method(module, "in_out_back", 		ease_in_out_back,		-1);
-	rb_define_singleton_method(module, "in_bounce", 		ease_in_bounce,			5);
-	rb_define_singleton_method(module, "out_bounce", 		ease_out_bounce,		5);
-	rb_define_singleton_method(module, "in_out_bounce", 	ease_in_out_bounce,		5);
+	// rb_define_singleton_method(module, "in_bounce", 		ease_in_bounce,			5);
+	// rb_define_singleton_method(module, "out_bounce", 		ease_out_bounce,		5);
+	// rb_define_singleton_method(module, "in_out_bounce", 	ease_in_out_bounce,		5);
 }
 
-static VALUE ease_in_quad(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_quad(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -48,7 +48,7 @@ static VALUE ease_in_quad(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VA
 	return rb_float_new(c*(t/=d)*t + b);
 }
 
-static VALUE ease_out_quad(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_out_quad(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -58,7 +58,7 @@ static VALUE ease_out_quad(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, V
 	return rb_float_new(-c *(t/=d)*(t-2) + b);
 }
 
-static VALUE ease_in_out_quad(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_out_quad(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -66,10 +66,10 @@ static VALUE ease_in_out_quad(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c
 	double d = NUM2DBL(val_d);
 	
 	if ((t/=d/2) < 1) return rb_float_new(c/2*t*t + b);
-	return rb_float_new(-c/2 * ((--t)*(t-2) - 1) + b);
+	return rb_float_new( -c/2 * ((--t)*(t-2) - 1) + b);
 }
 
-static VALUE ease_in_cubic(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_cubic(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -79,7 +79,7 @@ static VALUE ease_in_cubic(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, V
 	return rb_float_new(c*(t/=d)*t*t + b);
 }
 
-static VALUE ease_out_cubic(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_out_cubic(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -89,7 +89,7 @@ static VALUE ease_out_cubic(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, 
 	return rb_float_new(c*((t=t/d-1)*t*t + 1) + b);
 }
 
-static VALUE ease_in_out_cubic(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_out_cubic(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -100,7 +100,7 @@ static VALUE ease_in_out_cubic(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_
 	return rb_float_new(c/2*((t-=2)*t*t + 2) + b);
 }
 
-static VALUE ease_in_quart(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_quart(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -110,7 +110,7 @@ static VALUE ease_in_quart(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, V
 	return rb_float_new(c*(t/=d)*t*t*t + b);
 }
 
-static VALUE ease_out_quart(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_out_quart(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -120,7 +120,7 @@ static VALUE ease_out_quart(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, 
 	return rb_float_new(-c * ((t=t/d-1)*t*t*t - 1) + b);
 }
 
-static VALUE ease_in_out_quart(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_out_quart(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -131,7 +131,7 @@ static VALUE ease_in_out_quart(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_
 	return rb_float_new(-c/2 * ((t-=2)*t*t*t - 2) + b);
 }
 
-static VALUE ease_in_quint(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_quint(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -141,7 +141,7 @@ static VALUE ease_in_quint(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, V
 	return rb_float_new(c*(t/=d)*t*t*t*t + b);
 }
 
-static VALUE ease_out_quint(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_out_quint(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -151,7 +151,7 @@ static VALUE ease_out_quint(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, 
 	return rb_float_new(c*((t=t/d-1)*t*t*t*t + 1) + b);
 }
 
-static VALUE ease_in_out_quint(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_out_quint(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -162,7 +162,7 @@ static VALUE ease_in_out_quint(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_
 	return rb_float_new(c/2*((t-=2)*t*t*t*t + 2) + b);
 }
 
-static VALUE ease_in_sine(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_sine(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -172,7 +172,7 @@ static VALUE ease_in_sine(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VA
 	return rb_float_new(-c * cos(t/d * (M_PI/2)) + c + b);
 }
 
-static VALUE ease_out_sine(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_out_sine(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -182,7 +182,7 @@ static VALUE ease_out_sine(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, V
 	return rb_float_new(c * sin(t/d * (M_PI/2)) + b);
 }
 
-static VALUE ease_in_out_sine(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_out_sine(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -192,7 +192,7 @@ static VALUE ease_in_out_sine(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c
 	return rb_float_new(-c/2 * (cos(M_PI*t/d) - 1) + b);
 }
 
-static VALUE ease_in_expo(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_expo(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -202,7 +202,7 @@ static VALUE ease_in_expo(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VA
 	return (t==0) ? b : c * pow(2, 10 * (t/d - 1)) + b;
 }
 
-static VALUE ease_out_expo(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_out_expo(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -213,7 +213,7 @@ static VALUE ease_out_expo(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, V
 	return rb_float_new(output);
 }
 
-static VALUE ease_in_out_expo(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_out_expo(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -226,7 +226,7 @@ static VALUE ease_in_out_expo(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c
 		return rb_float_new(c/2 * (-pow(2, -10 * --t) + 2) + b);
 }
 
-static VALUE ease_in_circ(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_circ(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -236,7 +236,7 @@ static VALUE ease_in_circ(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VA
 	return rb_float_new(-c * (sqrt(1 - (t/=d)*t) - 1) + b);
 }
 
-static VALUE ease_out_circ(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_out_circ(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -246,7 +246,7 @@ static VALUE ease_out_circ(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, V
 	return rb_float_new(c * sqrt(1 - (t=t/d-1)*t) + b);
 }
 
-static VALUE ease_in_out_circ(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+static VALUE ease_in_out_circ(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
 	double x = NUM2DBL(val_x);
 	double t = NUM2DBL(val_t);
 	double b = NUM2DBL(val_b);
@@ -439,41 +439,41 @@ static VALUE ease_in_out_back(int argc, VALUE *argv, VALUE self) {
 	return rb_float_new(c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b);
 }
 
-static VALUE ease_in_bounce(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
-	double x = NUM2DBL(val_x);
-	double t = NUM2DBL(val_t);
-	double b = NUM2DBL(val_b);
-	double c = NUM2DBL(val_c);
-	double d = NUM2DBL(val_d);
+// static VALUE ease_in_bounce(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+// 	double x = NUM2DBL(val_x);
+// 	double t = NUM2DBL(val_t);
+// 	double b = NUM2DBL(val_b);
+// 	double c = NUM2DBL(val_c);
+// 	double d = NUM2DBL(val_d);
 	
-	return rb_float_new(c - ease_in_bounce (x, d-t, 0, c, d) + b);
-}
+// 	return rb_float_new(c - ease_in_bounce (x, d-t, 0, c, d) + b);
+// }
 
-static VALUE ease_out_bounce(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
-	double x = NUM2DBL(val_x);
-	double t = NUM2DBL(val_t);
-	double b = NUM2DBL(val_b);
-	double c = NUM2DBL(val_c);
-	double d = NUM2DBL(val_d);
+// static VALUE ease_out_bounce(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+// 	double x = NUM2DBL(val_x);
+// 	double t = NUM2DBL(val_t);
+// 	double b = NUM2DBL(val_b);
+// 	double c = NUM2DBL(val_c);
+// 	double d = NUM2DBL(val_d);
 	
-	if ((t/=d) < (1/2.75)) {
-		return rb_float_new(c*(7.5625*t*t) + b);
-	} else if (t < (2/2.75)) {
-		return rb_float_new(c*(7.5625*(t-=(1.5/2.75))*t + .75) + b);
-	} else if (t < (2.5/2.75)) {
-		return rb_float_new(c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b);
-	} else {
-		return rb_float_new(c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b);
-	}
-}
+// 	if ((t/=d) < (1/2.75)) {
+// 		return rb_float_new(c*(7.5625*t*t) + b);
+// 	} else if (t < (2/2.75)) {
+// 		return rb_float_new(c*(7.5625*(t-=(1.5/2.75))*t + .75) + b);
+// 	} else if (t < (2.5/2.75)) {
+// 		return rb_float_new(c*(7.5625*(t-=(2.25/2.75))*t + .9375) + b);
+// 	} else {
+// 		return rb_float_new(c*(7.5625*(t-=(2.625/2.75))*t + .984375) + b);
+// 	}
+// }
 
-static VALUE ease_in_out_bounce(VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
-	double x = NUM2DBL(val_x);
-	double t = NUM2DBL(val_t);
-	double b = NUM2DBL(val_b);
-	double c = NUM2DBL(val_c);
-	double d = NUM2DBL(val_d);
+// static VALUE ease_in_out_bounce(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
+// 	double x = NUM2DBL(val_x);
+// 	double t = NUM2DBL(val_t);
+// 	double b = NUM2DBL(val_b);
+// 	double c = NUM2DBL(val_c);
+// 	double d = NUM2DBL(val_d);
 	
-	if (t < d/2) return rb_float_new(ease_in_bounce (x, t*2, 0, c, d) * .5 + b);
-	return rb_float_new(ease_out_bounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b);
-}
+// 	if (t < d/2) return rb_float_new(ease_in_bounce (x, t*2, 0, c, d) * .5 + b);
+// 	return rb_float_new(ease_out_bounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b);
+// }
