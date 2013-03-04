@@ -37,6 +37,30 @@ extern "C" {
 		light->update(dt);
 	}
 	
+	int Oni_Light_getVisible(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		if(light->getVisible())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	void Oni_Light_setVisible(Oni_LightPtr obj, int visible){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		if(visible){
+			light->setVisible(true);
+		}
+		else{
+			light->setVisible(false);
+		}
+	}
+	
 	void Oni_Light_setType(Oni_LightPtr obj, int light_type){
 		Oni::Light* light = (Oni::Light*)(obj);
 		

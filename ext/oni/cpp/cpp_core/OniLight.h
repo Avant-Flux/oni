@@ -91,6 +91,7 @@ namespace Oni
 
 		// "invisible" lights do not affect the scene
 		void setVisible(bool visible){mLight->setVisible(visible);};
+		bool getVisible(){return mLight->getVisible();};
 		
 		/** Overridden from MovableObject */
 		Ogre::Real getBoundingRadius(void) const { return mLight->getBoundingRadius(); /* not visible */ }

@@ -20,6 +20,9 @@ extern "C" {
 	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2, char* name);
 	void Oni_Light_update(Oni_LightPtr obj, double dt);
 	
+	int Oni_Light_getVisible(Oni_LightPtr obj);
+	void Oni_Light_setVisible(Oni_LightPtr obj, int visible);
+	
 	void Oni_Light_setType(Oni_LightPtr obj, int light_type);
 	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z);
 	

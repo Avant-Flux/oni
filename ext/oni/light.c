@@ -7,6 +7,9 @@ void Init_Oni_Light(VALUE outer){
 	rb_define_method(klass, "initialize", initialize, 2);
 	rb_define_method(klass, "update", update, 1);
 	
+	rb_define_method(klass, "visible", getVisible, 0);
+	rb_define_method(klass, "visible=", setVisible, 1);
+	
 	rb_define_method(klass, "type=", setType, 1);
 	rb_define_method(klass, "position=", setPosition, 1);
 	
@@ -42,6 +45,31 @@ static VALUE update(VALUE self, VALUE dt){
 	double double_dt = NUM2DBL(dt);
 	
 	Oni_Light_update(ptr_light, double_dt);
+	
+	return Qnil;
+}
+
+static VALUE getVisible(VALUE self)
+{
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	if(Oni_Light_getVisible(ptr_light))
+	{
+		return Qtrue;
+	}
+	else
+	{
+		return Qfalse;
+	}
+}
+
+static VALUE setVisible(VALUE self, VALUE visible)
+{
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	Oni_Light_setVisible(ptr_light, RTEST(visible));
 	
 	return Qnil;
 }

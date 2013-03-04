@@ -15,8 +15,7 @@ namespace Oni
 	void
 	Light::initialize(Ogre::SceneManager* sceneMgr, std::string& name)
 	{
-		// add a bright light above the scene
-		mLight = sceneMgr->createLight(); // Note: Can specify a name for the light
+		mLight = sceneMgr->createLight(name);
 	}
 
 	void
