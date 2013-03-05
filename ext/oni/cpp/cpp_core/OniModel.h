@@ -30,6 +30,7 @@ namespace Oni
 		
 		// Rotation
 		void resetOrientation();
+		void rotate(const Ogre::Quaternion &q, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
 		void pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
 		void yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
 		void roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);

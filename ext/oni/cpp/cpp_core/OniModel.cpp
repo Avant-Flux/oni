@@ -74,9 +74,16 @@ namespace Oni
 	}
 	
 	// Rotation
-	void Model::resetOrientation()
+	void
+	Model::resetOrientation()
 	{
 		mNode->resetOrientation();
+	}
+	
+	void
+	Model::rotate(const Ogre::Quaternion &q, Ogre::Node::TransformSpace relativeTo)
+	{
+		mNode->rotate(q, relativeTo);
 	}
 	
 	void

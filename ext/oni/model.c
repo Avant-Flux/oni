@@ -173,7 +173,7 @@ static VALUE setRotation(VALUE self, VALUE radians){
 	return Qnil;
 }
 
-static VALUE setRotation3D(VALUE self, VALUE euler_rotation){
+static VALUE setRotation3D(VALUE self, VALUE quat){
 	// Convenience method
 	// Only for snapping to a given orientation
 	// Do not attempt to use with any sort of interpolation
@@ -182,19 +182,19 @@ static VALUE setRotation3D(VALUE self, VALUE euler_rotation){
 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
 	
 	// TODO: Take single argument of one array - interpreted as a vector
-	// RARRAY(euler_rotation)->ptr[0];
-	VALUE x = rb_ary_entry(euler_rotation, 0);
-	VALUE y = rb_ary_entry(euler_rotation, 1);
-	VALUE z = rb_ary_entry(euler_rotation, 2);
+	// RARRAY(quat)->ptr[0];
+	VALUE w = rb_ary_entry(quat, 0);
+	VALUE x = rb_ary_entry(quat, 1);
+	VALUE y = rb_ary_entry(quat, 2);
+	VALUE z = rb_ary_entry(quat, 3);
 	
+	double dbl_w = NUM2DBL(w);
 	double dbl_x = NUM2DBL(x);
 	double dbl_y = NUM2DBL(y);
 	double dbl_z = NUM2DBL(z);
 	
 	Oni_Model_resetOrientation(ptr_model);
-	Oni_Model_pitch(ptr_model, dbl_x);
-	Oni_Model_yaw(ptr_model, dbl_y);
-	Oni_Model_roll(ptr_model, dbl_z);
+	Oni_Model_rotate(ptr_model, dbl_w, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
 }

@@ -97,6 +97,14 @@ extern "C" {
 		model->resetOrientation();
 	}
 	
+	void Oni_Model_rotate(Oni_ModelPtr obj, double w, double x, double y, double z)
+	{
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		Ogre::Quaternion quat = Ogre::Quaternion(w,x,y,z);
+		model->rotate(quat);
+	}
+	
 	void Oni_Model_pitch(Oni_ModelPtr obj, double radians){
 		Oni::Model* model = (Oni::Model*)(obj);
 		
