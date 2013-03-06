@@ -22,6 +22,11 @@ namespace Oni
 		bool getVisible();
 		void setVisible(bool visible);
 		
+		// Bounding Box
+		Ogre::Real getBoundingBoxWidth();
+		Ogre::Real getBoundingBoxDepth();
+		Ogre::Real getBoundingBoxHeight();
+		
 		// Position
 		void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z);
 		

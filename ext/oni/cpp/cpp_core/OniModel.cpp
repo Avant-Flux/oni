@@ -50,7 +50,32 @@ namespace Oni
 	{
 		mEntity->setVisible(visible);
 	}
-
+	
+	// Bounding Box
+	Ogre::Real Model::getBoundingBoxWidth()
+	{
+		Ogre::Vector3 max = mEntity->getBoundingBox().getMaximum();
+		Ogre::Vector3 min = mEntity->getBoundingBox().getMinimum();
+		
+		return max.x - min.x;
+	}
+	
+	Ogre::Real Model::getBoundingBoxDepth()
+	{
+		Ogre::Vector3 max = mEntity->getBoundingBox().getMaximum();
+		Ogre::Vector3 min = mEntity->getBoundingBox().getMinimum();
+		
+		return max.z - min.z;
+	}
+	
+	Ogre::Real Model::getBoundingBoxHeight()
+	{
+		Ogre::Vector3 max = mEntity->getBoundingBox().getMaximum();
+		Ogre::Vector3 min = mEntity->getBoundingBox().getMinimum();
+		
+		return max.y - min.y;
+	}
+	
 	// Position
 	void
 	Model::setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z)

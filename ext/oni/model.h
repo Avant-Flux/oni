@@ -14,6 +14,10 @@ static VALUE update(VALUE self, VALUE dt);
 static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 
+static VALUE getBoundingBoxWidth(VALUE self);
+static VALUE getBoundingBoxDepth(VALUE self);
+static VALUE getBoundingBoxHeight(VALUE self);
+
 static VALUE setPosition(VALUE self, VALUE pos);
 static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z);
 

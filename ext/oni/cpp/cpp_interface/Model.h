@@ -23,6 +23,10 @@ extern "C" {
 	int Oni_Model_getVisible(Oni_ModelPtr obj);
 	void Oni_Model_setVisible(Oni_ModelPtr obj, int visible);
 	
+	double Oni_Model_getBoundingBoxWidth(Oni_ModelPtr obj);
+	double Oni_Model_getBoundingBoxDepth(Oni_ModelPtr obj);
+	double Oni_Model_getBoundingBoxHeight(Oni_ModelPtr obj);
+	
 	void Oni_Model_setPosition(Oni_ModelPtr obj, double x, double y, double z);
 	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z);
 	

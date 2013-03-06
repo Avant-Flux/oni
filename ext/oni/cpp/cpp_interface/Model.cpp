@@ -37,6 +37,24 @@ extern "C" {
 		
 		model->update(dt);
 	}
+	
+	double Oni_Model_getBoundingBoxWidth(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		return model->getBoundingBoxWidth();
+	}
+	
+	double Oni_Model_getBoundingBoxDepth(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		return model->getBoundingBoxDepth();
+	}
+	
+	double Oni_Model_getBoundingBoxHeight(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		return model->getBoundingBoxHeight();
+	}
 
 	int Oni_Model_getVisible(Oni_ModelPtr obj){
 		Oni::Model* model = (Oni::Model*)(obj);

@@ -10,6 +10,10 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "visible=", setVisible, 1);
 	rb_define_method(klass, "visible?", getVisible, 0);
 	
+	rb_define_method(klass, "bb_width", getBoundingBoxWidth, 0);
+	rb_define_method(klass, "bb_depth", getBoundingBoxDepth, 0);
+	rb_define_method(klass, "bb_height", getBoundingBoxHeight, 0);
+	
 	rb_define_method(klass, "position=", setPosition, 1);
 	rb_define_method(klass, "translate", translate, 3);
 	
@@ -83,6 +87,27 @@ static VALUE setVisible(VALUE self, VALUE visible)
 	Oni_Model_setVisible(ptr_model, RTEST(visible));
 	
 	return Qnil;
+}
+
+static VALUE getBoundingBoxWidth(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	return rb_float_new(Oni_Model_getBoundingBoxWidth(ptr_model));
+}
+
+static VALUE getBoundingBoxDepth(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	return rb_float_new(Oni_Model_getBoundingBoxDepth(ptr_model));
+}
+
+static VALUE getBoundingBoxHeight(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	return rb_float_new(Oni_Model_getBoundingBoxHeight(ptr_model));
 }
 
 static VALUE setPosition(VALUE self, VALUE pos)
