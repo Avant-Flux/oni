@@ -9,7 +9,7 @@ extern "C" {
 	}
 
 	void Oni_Animation_delete(Oni_AnimationPtr obj){
-		printf("======DELETING AGENT\n");
+		printf("======DELETING ANIMATION\n");
 		Oni::Animation* animation = (Oni::Animation*)(obj);
 		
 		delete animation;

@@ -9,7 +9,7 @@ extern "C" {
 	}
 
 	void Oni_Model_delete(Oni_ModelPtr obj){
-		printf("======DELETING AGENT\n");
+		printf("======DELETING MODEL\n");
 		Oni::Model* model = (Oni::Model*)(obj);
 		
 		delete model;
