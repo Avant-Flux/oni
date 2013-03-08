@@ -153,6 +153,12 @@ namespace Oni
 		// mNode->getOrientation().getYaw(); // get rotation around Y axis
 	}
 	
+	Ogre::Radian
+	Model::getHorizontalPlaneRotation()
+	{
+		return mNode->getOrientation().getYaw();
+	}
+	
 	// Scale
 	void
 	Model::scale(double x, double y, double z)

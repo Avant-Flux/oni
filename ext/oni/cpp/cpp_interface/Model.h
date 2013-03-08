@@ -41,6 +41,7 @@ extern "C" {
 	
 	// Set rotation in horizontal plane
 	void Oni_Model_setRotation(Oni_ModelPtr obj, double radians);
+	double Oni_Model_getRotation(Oni_ModelPtr obj);
 	
 	void Oni_Model_scale(Oni_ModelPtr obj, double x, double y, double z);
 	void Oni_Model_setScale(Oni_ModelPtr obj, double x, double y, double z);

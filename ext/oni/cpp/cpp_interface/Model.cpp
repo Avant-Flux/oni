@@ -157,4 +157,10 @@ extern "C" {
 		model->setHorizontalPlaneRotation(Ogre::Radian(radians));
 	}
 	
+	double Oni_Model_getRotation(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		return model->getHorizontalPlaneRotation().valueRadians();
+	}
+	
 }

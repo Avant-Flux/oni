@@ -27,6 +27,7 @@ static VALUE roll(VALUE self, VALUE radians);
 
 static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z);
 
+static VALUE getRotation(VALUE self);
 static VALUE setRotation(VALUE self, VALUE radians);
 static VALUE setRotation3D(VALUE self, VALUE quat);
 
