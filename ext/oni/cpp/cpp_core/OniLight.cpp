@@ -9,12 +9,14 @@ namespace Oni
 	
 	Light::~Light()
 	{
-		
+		mSceneMgr->destroyLight(mLight);
 	}
 	
 	void
 	Light::initialize(Ogre::SceneManager* sceneMgr, std::string& name)
 	{
+		mSceneMgr = sceneMgr;
+		
 		mLight = sceneMgr->createLight(name);
 	}
 

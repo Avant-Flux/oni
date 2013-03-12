@@ -149,6 +149,7 @@ namespace Oni
 		const Ogre::Vector4& getCustomParameter(Ogre::uint16 index) const {return mLight->getCustomParameter(index);};
 	
 	private:
+		Ogre::SceneManager* mSceneMgr;
 		Ogre::Light* mLight;
 	};
 }
