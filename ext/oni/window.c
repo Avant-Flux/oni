@@ -57,14 +57,22 @@ static VALUE show(VALUE self){
 		
 		VALUE ivar = rb_funcall(self, rb_intern("instance_variable_get"), 1, var_name);
 		
-		// VALUE rString_klass = rb_any_to_s(ivar);
-		// char* str_klass = StringValueCStr(rString_klass);
-		// printf("%s\n", str_klass);
+		VALUE rString_klass = rb_any_to_s(ivar);
+		char* str_klass = StringValueCStr(rString_klass);
+		printf("%d out of %d: %s\n", i+1, number_of_variables, str_klass);
 		
-		if(!(TYPE(ivar) == T_TRUE || TYPE(ivar) == T_FALSE ||  TYPE(ivar) == T_NIL)){
+		if(!
+			(
+				TYPE(ivar) == T_TRUE ||
+				TYPE(ivar) == T_FALSE ||
+				TYPE(ivar) == T_NIL || 
+				TYPE(ivar) == T_SYMBOL
+			)
+		){
 			rb_gc_force_recycle(ivar);
 		}
 	}
+	printf("DONE MARKING FOR GC\n");
 	
 	// printf("START GC\n");
 	// Force GC
