@@ -170,6 +170,7 @@ static VALUE getName(VALUE self){
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
 	// TODO: Check if memory needs to be freed
+	// TODO: Check C const lifespan. Will this still work when properly defined as const?
 	char* char_name = Oni_Animation_Track_getAnimationName(ptr_animation_track);
 	
 	VALUE name = rb_str_new2(char_name);
