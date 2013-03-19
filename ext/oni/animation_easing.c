@@ -199,7 +199,7 @@ static VALUE ease_in_expo(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VA
 	double c = NUM2DBL(val_c);
 	double d = NUM2DBL(val_d);
 	
-	return (t==0) ? b : c * pow(2, 10 * (t/d - 1)) + b;
+	return rb_float_new((t==0) ? b : c * pow(2, 10 * (t/d - 1)) + b);
 }
 
 static VALUE ease_out_expo(VALUE klass, VALUE val_x, VALUE val_t, VALUE val_b, VALUE val_c, VALUE val_d) {
