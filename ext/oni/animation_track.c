@@ -83,23 +83,23 @@ static VALUE disable(VALUE self){
 }
 
 
-static VALUE fadeIn(VALUE self, VALUE time, VALUE block){
+static VALUE fadeIn(VALUE self, VALUE t, VALUE block){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	// fade(time) {|influence, dt|}
-	// fade(time, &block)
+	// fade(t) {|influence, dt|}
+	// fade(t, &block)
 	
 	
 	return Qnil;
 }
 
-static VALUE fadeOut(VALUE self, VALUE time, VALUE block){
+static VALUE fadeOut(VALUE self, VALUE t, VALUE block){
 	Oni_Animation_TrackPtr ptr_animation_track;
 	Data_Get_Struct(self, Oni_Animation_TrackPtr, ptr_animation_track);
 	
-	// fade(time) {|influence, dt|}
-	// fade(time, &block)
+	// fade(t) {|influence, dt|}
+	// fade(t, &block)
 	
 	
 	return Qnil;
