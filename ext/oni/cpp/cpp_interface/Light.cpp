@@ -98,11 +98,15 @@ extern "C" {
 		light->setPosition(x,y,z);
 	}
 	
-	double* Oni_Light_getPosition(Oni_LightPtr obj){
+	void Oni_Light_getPosition(Oni_LightPtr obj, double* position){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
-		Ogre::Vector3 vec_light = light->getPosition();
-		return NULL;
+		Ogre::Vector3 vec_position = light->getPosition();
+		
+		// Assume array is already allocated
+		position[0] = vec_position.x;
+		position[1] = vec_position.y;
+		position[2] = vec_position.z;
 	}
 	
 	void Oni_Light_setDirection(Oni_LightPtr obj, double x, double y, double z){
@@ -111,15 +115,15 @@ extern "C" {
 		light->setDirection(x,y,z);
 	}
 	
-	double* Oni_Light_getDirection(Oni_LightPtr obj){
+	void Oni_Light_getDirection(Oni_LightPtr obj, double* direction){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
 		Ogre::Vector3 vec_direction = light->getDirection();
 		
-		// Array will be stack allocated, so calling functions after this one will clobber data
-		double dbl_direction [3] = {vec_direction.x, vec_direction.y, vec_direction.z};
-		
-		return dbl_direction;
+		// Assume array is already allocated
+		direction[0] = vec_direction.x;
+		direction[1] = vec_direction.y;
+		direction[2] = vec_direction.z;
 	}
 	
 	void Oni_Light_setDiffuseColor(Oni_LightPtr obj, double r, double g, double b){

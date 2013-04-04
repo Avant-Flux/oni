@@ -27,10 +27,10 @@ extern "C" {
 	int Oni_Light_getType(Oni_LightPtr obj);
 	
 	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z);
-	double* Oni_Light_getPosition(Oni_LightPtr obj);
+	void Oni_Light_getPosition(Oni_LightPtr obj, double* position);
 	
 	void Oni_Light_setDirection(Oni_LightPtr obj, double x, double y, double z);
-	double* Oni_Light_getDirection(Oni_LightPtr obj);
+	void Oni_Light_getDirection(Oni_LightPtr ob, double* direction);
 	
 	void Oni_Light_setDiffuseColor(Oni_LightPtr obj, double r, double g, double b);
 	void Oni_Light_setSpecularColor(Oni_LightPtr obj, double r, double g, double b);

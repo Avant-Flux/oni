@@ -141,7 +141,8 @@ static VALUE getPosition(VALUE self){
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
 	
 	// Returns an array
-	double* dbl_position = Oni_Light_getPosition(ptr_light);
+	double dbl_position [3];
+	Oni_Light_getDirection(ptr_light, dbl_position);
 	
 	VALUE pos = rb_ary_new3(
 		3,
@@ -172,9 +173,10 @@ static VALUE getDirection(VALUE self){
 	
 	// Returns an array
 	// Pointer should be provided as an argument
-	double* dbl_direction = Oni_Light_getDirection(ptr_light);
+	double dbl_direction [3];
+	Oni_Light_getDirection(ptr_light, dbl_direction);
 	
-	VALUE pos = rb_ary_new3(
+	VALUE direction = rb_ary_new3(
 		3,
 		
 		rb_float_new(dbl_direction[0]),
@@ -182,7 +184,7 @@ static VALUE getDirection(VALUE self){
 		rb_float_new(dbl_direction[2])
 	);
 	
-	return pos;
+	return direction;
 }
 
 static VALUE setDiffuseColor(VALUE self, VALUE color){
