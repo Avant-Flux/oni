@@ -11,10 +11,32 @@ void Init_Oni_Light(VALUE outer){
 	rb_define_method(klass, "visible=", setVisible, 1);
 	
 	rb_define_method(klass, "type=", setType, 1);
+	rb_define_method(klass, "type", getType, 0);
+	
 	rb_define_method(klass, "position=", setPosition, 1);
+	rb_define_method(klass, "position", getPosition, 0);
+	
+	rb_define_method(klass, "direction=", setDirection, 1);
+	rb_define_method(klass, "direction", getDirection, 0);
 	
 	rb_define_method(klass, "diffuse=", setDiffuseColor, 1);
 	rb_define_method(klass, "specular=", setSpecularColor, 1);
+	
+	// [dbl_range, dbl_constant, dbl_linear, dbl_quadratic]
+	rb_define_method(klass, "attenuation=", setAttenuation, 1);
+	
+	rb_define_method(klass, "power_scale=", setPowerScale, 1);
+	
+	rb_define_method(klass, "shadow_far_distance=", setShadowFarDistance, 1);
+	rb_define_method(klass, "reset_shadow_far_distance", resetShadowFarDistance, 0);
+	rb_define_method(klass, "shadow_far_distance", getShadowFarDistance, 0);
+	rb_define_method(klass, "shadow_far_distance_squared", getShadowFarDistanceSquared, 0);
+		rb_define_alias(klass, "shadow_far_distance_sq", "shadow_far_distance_squared");
+	
+	rb_define_method(klass, "shadow_near_clip_distance=", setShadowNearClipDistance, 1);
+	rb_define_method(klass, "shadow_near_clip_distance", getShadowNearClipDistance, 0);
+	rb_define_method(klass, "shadow_far_clip_distance=", setShadowFarClipDistance, 1);
+	rb_define_method(klass, "shadow_far_clip_distance", getShadowFarClipDistance, 0);
 }
 
 static VALUE alloc(VALUE class){
@@ -225,14 +247,14 @@ static VALUE setSpecularColor(VALUE self, VALUE color){
 	return Qnil;
 }
 
-static VALUE setAttenuation(VALUE self, VALUE range, VALUE constant, VALUE linear, VALUE quadratic){
+static VALUE setAttenuation(VALUE self, VALUE attenuation){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
 	
-	double dbl_range = NUM2DBL(range);
-	double dbl_constant = NUM2DBL(constant);
-	double dbl_linear = NUM2DBL(linear);
-	double dbl_quadratic = NUM2DBL(quadratic);
+	double dbl_range = NUM2DBL(rb_ary_entry(attenuation, 0));
+	double dbl_constant = NUM2DBL(rb_ary_entry(attenuation, 1));
+	double dbl_linear = NUM2DBL(rb_ary_entry(attenuation, 2));
+	double dbl_quadratic = NUM2DBL(rb_ary_entry(attenuation, 3));
 	
 	Oni_Light_setAttenuation(ptr_light, dbl_range, dbl_constant, dbl_linear, dbl_quadratic);
 	

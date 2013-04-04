@@ -15,7 +15,7 @@ static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 
 static VALUE setType(VALUE self, VALUE light_type);
-	static VALUE getType(VALUE self);
+static VALUE getType(VALUE self);
 	
 static VALUE setPosition(VALUE self, VALUE pos);
 	// static VALUE setPosition(VALUE self, VALUE x, VALUE y, VALUE z);
@@ -27,7 +27,7 @@ static VALUE getDirection(VALUE self);
 static VALUE setDiffuseColor(VALUE self, VALUE color);
 static VALUE setSpecularColor(VALUE self, VALUE color);
 
-static VALUE setAttenuation(VALUE self, VALUE range, VALUE constant, VALUE linear, VALUE quadratic);
+static VALUE setAttenuation(VALUE self, VALUE attenuation);
 
 static VALUE setPowerScale(VALUE self, VALUE power);
 
