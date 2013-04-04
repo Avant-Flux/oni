@@ -75,10 +75,51 @@ extern "C" {
 		light->setType(type);
 	}
 	
+	int Oni_Light_getType(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		Ogre::Light::LightTypes type = light->getType();
+		
+		int light_type;
+		if(type == Ogre::Light::LT_POINT){
+			light_type = 0;
+		}else if(type == Ogre::Light::LT_DIRECTIONAL){
+			light_type = 1;
+		}else if(type == Ogre::Light::LT_SPOTLIGHT){
+			light_type = 2;
+		}
+		
+		return light_type;
+	}
+	
 	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
 		light->setPosition(x,y,z);
+	}
+	
+	double* Oni_Light_getPosition(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		Ogre::Vector3 vec_light = light->getPosition();
+		return NULL;
+	}
+	
+	void Oni_Light_setDirection(Oni_LightPtr obj, double x, double y, double z){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setDirection(x,y,z);
+	}
+	
+	double* Oni_Light_getDirection(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		Ogre::Vector3 vec_direction = light->getDirection();
+		
+		// Array will be stack allocated, so calling functions after this one will clobber data
+		double dbl_direction [3] = {vec_direction.x, vec_direction.y, vec_direction.z};
+		
+		return dbl_direction;
 	}
 	
 	void Oni_Light_setDiffuseColor(Oni_LightPtr obj, double r, double g, double b){
@@ -91,5 +132,63 @@ extern "C" {
 		Oni::Light* light = (Oni::Light*)(obj);
 		
 		light->setSpecularColour(r,g,b);
+	}
+	
+	void Oni_Light_setAttenuation(Oni_LightPtr obj, double range, double constant, double linear, double quadratic){
+		
+	}
+	
+	void Oni_Light_setPowerScale(Oni_LightPtr obj, double power){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setPowerScale(power);
+	}
+	
+	void Oni_Light_setShadowFarDistance(Oni_LightPtr obj, double distance){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setShadowFarDistance(distance);
+	}
+	
+	void Oni_Light_resetShadowFarDistance(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->resetShadowFarDistance();
+	}
+	
+	double Oni_Light_getShadowFarDistance(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		return light->getShadowFarDistance();
+	}
+	
+	double Oni_Light_getShadowFarDistanceSquared(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		return light->getShadowFarDistanceSquared();
+	}
+	
+	void Oni_Light_setShadowNearClipDistance(Oni_LightPtr obj, double nearClip){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setShadowNearClipDistance(nearClip);
+	}
+	
+	double Oni_Light_getShadowNearClipDistance(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		return light->getShadowNearClipDistance();
+	}
+	
+	void Oni_Light_setShadowFarClipDistance(Oni_LightPtr obj, double farClip){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setShadowFarClipDistance(farClip);
+	}
+	
+	double Oni_Light_getShadowFarClipDistance(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		return light->getShadowFarClipDistance();
 	}
 }

@@ -15,7 +15,28 @@ static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 
 static VALUE setType(VALUE self, VALUE light_type);
+	static VALUE getType(VALUE self);
+	
 static VALUE setPosition(VALUE self, VALUE pos);
+	// static VALUE setPosition(VALUE self, VALUE x, VALUE y, VALUE z);
+static VALUE getPosition(VALUE self);
+
+static VALUE setDirection(VALUE self, VALUE x, VALUE y, VALUE z);
+static VALUE getDirection(VALUE self);
 
 static VALUE setDiffuseColor(VALUE self, VALUE color);
 static VALUE setSpecularColor(VALUE self, VALUE color);
+
+static VALUE setAttenuation(VALUE self, VALUE range, VALUE constant, VALUE linear, VALUE quadratic);
+
+static VALUE setPowerScale(VALUE self, VALUE power);
+
+static VALUE setShadowFarDistance(VALUE self, VALUE distance);
+static VALUE resetShadowFarDistance(VALUE self);
+static VALUE getShadowFarDistance(VALUE self);
+static VALUE getShadowFarDistanceSquared(VALUE self);
+
+static VALUE setShadowNearClipDistance(VALUE self, VALUE nearClip);
+static VALUE getShadowNearClipDistance(VALUE self);
+static VALUE setShadowFarClipDistance(VALUE self, VALUE farClip);
+static VALUE getShadowFarClipDistance(VALUE self);

@@ -82,9 +82,9 @@ static VALUE setType(VALUE self, VALUE light_type){
 	ID directional = rb_intern("directional");
 	ID spotlight = rb_intern("spotlight");
 	
-	if(SYM2ID(light_type)){
+	// if(SYM2ID(light_type)){
 		
-	}
+	// }
 	
 	ID type = SYM2ID(light_type);
 	if(type == point){
@@ -97,6 +97,25 @@ static VALUE setType(VALUE self, VALUE light_type){
 	
 	return Qnil;
 }
+
+static VALUE getType(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	int int_type = Oni_Light_getType(ptr_light);
+	
+	VALUE sym;
+	if(int_type == 0){
+		sym = ID2SYM(rb_intern("point"));
+	}else if(int_type == 1){
+		sym = ID2SYM(rb_intern("directional"));
+	}else if(int_type == 2){
+		sym = ID2SYM(rb_intern("spotlight"));
+	}
+	
+	return sym;
+}
+
 
 static VALUE setPosition(VALUE self, VALUE pos){
 	Oni_LightPtr ptr_light;
@@ -115,6 +134,55 @@ static VALUE setPosition(VALUE self, VALUE pos){
 	Oni_Light_setPosition(ptr_light, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
+}
+
+static VALUE getPosition(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	// Returns an array
+	double* dbl_position = Oni_Light_getPosition(ptr_light);
+	
+	VALUE pos = rb_ary_new3(
+		3,
+		
+		rb_float_new(dbl_position[0]),
+		rb_float_new(dbl_position[1]),
+		rb_float_new(dbl_position[2])
+	);
+	
+	return pos;
+}
+
+static VALUE setDirection(VALUE self, VALUE x, VALUE y, VALUE z){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Light_setDirection(ptr_light, dbl_x, dbl_y, dbl_z);
+	return Qnil;
+}
+
+static VALUE getDirection(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	// Returns an array
+	// Pointer should be provided as an argument
+	double* dbl_direction = Oni_Light_getDirection(ptr_light);
+	
+	VALUE pos = rb_ary_new3(
+		3,
+		
+		rb_float_new(dbl_direction[0]),
+		rb_float_new(dbl_direction[1]),
+		rb_float_new(dbl_direction[2])
+	);
+	
+	return pos;
 }
 
 static VALUE setDiffuseColor(VALUE self, VALUE color){
@@ -153,4 +221,108 @@ static VALUE setSpecularColor(VALUE self, VALUE color){
 	Oni_Light_setSpecularColor(ptr_light, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
+}
+
+static VALUE setAttenuation(VALUE self, VALUE range, VALUE constant, VALUE linear, VALUE quadratic){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_range = NUM2DBL(range);
+	double dbl_constant = NUM2DBL(constant);
+	double dbl_linear = NUM2DBL(linear);
+	double dbl_quadratic = NUM2DBL(quadratic);
+	
+	Oni_Light_setAttenuation(ptr_light, dbl_range, dbl_constant, dbl_linear, dbl_quadratic);
+	
+	return Qnil;
+}
+
+static VALUE setPowerScale(VALUE self, VALUE power){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_power = NUM2DBL(power);
+	
+	Oni_Light_setPowerScale(ptr_light, dbl_power);
+	
+	return Qnil;
+}
+static VALUE setShadowFarDistance(VALUE self, VALUE distance){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_distance = NUM2DBL(distance);
+	
+	Oni_Light_setShadowFarDistance(ptr_light, dbl_distance);
+	
+	return Qnil;
+}
+
+static VALUE resetShadowFarDistance(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	Oni_Light_resetShadowFarDistance(ptr_light);
+	
+	return Qnil;
+}
+static VALUE getShadowFarDistance(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_farDistance = Oni_Light_getShadowFarDistance(ptr_light);
+	
+	VALUE farDistance = rb_float_new(dbl_farDistance);
+	
+	return farDistance;
+}
+static VALUE getShadowFarDistanceSquared(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_farDistance = Oni_Light_getShadowFarDistanceSquared(ptr_light);
+	
+	VALUE farDistance = rb_float_new(dbl_farDistance);
+	
+	return farDistance;
+}
+static VALUE setShadowNearClipDistance(VALUE self, VALUE nearClip){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_nearClip = NUM2DBL(nearClip);
+	
+	Oni_Light_setShadowNearClipDistance(ptr_light, dbl_nearClip);
+	
+	return Qnil;
+}
+static VALUE getShadowNearClipDistance(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_nearClipDistance = Oni_Light_getShadowNearClipDistance(ptr_light);
+	
+	VALUE nearClipDistance = rb_float_new(dbl_nearClipDistance);
+	
+	return nearClipDistance;
+}
+static VALUE setShadowFarClipDistance(VALUE self, VALUE farClip){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_farClip = NUM2DBL(farClip);
+	
+	Oni_Light_setShadowFarClipDistance(ptr_light, dbl_farClip);
+	
+	return Qnil;
+}
+static VALUE getShadowFarClipDistance(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_shadowFarClipDistance = Oni_Light_getShadowFarClipDistance(ptr_light);
+	
+	VALUE shadowFarClipDistance = rb_float_new(dbl_shadowFarClipDistance);
+	
+	return shadowFarClipDistance;
 }
