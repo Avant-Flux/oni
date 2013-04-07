@@ -38,26 +38,16 @@ EOS
 	
 	if ENABLE_C_EXTENSION
 		# C code
-		s.files      += Dir["{ext}/#{NAME}/*.{c,h,rb}"]
+		s.files      += Dir["{ext}/#{NAME}/*.{rb}"]
 		
-		# C++ code
-		s.files      += Dir["{ext}/#{NAME}/cpp/*.{txt}"]
-		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_core/*.{c,cpp,h}"]
-		s.files      += Dir["{ext}/#{NAME}/cpp/cpp_interface/*.{c,cpp,h}"]
-		
-		if defined? RUBY_PLATFORM and 
-		%w(-win32 win32- mswin mingw32).any? { |s| RUBY_PLATFORM.include? s } then
-			# WINDOWS ONLY
-			# TODO: REMOVE WHEN CMAKE DEPENDECY IS REMOVED
-			s.files      += Dir["{ext}/#{NAME}/cpp/lib/*.a"]
-			s.files      += Dir["{lib}/#{NAME}/*.so"]
-			s.files      += Dir["{lib}/*.dll"]
-		end
+		# WINDOWS ONLY
+		# TODO: REMOVE WHEN CMAKE DEPENDECY IS REMOVED
+		s.files      += Dir["{ext}/#{NAME}/cpp/lib/*.a"]
+		s.files      += Dir["{lib}/#{NAME}/*.so"]
+		s.files      += Dir["{lib}/*.dll"]
 
 		# Licensing
 		s.files      += Dir["legal/*.{txt}"]
-		
-		s.extensions = ["ext/#{NAME}/extconf.rb"]
 	else
 		
 	end
