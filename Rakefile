@@ -65,7 +65,7 @@ end
 
 task :test => c_library
 
-task :build_gem => c_library do
+task :package => c_library do
 	`gem build oni.gemspec`
 end
 
@@ -77,4 +77,8 @@ CLEAN.include('ext/**/*{.o,.log,.so}')
 CLOBBER.include('lib/**/*.so')
 
 desc "Run tests"
-task :default => [:test, :build_gem]
+task :default => [:test, :package]
+
+task :package_windows => :default do
+	`gem build oni_win_precompiled.gemspec`
+end
