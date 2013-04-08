@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 	d = Time.now
 	s.date        = "#{d.year}-#{"%02d" % d.month}-#{"%02d" % d.day}"
 	
-	s.platform    = Gem::Platform::RUBY
+	s.platform    = "x86-mingw32"
 	s.authors     = ["Raven"]
 	s.email       = 'AvantFlux.Raven@gmail.com'
 	s.homepage    = 'https://github.com/RavensKrag'
@@ -37,7 +37,7 @@ EOS
 	s.files = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
 	
 	if ENABLE_C_EXTENSION
-		# C code
+		# Ruby files
 		s.files      += Dir["{ext}/#{NAME}/*.{rb}"]
 		
 		# WINDOWS ONLY
