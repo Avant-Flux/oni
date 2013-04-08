@@ -79,6 +79,12 @@ CLOBBER.include('lib/**/*.so')
 desc "Run tests"
 task :default => [:test, :package]
 
-task :package_windows => :default do
-	`gem build oni_win_precompiled.gemspec`
+namespace :windows do
+	task :package => :default do
+		`gem build oni_win_precompiled.gemspec`		
+	end
+	
+	task :release => Rake::Task['windows:package'] do
+		
+	end
 end
