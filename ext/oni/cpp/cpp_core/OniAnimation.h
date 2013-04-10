@@ -17,7 +17,9 @@ namespace Oni
 		virtual ~Animation();
 		virtual void initialize(Oni::Model* model);
 		virtual void update(Ogre::Real deltaTime);
-				
+		
+		void shareSkeletonWith(Oni::Animation* animation, double scale=1.0f);
+		
 		Ogre::AnimationStateIterator getAnimationNames();
 		
 		Oni::AnimationTrack* getAnimationTrack(std::string name);
@@ -26,6 +28,8 @@ namespace Oni
 		std::string getBaseAnimation(){return "mBaseAnimID";};
 		void setTopAnimation(std::string id, bool reset = false);
 		std::string getTopAnimation(){return "mTopAnimID";};
+		
+		Oni::Model* getModel(){return mModel;}; // Necessary to allow exposure of the entity
 	
 	private:
 		Oni::Model* mModel;

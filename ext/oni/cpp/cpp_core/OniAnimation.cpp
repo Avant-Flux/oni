@@ -59,6 +59,31 @@ namespace Oni
 		// apply smooth transitioning between our animations
 		// fadeAnimations(deltaTime);
 	}
+	
+	// TODO: Add animations from another skeleton
+	// The following method also exists for Ogre::SkeletonInstance
+	// instances should be modified, not whole skeletons, so that different characters
+	// can have different animation sets
+	// void Ogre::Skeleton::addLinkedSkeletonAnimationSource(const Ogre::String &skelName, Ogre::Real scale = 1.0f)
+	
+	// TODO: Share skeleton instances among entities
+	// Useful for tying equipment sets together
+	// Should load the animations in from the linked skeleton as well
+	// 		Should that be done automatically at C++ level?
+	// shareSkeletonInstanceWith (Entity *entity)
+	void
+	Animation::shareSkeletonWith(Oni::Animation* animation, double scale)
+	{
+		Ogre::Entity* otherEntity = animation->getModel()->getEntity();
+		Ogre::Entity* entity = mModel->getEntity();
+		
+		// add linked animations
+		entity->getSkeleton()->addLinkedSkeletonAnimationSource(
+			otherEntity->getSkeleton()->getName(), scale
+		);
+		// share skeletons
+		entity->shareSkeletonInstanceWith(otherEntity);
+	}
 
 	Ogre::AnimationStateIterator
 	Animation::getAnimationNames()

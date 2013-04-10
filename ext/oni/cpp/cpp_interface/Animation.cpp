@@ -32,6 +32,14 @@ extern "C" {
 		
 		animation->update(dt);
 	}
+	
+	
+	void Oni_shareSkeletonWith(Oni_AnimationPtr obj, Oni_AnimationPtr obj2, double scale){
+		Oni::Animation* animation = (Oni::Animation*)(obj);
+		Oni::Animation* otherAnimation = (Oni::Animation*)(obj2);
+		
+		animation->shareSkeletonWith(otherAnimation, scale);
+	}
 
 
 	char** Oni_Animation_getAnimationNames(Oni_AnimationPtr obj){
