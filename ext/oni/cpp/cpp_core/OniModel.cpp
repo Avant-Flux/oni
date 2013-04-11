@@ -60,6 +60,12 @@ namespace Oni
 	void
 	Model::attachObjectToBone(std::string bone, Oni::Model* otherModel)
 	{
+		if(!mEntity->hasSkeleton())
+		{
+			// If this Model does not contain a skeleton, leave this method immediately.
+			return;
+		}
+		
 		if(otherModel->getEntity()->isParentTagPoint())
 		{
 			// Object is already attached to a bone.
@@ -80,11 +86,14 @@ namespace Oni
 	void
 	Model::detachObjectFromBone(Oni::Model* otherModel)
 	{
-		// Create SceneNode for Model to be attached to
+		if(!mEntity->hasSkeleton())
+		{
+			// If this Model does not contain a skeleton, leave this method immediately.
+			return;
+		}
 		
 		// attachObjectToBone (const String &boneName, MovableObject *pMovable, const Quaternion &offsetOrientation=Quaternion::IDENTITY, const Vector3 &offsetPosition=Vector3::ZERO)
 		mEntity->detachObjectFromBone(otherModel->getEntity());
-		
 		otherModel->attachToNewSceneNode();
 	}
 	
