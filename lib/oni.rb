@@ -181,9 +181,6 @@ module Oni
 			:kb_menu
 		]
 		
-		def setup
-		end
-		
 		def update(dt)
 		end
 		

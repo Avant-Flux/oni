@@ -20,7 +20,7 @@ public:
 					keyDownCallback down_callback, keyUpCallback up_callback);
     virtual ~GameApplication(void);
     
-    virtual bool setup();
+    virtual bool setup(Ogre::String& window_title);
     
 	void loadEnv();			// Load the buildings or ground plane, etc.
 	void setupEnv();		// Set up the lights, shadows, etc

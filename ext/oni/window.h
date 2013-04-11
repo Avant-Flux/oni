@@ -7,6 +7,7 @@
 void Init_Oni_Window(VALUE outer);
 
 static VALUE alloc(VALUE class);
+static VALUE initialize(VALUE self, VALUE window_title);
 
 static VALUE show(VALUE klass);
 

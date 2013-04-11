@@ -16,9 +16,9 @@ GameApplication::~GameApplication(void)
 }
 
 bool
-GameApplication::setup()
+GameApplication::setup(Ogre::String& window_title)
 {
-	if(!BaseApplication::setup())
+	if(!BaseApplication::setup(window_title))
 	{
 		return false;
 	}

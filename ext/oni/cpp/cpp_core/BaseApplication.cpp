@@ -46,7 +46,7 @@ BaseApplication::~BaseApplication(void)
 }
 
 //-------------------------------------------------------------------------------------
-bool BaseApplication::configure(void)
+bool BaseApplication::configure(Ogre::String& window_title)
 {
     // Show the configuration dialog and initialise the system
     // You can skip this and use root.restoreConfig() to load configuration
@@ -55,7 +55,7 @@ bool BaseApplication::configure(void)
     {
         // If returned true, user clicked OK so initialise
         // Here we choose to let the system create a default rendering window by passing 'true'
-        mWindow = mRoot->initialise(true, "TutorialApplication Render Window");
+        mWindow = mRoot->initialise(true, window_title);
 
         return true;
     }
@@ -173,7 +173,7 @@ void BaseApplication::go(void)
     destroyScene();
 }
 //-------------------------------------------------------------------------------------
-bool BaseApplication::setup(void)
+bool BaseApplication::setup(Ogre::String& window_title)
 {
 #ifdef _DEBUG
     mResourcesCfg = "resources_d.cfg";
@@ -187,7 +187,7 @@ bool BaseApplication::setup(void)
 
     setupResources();
 
-    bool carryOn = configure();
+    bool carryOn = configure(window_title);
     if (!carryOn) return false;
 
     chooseSceneManager();

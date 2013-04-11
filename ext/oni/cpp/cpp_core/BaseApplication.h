@@ -42,13 +42,13 @@ public:
     virtual ~BaseApplication(void);
 
     virtual void go(void);
-    virtual bool setup();
+    virtual bool setup(Ogre::String& window_title);
     
     Ogre::SceneManager* getSceneMgr(){return mSceneMgr;};
     Ogre::RenderWindow* getWindow(){return mWindow;};
 
 protected:
-    virtual bool configure(void);
+    virtual bool configure(Ogre::String& window_title);
     virtual void chooseSceneManager(void);
     virtual void createFrameListener(void);
     virtual void createScene(void) = 0; // Override me!

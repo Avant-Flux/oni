@@ -2,16 +2,9 @@
 
 extern "C" {
 	Ogre_WindowPtr Ogre_Window_new(updateCallback update_callback, 
-                                    keyDownCallback down_callback, keyUpCallback up_callback){
+                                    keyDownCallback down_callback, 
+                                    keyUpCallback up_callback){
         GameApplication* game = new GameApplication(update_callback, down_callback, up_callback);
-        std::cout << "START NEW WINDOW" << std::endl;
-        bool carryOn = game->setup();
-        
-        if(!carryOn)
-        {
-            delete game;
-            return NULL;
-        }
         
         return (Ogre_WindowPtr)game;
     }
@@ -19,6 +12,22 @@ extern "C" {
     void Ogre_Window_delete(Ogre_WindowPtr window){
         GameApplication* game = (GameApplication*)window;
         delete game;
+    }
+    
+    void Ogre_Window_initialize(Ogre_WindowPtr window, char* window_title){
+        GameApplication* game = (GameApplication*)window;
+        
+        std::cout << "START NEW WINDOW" << std::endl;
+        
+        std::string cpp_window_title(window_title);
+        bool carryOn = game->setup(cpp_window_title);
+        
+        if(!carryOn)
+        {
+            delete game;
+            std::cout << "Setup failed!" << std::endl; // Throw exception? Need to notify Ruby
+            return;
+        }
     }
     
     int Ogre_Window_run(Ogre_WindowPtr window){

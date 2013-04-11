@@ -4,12 +4,14 @@ void Init_Oni_Window(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Window", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
+	rb_define_method(klass, "initialize", initialize, 1);
 	
 	rb_define_method(klass, "show", show, 0);
 	// rb_define_method(klass, "update", update, 1);
 }
 
 static VALUE alloc(VALUE class){
+	// TODO: Remove all arguments to allocator and set values in initializer instead
 	/* VALUE class, void (*mark)(), void (*free)(), void *ptr */
 	Ogre_WindowPtr window = Ogre_Window_new(update, buttonDown, buttonUp);
 	
@@ -27,13 +29,21 @@ static VALUE alloc(VALUE class){
 	return data;
 }
 
+static VALUE initialize(VALUE self, VALUE window_title){
+	Ogre_WindowPtr ptr;
+	Data_Get_Struct(self, Ogre_WindowPtr, ptr);
+	
+	char* string_window_title = StringValueCStr(window_title);
+	Ogre_Window_initialize(ptr, string_window_title);
+	
+	return Qnil;
+}
+
 static VALUE show(VALUE self){
 	// Run the window
 	// OGRE_WINDOW ptr;
 	Ogre_WindowPtr ptr;
 	Data_Get_Struct(self, Ogre_WindowPtr, ptr);
-	
-	rb_funcall(self, rb_intern("setup"), 0);
 	
 	// Assumed that VALUE is some sort of typedef-ed pointer
 	update(1, (void*)self);

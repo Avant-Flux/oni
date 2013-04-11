@@ -6,7 +6,9 @@ require 'glu'
 require 'oni'
 
 class Window < Oni::Window
-	def setup
+	def initialize
+		super("Animation Benchmark")
+		
 		@camera = Oni::Camera.new(self, "main_camera", 0) # TODO: Make z_order=0 by default
 		@camera.fov = 110
 		@camera.position = [0,30,40]
