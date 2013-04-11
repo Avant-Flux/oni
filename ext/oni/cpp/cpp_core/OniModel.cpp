@@ -9,23 +9,39 @@ namespace Oni
 
 	Model::~Model()
 	{
-		mNode->detachObject(mEntity);
+		Ogre::Node* parent = mEntity->getParentNode();
+		bool isTagPoint = mEntity->isParentTagPoint();
+		
+		mEntity->detachFromParent();
 		mSceneMgr->destroyEntity(mEntity);
-		mSceneMgr->destroySceneNode(mNode);
+		
+		if(isTagPoint)
+		{
+			// If the current mesh is bound to a tag point, should alert Entity which controls the skeleton that the tag point must be freed
+			
+			// remember to delete tag point if mesh is bound to skeleton
+			// mEntity->getSkeleton()->freeTagPoint();
+		}
+		else
+		{
+			// Destroy parent node if it is a scene node
+			// may be poor reasoning.  might there be multiple Model objects per node?
+			// perhaps destroy parent if it is a scene node such that numChildren == 0 ?
+			mSceneMgr->destroySceneNode(static_cast<Ogre::SceneNode*>(parent));
+		}
 	}
 
 	void
 	Model::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
 	{
+		// TODO: Allow for a parent node
 		mSceneMgr = sceneMgr;
 		
-		mNode = sceneMgr->getRootSceneNode()->createChildSceneNode();
 		mEntity = sceneMgr->createEntity(name, filename);
-		mNode->attachObject(mEntity);
 		
-		mNode->setPosition(0,0,0); // Spawn all objects at the origin
+		this->attachToNewSceneNode();
 	}
-
+	
 	void
 	Model::update(Ogre::Real deltaTime)
 	{
@@ -36,6 +52,46 @@ namespace Oni
 	Model::getEntity()
 	{
 		return mEntity;
+	}
+	
+	// Attach to new parent node
+	
+	// Attach Moveable to skeleton tagpoint
+	void
+	Model::attachObjectToBone(std::string bone, Oni::Model* otherModel)
+	{
+		if(otherModel->getEntity()->isParentTagPoint())
+		{
+			// Object is already attached to a bone.
+			// Though, perhaps not the bone specified.
+			// Exit function.
+			return;
+		}
+		
+		// Discard old parent scene node, so TagPoint can be used instead
+		Ogre::Node* parent = otherModel->getEntity()->getParentNode();
+		otherModel->getEntity()->detachFromParent();
+		mSceneMgr->destroySceneNode(static_cast<Ogre::SceneNode*>(parent));
+		
+		// attachObjectToBone (const String &boneName, MovableObject *pMovable, const Quaternion &offsetOrientation=Quaternion::IDENTITY, const Vector3 &offsetPosition=Vector3::ZERO)
+		mEntity->attachObjectToBone(bone, otherModel->getEntity());
+	}
+	
+	void
+	Model::detachObjectFromBone(Oni::Model* otherModel)
+	{
+		// Create SceneNode for Model to be attached to
+		
+		// attachObjectToBone (const String &boneName, MovableObject *pMovable, const Quaternion &offsetOrientation=Quaternion::IDENTITY, const Vector3 &offsetPosition=Vector3::ZERO)
+		mEntity->detachObjectFromBone(otherModel->getEntity());
+		
+		otherModel->attachToNewSceneNode();
+	}
+	
+	bool
+	Model::isAttachedToBone()
+	{
+		return mEntity->isParentTagPoint();
 	}
 	
 	// Visibility
@@ -80,7 +136,7 @@ namespace Oni
 	void
 	Model::setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z)
 	{
-		mNode->setPosition(x,y,z);
+		mEntity->getParentNode()->setPosition(x,y,z);
 	}
 	
 	
@@ -88,45 +144,45 @@ namespace Oni
 	Model::translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
 	{
 		// Moves the node along the Cartesian axes. 
-		mNode->translate(x,y,z, relativeTo);
+		mEntity->getParentNode()->translate(x,y,z, relativeTo);
 	}
 	
 	void
 	Model::translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
 	{
 		// Moves the node along arbitrary axes. 
-		mNode->translate(axes, x,y,z, relativeTo);
+		mEntity->getParentNode()->translate(axes, x,y,z, relativeTo);
 	}
 	
 	// Rotation
 	void
 	Model::resetOrientation()
 	{
-		mNode->resetOrientation();
+		mEntity->getParentNode()->resetOrientation();
 	}
 	
 	void
 	Model::rotate(const Ogre::Quaternion &q, Ogre::Node::TransformSpace relativeTo)
 	{
-		mNode->rotate(q, relativeTo);
+		mEntity->getParentNode()->rotate(q, relativeTo);
 	}
 	
 	void
 	Model::pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
 	{
-		mNode->pitch(angle, relativeTo);
+		mEntity->getParentNode()->pitch(angle, relativeTo);
 	}
 
 	void
 	Model::yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
 	{
-		mNode->yaw(angle, relativeTo);
+		mEntity->getParentNode()->yaw(angle, relativeTo);
 	}
 
 	void
 	Model::roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo)
 	{
-		mNode->roll(angle, relativeTo);
+		mEntity->getParentNode()->roll(angle, relativeTo);
 	}
 	
 	void
@@ -134,29 +190,29 @@ namespace Oni
 	{
 		Ogre::Vector3 vec = Ogre::Vector3(x,y,z);
 		
-		// Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
-		mNode->resetOrientation();
+		// Ogre::Vector3 src = mEntity->getParentNode()->getOrientation() * Ogre::Vector3::UNIT_X;
+		mEntity->getParentNode()->resetOrientation();
 		
 		Ogre::Quaternion quat = Ogre::Vector3::UNIT_X.getRotationTo(vec); 
-		mNode->setOrientation(quat);
+		mEntity->getParentNode()->setOrientation(quat);
 	}
 
 	void
 	Model::setHorizontalPlaneRotation(const Ogre::Radian &angle)
 	{
 		// Reset orientation, and set again
-		mNode->resetOrientation();
+		mEntity->getParentNode()->resetOrientation();
 		
 		Ogre::Quaternion quat = Ogre::Quaternion(angle, Ogre::Vector3::UNIT_Y);
-		mNode->setOrientation(quat);
+		mEntity->getParentNode()->setOrientation(quat);
 		
-		// mNode->getOrientation().getYaw(); // get rotation around Y axis
+		// mEntity->getParentNode()->getOrientation().getYaw(); // get rotation around Y axis
 	}
 	
 	Ogre::Radian
 	Model::getHorizontalPlaneRotation()
 	{
-		return mNode->getOrientation().getYaw();
+		return mEntity->getParentNode()->getOrientation().getYaw();
 	}
 	
 	// Scale
@@ -164,13 +220,26 @@ namespace Oni
 	Model::scale(double x, double y, double z)
 	{
 		// Adjust scale
-		mNode->scale(x,y,z);
+		mEntity->getParentNode()->scale(x,y,z);
 	}
 	
 	void
 	Model::setScale(double x, double y, double z)
 	{
 		// Set scale to specified value
-		mNode->setScale(x,y,z);
+		mEntity->getParentNode()->setScale(x,y,z);
+	}
+	
+	
+	// ===== Private
+	Ogre::SceneNode*
+	Model::attachToNewSceneNode(){
+		Ogre::SceneNode* node;
+		node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+		
+		node->attachObject(mEntity);
+		node->setPosition(0,0,0); // Spawn all objects at the origin
+		
+		return node;
 	}
 }

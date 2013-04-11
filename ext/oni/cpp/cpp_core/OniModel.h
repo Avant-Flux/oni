@@ -18,6 +18,10 @@ namespace Oni
 		// May want to use Friend classes instead
 		Ogre::Entity* getEntity();
 		
+		void attachObjectToBone(std::string bone, Oni::Model* otherModel);
+		void detachObjectFromBone(Oni::Model* otherModel);
+		bool isAttachedToBone();
+		
 		// Visibility
 		bool getVisible();
 		void setVisible(bool visible);
@@ -51,12 +55,14 @@ namespace Oni
 		// Scale
 		void scale(double x, double y, double z);
 		void setScale(double x, double y, double z);
-
+	
 	protected:
 		Ogre::SceneManager* mSceneMgr; // TODO: Consider optimizing using flyweight pattern
 		
-		Ogre::SceneNode* mNode;
 		Ogre::Entity* mEntity;
+	
+	private:
+		Ogre::SceneNode* attachToNewSceneNode();
 	};
 }
 

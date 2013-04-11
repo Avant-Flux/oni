@@ -11,6 +11,10 @@ static VALUE alloc(VALUE class);
 static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE filename);
 static VALUE update(VALUE self, VALUE dt);
 
+static VALUE attachObjectToBone(VALUE self, VALUE name, VALUE obj);
+static VALUE detachObjectFromBone(VALUE self, VALUE obj);
+static VALUE isAttachedToBone(VALUE self);
+
 static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 

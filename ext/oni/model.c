@@ -7,6 +7,11 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "initialize", initialize, 3);
 	rb_define_method(klass, "update", update, 1);
 	
+	// rb_define_method(klass, "bone", getBone, 1);
+	rb_define_method(klass, "attach_object_to_bone", attachObjectToBone, 2);
+	rb_define_method(klass, "detach_object_from_bone", detachObjectFromBone, 1);
+	rb_define_method(klass, "attached_to_bone?", isAttachedToBone, 0);
+	
 	rb_define_method(klass, "visible=", setVisible, 1);
 	rb_define_method(klass, "visible?", getVisible, 0);
 	
@@ -63,6 +68,54 @@ static VALUE update(VALUE self, VALUE dt){
 	Oni_Model_update(ptr_model, double_dt);
 	
 	return Qnil;
+}
+
+// static VALUE getBone(VALUE self, VALUE name){
+// 	Oni_ModelPtr ptr_model;
+// 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	
+	
+// 	return 
+// }
+
+static VALUE attachObjectToBone(VALUE self, VALUE name, VALUE obj){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	Oni_ModelPtr ptr_otherModel;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_otherModel);
+	
+	char* string_name = StringValueCStr(name);
+	Oni_Model_attachObjectToBone(ptr_model, string_name, ptr_otherModel);
+	
+	return Qnil;
+}
+
+static VALUE detachObjectFromBone(VALUE self, VALUE obj){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	Oni_ModelPtr ptr_otherModel;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_otherModel);
+	
+	Oni_Model_detachObjectFromBone(ptr_model, ptr_otherModel);
+	
+	return Qnil;
+}
+
+static VALUE isAttachedToBone(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	if(Oni_Model_isAttachedToBone(ptr_model))
+	{
+		return Qtrue;
+	}
+	else
+	{
+		return Qfalse;
+	}
 }
 
 static VALUE getVisible(VALUE self)

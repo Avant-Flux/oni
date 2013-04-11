@@ -38,6 +38,34 @@ extern "C" {
 		model->update(dt);
 	}
 	
+	void Oni_Model_attachObjectToBone(Oni_ModelPtr obj, char* name, Oni_ModelPtr obj2){
+		Oni::Model* model = (Oni::Model*)(obj);
+		Oni::Model* otherModel = (Oni::Model*)(obj2);
+		
+		std::string cpp_name(name);
+		model->attachObjectToBone(cpp_name, otherModel);
+	}
+	
+	void Oni_Model_detachObjectFromBone(Oni_ModelPtr obj, Oni_ModelPtr obj2){
+		Oni::Model* model = (Oni::Model*)(obj);
+		Oni::Model* otherModel = (Oni::Model*)(obj2);
+		
+		model->detachObjectFromBone(otherModel);
+	}
+	
+	int Oni_Model_isAttachedToBone(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		if(model->isAttachedToBone())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
 	double Oni_Model_getBoundingBoxWidth(Oni_ModelPtr obj){
 		Oni::Model* model = (Oni::Model*)(obj);
 		
