@@ -8,7 +8,7 @@ void Init_Oni_Animation(VALUE outer){
 	rb_define_method(klass, "initialize", initialize, 1);
 	rb_define_method(klass, "update", update, 1);
 	
-	rb_define_method(klass, "share_skeleton_with", shareSkeletonWith, 1);
+	rb_define_method(klass, "share_skeleton_with", shareSkeletonWith, -1);
 	
 	rb_define_method(klass, "animations", animation_names, 0);
 	
@@ -56,14 +56,28 @@ static VALUE update(VALUE self, VALUE dt){
 	return Qnil;
 }
 
-static VALUE shareSkeletonWith(VALUE self, VALUE other, VALUE scale){
+static VALUE shareSkeletonWith(int argc, VALUE* argv, VALUE self){
+	VALUE other = argv[0];
+	VALUE scale = argv[1];
+	
 	Oni_AnimationPtr ptr_animation;
 	Data_Get_Struct(self, Oni_AnimationPtr, ptr_animation);
 	
 	Oni_AnimationPtr ptr_otherAnimation;
 	Data_Get_Struct(other, Oni_AnimationPtr, ptr_otherAnimation);
 	
-	double dbl_scale = NUM2DBL(scale);
+	double dbl_scale;
+	if(argc == 2)
+	{
+		// share_skeleton_with(other, scale)
+		dbl_scale = NUM2DBL(scale);
+	}
+	else if(argc == 1)
+	{
+		// share_skeleton_with(other)
+		dbl_scale = 1.0;
+	}
+	
 	Oni_shareSkeletonWith(ptr_animation, ptr_otherAnimation, dbl_scale);
 	
 	return Qnil;

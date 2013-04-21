@@ -13,7 +13,8 @@ static VALUE alloc(VALUE class);
 static VALUE initialize(VALUE self, VALUE model);
 static VALUE update(VALUE self, VALUE dt);
 
-static VALUE shareSkeletonWith(VALUE self, VALUE other, VALUE scale);
+static VALUE shareSkeletonWith(int argc, VALUE* argv, VALUE self);
+	// static VALUE shareSkeletonWith(VALUE self, VALUE other, VALUE scale = 1.0);
 
 static VALUE animation_names(VALUE self);
 
