@@ -13,10 +13,10 @@ namespace Oni
 		bool isTagPoint = mEntity->isParentTagPoint();
 		
 		mEntity->detachFromParent();
-		mSceneMgr->destroyEntity(mEntity);
 		
 		if(isTagPoint)
 		{
+			// std::cout << "TAG POINT" << std::endl;
 			// If the current mesh is bound to a tag point, should alert Entity which controls the skeleton that the tag point must be freed
 			
 			// remember to delete tag point if mesh is bound to skeleton
@@ -24,11 +24,31 @@ namespace Oni
 		}
 		else
 		{
+			// std::cout << "NOT tag point" << std::endl;
 			// Destroy parent node if it is a scene node
 			// may be poor reasoning.  might there be multiple Model objects per node?
 			// perhaps destroy parent if it is a scene node such that numChildren == 0 ?
 			mSceneMgr->destroySceneNode(static_cast<Ogre::SceneNode*>(parent));
 		}
+		
+		// Detach all objects attached to this one, so they don't freak out when this is gone.
+		// Iterate over all objects attached to bones
+			// detach them from bones, and re-attach them to scene nodes
+			// make those scene nodes direct children of the root node
+		Ogre::Entity::ChildObjectListIterator iter = mEntity->getAttachedObjectIterator();
+		while(iter.hasMoreElements())
+		{
+			Ogre::MovableObject* child = iter.getNext();
+			
+			mEntity->detachObjectFromBone(child);
+			
+			Ogre::SceneNode* node;
+			node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+			node->attachObject(child);
+		}
+		
+		// std::cout << "destroy entity" << std::endl;
+		mSceneMgr->destroyEntity(mEntity);
 	}
 
 	void
