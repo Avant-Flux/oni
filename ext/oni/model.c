@@ -27,9 +27,10 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "roll", roll, 1);
 	
 	// Note: should probably flip this to rotation_2d and rotation
+	rb_define_method(klass, "reset_orientation", resetOrientation, 0);
 	rb_define_method(klass, "rotation", getRotation, 0);
 	rb_define_method(klass, "rotation=", setRotation, 1);
-	rb_define_method(klass, "rotation_3D=", setRotation3D, 1);
+	rb_define_method(klass, "rotate_3D", rotate3D, 1);
 	
 	rb_define_method(klass, "scale", scale, 3);
 	rb_define_method(klass, "scale=", setScale, 1);
@@ -241,6 +242,10 @@ static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z){
 	return Qnil;
 }
 
+static VALUE resetOrientation(VALUE self){
+	
+}
+
 static VALUE getRotation(VALUE self){
 	Oni_ModelPtr ptr_model;
 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
@@ -263,7 +268,7 @@ static VALUE setRotation(VALUE self, VALUE radians){
 	return Qnil;
 }
 
-static VALUE setRotation3D(VALUE self, VALUE quat){
+static VALUE rotate3D(VALUE self, VALUE quat){
 	// Convenience method
 	// Only for snapping to a given orientation
 	// Do not attempt to use with any sort of interpolation
@@ -283,7 +288,6 @@ static VALUE setRotation3D(VALUE self, VALUE quat){
 	double dbl_y = NUM2DBL(y);
 	double dbl_z = NUM2DBL(z);
 	
-	Oni_Model_resetOrientation(ptr_model);
 	Oni_Model_rotate(ptr_model, dbl_w, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
