@@ -45,7 +45,7 @@ namespace Oni
 	void
 	Animation::update(Ogre::Real deltaTime)
 	{
-		// increment the current base and top animation times
+		// NOTE: Iterates over all animation tracks, but the track will only update if animation is active.
 		for(
 			std::map<std::string, Oni::AnimationTrack*>::iterator iter = mAnims.begin();
 			iter != mAnims.end();
