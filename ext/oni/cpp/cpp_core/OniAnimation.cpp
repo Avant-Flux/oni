@@ -110,23 +110,4 @@ namespace Oni
 		// Does exist
 		return track_iter->second;
 	}
-
-	void 
-	Animation::setBaseAnimation(std::string id, bool reset)
-	{
-		// Fade out old animation
-		// no longer relevant, as there are no longer strict animation slots
-		
-		// Fade in new animation
-		mAnims[id]->setEnabled(true);
-		mAnims[id]->setWeight(0);
-		mAnims[id]->setFadeOutTime(0);
-		mAnims[id]->setFadeInTime(3000);
-	}
-		
-	void
-	Animation::setTopAnimation(std::string id, bool reset)
-	{
-		
-	}
 }

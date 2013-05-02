@@ -24,11 +24,6 @@ namespace Oni
 		
 		Oni::AnimationTrack* getAnimationTrack(std::string name);
 		
-		void setBaseAnimation(std::string id, bool reset = false);
-		std::string getBaseAnimation(){return "mBaseAnimID";};
-		void setTopAnimation(std::string id, bool reset = false);
-		std::string getTopAnimation(){return "mTopAnimID";};
-		
 		Oni::Model* getModel(){return mModel;}; // Necessary to allow exposure of the entity
 	
 	private:
