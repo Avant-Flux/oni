@@ -2,24 +2,24 @@
 
 namespace Oni
 {
-	Bone::Bone()
+	AnimationBone::AnimationBone()
 	{
 		
 	}
 
-	Bone::~Bone()
-	{
-		
-	}
-
-	void
-	Bone::initialize(Ogre::Bone* bone)
+	AnimationBone::~AnimationBone()
 	{
 		
 	}
 
 	void
-	Bone::update(Ogre::Real deltaTime)
+	AnimationBone::initialize(Ogre::Bone* bone)
+	{
+		
+	}
+
+	void
+	AnimationBone::update(Ogre::Real deltaTime)
 	{
 		
 	}

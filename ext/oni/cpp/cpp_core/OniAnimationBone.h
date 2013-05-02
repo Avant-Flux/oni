@@ -1,5 +1,5 @@
-#ifndef ONI_BONE_H
-#define ONI_BONE_H
+#ifndef ONI_ANIMATION_BONE_H
+#define ONI_ANIMATION_BONE_H
 
 #include "BaseApplication.h"
 
@@ -7,18 +7,24 @@
 
 namespace Oni
 {
-	class Bone
+	class AnimationBone
 	{
 	public:
-		Bone();
-		virtual ~Bone();
+		AnimationBone();
+		virtual ~AnimationBone();
 		virtual void initialize(Ogre::Bone* bone);
 		virtual void update(Ogre::Real deltaTime);
 		
+		// getOrientation();
+		// getPosition();
+		// pitch();
+		// yaw();
+		// roll();
+		
 	
 	private:
-		Oni::Bone* mBone;
+		Ogre::Bone* mBone;
 	};
 }
 
-#endif /* ONI_BONE_H */
+#endif /* ONI_ANIMATION_BONE_H */

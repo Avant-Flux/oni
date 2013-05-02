@@ -21,7 +21,8 @@ extern "C" {
 	void Oni_Animation_initialize(Oni_AnimationPtr obj, Oni_ModelPtr obj2);
 	void Oni_Animation_update(Oni_AnimationPtr obj, double dt);
 	
-	void Oni_shareSkeletonWith(Oni_AnimationPtr obj, Oni_AnimationPtr obj2, double scale);
+	void Oni_Animation_shareSkeletonWith(Oni_AnimationPtr obj, Oni_AnimationPtr obj2, double scale);
+	Oni_Animation_BonePtr Oni_Animation_getBone(Oni_AnimationPtr obj, char* name);
 	
 	char** Oni_Animation_getAnimationNames(Oni_AnimationPtr obj);
 	

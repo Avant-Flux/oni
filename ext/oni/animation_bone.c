@@ -11,7 +11,7 @@ void Init_Oni_Animation_Bone(VALUE outer){
 	// rb_define_method(klass, "name", getName, 0);
 }
 
-VALUE rb_Oni_Animation_Bone_new(Oni_BonePtr ptr_bone){
+VALUE rb_Oni_Animation_Bone_new(Oni_Animation_BonePtr ptr_bone){
 	// Should only be visible at C level
 	// This class should essentially be a private nested class
 	// It is merely a handle for things managed by Oni::Animation
@@ -23,14 +23,14 @@ VALUE rb_Oni_Animation_Bone_new(Oni_BonePtr ptr_bone){
 	VALUE outer_end = rb_const_get(module, rb_intern("Animation"));
 	VALUE class = rb_const_get(outer_end, rb_intern("Bone"));
 	
-	VALUE bone = Data_Wrap_Struct(class, NULL, Oni_Bone_delete, ptr_bone);
+	VALUE bone = Data_Wrap_Struct(class, NULL, Oni_Animation_Bone_delete, ptr_bone);
 	
 	return bone;
 }
 
 static VALUE update(VALUE self, VALUE dt){
-	Oni_BonePtr ptr_bone;
-	Data_Get_Struct(self, Oni_BonePtr, ptr_bone);
+	Oni_Animation_BonePtr ptr_bone;
+	Data_Get_Struct(self, Oni_Animation_BonePtr, ptr_bone);
 	
 	double double_dt = NUM2DBL(dt);
 	

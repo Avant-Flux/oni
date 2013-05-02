@@ -17,9 +17,9 @@ extern "C" {
 	// Memory allocated by C++ level code, as this class should never be created at Ruby level
 	// however, C++ level code has no need for this wrapper
 	// so it should be discarded when Ruby no longer needs it
-	void Oni_Animation_Bone_delete(Oni_BonePtr bone);
-	void Oni_Animation_Bone_markgc(Oni_BonePtr obj);
-	void Oni_Animation_Bone_update(Oni_BonePtr obj, double dt);
+	void Oni_Animation_Bone_delete(Oni_Animation_BonePtr bone);
+	void Oni_Animation_Bone_markgc(Oni_Animation_BonePtr obj);
+	void Oni_Animation_Bone_update(Oni_Animation_BonePtr obj, double dt);
 
 #ifdef __cplusplus
 }

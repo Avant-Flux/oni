@@ -85,13 +85,13 @@ namespace Oni
 		entity->shareSkeletonInstanceWith(otherEntity);
 	}
 	
-	Oni::Bone*
+	Oni::AnimationBone*
 	Animation::getBone(std::string& name)
 	{
 		Ogre::SkeletonInstance* skeleton = mModel->getEntity()->getSkeleton();
 		Ogre::Bone* bone = skeleton->getBone(name);
 		
-		Oni::Bone* oni_bone = new Oni::Bone();
+		Oni::AnimationBone* oni_bone = new Oni::AnimationBone();
 		oni_bone->initialize(bone);
 		
 		return oni_bone;

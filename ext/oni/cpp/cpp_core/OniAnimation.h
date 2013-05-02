@@ -21,7 +21,7 @@ namespace Oni
 		virtual void update(Ogre::Real deltaTime);
 		
 		void shareSkeletonWith(Oni::Animation* animation, double scale=1.0f);
-		Oni::Bone* getBone(std::string& name);
+		Oni::AnimationBone* getBone(std::string& name);
 		
 		Ogre::AnimationStateIterator getAnimationNames();
 		

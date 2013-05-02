@@ -34,11 +34,22 @@ extern "C" {
 	}
 	
 	
-	void Oni_shareSkeletonWith(Oni_AnimationPtr obj, Oni_AnimationPtr obj2, double scale){
+	void Oni_Animation_shareSkeletonWith(Oni_AnimationPtr obj, Oni_AnimationPtr obj2, double scale){
 		Oni::Animation* animation = (Oni::Animation*)(obj);
 		Oni::Animation* otherAnimation = (Oni::Animation*)(obj2);
 		
 		animation->shareSkeletonWith(otherAnimation, scale);
+	}
+	
+	Oni_Animation_BonePtr Oni_Animation_getBone(Oni_AnimationPtr obj, char* name){
+		Oni::Animation* animation = (Oni::Animation*)(obj);
+		
+		std::string cpp_name(name);
+		Oni::AnimationBone* bone = animation->getBone(cpp_name);
+		
+		Oni_Animation_BonePtr ptr_bone = (Oni_Animation_BonePtr)bone;
+		
+		return ptr_bone;
 	}
 
 
