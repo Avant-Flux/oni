@@ -3,7 +3,6 @@ TODO: Use static_cast<>() instead of C-style casting for dealing with opaque typ
 TODO: Clean up OgreInterface.h GameApplication.h function callback declaration
 	Should only be declared in one way, in one place
 TODO: Use define guards in C headers
-TODO: Split agent.c into two separate ruby classes - GraphicsObject and Agent (with w/o animation)
 TODO: Find out why key IDs fall outside of the expected range (much larger)
 TODO: Consider increasing scale of all objects if shadows are scale-dependent
 	Currently, shadows are very pixelated
@@ -11,15 +10,13 @@ TODO: Move as much of window setup as possible into BaseApplication.setup() and 
 
 TODO: Default Agent to face down Y Axis, not X-Axis
 
-TODO: Depreciate Oni::Window#setup in favor of just using initialize()
-	Initialize will always be called after the window is set up, as that happens in the
-	call to Ogre_Window_new
-
 TODO: Consider - Functions which accept vectors should accept three numbers where possible, rather than an array.  That way, the unpacking happens in plain sight.  Also, you can easily unbox with splat, but it's not necessary to force items into an array just for a parameter.
 
 TODO: Optimize - Consider making C++-level things use char* instead of std::string, so that no conversion has to be done
 	Conversion is pretty pointless, considering one of the main objectives of this engine is to get away from C++ as much as possible, in favor of Ruby and C.
 	Conversion happens a lot in Oni::Animation, and may be a source of optimization in the future.
+
+TODO: Rename Init_Oni_AnimationEasing to perhaps Init_Oni_Animation_Easing or Init_Oni_Animation_Ease for symmetry with it's ruby class name, and other similar C functions.
 
 TODO: Windows - make sure windows builds with Zip support
 
