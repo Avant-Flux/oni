@@ -4,7 +4,7 @@
 #include "BaseApplication.h"
 #include "OniModel.h"
 
-#include "OniBone.h"
+#include "OniAnimationBone.h"
 
 #include "OniAnimationTrack.h"
 

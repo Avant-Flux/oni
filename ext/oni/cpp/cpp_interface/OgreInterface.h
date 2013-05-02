@@ -9,7 +9,7 @@
 
 #include "Model.h"
 #include "Animation.h"
-#include "AnimationTrack.h"
-#include "Bone.h"
+	#include "AnimationTrack.h"
+	#include "AnimationBone.h"
 
 #endif /* OGRE_C_INTERFACE */

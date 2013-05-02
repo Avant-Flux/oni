@@ -1,6 +1,6 @@
 #include "animation.h"
 #include "animation_track.h"
-#include "bone.h"
+#include "animation_bone.h"
 
 void Init_Oni_Animation(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Animation", rb_cObject);
@@ -156,7 +156,7 @@ static VALUE getBone(VALUE self, VALUE name){
 	
 	
 	// Wrap into Ruby object
-	VALUE bone = rb_Oni_Animation_Track_new(ptr_bone);
+	VALUE bone = rb_Oni_Animation_Bone_new(ptr_bone);
 	
 	return bone;
 }

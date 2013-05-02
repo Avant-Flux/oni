@@ -3,7 +3,7 @@
 
 #include "BaseApplication.h"
 
-#include "OniBone.h"
+#include "OniAnimationBone.h"
 
 namespace Oni
 {

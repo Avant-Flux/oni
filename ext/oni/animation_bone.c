@@ -1,4 +1,4 @@
-#include "bone.h"
+#include "animation_bone.h"
 
 // Memory allocated by C++ level code, as this class should never be created at Ruby level
 // however, C++ level code has no need for this wrapper
