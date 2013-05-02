@@ -10,5 +10,6 @@
 #include "Model.h"
 #include "Animation.h"
 #include "AnimationTrack.h"
+#include "Bone.h"
 
 #endif /* OGRE_C_INTERFACE */

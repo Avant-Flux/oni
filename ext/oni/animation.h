@@ -15,6 +15,7 @@ static VALUE update(VALUE self, VALUE dt);
 
 static VALUE shareSkeletonWith(int argc, VALUE* argv, VALUE self);
 	// static VALUE shareSkeletonWith(VALUE self, VALUE other, VALUE scale = 1.0);
+static VALUE getBone(VALUE self, VALUE name);
 
 static VALUE animation_names(VALUE self);
 

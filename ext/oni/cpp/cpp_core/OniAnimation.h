@@ -4,6 +4,8 @@
 #include "BaseApplication.h"
 #include "OniModel.h"
 
+#include "OniBone.h"
+
 #include "OniAnimationTrack.h"
 
 #include <deque>
@@ -19,6 +21,7 @@ namespace Oni
 		virtual void update(Ogre::Real deltaTime);
 		
 		void shareSkeletonWith(Oni::Animation* animation, double scale=1.0f);
+		Oni::Bone* getBone(std::string& name);
 		
 		Ogre::AnimationStateIterator getAnimationNames();
 		

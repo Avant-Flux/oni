@@ -1,5 +1,6 @@
 #include "animation.h"
 #include "animation_track.h"
+#include "bone.h"
 
 void Init_Oni_Animation(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Animation", rb_cObject);
@@ -9,6 +10,7 @@ void Init_Oni_Animation(VALUE outer){
 	rb_define_method(klass, "update", update, 1);
 	
 	rb_define_method(klass, "share_skeleton_with", shareSkeletonWith, -1);
+	rb_define_method(klass, "bone", getBone, 1);
 	
 	rb_define_method(klass, "animations", animation_names, 0);
 	
@@ -20,6 +22,7 @@ void Init_Oni_Animation(VALUE outer){
 	
 	// Nested class
 	Init_Oni_Animation_Track(klass);
+	Init_Oni_Animation_Bone(klass);
 	Init_Oni_AnimationEasing(klass);
 }
 
@@ -78,7 +81,7 @@ static VALUE shareSkeletonWith(int argc, VALUE* argv, VALUE self){
 		dbl_scale = 1.0;
 	}
 	
-	Oni_shareSkeletonWith(ptr_animation, ptr_otherAnimation, dbl_scale);
+	Oni_Animation_shareSkeletonWith(ptr_animation, ptr_otherAnimation, dbl_scale);
 	
 	return Qnil;
 }
@@ -134,4 +137,26 @@ static VALUE getAnimationTrack(VALUE self, VALUE track_name){
 	VALUE track = rb_Oni_Animation_Track_new(ptr_track);
 	
 	return track;
+}
+
+static VALUE getBone(VALUE self, VALUE name){
+	Oni_AnimationPtr ptr_animation;
+	Data_Get_Struct(self, Oni_AnimationPtr, ptr_animation);
+	
+	// Allocate memory
+	char* str_name = StringValueCStr(name);
+	
+	// Process call
+	// Can be NULL
+	Oni_BonePtr ptr_bone = Oni_Animation_getBone(ptr_animation, str_name);
+	if(ptr_bone == NULL)
+	{
+		return Qnil;
+	}
+	
+	
+	// Wrap into Ruby object
+	VALUE bone = rb_Oni_Animation_Track_new(ptr_bone);
+	
+	return bone;
 }

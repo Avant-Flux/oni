@@ -18,6 +18,7 @@ typedef void* Oni_LightPtr;
 typedef void* Oni_ModelPtr;
 typedef void* Oni_AnimationPtr;
 typedef void* Oni_Animation_TrackPtr;
+	typedef void* Oni_BonePtr;
 
 #ifdef __cplusplus
 extern "C" {

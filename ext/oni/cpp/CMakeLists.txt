@@ -121,6 +121,7 @@ set(CORE_HDRS
 	./cpp_core/OniModel.h
 	./cpp_core/OniAnimation.h
 	./cpp_core/OniAnimationTrack.h
+	./cpp_core/OniBone.h
 )
 
 set(CORE_SRCS
@@ -132,6 +133,7 @@ set(CORE_SRCS
 	./cpp_core/OniModel.cpp
 	./cpp_core/OniAnimation.cpp
 	./cpp_core/OniAnimationTrack.cpp
+	./cpp_core/OniBone.cpp
 )
 
 set(INTERFACE_HDRS
@@ -146,6 +148,7 @@ set(INTERFACE_HDRS
 	./cpp_interface/Model.h
 	./cpp_interface/Animation.h
 	./cpp_interface/AnimationTrack.h
+	./cpp_interface/Bone.h
 )
 
 set(INTERFACE_SRCS
@@ -159,6 +162,7 @@ set(INTERFACE_SRCS
 	./cpp_interface/Model.cpp
 	./cpp_interface/Animation.cpp
 	./cpp_interface/AnimationTrack.cpp
+	./cpp_interface/Bone.cpp
 )
 
 include_directories( ${OIS_INCLUDE_DIRS}
