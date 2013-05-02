@@ -15,6 +15,8 @@ TODO: Depreciate Oni::Window#setup in favor of just using initialize()
 	Initialize will always be called after the window is set up, as that happens in the
 	call to Ogre_Window_new
 
+TODO: Consider - Functions which accept vectors should accept three numbers where possible, rather than an array.  That way, the unpacking happens in plain sight.  Also, you can easily unbox with splat, but it's not necessary to force items into an array just for a parameter.
+
 TODO: Optimize - Consider making C++-level things use char* instead of std::string, so that no conversion has to be done
 	Conversion is pretty pointless, considering one of the main objectives of this engine is to get away from C++ as much as possible, in favor of Ruby and C.
 	Conversion happens a lot in Oni::Animation, and may be a source of optimization in the future.
