@@ -18,6 +18,16 @@ void Init_Oni_AnimationEasing(VALUE outer);
  * ======================================================== */
  // t: current time, b: begInnIng value, c: change In value, d: duration
  
+ // x = value to be changed
+ // t = parametric parameter
+ // b = low end of output
+ // c = range of output
+	// output varies between b and b + c
+ // d = maximum value of t
+	 // t varies between 0 and t
+ 
+ // note: it seem that only the bounce equations vary with x, so it would would totally possible to omit that parameter entirely
+ 
 static VALUE ease_in_quad(VALUE klass, VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 static VALUE ease_out_quad(VALUE klass, VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
 static VALUE ease_in_out_quad(VALUE klass, VALUE x, VALUE t, VALUE b, VALUE c, VALUE d);
