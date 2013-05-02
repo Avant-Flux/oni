@@ -16,6 +16,7 @@ VALUE rb_Oni_Animation_Bone_new(Oni_BonePtr ptr_bone){
 	// This class should essentially be a private nested class
 	// It is merely a handle for things managed by Oni::Animation
 	
+	// TOOD: Figure out if there needs to be an override of new/initialize at ruby level so that this "private class" can't be created, even though Ruby doesn't seem to have private classes.
 	// TODO: Consider making this function "inline"
 	
 	VALUE module = rb_const_get(rb_cObject, rb_intern("Oni"));
