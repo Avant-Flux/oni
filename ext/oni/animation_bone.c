@@ -8,7 +8,12 @@ void Init_Oni_Animation_Bone(VALUE outer){
 	
 	rb_define_method(klass, "update", update, 1);
 	
-	// rb_define_method(klass, "name", getName, 0);
+	rb_define_method(klass, "position", getPosition, 0);
+	rb_define_method(klass, "orientation", getOrientation, 0);
+	rb_define_method(klass, "initial_position", getInitialPosition, 0);
+	rb_define_method(klass, "initial_orientation", getInitialOrientation, 0);
+	rb_define_method(klass, "position_delta", getPositionDelta, 0);
+	rb_define_method(klass, "orientation_delta", getOrientationDelta, 0);
 }
 
 VALUE rb_Oni_Animation_Bone_new(Oni_Animation_BonePtr ptr_bone){
@@ -34,7 +39,109 @@ static VALUE update(VALUE self, VALUE dt){
 	
 	double double_dt = NUM2DBL(dt);
 	
-	Oni_Bone_update(ptr_bone, double_dt);
+	Oni_Animation_Bone_update(ptr_bone, double_dt);
 	
 	return Qnil;
+}
+
+static VALUE getPosition(VALUE self){
+	Oni_Animation_BonePtr ptr_bone;
+	Data_Get_Struct(self, Oni_Animation_BonePtr, ptr_bone);
+	
+	double position[ONI_POSITION_VECTOR_SIZE];
+	Oni_Animation_Bone_getPosition(ptr_bone, position);
+	
+	// Convert the C array into a Ruby array
+	VALUE array = rb_ary_new2(ONI_POSITION_VECTOR_SIZE);
+	int i;
+	for(i = 0; i < ONI_POSITION_VECTOR_SIZE; i++){
+		rb_ary_store(array, i, rb_float_new(position[i]));
+	}
+	
+	return array;
+}
+
+static VALUE getOrientation(VALUE self){
+	Oni_Animation_BonePtr ptr_bone;
+	Data_Get_Struct(self, Oni_Animation_BonePtr, ptr_bone);
+	
+	double orientation[ONI_QUATERNION_VECTOR_SIZE];
+	Oni_Animation_Bone_getOrientation(ptr_bone, orientation);
+	
+	// Convert the C array into a Ruby array
+	VALUE array = rb_ary_new2(ONI_QUATERNION_VECTOR_SIZE);
+	int i;
+	for(i = 0; i < ONI_QUATERNION_VECTOR_SIZE; i++){
+		rb_ary_store(array, i, rb_float_new(orientation[i]));
+	}
+	
+	return array;
+}
+
+static VALUE getInitialPosition(VALUE self){
+	Oni_Animation_BonePtr ptr_bone;
+	Data_Get_Struct(self, Oni_Animation_BonePtr, ptr_bone);
+	
+	double position[ONI_POSITION_VECTOR_SIZE];
+	Oni_Animation_Bone_getInitialPosition(ptr_bone, position);
+	
+	// Convert the C array into a Ruby array
+	VALUE array = rb_ary_new2(ONI_POSITION_VECTOR_SIZE);
+	int i;
+	for(i = 0; i < ONI_POSITION_VECTOR_SIZE; i++){
+		rb_ary_store(array, i, rb_float_new(position[i]));
+	}
+	
+	return array;
+}
+
+static VALUE getInitialOrientation(VALUE self){
+	Oni_Animation_BonePtr ptr_bone;
+	Data_Get_Struct(self, Oni_Animation_BonePtr, ptr_bone);
+	
+	double orientation[ONI_QUATERNION_VECTOR_SIZE];
+	Oni_Animation_Bone_getInitialOrientation(ptr_bone, orientation);
+	
+	// Convert the C array into a Ruby array
+	VALUE array = rb_ary_new2(ONI_QUATERNION_VECTOR_SIZE);
+	int i;
+	for(i = 0; i < ONI_QUATERNION_VECTOR_SIZE; i++){
+		rb_ary_store(array, i, rb_float_new(orientation[i]));
+	}
+	
+	return array;
+}
+
+static VALUE getPositionDelta(VALUE self){
+	Oni_Animation_BonePtr ptr_bone;
+	Data_Get_Struct(self, Oni_Animation_BonePtr, ptr_bone);
+	
+	double position[ONI_POSITION_VECTOR_SIZE];
+	Oni_Animation_Bone_getPositionDelta(ptr_bone, position);
+	
+	// Convert the C array into a Ruby array
+	VALUE array = rb_ary_new2(ONI_POSITION_VECTOR_SIZE);
+	int i;
+	for(i = 0; i < ONI_POSITION_VECTOR_SIZE; i++){
+		rb_ary_store(array, i, rb_float_new(position[i]));
+	}
+	
+	return array;
+}
+
+static VALUE getOrientationDelta(VALUE self){
+	Oni_Animation_BonePtr ptr_bone;
+	Data_Get_Struct(self, Oni_Animation_BonePtr, ptr_bone);
+	
+	double orientation[ONI_QUATERNION_VECTOR_SIZE];
+	Oni_Animation_Bone_getOrientationDelta(ptr_bone, orientation);
+	
+	// Convert the C array into a Ruby array
+	VALUE array = rb_ary_new2(ONI_QUATERNION_VECTOR_SIZE);
+	int i;
+	for(i = 0; i < ONI_QUATERNION_VECTOR_SIZE; i++){
+		rb_ary_store(array, i, rb_float_new(orientation[i]));
+	}
+	
+	return array;
 }

@@ -15,12 +15,13 @@ namespace Oni
 		virtual void initialize(Ogre::Bone* bone);
 		virtual void update(Ogre::Real deltaTime);
 		
-		// getOrientation();
-		// getPosition();
+		const Ogre::Vector3& getPosition();
+		const Ogre::Quaternion& getOrientation();
 		// pitch();
 		// yaw();
 		// roll();
-		
+		const Ogre::Vector3& getInitialPosition();
+		const Ogre::Quaternion& getInitialOrientation();
 	
 	private:
 		Ogre::Bone* mBone;

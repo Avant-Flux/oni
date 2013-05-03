@@ -15,7 +15,7 @@ namespace Oni
 	void
 	AnimationBone::initialize(Ogre::Bone* bone)
 	{
-		
+		mBone = bone;
 	}
 
 	void
@@ -23,4 +23,29 @@ namespace Oni
 	{
 		
 	}
+	
+	const Ogre::Vector3&
+	AnimationBone::getPosition()
+	{
+		return mBone->getPosition();
+	}
+	
+	const Ogre::Quaternion&
+	AnimationBone::getOrientation()
+	{
+		return mBone->getOrientation();
+	}
+	
+	const Ogre::Vector3&
+	AnimationBone::getInitialPosition()
+	{
+		return mBone->getInitialPosition();
+	}
+	
+	const Ogre::Quaternion&
+	AnimationBone::getInitialOrientation()
+	{
+		return mBone->getInitialOrientation();
+	}
+	
 }

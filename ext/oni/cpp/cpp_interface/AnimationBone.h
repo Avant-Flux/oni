@@ -20,6 +20,15 @@ extern "C" {
 	void Oni_Animation_Bone_delete(Oni_Animation_BonePtr bone);
 	void Oni_Animation_Bone_markgc(Oni_Animation_BonePtr obj);
 	void Oni_Animation_Bone_update(Oni_Animation_BonePtr obj, double dt);
+	
+	void Oni_Animation_Bone_getPosition(Oni_Animation_BonePtr obj, double* position);
+	void Oni_Animation_Bone_getOrientation(Oni_Animation_BonePtr obj, double* orientation);
+	
+	void Oni_Animation_Bone_getInitialPosition(Oni_Animation_BonePtr obj, double* position);
+	void Oni_Animation_Bone_getInitialOrientation(Oni_Animation_BonePtr obj, double* orientation);
+	
+	void Oni_Animation_Bone_getPositionDelta(Oni_Animation_BonePtr obj, double* position);
+	void Oni_Animation_Bone_getOrientationDelta(Oni_Animation_BonePtr obj, double* orientation);
 
 #ifdef __cplusplus
 }

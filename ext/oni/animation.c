@@ -148,7 +148,7 @@ static VALUE getBone(VALUE self, VALUE name){
 	
 	// Process call
 	// Can be NULL
-	Oni_BonePtr ptr_bone = Oni_Animation_getBone(ptr_animation, str_name);
+	Oni_Animation_BonePtr ptr_bone = Oni_Animation_getBone(ptr_animation, str_name);
 	if(ptr_bone == NULL)
 	{
 		return Qnil;
