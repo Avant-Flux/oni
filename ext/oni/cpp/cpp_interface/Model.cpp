@@ -117,11 +117,21 @@ extern "C" {
 		model->setPosition(x,y,z);
 	}
 	
-	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z){
+	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z, OniTransformSpace ts){
 		// void translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
 		Oni::Model* model = (Oni::Model*)(obj);
 		
-		model->translate(x,y,z);
+		switch(ts){
+			case LOCAL:	
+				model->translate(x,y,z, Ogre::Node::TS_LOCAL);
+				break;
+			case PARENT:	
+				model->translate(x,y,z, Ogre::Node::TS_PARENT);	
+				break;
+			case WORLD:
+				model->translate(x,y,z, Ogre::Node::TS_WORLD);
+				break;
+		}
 	}
 	
 	void Oni_Model_scale(Oni_ModelPtr obj, double x, double y, double z){

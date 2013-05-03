@@ -23,7 +23,8 @@ static VALUE getBoundingBoxDepth(VALUE self);
 static VALUE getBoundingBoxHeight(VALUE self);
 
 static VALUE setPosition(VALUE self, VALUE pos);
-static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z);
+static VALUE translate(int argc, VALUE *argv, VALUE self);
+	// static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z, VALUE transform_space);
 
 static VALUE pitch(VALUE self, VALUE radians);
 static VALUE yaw(VALUE self, VALUE radians);

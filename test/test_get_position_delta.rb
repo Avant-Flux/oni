@@ -42,7 +42,13 @@ class Window < Oni::Window
 		@animation.update dt
 		
 		p @animation.bone("hips").position_delta
-		p @animation.bone("hips").orientation_delta
+		# p @animation.bone("hips").orientation_delta
+		
+		@model.position = [0,0,0]
+		@model.rotation = Math::PI/2
+		delta = @animation.bone("hips").position_delta
+		@model.translate -delta[0], -delta[1], -delta[2], :local
+		
 		
 		@counter += 1
 		@counter = @counter % 100

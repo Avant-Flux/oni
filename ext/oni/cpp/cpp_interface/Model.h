@@ -14,6 +14,8 @@
 extern "C" {
 #endif
 
+	typedef enum { LOCAL, PARENT, WORLD } OniTransformSpace;
+	
 	Oni_ModelPtr Oni_Model_new();
 	void Oni_Model_delete(Oni_ModelPtr model);
 	void Oni_Model_markgc(Oni_ModelPtr obj);
@@ -32,7 +34,7 @@ extern "C" {
 	double Oni_Model_getBoundingBoxHeight(Oni_ModelPtr obj);
 	
 	void Oni_Model_setPosition(Oni_ModelPtr obj, double x, double y, double z);
-	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z);
+	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z, OniTransformSpace ts);
 	
 	void Oni_Model_resetOrientation(Oni_ModelPtr obj);
 	void Oni_Model_rotate(Oni_ModelPtr obj, double w, double x, double y, double z);

@@ -20,7 +20,7 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "bb_height", getBoundingBoxHeight, 0);
 	
 	rb_define_method(klass, "position=", setPosition, 1);
-	rb_define_method(klass, "translate", translate, 3);
+	rb_define_method(klass, "translate", translate, -1);
 	
 	rb_define_method(klass, "pitch", pitch, 1);
 	rb_define_method(klass, "yaw", yaw, 1);
@@ -186,15 +186,38 @@ static VALUE setPosition(VALUE self, VALUE pos)
 	return Qnil;
 }
 
-static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z){
+static VALUE translate(int argc, VALUE *argv, VALUE self){
+	// VALUE self, VALUE x, VALUE y, VALUE z, VALUE transform_space
 	Oni_ModelPtr ptr_model;
 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
 	
-	double dbl_x = NUM2DBL(x);
-	double dbl_y = NUM2DBL(y);
-	double dbl_z = NUM2DBL(z);
+	double dbl_x = NUM2DBL(argv[0]);
+	double dbl_y = NUM2DBL(argv[1]);
+	double dbl_z = NUM2DBL(argv[2]);
 	
-	Oni_Model_translate(ptr_model, dbl_x, dbl_y, dbl_z);
+	// transform space should be a symbol, either :local, :parent, or :world
+	ID local = rb_intern("local");
+	ID parent = rb_intern("parent");
+	ID world = rb_intern("world");
+	
+	ID ts;
+	if(argc == 4){
+		ts = SYM2ID(argv[3]);
+	}
+	else{
+		ts = rb_intern("parent");
+	}
+	
+	
+	if(ts == local){
+		Oni_Model_translate(ptr_model, dbl_x, dbl_y, dbl_z, LOCAL);
+	}
+	else if(ts == parent){
+		Oni_Model_translate(ptr_model, dbl_x, dbl_y, dbl_z, PARENT);
+	}
+	else if(ts == world){
+		Oni_Model_translate(ptr_model, dbl_x, dbl_y, dbl_z, WORLD);
+	}
 	
 	return Qnil;
 }
