@@ -59,7 +59,19 @@ file c_library => source_files do
 		# this does essentially the same thing
 		# as what RubyGems does
 		ruby "extconf.rb"
-		`make`
+		
+		# Run make
+		flags = ""
+		stdin, stdout_and_stderr, wait_thr = Open3.popen2e "make " + flags
+		
+		output = nil
+		begin
+			output = stdout_and_stderr.gets
+			puts output
+		end while output
+		
+		stdin.close
+		stdout_and_stderr.close
 	end
 	
 	cp "ext/#{NAME}/#{NAME}.so", "lib/#{NAME}"
