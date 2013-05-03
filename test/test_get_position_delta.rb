@@ -28,11 +28,13 @@ class Window < Oni::Window
 		@animation = Oni::Animation.new @model
 		
 		@animation_list = [
-			@animation["idle"]
+			@animation["idle"],
 			@animation["sword_r-l"]
 		]
 		
 		@animation_list[0].enable
+		
+		@counter = 0
 	end
 	
 	def update(dt)
@@ -41,6 +43,10 @@ class Window < Oni::Window
 		
 		p @animation.bone("hips").position_delta
 		p @animation.bone("hips").orientation_delta
+		
+		@counter += 1
+		@counter = @counter % 100
+		GC.start if @counter == 0
 	end
 	
 	def draw

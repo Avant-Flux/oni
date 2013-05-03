@@ -71,12 +71,15 @@ static VALUE show(VALUE self){
 		char* str_klass = StringValueCStr(rString_klass);
 		printf("%d out of %d: %s\n", i+1, number_of_variables, str_klass);
 		
+		// Make sure only to force the cleanup of objects which can be cleaned up
+		// This should include all "complex" types
 		if(!
 			(
 				TYPE(ivar) == T_TRUE ||
 				TYPE(ivar) == T_FALSE ||
 				TYPE(ivar) == T_NIL || 
-				TYPE(ivar) == T_SYMBOL
+				TYPE(ivar) == T_SYMBOL ||
+				TYPE(ivar) == T_FIXNUM
 			)
 		){
 			rb_gc_force_recycle(ivar);
