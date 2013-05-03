@@ -26,7 +26,13 @@ class Window < Oni::Window
 		@model = Oni::Model.new self, "#{name}", "#{name}.mesh"
 		
 		@animation = Oni::Animation.new @model
-		@animation["idle"].enable
+		
+		@animation_list = [
+			@animation["idle"]
+			@animation["sword_r-l"]
+		]
+		
+		@animation_list[0].enable
 	end
 	
 	def update(dt)
@@ -43,14 +49,13 @@ class Window < Oni::Window
 	end
 	
 	def button_down(id)
-		@animation["idle"].disable
-		@animation["sword_r-l"].disable
+		@animation_list.each {|a| a.disable}
 		
 		case button_id_to_sym id
 			when :kb_1
-				@animation["idle"].enable
+				@animation_list[0].enable
 			when :kb_2
-				@animation["sword_r-l"].enable
+				@animation_list[1].enable
 		end
 	end
 	
