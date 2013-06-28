@@ -57,9 +57,63 @@ extern "C" {
 		camera->setNearClipDistance(distance);
 	}
 	
+	void Ogre_Camera_setProjectionType(Ogre_CameraPtr obj, OniCameraProjectionType type){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		Ogre::ProjectionType pt;
+		if(type == ORTHOGRAPHIC){
+			pt = Ogre::PT_ORTHOGRAPHIC;
+		}
+		else// if(type == PERSPECTIVE)
+		{
+			pt = Ogre::PT_PERSPECTIVE;
+		}
+		
+		camera->setProjectionType(pt);
+	}
+	
+	// Return horizontal FOV in degrees
+	double Ogre_Camera_getFOV(Ogre_CameraPtr obj){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		// Should be correct, based on Ogre_Camera_setFOV
+		Ogre::Radian rad_fov = camera->getFOVy() * camera->getAspectRatio();
+		return rad_fov.valueDegrees();
+	}
+	
 	void Ogre_Camera_setFOV(Ogre_CameraPtr obj, double x_angle){
 		Ogre::Camera* camera = (Ogre::Camera*)obj;
 		
 		camera->setFOVy(Ogre::Degree(x_angle)/camera->getAspectRatio());
+	}
+	
+	void Ogre_Camera_setOrthoWindow(Ogre_CameraPtr obj, double w, double h){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		camera->setOrthoWindow(w,h);
+	}
+	
+	void Ogre_Camera_setOrthoWindowHeight(Ogre_CameraPtr obj, double h){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		camera->setOrthoWindowHeight(h);
+	}
+	
+	void Ogre_Camera_setOrthoWindowWidth(Ogre_CameraPtr obj, double w){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		camera->setOrthoWindowWidth(w);
+	}
+	
+	double Ogre_Camera_getOrthoWindowHeight(Ogre_CameraPtr obj){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		return camera->getOrthoWindowHeight();
+	}
+	
+	double Ogre_Camera_getOrthoWindowWidth(Ogre_CameraPtr obj){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		return camera->getOrthoWindowWidth();
 	}
 }
