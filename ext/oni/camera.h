@@ -27,6 +27,9 @@ static VALUE setProjectionType(VALUE self, VALUE projection_type);
 static VALUE getFOV(VALUE self);
 static VALUE setFOV(VALUE self, VALUE fov);
 
+static VALUE getFOVy(VALUE self);
+static VALUE setFOVy(VALUE self, VALUE fov);
+
 static VALUE setOrthoWindow(VALUE self, VALUE dimensions);
 static VALUE setOrthoWindowHeight(VALUE self, VALUE h);
 static VALUE setOrthoWindowWidth(VALUE self, VALUE w);

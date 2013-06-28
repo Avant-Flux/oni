@@ -19,6 +19,8 @@ void Init_Oni_Camera(VALUE outer){
 	
 	rb_define_method(klass, "fov", getFOV, 0);
 	rb_define_method(klass, "fov=", setFOV, 1);
+	rb_define_method(klass, "fov_y", getFOVy, 0);
+	rb_define_method(klass, "fov_y=", setFOVy, 1);
 	
 	rb_define_method(klass, "ortho_window_size=", setOrthoWindow, 1); // arg is [width, height]
 	rb_define_method(klass, "ortho_window_height=", setOrthoWindowHeight, 1);
@@ -176,7 +178,7 @@ static VALUE getFOV(VALUE self){
 	Data_Get_Struct(self, cameraContainer*, container);
 	Ogre_CameraPtr ptr_camera = container->camera;
 	
-	double dbl_fov = Ogre_Camera_getFOV(ptr_camera);
+	double dbl_fov = Ogre_Camera_getFOVx(ptr_camera);
 	VALUE fov = rb_float_new(dbl_fov);
 	
 	return fov;
@@ -189,7 +191,30 @@ static VALUE setFOV(VALUE self, VALUE fov){
 	
 	double double_angle = NUM2DBL(fov);
 	
-	Ogre_Camera_setFOV(ptr_camera, double_angle);
+	Ogre_Camera_setFOVx(ptr_camera, double_angle);
+	
+	return Qnil;
+}
+
+static VALUE getFOVy(VALUE self){
+	cameraContainer* container;
+	Data_Get_Struct(self, cameraContainer*, container);
+	Ogre_CameraPtr ptr_camera = container->camera;
+	
+	double dbl_fov = Ogre_Camera_getFOVy(ptr_camera);
+	VALUE fov = rb_float_new(dbl_fov);
+	
+	return fov;
+}
+
+static VALUE setFOVy(VALUE self, VALUE fov){
+	cameraContainer* container;
+	Data_Get_Struct(self, cameraContainer*, container);
+	Ogre_CameraPtr ptr_camera = container->camera;
+	
+	double double_angle = NUM2DBL(fov);
+	
+	Ogre_Camera_setFOVy(ptr_camera, double_angle);
 	
 	return Qnil;
 }

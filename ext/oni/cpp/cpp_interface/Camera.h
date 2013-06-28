@@ -29,8 +29,11 @@ extern "C" {
 	void Ogre_Camera_setProjectionType(Ogre_CameraPtr obj, OniCameraProjectionType type);
 	
 	// Perspective camera only
-	double Ogre_Camera_getFOV(Ogre_CameraPtr obj);
-	void Ogre_Camera_setFOV(Ogre_CameraPtr obj, double x_angle);
+	double Ogre_Camera_getFOVx(Ogre_CameraPtr obj);
+	void Ogre_Camera_setFOVx(Ogre_CameraPtr obj, double x_angle);
+	
+	double Ogre_Camera_getFOVy(Ogre_CameraPtr obj);
+	void Ogre_Camera_setFOVy(Ogre_CameraPtr obj, double y_angle);
 	
 	// Ortho camera only
 	void Ogre_Camera_setOrthoWindow(Ogre_CameraPtr obj, double w, double h);

@@ -73,7 +73,7 @@ extern "C" {
 	}
 	
 	// Return horizontal FOV in degrees
-	double Ogre_Camera_getFOV(Ogre_CameraPtr obj){
+	double Ogre_Camera_getFOVx(Ogre_CameraPtr obj){
 		Ogre::Camera* camera = (Ogre::Camera*)obj;
 		
 		// Should be correct, based on Ogre_Camera_setFOV
@@ -81,10 +81,24 @@ extern "C" {
 		return rad_fov.valueDegrees();
 	}
 	
-	void Ogre_Camera_setFOV(Ogre_CameraPtr obj, double x_angle){
+	void Ogre_Camera_setFOVx(Ogre_CameraPtr obj, double x_angle){
 		Ogre::Camera* camera = (Ogre::Camera*)obj;
 		
 		camera->setFOVy(Ogre::Degree(x_angle)/camera->getAspectRatio());
+	}
+	
+	double Ogre_Camera_getFOVy(Ogre_CameraPtr obj){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		// Should be correct, based on Ogre_Camera_setFOV
+		Ogre::Radian rad_fov = camera->getFOVy();
+		return rad_fov.valueDegrees();
+	}
+	
+	void Ogre_Camera_setFOVy(Ogre_CameraPtr obj, double y_angle){
+		Ogre::Camera* camera = (Ogre::Camera*)obj;
+		
+		camera->setFOVy(Ogre::Degree(y_angle));
 	}
 	
 	void Ogre_Camera_setOrthoWindow(Ogre_CameraPtr obj, double w, double h){
