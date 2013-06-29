@@ -22,6 +22,8 @@ extern "C" {
 	void Oni_Model_initialize(Oni_ModelPtr obj, Ogre_WindowPtr obj2, char* name, char* filename);
 	void Oni_Model_update(Oni_ModelPtr obj, double dt);
 	
+	Ogre_NodePtr Oni_Model_getParentNode(Oni_ModelPtr obj);
+	
 	void Oni_Model_attachObjectToBone(Oni_ModelPtr obj, char* name, Oni_ModelPtr obj2);
 	void Oni_Model_detachObjectFromBone(Oni_ModelPtr obj, Oni_ModelPtr obj2);
 	int Oni_Model_isAttachedToBone(Oni_ModelPtr obj);

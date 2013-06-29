@@ -11,8 +11,10 @@ namespace Oni
 		Light();
 		virtual ~Light();
 		
-		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name);
+		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, Ogre::Node* parentNode=NULL);
 		virtual void update(Ogre::Real deltaTime);
+		
+		Ogre::Node* getParentNode();
 		
 		void setType(Ogre::Light::LightTypes type){mLight->setType(type);};
 		Ogre::Light::LightTypes getType(void) const{ return mLight->getType();};
@@ -151,6 +153,8 @@ namespace Oni
 	private:
 		Ogre::SceneManager* mSceneMgr;
 		Ogre::Light* mLight;
+		
+		Ogre::SceneNode* attachToNewSceneNode(Ogre::Node* parentNode=NULL);
 	};
 }
 

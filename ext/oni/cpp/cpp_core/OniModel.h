@@ -11,7 +11,7 @@ namespace Oni
 		Model();
 		virtual ~Model();
 		
-		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename);
+		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename, Ogre::Node* parentNode=NULL);
 		virtual void update(Ogre::Real deltaTime);
 		
 		// Necessary for extensibility
@@ -62,7 +62,7 @@ namespace Oni
 		Ogre::Entity* mEntity;
 	
 	private:
-		Ogre::SceneNode* attachToNewSceneNode();
+		Ogre::SceneNode* attachToNewSceneNode(Ogre::Node* parentNode=NULL);
 	};
 }
 

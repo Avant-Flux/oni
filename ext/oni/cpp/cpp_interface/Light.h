@@ -17,8 +17,10 @@ extern "C" {
 	Oni_LightPtr Oni_Light_new();
 	void Oni_Light_delete(Oni_LightPtr obj);
 	void Oni_Light_markgc(Oni_LightPtr obj);
-	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2, char* name);
+	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2, char* name, Ogre_NodePtr parent);
 	void Oni_Light_update(Oni_LightPtr obj, double dt);
+	
+	Ogre_NodePtr Oni_Light_getParentNode(Oni_LightPtr obj);
 	
 	int Oni_Light_getVisible(Oni_LightPtr obj);
 	void Oni_Light_setVisible(Oni_LightPtr obj, int visible);

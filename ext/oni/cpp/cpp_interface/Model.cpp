@@ -38,6 +38,13 @@ extern "C" {
 		model->update(dt);
 	}
 	
+	Ogre_NodePtr Oni_Model_getParentNode(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		Ogre::Node* node = model->getEntity()->getParentNode();
+		return (Ogre_NodePtr)(node);
+	}
+	
 	void Oni_Model_attachObjectToBone(Oni_ModelPtr obj, char* name, Oni_ModelPtr obj2){
 		Oni::Model* model = (Oni::Model*)(obj);
 		Oni::Model* otherModel = (Oni::Model*)(obj2);

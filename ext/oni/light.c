@@ -1,10 +1,11 @@
 #include "light.h"
+#include "node_management.h"
 
 void Init_Oni_Light(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Light", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
-	rb_define_method(klass, "initialize", initialize, 2);
+	rb_define_method(klass, "initialize", initialize, -1);
 	rb_define_method(klass, "update", update, 1);
 	
 	rb_define_method(klass, "visible", getVisible, 0);
@@ -46,16 +47,34 @@ static VALUE alloc(VALUE class){
 	return data;
 }
 
-static VALUE initialize(VALUE self, VALUE window, VALUE name){
+static VALUE initialize(int argc, VALUE *argv, VALUE self){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	VALUE window, name, parent;
+	rb_scan_args(argc, argv, "21", &window, &name, &parent);
+	
 	
 	Ogre_WindowPtr ptr_window;
 	Data_Get_Struct(window, Ogre_WindowPtr, ptr_window);
 	
 	char* str_name = StringValueCStr(name);
 	
-	Oni_Light_initialize(ptr_light, ptr_window, str_name);
+	
+	// Parent must be something which has a Node as a parent
+		// Light
+		// Model
+	Ogre_NodePtr ptr_parent;
+	if(NIL_P(parent)){
+		ptr_parent = NULL;
+	}
+	else
+	{
+		ptr_parent = Oni_getNodePointer(parent);
+	}
+	
+	
+	Oni_Light_initialize(ptr_light, ptr_window, str_name, ptr_parent);
 	
 	return Qnil;
 }

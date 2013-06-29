@@ -22,19 +22,28 @@ extern "C" {
 		// light->setVisible(false);
 	}
 
-	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2, char* name){
+	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2, char* name, Ogre_NodePtr parent){
 		Oni::Light* light = (Oni::Light*)(obj);
 		GameApplication* game = (GameApplication*)obj2;
 		
 		std::string cpp_name(name);
 		
-		light->initialize(game->getSceneMgr(), cpp_name);
+		Ogre::Node* parentNode = (Ogre::Node*)(parent)
+		
+		light->initialize(game->getSceneMgr(), cpp_name, parentNode);
 	}
 
 	void Oni_Light_update(Oni_LightPtr obj, double dt){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
 		light->update(dt);
+	}
+	
+	Ogre_NodePtr Oni_Light_getParentNode(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		Ogre::Node* node = light->getParentNode();
+		return (Ogre_NodePtr)(node);
 	}
 	
 	int Oni_Light_getVisible(Oni_LightPtr obj){

@@ -8,7 +8,7 @@ void Init_Oni_Light(VALUE outer);
 
 static VALUE alloc(VALUE class);
 
-static VALUE initialize(VALUE self, VALUE window, VALUE name);
+static VALUE initialize(int argc, VALUE *argv, VALUE self);
 static VALUE update(VALUE self, VALUE dt);
 
 static VALUE getVisible(VALUE self);

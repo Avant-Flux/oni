@@ -52,14 +52,14 @@ namespace Oni
 	}
 
 	void
-	Model::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename)
+	Model::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename, Ogre::Node* parentNode)
 	{
 		// TODO: Allow for a parent node
 		mSceneMgr = sceneMgr;
 		
 		mEntity = sceneMgr->createEntity(name, filename);
-		
-		this->attachToNewSceneNode();
+				
+		this->attachToNewSceneNode(parentNode);
 	}
 	
 	void
@@ -262,9 +262,15 @@ namespace Oni
 	
 	// ===== Private
 	Ogre::SceneNode*
-	Model::attachToNewSceneNode(){
-		Ogre::SceneNode* node;
-		node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	Model::attachToNewSceneNode(Ogre::Node* parentNode){
+		Ogre::SceneNode* node = mSceneMgr->createSceneNode();
+		
+		if(parentNode == NULL)
+		{
+			parentNode = mSceneMgr->getRootSceneNode();
+		}
+		
+		parentNode->addChild(node);
 		
 		node->attachObject(mEntity);
 		node->setPosition(0,0,0); // Spawn all objects at the origin
