@@ -21,7 +21,7 @@ static VALUE setPosition(VALUE self, VALUE pos);
 	// static VALUE setPosition(VALUE self, VALUE x, VALUE y, VALUE z);
 static VALUE getPosition(VALUE self);
 
-static VALUE setDirection(VALUE self, VALUE x, VALUE y, VALUE z);
+static VALUE setDirection(VALUE self, VALUE direction_vector);
 static VALUE getDirection(VALUE self);
 
 static VALUE setDiffuseColor(VALUE self, VALUE color);

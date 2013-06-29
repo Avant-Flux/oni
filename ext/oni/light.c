@@ -177,13 +177,13 @@ static VALUE getPosition(VALUE self){
 	return pos;
 }
 
-static VALUE setDirection(VALUE self, VALUE x, VALUE y, VALUE z){
+static VALUE setDirection(VALUE self, VALUE direction_vector){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
 	
-	double dbl_x = NUM2DBL(x);
-	double dbl_y = NUM2DBL(y);
-	double dbl_z = NUM2DBL(z);
+	double dbl_x = NUM2DBL(rb_ary_entry(direction_vector, 0));
+	double dbl_y = NUM2DBL(rb_ary_entry(direction_vector, 1));
+	double dbl_z = NUM2DBL(rb_ary_entry(direction_vector, 2));
 	
 	Oni_Light_setDirection(ptr_light, dbl_x, dbl_y, dbl_z);
 	return Qnil;
