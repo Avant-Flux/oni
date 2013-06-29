@@ -66,7 +66,7 @@ GameApplication::setupEnv()
 	mSceneMgr->setShadowTextureCount(1);
 	
 	// use small amount of ambient lighting
-	mSceneMgr->setAmbientLight(ColourValue(0.3f, 0.3f, 0.3f));
+	mSceneMgr->setAmbientLight(ColourValue::Black);
 }
 
 void // Load other props or objects
