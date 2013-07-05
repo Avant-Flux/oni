@@ -226,7 +226,7 @@ static VALUE translate(int argc, VALUE *argv, VALUE self){
 }
 
 static VALUE resetOrientation(VALUE self){
-	
+	return Qnil;
 }
 
 static VALUE getOrientation(int argc, VALUE *argv, VALUE self){
