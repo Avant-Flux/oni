@@ -20,18 +20,6 @@ extern "C" {
 		return track->getPlaybackRate();
 	}
 	
-	void Oni_Animation_Track_setFadeInTime(Oni_Animation_TrackPtr obj, double fadeTime){
-		Oni::AnimationTrack* track = (Oni::AnimationTrack*)(obj);
-		
-		track->setFadeInTime(fadeTime);
-	}
-	
-	void Oni_Animation_Track_setFadeOutTime(Oni_Animation_TrackPtr obj, double fadeTime){
-		Oni::AnimationTrack* track = (Oni::AnimationTrack*)(obj);
-		
-		track->setFadeOutTime(fadeTime);
-	}
-	
 	const char* Oni_Animation_Track_getAnimationName(Oni_Animation_TrackPtr obj){
 		Oni::AnimationTrack* track = (Oni::AnimationTrack*)(obj);
 		

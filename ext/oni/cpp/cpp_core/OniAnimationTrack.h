@@ -18,9 +18,6 @@ namespace Oni
 		void setPlaybackRate(Ogre::Real rate);
 		Ogre::Real getPlaybackRate();
 		
-		void setFadeInTime(Ogre::Real fadeTime);
-		void setFadeOutTime(Ogre::Real fadeTime);
-		
 		// Delegation
 		// Should expose ALL methods for Animation track
 		

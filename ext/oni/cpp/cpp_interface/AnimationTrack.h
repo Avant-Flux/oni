@@ -20,9 +20,6 @@ extern "C" {
 	void Oni_Animation_Track_setPlaybackRate(Oni_Animation_TrackPtr obj, double rate);
 	double Oni_Animation_Track_getPlaybackRate(Oni_Animation_TrackPtr obj);
 	
-	void Oni_Animation_Track_setFadeInTime(Oni_Animation_TrackPtr obj, double fadeTime);
-	void Oni_Animation_Track_setFadeOutTime(Oni_Animation_TrackPtr obj, double fadeTime);
-	
 	// Delegation
 	const char* Oni_Animation_Track_getAnimationName(Oni_Animation_TrackPtr obj);
 	double Oni_Animation_Track_getTimePosition(Oni_Animation_TrackPtr obj);

@@ -35,9 +35,6 @@ namespace Oni
 			
 			track->setLoop(true);
 			
-			track->setFadeInTime(0);
-			track->setFadeOutTime(0);
-			
 			mAnims[a->getAnimationName()] = track;
 		}
 	}

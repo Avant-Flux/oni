@@ -39,16 +39,4 @@ namespace Oni
 	{
 		return mPlaybackRate;
 	}
-	
-	void
-	AnimationTrack::setFadeInTime(Ogre::Real fadeTime)
-	{
-		mFadeInTime = fadeTime;
-	}
-	
-	void
-	AnimationTrack::setFadeOutTime(Ogre::Real fadeTime)
-	{
-		mFadeOutTime = fadeTime;
-	}
 }

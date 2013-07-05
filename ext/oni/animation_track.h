@@ -13,9 +13,6 @@ static VALUE update(VALUE self, VALUE dt);
 static VALUE enable(VALUE self);
 static VALUE disable(VALUE self);
 
-static VALUE fadeIn(VALUE self, VALUE t, VALUE block);
-static VALUE fadeOut(VALUE self, VALUE t, VALUE block);
-
 static VALUE setWeight(VALUE self, VALUE weight);
 static VALUE getWeight(VALUE self);
 
