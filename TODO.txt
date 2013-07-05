@@ -27,3 +27,20 @@ TODO: Allow for cross-compiling of Windows gems
 TODO: Pass correct cmake parameters when compiling for Windows
 TODO: Warn when attempting to build gem natively on Windows
 TODO: Make all include paths in CMakeLists based on paths that apply to all users
+
+
+TODO: Create setViewport() getViewport() in BaseApplication
+	need to grab viewpoint pointer to pass between different cameras, for camera switching
+
+TODO: Create programmable scene manager and programmable camera
+	Allows for changes in the way the scene manager is structured to be handled the ruby level
+	same goes for the camera
+	Wouldn't be super efficient, but would allow for rapid prototyping / livecoding
+
+TODO: Create Oni::Movable, because there is way to much code overlap between Model and Light
+	This might not help at all, because there's still going to be a bunch of overlap at the C-extension level
+
+TODO: Actually pass proper transform space to Ogre::Node in translate method for Light and Model instead of having to switch between three different function calls.
+
+
+TODO: Allow Oni::Model#setOrientation. Not so useful for gameplay scripting, but useful for level loading, to allow static assets to be rotated in 3D space.
