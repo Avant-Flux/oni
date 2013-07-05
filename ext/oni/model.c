@@ -226,6 +226,11 @@ static VALUE translate(int argc, VALUE *argv, VALUE self){
 }
 
 static VALUE resetOrientation(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	Oni_Model_resetOrientation(ptr_model);
+	
 	return Qnil;
 }
 

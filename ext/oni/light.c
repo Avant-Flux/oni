@@ -214,6 +214,11 @@ static VALUE translate(int argc, VALUE *argv, VALUE self){
 }
 
 static VALUE resetOrientation(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	Oni_Light_resetOrientation(ptr_light);
+	
 	return Qnil;
 }
 
@@ -239,8 +244,8 @@ static VALUE rotate3D(VALUE self, VALUE quat){
 	// Only for snapping to a given orientation
 	// Do not attempt to use with any sort of interpolation
 	
-	Oni_LightPtr ptr_model;
-	Data_Get_Struct(self, Oni_LightPtr, ptr_model);
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
 	
 	// TODO: Take single argument of one array - interpreted as a vector
 	// RARRAY(quat)->ptr[0];
@@ -254,7 +259,7 @@ static VALUE rotate3D(VALUE self, VALUE quat){
 	double dbl_y = NUM2DBL(y);
 	double dbl_z = NUM2DBL(z);
 	
-	Oni_Light_rotate(ptr_model, dbl_w, dbl_x, dbl_y, dbl_z);
+	Oni_Light_rotate(ptr_light, dbl_w, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
 }
