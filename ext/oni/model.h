@@ -26,16 +26,19 @@ static VALUE setPosition(VALUE self, VALUE pos);
 static VALUE translate(int argc, VALUE *argv, VALUE self);
 	// static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z, VALUE transform_space);
 
+
+static VALUE resetOrientation(VALUE self);
+static VALUE getOrientation(int argc, VALUE *argv, VALUE self);
+static VALUE setOrientation(VALUE self, VALUE quat);
+
+static VALUE rotate3D(VALUE self, VALUE quat);
 static VALUE pitch(VALUE self, VALUE radians);
 static VALUE yaw(VALUE self, VALUE radians);
 static VALUE roll(VALUE self, VALUE radians);
 
-static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z);
-
-static VALUE resetOrientation(VALUE self);
 static VALUE getRotation(VALUE self);
 static VALUE setRotation(VALUE self, VALUE radians);
-static VALUE rotate3D(VALUE self, VALUE quat);
+// static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z);
 
 static VALUE scale(VALUE self, VALUE x, VALUE y, VALUE z);
 static VALUE setScale(VALUE self, VALUE scale);

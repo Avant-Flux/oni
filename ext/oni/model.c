@@ -22,15 +22,18 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "position=", setPosition, 1);
 	rb_define_method(klass, "translate", translate, -1);
 	
+	// Note: should probably flip this to rotation_2d and rotation
+	rb_define_method(klass, "reset_orientation", resetOrientation, 0);
+	rb_define_method(klass, "orientation", getOrientation, -1);
+	rb_define_method(klass, "orientation=", setOrientation, 1);
+	
+	rb_define_method(klass, "rotate_3D", rotate3D, 1);
 	rb_define_method(klass, "pitch", pitch, 1);
 	rb_define_method(klass, "yaw", yaw, 1);
 	rb_define_method(klass, "roll", roll, 1);
 	
-	// Note: should probably flip this to rotation_2d and rotation
-	rb_define_method(klass, "reset_orientation", resetOrientation, 0);
 	rb_define_method(klass, "rotation", getRotation, 0);
 	rb_define_method(klass, "rotation=", setRotation, 1);
-	rb_define_method(klass, "rotate_3D", rotate3D, 1);
 	
 	rb_define_method(klass, "scale", scale, 3);
 	rb_define_method(klass, "scale=", setScale, 1);
@@ -222,6 +225,52 @@ static VALUE translate(int argc, VALUE *argv, VALUE self){
 	return Qnil;
 }
 
+static VALUE resetOrientation(VALUE self){
+	
+}
+
+static VALUE getOrientation(int argc, VALUE *argv, VALUE self){
+	// takes one optional parameter, which determines what type to return
+	// Returns orientation in one of two formats:
+		// Euler rotations
+		// Quaternion
+	
+	return Qnil;
+}
+
+static VALUE setOrientation(VALUE self, VALUE quat){
+	// There's probably a faster way to do this at the C++ level
+	resetOrientation(self);
+	rotate3D(self, quat);
+	
+	return Qnil;
+}
+
+static VALUE rotate3D(VALUE self, VALUE quat){
+	// Convenience method
+	// Only for snapping to a given orientation
+	// Do not attempt to use with any sort of interpolation
+	
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	// TODO: Take single argument of one array - interpreted as a vector
+	// RARRAY(quat)->ptr[0];
+	VALUE w = rb_ary_entry(quat, 0);
+	VALUE x = rb_ary_entry(quat, 1);
+	VALUE y = rb_ary_entry(quat, 2);
+	VALUE z = rb_ary_entry(quat, 3);
+	
+	double dbl_w = NUM2DBL(w);
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Model_rotate(ptr_model, dbl_w, dbl_x, dbl_y, dbl_z);
+	
+	return Qnil;
+}
+
 static VALUE pitch(VALUE self, VALUE radians){
 	Oni_ModelPtr ptr_model;
 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
@@ -252,22 +301,19 @@ static VALUE roll(VALUE self, VALUE radians){
 	return Qnil;
 }
 
-static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z){
-	Oni_ModelPtr ptr_model;
-	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+// DEPRECIATED
+// static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z){
+// 	Oni_ModelPtr ptr_model;
+// 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
 	
-	double dbl_x = NUM2DBL(x);
-	double dbl_y = NUM2DBL(y);
-	double dbl_z = NUM2DBL(z);
+// 	double dbl_x = NUM2DBL(x);
+// 	double dbl_y = NUM2DBL(y);
+// 	double dbl_z = NUM2DBL(z);
 	
-	Oni_Model_rotateTo(ptr_model, dbl_x,dbl_y,dbl_z);
+// 	Oni_Model_rotateTo(ptr_model, dbl_x,dbl_y,dbl_z);
 	
-	return Qnil;
-}
-
-static VALUE resetOrientation(VALUE self){
-	
-}
+// 	return Qnil;
+// }
 
 static VALUE getRotation(VALUE self){
 	Oni_ModelPtr ptr_model;
@@ -287,31 +333,6 @@ static VALUE setRotation(VALUE self, VALUE radians){
 	double dbl_radians = NUM2DBL(radians);
 	
 	Oni_Model_setRotation(ptr_model, dbl_radians);
-	
-	return Qnil;
-}
-
-static VALUE rotate3D(VALUE self, VALUE quat){
-	// Convenience method
-	// Only for snapping to a given orientation
-	// Do not attempt to use with any sort of interpolation
-	
-	Oni_ModelPtr ptr_model;
-	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
-	
-	// TODO: Take single argument of one array - interpreted as a vector
-	// RARRAY(quat)->ptr[0];
-	VALUE w = rb_ary_entry(quat, 0);
-	VALUE x = rb_ary_entry(quat, 1);
-	VALUE y = rb_ary_entry(quat, 2);
-	VALUE z = rb_ary_entry(quat, 3);
-	
-	double dbl_w = NUM2DBL(w);
-	double dbl_x = NUM2DBL(x);
-	double dbl_y = NUM2DBL(y);
-	double dbl_z = NUM2DBL(z);
-	
-	Oni_Model_rotate(ptr_model, dbl_w, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
 }

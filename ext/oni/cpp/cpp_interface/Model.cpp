@@ -129,11 +129,11 @@ extern "C" {
 		Oni::Model* model = (Oni::Model*)(obj);
 		
 		switch(ts){
-			case LOCAL:	
+			case LOCAL:
 				model->translate(x,y,z, Ogre::Node::TS_LOCAL);
 				break;
-			case PARENT:	
-				model->translate(x,y,z, Ogre::Node::TS_PARENT);	
+			case PARENT:
+				model->translate(x,y,z, Ogre::Node::TS_PARENT);
 				break;
 			case WORLD:
 				model->translate(x,y,z, Ogre::Node::TS_WORLD);
@@ -158,6 +158,13 @@ extern "C" {
 		Oni::Model* model = (Oni::Model*)(obj);
 		
 		model->resetOrientation();
+	}
+	
+	void Oni_Model_setOrientation(Oni_ModelPtr obj, double w, double x, double y, double z)
+	{
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		model->setOrientation(w,x,y,z);
 	}
 	
 	void Oni_Model_rotate(Oni_ModelPtr obj, double w, double x, double y, double z)

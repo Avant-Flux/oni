@@ -172,14 +172,14 @@ namespace Oni
 	void
 	Model::translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
 	{
-		// Moves the node along the Cartesian axes. 
+		// Moves the node along the Cartesian axes.
 		mEntity->getParentNode()->translate(x,y,z, relativeTo);
 	}
 	
 	void
 	Model::translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo)
 	{
-		// Moves the node along arbitrary axes. 
+		// Moves the node along arbitrary axes.
 		mEntity->getParentNode()->translate(axes, x,y,z, relativeTo);
 	}
 	
@@ -188,6 +188,12 @@ namespace Oni
 	Model::resetOrientation()
 	{
 		mEntity->getParentNode()->resetOrientation();
+	}
+	
+	void
+	Model::setOrientation(Ogre::Real w, Ogre::Real x, Ogre::Real y, Ogre::Real z)
+	{
+		mEntity->getParentNode()->setOrientation(w,x,y,z);
 	}
 	
 	void
@@ -222,7 +228,7 @@ namespace Oni
 		// Ogre::Vector3 src = mEntity->getParentNode()->getOrientation() * Ogre::Vector3::UNIT_X;
 		mEntity->getParentNode()->resetOrientation();
 		
-		Ogre::Quaternion quat = Ogre::Vector3::UNIT_X.getRotationTo(vec); 
+		Ogre::Quaternion quat = Ogre::Vector3::UNIT_X.getRotationTo(vec);
 		mEntity->getParentNode()->setOrientation(quat);
 	}
 
