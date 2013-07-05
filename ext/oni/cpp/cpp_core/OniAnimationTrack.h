@@ -66,9 +66,6 @@ namespace Oni
 	private:
 		Ogre::AnimationState* mAnimationState;
 		
-		Ogre::Real mFadeInTime;
-		Ogre::Real mFadeOutTime;
-		
 		Ogre::Real mPlaybackRate;
 	};
 }
