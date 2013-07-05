@@ -16,6 +16,26 @@ namespace Oni
 		
 		Ogre::Node* getParentNode();
 		
+		// Manipulate Node the light is attached to
+			// Position
+			void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z);
+			const Ogre::Vector3& getPosition();
+			
+			void translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
+			void translate(const Ogre::Matrix3 &axes, Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);
+			
+			// Rotation
+			void resetOrientation();
+			void setOrientation(Ogre::Real w, Ogre::Real x, Ogre::Real y, Ogre::Real z);
+			
+			void rotate(const Ogre::Quaternion &q, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
+			void pitch(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
+			void yaw(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
+			void roll(const Ogre::Radian &angle, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_LOCAL);
+			
+			void rotateTo(double x, double y, double z);
+		// ----------
+		
 		void setType(Ogre::Light::LightTypes type){mLight->setType(type);};
 		Ogre::Light::LightTypes getType(void) const{ return mLight->getType();};
 			// LT_POINT 	
@@ -39,8 +59,8 @@ namespace Oni
 			Ogre::Real getAttenuationLinear(void) const{ return mLight->getAttenuationLinear();};
 			Ogre::Real getAttenuationQuadric(void) const{ return mLight->getAttenuationQuadric();};
 		
-		void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z){mLight->setPosition(x,y,z);};
-		const Ogre::Vector3& getPosition(void) const{ return mLight->getPosition();};
+		void setLightPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z){mLight->setPosition(x,y,z);};
+		const Ogre::Vector3& getLightPosition(void) const{ return mLight->getPosition();};
 		void setDirection(Ogre::Real x, Ogre::Real y, Ogre::Real z){mLight->setDirection(x,y,z);};
 		const Ogre::Vector3& getDirection(void) const{ return mLight->getDirection();};
 		

@@ -11,6 +11,26 @@ void Init_Oni_Light(VALUE outer){
 	rb_define_method(klass, "visible", getVisible, 0);
 	rb_define_method(klass, "visible=", setVisible, 1);
 	
+	
+	rb_define_method(klass, "position", getPosition, 0);
+	rb_define_method(klass, "position=", setPosition, 1);
+	rb_define_method(klass, "translate", translate, -1);
+	
+	// Note: should probably flip this to rotation_2d and rotation
+	rb_define_method(klass, "reset_orientation", resetOrientation, 0);
+	rb_define_method(klass, "orientation", getOrientation, -1);
+	rb_define_method(klass, "orientation=", setOrientation, 1);
+	
+	rb_define_method(klass, "rotate_3D", rotate3D, 1);
+	rb_define_method(klass, "pitch", pitch, 1);
+	rb_define_method(klass, "yaw", yaw, 1);
+	rb_define_method(klass, "roll", roll, 1);
+	
+	// rb_define_method(klass, "rotation", getRotation, 0);
+	// rb_define_method(klass, "rotation=", setRotation, 1);
+	
+	
+	
 	rb_define_method(klass, "type=", setType, 1);
 	rb_define_method(klass, "type", getType, 0);
 	
@@ -115,6 +135,186 @@ static VALUE setVisible(VALUE self, VALUE visible)
 	return Qnil;
 }
 
+
+static VALUE getPosition(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	// Returns an array
+	double dbl_position [3];
+	Oni_Light_getPosition(ptr_light, dbl_position);
+	
+	VALUE pos = rb_ary_new3(
+		3,
+		
+		rb_float_new(dbl_position[0]),
+		rb_float_new(dbl_position[1]),
+		rb_float_new(dbl_position[2])
+	);
+	
+	return pos;
+}
+
+static VALUE setPosition(VALUE self, VALUE pos)
+{
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	
+	// TODO: Take single argument of one array - interpreted as a vector
+	// RARRAY(pos)->ptr[0];
+	VALUE x = rb_ary_entry(pos, 0);
+	VALUE y = rb_ary_entry(pos, 1);
+	VALUE z = rb_ary_entry(pos, 2);
+	
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Light_setPosition(ptr_light, dbl_x, dbl_y, dbl_z);
+	
+	return Qnil;
+}
+
+static VALUE translate(int argc, VALUE *argv, VALUE self){
+	// VALUE self, VALUE x, VALUE y, VALUE z, VALUE transform_space
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_x = NUM2DBL(argv[0]);
+	double dbl_y = NUM2DBL(argv[1]);
+	double dbl_z = NUM2DBL(argv[2]);
+	
+	// transform space should be a symbol, either :local, :parent, or :world
+	ID local = rb_intern("local");
+	ID parent = rb_intern("parent");
+	ID world = rb_intern("world");
+	
+	ID ts;
+	if(argc == 4){
+		ts = SYM2ID(argv[3]);
+	}
+	else{
+		// Default transform space
+		ts = rb_intern("parent");
+	}
+	
+	
+	if(ts == local){
+		Oni_Light_translate(ptr_light, dbl_x, dbl_y, dbl_z, LOCAL);
+	}
+	else if(ts == parent){
+		Oni_Light_translate(ptr_light, dbl_x, dbl_y, dbl_z, PARENT);
+	}
+	else if(ts == world){
+		Oni_Light_translate(ptr_light, dbl_x, dbl_y, dbl_z, WORLD);
+	}
+	
+	return Qnil;
+}
+
+static VALUE resetOrientation(VALUE self){
+	return Qnil;
+}
+
+static VALUE getOrientation(int argc, VALUE *argv, VALUE self){
+	// takes one optional parameter, which determines what type to return
+	// Returns orientation in one of two formats:
+		// Euler rotations
+		// Quaternion
+	
+	return Qnil;
+}
+
+static VALUE setOrientation(VALUE self, VALUE quat){
+	// There's probably a faster way to do this at the C++ level
+	resetOrientation(self);
+	rotate3D(self, quat);
+	
+	return Qnil;
+}
+
+static VALUE rotate3D(VALUE self, VALUE quat){
+	// Convenience method
+	// Only for snapping to a given orientation
+	// Do not attempt to use with any sort of interpolation
+	
+	Oni_LightPtr ptr_model;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_model);
+	
+	// TODO: Take single argument of one array - interpreted as a vector
+	// RARRAY(quat)->ptr[0];
+	VALUE w = rb_ary_entry(quat, 0);
+	VALUE x = rb_ary_entry(quat, 1);
+	VALUE y = rb_ary_entry(quat, 2);
+	VALUE z = rb_ary_entry(quat, 3);
+	
+	double dbl_w = NUM2DBL(w);
+	double dbl_x = NUM2DBL(x);
+	double dbl_y = NUM2DBL(y);
+	double dbl_z = NUM2DBL(z);
+	
+	Oni_Light_rotate(ptr_model, dbl_w, dbl_x, dbl_y, dbl_z);
+	
+	return Qnil;
+}
+
+static VALUE pitch(VALUE self, VALUE radians){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_radians = NUM2DBL(radians);
+	Oni_Light_pitch(ptr_light, dbl_radians);
+	
+	return Qnil;
+}
+
+static VALUE yaw(VALUE self, VALUE radians){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_radians = NUM2DBL(radians);
+	Oni_Light_yaw(ptr_light, dbl_radians);
+	
+	return Qnil;
+}
+
+static VALUE roll(VALUE self, VALUE radians){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double dbl_radians = NUM2DBL(radians);
+	Oni_Light_roll(ptr_light, dbl_radians);
+	
+	return Qnil;
+}
+
+// static VALUE getRotation(VALUE self){
+// 	Oni_LightPtr ptr_light;
+// 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+		
+// 	double dbl_rotation = Oni_Light_getRotation(ptr_light);
+	
+// 	VALUE rotation = rb_float_new(dbl_rotation);
+	
+// 	return rotation;
+// }
+
+// static VALUE setRotation(VALUE self, VALUE radians){
+// 	Oni_LightPtr ptr_light;
+// 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+// 	double dbl_radians = NUM2DBL(radians);
+	
+// 	Oni_Light_setRotation(ptr_light, dbl_radians);
+	
+// 	return Qnil;
+// }
+
+
+
+
+
 static VALUE setType(VALUE self, VALUE light_type){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
@@ -158,7 +358,7 @@ static VALUE getType(VALUE self){
 }
 
 
-static VALUE setPosition(VALUE self, VALUE pos){
+static VALUE setLightPosition(VALUE self, VALUE pos){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
 	
@@ -172,18 +372,18 @@ static VALUE setPosition(VALUE self, VALUE pos){
 	double dbl_y = NUM2DBL(y);
 	double dbl_z = NUM2DBL(z);
 	
-	Oni_Light_setPosition(ptr_light, dbl_x, dbl_y, dbl_z);
+	Oni_Light_setLightPosition(ptr_light, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
 }
 
-static VALUE getPosition(VALUE self){
+static VALUE getLightPosition(VALUE self){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
 	
 	// Returns an array
 	double dbl_position [3];
-	Oni_Light_getDirection(ptr_light, dbl_position);
+	Oni_Light_getLightPosition(ptr_light, dbl_position);
 	
 	VALUE pos = rb_ary_new3(
 		3,

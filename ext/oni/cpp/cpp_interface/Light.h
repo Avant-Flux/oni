@@ -21,6 +21,20 @@ extern "C" {
 	void Oni_Light_update(Oni_LightPtr obj, double dt);
 	
 	Ogre_NodePtr Oni_Light_getParentNode(Oni_LightPtr obj);
+		void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z);
+		void Oni_Light_getPosition(Oni_LightPtr obj, double* position);
+		
+		void Oni_Light_translate(Oni_LightPtr obj, double x, double y, double z, OniTransformSpace ts);
+		
+		void Oni_Light_resetOrientation(Oni_LightPtr obj);
+		void Oni_Light_setOrientation(Oni_LightPtr obj, double w, double x, double y, double z);
+		
+		void Oni_Light_rotate(Oni_LightPtr obj, double w, double x, double y, double z);
+		void Oni_Light_pitch(Oni_LightPtr obj, double radians);
+		void Oni_Light_yaw(Oni_LightPtr obj, double radians);
+		void Oni_Light_roll(Oni_LightPtr obj, double radians);
+	
+	
 	
 	int Oni_Light_getVisible(Oni_LightPtr obj);
 	void Oni_Light_setVisible(Oni_LightPtr obj, int visible);
@@ -28,8 +42,8 @@ extern "C" {
 	void Oni_Light_setType(Oni_LightPtr obj, int light_type);
 	int Oni_Light_getType(Oni_LightPtr obj);
 	
-	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z);
-	void Oni_Light_getPosition(Oni_LightPtr obj, double* position);
+	void Oni_Light_setLightPosition(Oni_LightPtr obj, double x, double y, double z);
+	void Oni_Light_getLightPosition(Oni_LightPtr obj, double* position);
 	
 	void Oni_Light_setDirection(Oni_LightPtr obj, double x, double y, double z);
 	void Oni_Light_getDirection(Oni_LightPtr ob, double* direction);

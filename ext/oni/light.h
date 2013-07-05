@@ -14,12 +14,35 @@ static VALUE update(VALUE self, VALUE dt);
 static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 
+
+static VALUE getPosition(VALUE self);
+static VALUE setPosition(VALUE self, VALUE pos);
+static VALUE translate(int argc, VALUE *argv, VALUE self);
+	// static VALUE translate(VALUE self, VALUE x, VALUE y, VALUE z, VALUE transform_space);
+
+static VALUE resetOrientation(VALUE self);
+static VALUE getOrientation(int argc, VALUE *argv, VALUE self);
+	// static VALUE getOrientation(VALUE self, VALUE sym_quat_or_euler_angles);
+static VALUE setOrientation(VALUE self, VALUE quat);
+	// static VALUE setOrientation(VALUE self, VALUE w, VALUE x, VALUE y, VALUE z);
+
+static VALUE rotate3D(VALUE self, VALUE quat);
+static VALUE pitch(VALUE self, VALUE radians);
+static VALUE yaw(VALUE self, VALUE radians);
+static VALUE roll(VALUE self, VALUE radians);
+
+// Manage 2D rotations in horizontal plane
+// static VALUE getRotation(VALUE self);
+// static VALUE setRotation(VALUE self, VALUE radians);
+
+
+
 static VALUE setType(VALUE self, VALUE light_type);
 static VALUE getType(VALUE self);
 	
-static VALUE setPosition(VALUE self, VALUE pos);
-	// static VALUE setPosition(VALUE self, VALUE x, VALUE y, VALUE z);
-static VALUE getPosition(VALUE self);
+static VALUE setLightPosition(VALUE self, VALUE pos);
+	// static VALUE setLightPosition(VALUE self, VALUE x, VALUE y, VALUE z);
+static VALUE getLightPosition(VALUE self);
 
 static VALUE setDirection(VALUE self, VALUE direction_vector);
 static VALUE getDirection(VALUE self);

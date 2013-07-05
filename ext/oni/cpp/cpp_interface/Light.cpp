@@ -28,7 +28,7 @@ extern "C" {
 		
 		std::string cpp_name(name);
 		
-		Ogre::Node* parentNode = (Ogre::Node*)(parent)
+		Ogre::Node* parentNode = (Ogre::Node*)(parent);
 		
 		light->initialize(game->getSceneMgr(), cpp_name, parentNode);
 	}
@@ -45,6 +45,78 @@ extern "C" {
 		Ogre::Node* node = light->getParentNode();
 		return (Ogre_NodePtr)(node);
 	}
+	
+	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setPosition(x,y,z);
+	}
+	
+	void Oni_Light_getPosition(Oni_LightPtr obj, double* position){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		Ogre::Vector3 vec_position = light->getPosition();
+		
+		// Assume array is already allocated
+		position[0] = vec_position.x;
+		position[1] = vec_position.y;
+		position[2] = vec_position.z;
+	}
+	
+	void Oni_Light_translate(Oni_LightPtr obj, double x, double y, double z, OniTransformSpace ts){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		switch(ts){
+			case LOCAL:
+				light->translate(x,y,z, Ogre::Node::TS_LOCAL);
+				break;
+			case PARENT:
+				light->translate(x,y,z, Ogre::Node::TS_PARENT);
+				break;
+			case WORLD:
+				light->translate(x,y,z, Ogre::Node::TS_WORLD);
+				break;
+		}
+	}
+	
+	
+	void Oni_Light_resetOrientation(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->resetOrientation();
+	}
+	
+	void Oni_Light_setOrientation(Oni_LightPtr obj, double w, double x, double y, double z){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setOrientation(w,x,y,z);
+	}
+	
+	void Oni_Light_rotate(Oni_LightPtr obj, double w, double x, double y, double z){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		Ogre::Quaternion quat = Ogre::Quaternion(w,x,y,z);
+		light->rotate(quat);
+	}
+	
+	void Oni_Light_pitch(Oni_LightPtr obj, double radians){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->pitch(Ogre::Radian(radians));
+	}
+	
+	void Oni_Light_yaw(Oni_LightPtr obj, double radians){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->yaw(Ogre::Radian(radians));
+	}
+	
+	void Oni_Light_roll(Oni_LightPtr obj, double radians){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->roll(Ogre::Radian(radians));
+	}
+	
 	
 	int Oni_Light_getVisible(Oni_LightPtr obj){
 		Oni::Light* light = (Oni::Light*)(obj);
@@ -101,16 +173,19 @@ extern "C" {
 		return light_type;
 	}
 	
-	void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z){
+	// Set position relative to node (ie, inside the node)
+	// rather than the position of the node itself.
+	void Oni_Light_setLightPosition(Oni_LightPtr obj, double x, double y, double z){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
-		light->setPosition(x,y,z);
+		light->setLightPosition(x,y,z);
 	}
 	
-	void Oni_Light_getPosition(Oni_LightPtr obj, double* position){
+	// Return the position of the light itself, not it's parent node
+	void Oni_Light_getLightPosition(Oni_LightPtr obj, double* position){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
-		Ogre::Vector3 vec_position = light->getPosition();
+		Ogre::Vector3 vec_position = light->getLightPosition();
 		
 		// Assume array is already allocated
 		position[0] = vec_position.x;

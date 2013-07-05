@@ -11,6 +11,8 @@ typedef void* VALUE; // Mimic the ruby VALUE type
 
 #endif /* __cplusplus */
 
+typedef enum { LOCAL, PARENT, WORLD } OniTransformSpace;
+
 typedef void* Ogre_WindowPtr;
 typedef void* Ogre_CameraPtr;
 typedef void* Ogre_NodePtr;
