@@ -48,12 +48,17 @@ extern "C" {
 	void Oni_Light_setDirection(Oni_LightPtr obj, double x, double y, double z);
 	void Oni_Light_getDirection(Oni_LightPtr ob, double* direction);
 	
+	void Oni_Light_setSpotlightRange(Oni_LightPtr obj, double innerAngle, double outerAngle, double falloff);
+	
 	void Oni_Light_setDiffuseColor(Oni_LightPtr obj, double r, double g, double b);
 	void Oni_Light_setSpecularColor(Oni_LightPtr obj, double r, double g, double b);
 	
 	void Oni_Light_setAttenuation(Oni_LightPtr obj, double range, double constant, double linear, double quadratic);
 	
 	void Oni_Light_setPowerScale(Oni_LightPtr obj, double power);
+	
+	int Oni_Light_getCastShadows(Oni_LightPtr obj);
+	void Oni_Light_setCastShadows(Oni_LightPtr obj, int enabled);
 	
 	void Oni_Light_setShadowFarDistance(Oni_LightPtr obj, double distance);
 	void Oni_Light_resetShadowFarDistance(Oni_LightPtr obj);

@@ -47,12 +47,17 @@ static VALUE getLightPosition(VALUE self);
 static VALUE setDirection(VALUE self, VALUE direction_vector);
 static VALUE getDirection(VALUE self);
 
+static VALUE setSpotlightRange(VALUE self, VALUE array);
+
 static VALUE setDiffuseColor(VALUE self, VALUE color);
 static VALUE setSpecularColor(VALUE self, VALUE color);
 
 static VALUE setAttenuation(VALUE self, VALUE attenuation);
 
 static VALUE setPowerScale(VALUE self, VALUE power);
+
+static VALUE setCastShadows(VALUE self, VALUE enabled);
+static VALUE getCastShadows(VALUE self);
 
 static VALUE setShadowFarDistance(VALUE self, VALUE distance);
 static VALUE resetShadowFarDistance(VALUE self);

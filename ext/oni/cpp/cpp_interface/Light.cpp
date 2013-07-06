@@ -210,6 +210,12 @@ extern "C" {
 		direction[2] = vec_direction.z;
 	}
 	
+	void Oni_Light_setSpotlightRange(Oni_LightPtr obj, double innerAngle, double outerAngle, double falloff){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		light->setSpotlightRange(Ogre::Radian(innerAngle), Ogre::Radian(outerAngle), falloff);
+	}
+	
 	void Oni_Light_setDiffuseColor(Oni_LightPtr obj, double r, double g, double b){
 		Oni::Light* light = (Oni::Light*)(obj);
 		
@@ -230,6 +236,28 @@ extern "C" {
 		Oni::Light* light = (Oni::Light*)(obj);
 		
 		light->setPowerScale(power);
+	}
+	
+	int Oni_Light_getCastShadows(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		if(light->getCastShadows()){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	void Oni_Light_setCastShadows(Oni_LightPtr obj, int enabled){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		if(enabled){
+			light->setCastShadows(true);
+		}
+		else{
+			light->setCastShadows(false);
+		}
 	}
 	
 	void Oni_Light_setShadowFarDistance(Oni_LightPtr obj, double distance){

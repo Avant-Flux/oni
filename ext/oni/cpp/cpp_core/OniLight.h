@@ -149,6 +149,10 @@ namespace Oni
 		void visitRenderables(Ogre::Renderable::Visitor* visitor, bool debugRenderables = false){return mLight->visitRenderables(visitor, debugRenderables);};
 		
 		
+		bool getCastShadows(){return mLight->getCastShadows();};
+		void setCastShadows(bool enabled){mLight->setCastShadows(enabled);}
+		
+		
 		// maximum distance away from the camera that shadows by this light will be visible.
 		void setShadowFarDistance(Ogre::Real distance){mLight->setShadowFarDistance(distance);};
 		void resetShadowFarDistance(void){mLight->resetShadowFarDistance();};

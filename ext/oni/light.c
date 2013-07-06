@@ -34,11 +34,13 @@ void Init_Oni_Light(VALUE outer){
 	rb_define_method(klass, "type=", setType, 1);
 	rb_define_method(klass, "type", getType, 0);
 	
-	rb_define_method(klass, "position=", setPosition, 1);
-	rb_define_method(klass, "position", getPosition, 0);
+	rb_define_method(klass, "light_position=", setLightPosition, 1);
+	rb_define_method(klass, "light_position", getLightPosition, 0);
 	
 	rb_define_method(klass, "direction=", setDirection, 1);
 	rb_define_method(klass, "direction", getDirection, 0);
+	
+	rb_define_method(klass, "spotlight_range=", setSpotlightRange, 1);
 	
 	rb_define_method(klass, "diffuse=", setDiffuseColor, 1);
 	rb_define_method(klass, "specular=", setSpecularColor, 1);
@@ -47,6 +49,9 @@ void Init_Oni_Light(VALUE outer){
 	rb_define_method(klass, "attenuation=", setAttenuation, 1);
 	
 	rb_define_method(klass, "power_scale=", setPowerScale, 1);
+	
+	rb_define_method(klass, "cast_shadows=", setCastShadows, 1);
+	rb_define_method(klass, "cast_shadows", getCastShadows, 0);
 	
 	rb_define_method(klass, "shadow_far_distance=", setShadowFarDistance, 1);
 	rb_define_method(klass, "reset_shadow_far_distance", resetShadowFarDistance, 0);
@@ -433,6 +438,20 @@ static VALUE getDirection(VALUE self){
 	return direction;
 }
 
+static VALUE setSpotlightRange(VALUE self, VALUE array){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	double inner_angle = NUM2DBL(rb_ary_entry(array, 0));
+	double outer_angle = NUM2DBL(rb_ary_entry(array, 1));
+	double falloff = NUM2DBL(rb_ary_entry(array, 2));
+	
+	
+	Oni_Light_setSpotlightRange(ptr_light, inner_angle, outer_angle, falloff);
+	
+	return Qnil;
+}
+
 static VALUE setDiffuseColor(VALUE self, VALUE color){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
@@ -495,6 +514,30 @@ static VALUE setPowerScale(VALUE self, VALUE power){
 	
 	return Qnil;
 }
+
+static VALUE setCastShadows(VALUE self, VALUE enabled){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	Oni_Light_setCastShadows(ptr_light, RTEST(enabled));
+	
+	return Qnil;
+}
+
+static VALUE getCastShadows(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	if(Oni_Light_getCastShadows(ptr_light))
+	{
+		return Qtrue;
+	}
+	else
+	{
+		return Qfalse;
+	}
+}
+
 static VALUE setShadowFarDistance(VALUE self, VALUE distance){
 	Oni_LightPtr ptr_light;
 	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
