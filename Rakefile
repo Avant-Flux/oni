@@ -16,7 +16,7 @@ Rake::TestTask.new do |t|
 	
 	# t.test_files = ["test/test_window_creation.rb"]
 	
-	# t.test_files = ["test/test_camera.rb"]
+	t.test_files = ["test/test_camera.rb"]
 	
 	# t.test_files = ["test/test_quad_creation.rb"]
 	# t.test_files = ["test/test_keyboard_input.rb"]
@@ -33,7 +33,7 @@ Rake::TestTask.new do |t|
 	# t.test_files = ["test/test_get_animation.rb"]
 	
 	# t.test_files = ["test/test_attach_to_bone.rb"]
-	t.test_files = ["test/test_get_position_delta.rb"]
+	# t.test_files = ["test/test_get_position_delta.rb"]
 end
 
 

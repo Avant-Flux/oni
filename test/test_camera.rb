@@ -6,7 +6,14 @@ require 'glu'
 require 'oni'
 
 class Window < Oni::Window
-	def setup
+	def initialize
+		super("Test camera")
+		
+		@light = Oni::Light.new self, "Light"
+		@light.type = :point
+		@light.position = [-10, 40, 20]
+		@light.specular = [1.0, 1.0, 1.0]
+		
 		@a = Oni::Model.new(self, "Human_Male", "Human_Male.mesh")
 		@a.translate(0, 0, 0)
 		

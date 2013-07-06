@@ -8,12 +8,19 @@ require 'oni'
 require 'test/unit'
 
 class Window < Oni::Window
-	def setup
+	def initialize
+		super("Test animation time")
+		
 		@camera = Oni::Camera.new(self, "main_camera", 0) # TODO: Make z_order=0 by default
 		@camera.fov = 110
 		@camera.position = [0,30,40]
 		@camera.look_at [0,0,0]
 		@camera.near_clip_distance = 5
+		
+		@light = Oni::Light.new self, "Light"
+		@light.type = :point
+		@light.position = [-10, 40, 20]
+		@light.specular = [1.0, 1.0, 1.0]
 		
 		@a = Oni::Model.new(self, "Human_Male", "Human_Male.mesh")
 		@a.translate(0, 0, 0)
