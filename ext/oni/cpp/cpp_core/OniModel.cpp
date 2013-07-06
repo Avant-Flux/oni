@@ -58,7 +58,7 @@ namespace Oni
 		mSceneMgr = sceneMgr;
 		
 		mEntity = sceneMgr->createEntity(name, filename);
-				
+		
 		this->attachToNewSceneNode(parentNode);
 	}
 	

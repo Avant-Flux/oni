@@ -16,7 +16,7 @@ Rake::TestTask.new do |t|
 	
 	# t.test_files = ["test/test_window_creation.rb"]
 	
-	t.test_files = ["test/test_camera.rb"]
+	# t.test_files = ["test/test_camera.rb"]
 	
 	# t.test_files = ["test/test_quad_creation.rb"]
 	# t.test_files = ["test/test_keyboard_input.rb"]
@@ -25,6 +25,8 @@ Rake::TestTask.new do |t|
 	# t.test_files = ["test/test_agent_translation.rb"]
 	# t.test_files = ["test/test_agent_rotation.rb"]
 	# t.test_files = ["test/test_agent_scale.rb"]
+	
+	t.test_files = ["test/test_lighting.rb"]
 	
 	# t.test_files = ["test/test_animation_benchmark.rb"]
 	# t.test_files = ["test/test_animation_time.rb"]

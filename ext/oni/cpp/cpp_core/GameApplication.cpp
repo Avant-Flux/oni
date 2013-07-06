@@ -60,10 +60,11 @@ GameApplication::setupEnv()
 	using namespace Ogre;
 
 	// set shadow properties
-	mSceneMgr->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
-	mSceneMgr->setShadowColour(ColourValue(0.5, 0.5, 0.5));
+	mSceneMgr->setShadowTechnique(SHADOWTYPE_STENCIL_ADDITIVE);
+	mSceneMgr->setShadowColour(ColourValue(0.0, 0.0, 0.0));
 	mSceneMgr->setShadowTextureSize(1024);
 	mSceneMgr->setShadowTextureCount(1);
+	
 	
 	// use small amount of ambient lighting
 	mSceneMgr->setAmbientLight(ColourValue::Black);
