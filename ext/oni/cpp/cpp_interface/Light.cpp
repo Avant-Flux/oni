@@ -229,7 +229,9 @@ extern "C" {
 	}
 	
 	void Oni_Light_setAttenuation(Oni_LightPtr obj, double range, double constant, double linear, double quadratic){
+		Oni::Light* light = (Oni::Light*)(obj);
 		
+		light->setAttenuation(range, constant, linear, quadratic);
 	}
 	
 	void Oni_Light_setPowerScale(Oni_LightPtr obj, double power){
