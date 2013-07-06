@@ -117,6 +117,28 @@ extern "C" {
 		}
 	}
 	
+	int Oni_Model_getCastShadows(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		if(model->getCastShadows()){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
+	
+	void Oni_Model_setCastShadows(Oni_ModelPtr obj, int enabled){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		if(enabled){
+			model->setCastShadows(true);
+		}
+		else{
+			model->setCastShadows(false);
+		}
+	}
+	
 	
 	void Oni_Model_setPosition(Oni_ModelPtr obj, double x, double y, double z){
 		Oni::Model* model = (Oni::Model*)(obj);

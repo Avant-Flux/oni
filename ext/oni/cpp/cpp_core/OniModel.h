@@ -26,6 +26,10 @@ namespace Oni
 		bool getVisible();
 		void setVisible(bool visible);
 		
+		// Shadow casting
+		bool getCastShadows();
+		void setCastShadows(bool enabled);
+		
 		// Bounding Box
 		Ogre::Real getBoundingBoxWidth();
 		Ogre::Real getBoundingBoxDepth();

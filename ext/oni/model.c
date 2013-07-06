@@ -15,6 +15,9 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "visible=", setVisible, 1);
 	rb_define_method(klass, "visible?", getVisible, 0);
 	
+	rb_define_method(klass, "cast_shadows=", setCastShadows, 1);
+	rb_define_method(klass, "cast_shadows", getCastShadows, 0);
+	
 	rb_define_method(klass, "bb_width", getBoundingBoxWidth, 0);
 	rb_define_method(klass, "bb_depth", getBoundingBoxDepth, 0);
 	rb_define_method(klass, "bb_height", getBoundingBoxHeight, 0);
@@ -143,6 +146,29 @@ static VALUE setVisible(VALUE self, VALUE visible)
 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
 	
 	Oni_Model_setVisible(ptr_model, RTEST(visible));
+	
+	return Qnil;
+}
+
+static VALUE getCastShadows(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	if(Oni_Model_getCastShadows(ptr_model))
+	{
+		return Qtrue;
+	}
+	else
+	{
+		return Qfalse;
+	}
+}
+
+static VALUE setCastShadows(VALUE self, VALUE enabled){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	Oni_Model_setCastShadows(ptr_model, RTEST(enabled));
 	
 	return Qnil;
 }

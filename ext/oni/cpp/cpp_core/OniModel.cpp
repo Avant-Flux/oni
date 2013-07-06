@@ -136,6 +136,17 @@ namespace Oni
 		mEntity->setVisible(visible);
 	}
 	
+	// Shadow casting
+	bool Model::getCastShadows()
+	{
+		return mEntity->getCastShadows();
+	}
+	
+	void Model::setCastShadows(bool enabled)
+	{
+		mEntity->setCastShadows(enabled);
+	}
+	
 	// Bounding Box
 	Ogre::Real Model::getBoundingBoxWidth()
 	{

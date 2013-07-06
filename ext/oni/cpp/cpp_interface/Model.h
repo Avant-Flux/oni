@@ -29,6 +29,9 @@ extern "C" {
 	int Oni_Model_getVisible(Oni_ModelPtr obj);
 	void Oni_Model_setVisible(Oni_ModelPtr obj, int visible);
 	
+	int Oni_Model_getCastShadows(Oni_ModelPtr obj);
+	void Oni_Model_setCastShadows(Oni_ModelPtr obj, int enabled);
+	
 	double Oni_Model_getBoundingBoxWidth(Oni_ModelPtr obj);
 	double Oni_Model_getBoundingBoxDepth(Oni_ModelPtr obj);
 	double Oni_Model_getBoundingBoxHeight(Oni_ModelPtr obj);

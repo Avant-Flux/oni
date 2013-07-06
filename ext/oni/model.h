@@ -18,6 +18,9 @@ static VALUE isAttachedToBone(VALUE self);
 static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 
+static VALUE setCastShadows(VALUE self, VALUE enabled);
+static VALUE getCastShadows(VALUE self);
+
 static VALUE getBoundingBoxWidth(VALUE self);
 static VALUE getBoundingBoxDepth(VALUE self);
 static VALUE getBoundingBoxHeight(VALUE self);
