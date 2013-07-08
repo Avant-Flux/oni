@@ -1,10 +1,11 @@
 #include "model.h"
+#include "node_management.h"
 
 void Init_Oni_Model(VALUE outer){
 	VALUE klass = rb_define_class_under(outer, "Model", rb_cObject);
 	
 	rb_define_alloc_func(klass, alloc);
-	rb_define_method(klass, "initialize", initialize, 3);
+	rb_define_method(klass, "initialize", initialize, -1);
 	rb_define_method(klass, "update", update, 1);
 	
 	// rb_define_method(klass, "bone", getBone, 1);
@@ -49,11 +50,16 @@ static VALUE alloc(VALUE class){
 	return data;
 }
 
-static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE filename){	
+static VALUE initialize(int argc, VALUE *argv, VALUE self){	
 	// Ruby interface: Model.new(window, "name", "name.mesh")
 	
 	Oni_ModelPtr ptr_model;
 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	
+	VALUE window, name, filename, parent;
+	rb_scan_args(argc, argv, "31", &window, &name, &filename, &parent);
+	
 	
 	Ogre_WindowPtr ptr_window;
 	Data_Get_Struct(window, Ogre_WindowPtr, ptr_window);
@@ -61,7 +67,16 @@ static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE filename){
 	char* string_name = StringValueCStr(name);
 	char* string_filename = StringValueCStr(filename);
 	
-	Oni_Model_initialize(ptr_model, ptr_window, string_name, string_filename);
+	Ogre_NodePtr ptr_parent;
+	if(NIL_P(parent)){
+		ptr_parent = NULL;
+	}
+	else
+	{
+		ptr_parent = Oni_getNodePointer(parent);
+	}
+	
+	Oni_Model_initialize(ptr_model, ptr_window, string_name, string_filename, ptr_parent);
 	
 	return Qnil;
 }

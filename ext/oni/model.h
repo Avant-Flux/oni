@@ -8,7 +8,7 @@ void Init_Oni_Model(VALUE outer);
 
 static VALUE alloc(VALUE class);
 
-static VALUE initialize(VALUE self, VALUE window, VALUE name, VALUE filename);
+static VALUE initialize(int argc, VALUE *argv, VALUE self);
 static VALUE update(VALUE self, VALUE dt);
 
 static VALUE attachObjectToBone(VALUE self, VALUE name, VALUE obj);

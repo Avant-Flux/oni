@@ -22,14 +22,16 @@ extern "C" {
 		model->setVisible(false);
 	}
 
-	void Oni_Model_initialize(Oni_ModelPtr obj, Ogre_WindowPtr obj2, char* name, char* filename){
+	void Oni_Model_initialize(Oni_ModelPtr obj, Ogre_WindowPtr obj2, char* name, char* filename, Ogre_NodePtr parent){
 		Oni::Model* model = (Oni::Model*)(obj);
 		GameApplication* game = (GameApplication*)obj2;
 		
 		std::string cpp_name(name);
 		std::string cpp_filename(filename);
 		
-		model->initialize(game->getSceneMgr(), cpp_name, cpp_filename);
+		Ogre::Node* parentNode = (Ogre::Node*)(parent);
+		
+		model->initialize(game->getSceneMgr(), cpp_name, cpp_filename, parentNode);
 	}
 
 	void Oni_Model_update(Oni_ModelPtr obj, double dt){
