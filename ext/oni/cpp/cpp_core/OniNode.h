@@ -14,6 +14,8 @@ namespace Oni
 		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, Ogre::Node* parentNode=NULL);
 		virtual void update(Ogre::Real deltaTime);
 		
+		Ogre::SceneNode* getNode(){return mNode;};
+		
 		// Position
 		void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z);
 		

@@ -20,7 +20,7 @@ extern "C" {
 	void Oni_Node_initialize(Oni_NodePtr obj, Ogre_WindowPtr obj2, char* name, Ogre_NodePtr parent);
 	void Oni_Node_update(Oni_NodePtr obj, double dt);
 	
-	Ogre_NodePtr Oni_Node_getParentNode(Oni_NodePtr obj);
+	Ogre_NodePtr Oni_Node_getNode(Oni_NodePtr obj);
 	
 	void Oni_Node_setPosition(Oni_NodePtr obj, double x, double y, double z);
 	void Oni_Node_translate(Oni_NodePtr obj, double x, double y, double z, OniTransformSpace ts);
@@ -32,9 +32,6 @@ extern "C" {
 	void Oni_Node_pitch(Oni_NodePtr obj, double radians);
 	void Oni_Node_yaw(Oni_NodePtr obj, double radians);
 	void Oni_Node_roll(Oni_NodePtr obj, double radians);
-	
-	// Rotate to face the given vector - DEPRECIATED
-	void Oni_Node_rotateTo(Oni_NodePtr obj, double x, double y, double z);
 	
 	// Set rotation in horizontal plane
 	void Oni_Node_setRotation(Oni_NodePtr obj, double radians);
