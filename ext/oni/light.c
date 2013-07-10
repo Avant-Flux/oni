@@ -51,7 +51,7 @@ void Init_Oni_Light(VALUE outer){
 	rb_define_method(klass, "power_scale=", setPowerScale, 1);
 	
 	rb_define_method(klass, "cast_shadows=", setCastShadows, 1);
-	rb_define_method(klass, "cast_shadows", getCastShadows, 0);
+	rb_define_method(klass, "cast_shadows?", getCastShadows, 0);
 	
 	rb_define_method(klass, "shadow_far_distance=", setShadowFarDistance, 1);
 	rb_define_method(klass, "reset_shadow_far_distance", resetShadowFarDistance, 0);

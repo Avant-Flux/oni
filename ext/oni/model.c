@@ -17,7 +17,7 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "visible?", getVisible, 0);
 	
 	rb_define_method(klass, "cast_shadows=", setCastShadows, 1);
-	rb_define_method(klass, "cast_shadows", getCastShadows, 0);
+	rb_define_method(klass, "cast_shadows?", getCastShadows, 0);
 	
 	rb_define_method(klass, "bb_width", getBoundingBoxWidth, 0);
 	rb_define_method(klass, "bb_depth", getBoundingBoxDepth, 0);
