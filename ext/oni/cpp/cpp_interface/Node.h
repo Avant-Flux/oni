@@ -20,6 +20,8 @@ extern "C" {
 	void Oni_Node_initialize(Oni_NodePtr obj, Ogre_WindowPtr obj2, char* name, Ogre_NodePtr parent);
 	void Oni_Node_update(Oni_NodePtr obj, double dt);
 	
+	const char* Oni_Node_getName(Oni_NodePtr obj);
+	
 	Ogre_NodePtr Oni_Node_getNode(Oni_NodePtr obj);
 	
 	void Oni_Node_setPosition(Oni_NodePtr obj, double x, double y, double z);

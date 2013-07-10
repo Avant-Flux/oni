@@ -38,6 +38,12 @@ extern "C" {
 		node->update(dt);
 	}
 	
+	const char* Oni_Node_getName(Oni_NodePtr obj){
+		Oni::Node* node = (Oni::Node*)(obj);
+		
+		return node->getName().c_str();
+	}
+	
 	Ogre_NodePtr Oni_Node_getNode(Oni_NodePtr obj){
 		Oni::Node* node = (Oni::Node*)(obj);
 		

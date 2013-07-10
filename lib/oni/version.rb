@@ -1,3 +1,3 @@
 module Oni
-	VERSION = "0.05.0"
+	VERSION = "0.05.1"
 end

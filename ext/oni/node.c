@@ -8,6 +8,8 @@ void Init_Oni_Node(VALUE outer){
 	rb_define_method(klass, "initialize", initialize, -1);
 	rb_define_method(klass, "update", update, 1);
 	
+	rb_define_method(klass, "name", getName, 0);
+	
 	rb_define_method(klass, "visible=", setVisible, 1); // Manages visibility of all children
 	rb_define_method(klass, "visible?", getVisible, 0); // true if at least one child visible
 	
@@ -93,6 +95,16 @@ static VALUE update(VALUE self, VALUE dt){
 	Oni_Node_update(ptr_node, double_dt);
 	
 	return Qnil;
+}
+
+static VALUE getName(VALUE self){
+	Oni_NodePtr ptr_node;
+	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
+	
+	const char* string_name = Oni_Node_getName(ptr_node);
+	VALUE name = rb_str_new2(string_name);
+	
+	return name;
 }
 
 static VALUE getVisible(VALUE self)
