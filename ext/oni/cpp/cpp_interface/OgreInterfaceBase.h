@@ -16,6 +16,9 @@ typedef enum { LOCAL, PARENT, WORLD } OniTransformSpace;
 typedef void* Ogre_WindowPtr;
 typedef void* Ogre_CameraPtr;
 typedef void* Ogre_NodePtr;
+
+typedef void* Oni_NodePtr;
+
 typedef void* Oni_LightPtr;
 
 typedef void* Oni_ModelPtr;
