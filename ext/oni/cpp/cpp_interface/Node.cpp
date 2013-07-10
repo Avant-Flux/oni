@@ -38,11 +38,11 @@ extern "C" {
 		node->update(dt);
 	}
 	
-	Ogre_NodePtr Oni_Node_getParentNode(Oni_NodePtr obj){
+	Ogre_NodePtr Oni_Node_getNode(Oni_NodePtr obj){
 		Oni::Node* node = (Oni::Node*)(obj);
 		
-		Ogre::Node* ogre_node = node->getEntity()->getParentNode();
-		return (Ogre_NodePtr)(ogre_node);
+		// NOTE: This cast should work, but has the possibility of breakage
+		return (Ogre_NodePtr)(node->getNode());
 	}
 	
 	void Oni_Node_setPosition(Oni_NodePtr obj, double x, double y, double z){
@@ -119,15 +119,6 @@ extern "C" {
 		
 		node->roll(Ogre::Radian(radians));
 	}
-	
-	
-	// Rotate to face the given vector - DEPRECIATED
-	void Oni_Node_rotateTo(Oni_NodePtr obj, double x, double y, double z){
-		Oni::Node* node = (Oni::Node*)(obj);
-		
-		node->rotateTo(x,y,z);
-	}
-	
 	
 	// Set rotation in horizontal plane
 	void Oni_Node_setRotation(Oni_NodePtr obj, double radians){

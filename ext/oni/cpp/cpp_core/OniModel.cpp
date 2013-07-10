@@ -54,7 +54,6 @@ namespace Oni
 	void
 	Model::initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename, Ogre::Node* parentNode)
 	{
-		// TODO: Allow for a parent node
 		mSceneMgr = sceneMgr;
 		
 		mEntity = sceneMgr->createEntity(name, filename);

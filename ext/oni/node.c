@@ -12,7 +12,7 @@ void Init_Oni_Node(VALUE outer){
 	rb_define_method(klass, "visible?", getVisible, 0); // true if at least one child visible
 	
 	rb_define_method(klass, "cast_shadows=", setCastShadows, 1); // all children
-	rb_define_method(klass, "cast_shadows", getCastShadows, 0); // true if at least one child
+	rb_define_method(klass, "cast_shadows?", getCastShadows, 0); // true if at least one child
 	
 	// Ogre::Nodes does not implement these
 	// would be good to get bounding box based on all underlying elements though
@@ -100,14 +100,16 @@ static VALUE getVisible(VALUE self)
 	Oni_NodePtr ptr_node;
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
-	if(Oni_Node_getVisible(ptr_node))
-	{
-		return Qtrue;
-	}
-	else
-	{
-		return Qfalse;
-	}
+	// if(Oni_Node_getVisible(ptr_node))
+	// {
+	// 	return Qtrue;
+	// }
+	// else
+	// {
+	// 	return Qfalse;
+	// }
+	
+	return Qnil;
 }
 
 static VALUE setVisible(VALUE self, VALUE visible)
@@ -115,7 +117,7 @@ static VALUE setVisible(VALUE self, VALUE visible)
 	Oni_NodePtr ptr_node;
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
-	Oni_Node_setVisible(ptr_node, RTEST(visible));
+	// Oni_Node_setVisible(ptr_node, RTEST(visible));
 	
 	return Qnil;
 }
@@ -124,21 +126,23 @@ static VALUE getCastShadows(VALUE self){
 	Oni_NodePtr ptr_node;
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
-	if(Oni_Node_getCastShadows(ptr_node))
-	{
-		return Qtrue;
-	}
-	else
-	{
-		return Qfalse;
-	}
+	// if(Oni_Node_getCastShadows(ptr_node))
+	// {
+	// 	return Qtrue;
+	// }
+	// else
+	// {
+	// 	return Qfalse;
+	// }
+	
+	return Qnil;
 }
 
 static VALUE setCastShadows(VALUE self, VALUE enabled){
 	Oni_NodePtr ptr_node;
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
-	Oni_Node_setCastShadows(ptr_node, RTEST(enabled));
+	// Oni_Node_setCastShadows(ptr_node, RTEST(enabled));
 	
 	return Qnil;
 }
@@ -147,21 +151,24 @@ static VALUE getBoundingBoxWidth(VALUE self){
 	Oni_NodePtr ptr_node;
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
-	return rb_float_new(Oni_Node_getBoundingBoxWidth(ptr_node));
+	// return rb_float_new(Oni_Node_getBoundingBoxWidth(ptr_node));
+	return Qnil;
 }
 
 static VALUE getBoundingBoxDepth(VALUE self){
 	Oni_NodePtr ptr_node;
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
-	return rb_float_new(Oni_Node_getBoundingBoxDepth(ptr_node));
+	// return rb_float_new(Oni_Node_getBoundingBoxDepth(ptr_node));
+	return Qnil;
 }
 
 static VALUE getBoundingBoxHeight(VALUE self){
 	Oni_NodePtr ptr_node;
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
-	return rb_float_new(Oni_Node_getBoundingBoxHeight(ptr_node));
+	// return rb_float_new(Oni_Node_getBoundingBoxHeight(ptr_node));
+	return Qnil;
 }
 
 static VALUE setPosition(VALUE self, VALUE pos)
