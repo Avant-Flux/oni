@@ -14,6 +14,8 @@ namespace Oni
 		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, Ogre::Node* parentNode=NULL);
 		virtual void update(Ogre::Real deltaTime);
 		
+		std::string getName(){return mLight->getName();};
+		
 		Ogre::Node* getParentNode();
 		
 		// Manipulate Node the light is attached to

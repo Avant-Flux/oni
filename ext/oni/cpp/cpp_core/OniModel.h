@@ -14,6 +14,8 @@ namespace Oni
 		virtual void initialize(Ogre::SceneManager* sceneMgr, std::string& name, std::string& filename, Ogre::Node* parentNode=NULL);
 		virtual void update(Ogre::Real deltaTime);
 		
+		std::string getName(){return mEntity->getName();};
+		
 		// Necessary for extensibility
 		// May want to use Friend classes instead
 		Ogre::Entity* getEntity();

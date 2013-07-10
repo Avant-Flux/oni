@@ -11,6 +11,8 @@ static VALUE alloc(VALUE class);
 static VALUE initialize(int argc, VALUE *argv, VALUE self);
 static VALUE update(VALUE self, VALUE dt);
 
+static VALUE getName(VALUE self);
+
 static VALUE getVisible(VALUE self);
 static VALUE setVisible(VALUE self, VALUE visible);
 

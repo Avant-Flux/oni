@@ -39,6 +39,12 @@ extern "C" {
 		light->update(dt);
 	}
 	
+	const char* Oni_Light_getName(Oni_LightPtr obj){
+		Oni::Light* light = (Oni::Light*)(obj);
+		
+		return light->getName().c_str();
+	}
+	
 	Ogre_NodePtr Oni_Light_getParentNode(Oni_LightPtr obj){
 		Oni::Light* light = (Oni::Light*)(obj);
 		

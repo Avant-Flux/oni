@@ -8,6 +8,8 @@ void Init_Oni_Light(VALUE outer){
 	rb_define_method(klass, "initialize", initialize, -1);
 	rb_define_method(klass, "update", update, 1);
 	
+	rb_define_method(klass, "name", getName, 0);
+	
 	rb_define_method(klass, "visible", getVisible, 0);
 	rb_define_method(klass, "visible=", setVisible, 1);
 	
@@ -113,6 +115,16 @@ static VALUE update(VALUE self, VALUE dt){
 	Oni_Light_update(ptr_light, double_dt);
 	
 	return Qnil;
+}
+
+static VALUE getName(VALUE self){
+	Oni_LightPtr ptr_light;
+	Data_Get_Struct(self, Oni_LightPtr, ptr_light);
+	
+	const char* string_name = Oni_Light_getName(ptr_light);
+	VALUE name = rb_str_new2(string_name);
+	
+	return name;
 }
 
 static VALUE getVisible(VALUE self)

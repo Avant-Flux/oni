@@ -40,6 +40,12 @@ extern "C" {
 		model->update(dt);
 	}
 	
+	const char* Oni_Model_getName(Oni_ModelPtr obj){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		return model->getName().c_str();
+	}
+	
 	Ogre_NodePtr Oni_Model_getParentNode(Oni_ModelPtr obj){
 		Oni::Model* model = (Oni::Model*)(obj);
 		

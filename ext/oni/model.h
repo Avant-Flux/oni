@@ -11,6 +11,8 @@ static VALUE alloc(VALUE class);
 static VALUE initialize(int argc, VALUE *argv, VALUE self);
 static VALUE update(VALUE self, VALUE dt);
 
+static VALUE getName(VALUE self);
+
 static VALUE attachObjectToBone(VALUE self, VALUE name, VALUE obj);
 static VALUE detachObjectFromBone(VALUE self, VALUE obj);
 static VALUE isAttachedToBone(VALUE self);

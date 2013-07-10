@@ -20,6 +20,8 @@ extern "C" {
 	void Oni_Light_initialize(Oni_LightPtr obj, Ogre_WindowPtr obj2, char* name, Ogre_NodePtr parent);
 	void Oni_Light_update(Oni_LightPtr obj, double dt);
 	
+	const char* Oni_Light_getName(Oni_LightPtr obj);
+	
 	Ogre_NodePtr Oni_Light_getParentNode(Oni_LightPtr obj);
 		void Oni_Light_setPosition(Oni_LightPtr obj, double x, double y, double z);
 		void Oni_Light_getPosition(Oni_LightPtr obj, double* position);

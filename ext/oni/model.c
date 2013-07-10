@@ -8,6 +8,8 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "initialize", initialize, -1);
 	rb_define_method(klass, "update", update, 1);
 	
+	rb_define_method(klass, "name", getName, 0);
+	
 	// rb_define_method(klass, "bone", getBone, 1);
 	rb_define_method(klass, "attach_object_to_bone", attachObjectToBone, 2);
 	rb_define_method(klass, "detach_object_from_bone", detachObjectFromBone, 1);
@@ -91,6 +93,17 @@ static VALUE update(VALUE self, VALUE dt){
 	
 	return Qnil;
 }
+
+static VALUE getName(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	const char* string_name = Oni_Model_getName(ptr_model);
+	VALUE name = rb_str_new2(string_name);
+	
+	return name;
+}
+
 
 // static VALUE getBone(VALUE self, VALUE name){
 // 	Oni_ModelPtr ptr_model;
