@@ -162,10 +162,10 @@ namespace Oni
 			parentNode = mSceneMgr->getRootSceneNode();
 		}
 		
-		parentNode->addChild(node);
+		parentNode->addChild(mNode);
 		
-		node->setPosition(0,0,0); // Spawn all objects at the origin
+		mNode->setPosition(0,0,0); // Spawn all objects at the origin
 		
-		return node;
+		return mNode;
 	}
 }

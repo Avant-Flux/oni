@@ -61,16 +61,15 @@ static VALUE initialize(int argc, VALUE *argv, VALUE self){
 	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
 	
 	
-	VALUE window, name, filename, parent;
-	rb_scan_args(argc, argv, "31", &window, &name, &filename, &parent);
+	VALUE window, name, parent;
+	rb_scan_args(argc, argv, "21", &window, &name, &parent);
 	
 	
 	Ogre_WindowPtr ptr_window;
 	Data_Get_Struct(window, Ogre_WindowPtr, ptr_window);
 	
 	char* string_name = StringValueCStr(name);
-	char* string_filename = StringValueCStr(filename);
-	
+		
 	Ogre_NodePtr ptr_parent;
 	if(NIL_P(parent)){
 		ptr_parent = NULL;
@@ -80,7 +79,7 @@ static VALUE initialize(int argc, VALUE *argv, VALUE self){
 		ptr_parent = Oni_getNodePointer(parent);
 	}
 	
-	Oni_Node_initialize(ptr_node, ptr_window, string_name, string_filename, ptr_parent);
+	Oni_Node_initialize(ptr_node, ptr_window, string_name, ptr_parent);
 	
 	return Qnil;
 }

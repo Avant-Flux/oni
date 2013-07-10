@@ -17,7 +17,7 @@ extern "C" {
 	Oni_NodePtr Oni_Node_new();
 	void Oni_Node_delete(Oni_NodePtr model);
 	void Oni_Node_markgc(Oni_NodePtr obj);
-	void Oni_Node_initialize(Oni_NodePtr obj, Ogre_WindowPtr obj2, char* name, char* filename, Ogre_NodePtr parent);
+	void Oni_Node_initialize(Oni_NodePtr obj, Ogre_WindowPtr obj2, char* name, Ogre_NodePtr parent);
 	void Oni_Node_update(Oni_NodePtr obj, double dt);
 	
 	Ogre_NodePtr Oni_Node_getParentNode(Oni_NodePtr obj);

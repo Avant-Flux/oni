@@ -5,6 +5,9 @@
 
 #include "Window.h"
 #include "Camera.h"
+
+#include "Node.h"
+
 #include "Light.h"
 
 #include "Model.h"

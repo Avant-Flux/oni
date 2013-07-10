@@ -1,37 +1,35 @@
-#include "Model.h"
+#include "Node.h"
 
 
 extern "C" {
 	Oni_NodePtr Oni_Node_new(){
 		Oni::Node* node = new Oni::Node();
 		
-		return (Oni_NodePtr)model;
+		return (Oni_NodePtr)node;
 	}
 
 	void Oni_Node_delete(Oni_NodePtr obj){
 		printf("======DELETING NODE\n");
 		Oni::Node* node = (Oni::Node*)(obj);
 		
-		delete model;
+		delete node;
 	}
 
 	void Oni_Node_markgc(Oni_NodePtr obj){
 		printf("======MARK FOR COLLECTION\n");
-		Oni::Node* node = (Oni::Node*)(obj);
+		// Oni::Node* node = (Oni::Node*)(obj);
 		
-		node->setVisible(false);
 	}
 
-	void Oni_Node_initialize(Oni_NodePtr obj, Ogre_WindowPtr obj2, char* name, char* filename, Ogre_NodePtr parent){
+	void Oni_Node_initialize(Oni_NodePtr obj, Ogre_WindowPtr obj2, char* name, Ogre_NodePtr parent){
 		Oni::Node* node = (Oni::Node*)(obj);
 		GameApplication* game = (GameApplication*)obj2;
 		
 		std::string cpp_name(name);
-		std::string cpp_filename(filename);
-		
+				
 		Ogre::Node* parentNode = (Ogre::Node*)(parent);
 		
-		node->initialize(game->getSceneMgr(), cpp_name, cpp_filename, parentNode);
+		node->initialize(game->getSceneMgr(), cpp_name, parentNode);
 	}
 
 	void Oni_Node_update(Oni_NodePtr obj, double dt){
