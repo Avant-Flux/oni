@@ -30,7 +30,13 @@ namespace Oni
 		// 	node->attachObject(child);
 		// }
 		
-		mSceneMgr->destroySceneNode(mNode);
+		// std::cout << "DELETING FROM C++" << std::endl;
+		
+		// NODE: Don't seem to need to destroy the node?
+		// I don't really understand why.  Presumably the scene manager is handling it?
+		// mSceneMgr->destroySceneNode(mNode);
+		
+		// std::cout << "DELETING FROM C++ ---- END SECTION" << std::endl;
 	}
 
 	void

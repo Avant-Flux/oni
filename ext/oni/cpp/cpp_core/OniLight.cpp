@@ -9,6 +9,7 @@ namespace Oni
 	
 	Light::~Light()
 	{
+		// TODO: Remember to destroy scene node as well - or not? See OniNode.cpp#~Node() comments
 		mSceneMgr->destroyLight(mLight);
 	}
 	
