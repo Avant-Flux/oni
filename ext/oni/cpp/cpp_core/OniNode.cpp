@@ -34,6 +34,8 @@ namespace Oni
 		
 		// NODE: Don't seem to need to destroy the node?
 		// I don't really understand why.  Presumably the scene manager is handling it?
+		// 
+		// It certainly seems like there's a memory leak though
 		// mSceneMgr->destroySceneNode(mNode);
 		
 		// std::cout << "DELETING FROM C++ ---- END SECTION" << std::endl;
@@ -44,7 +46,7 @@ namespace Oni
 	{
 		mSceneMgr = sceneMgr;
 		
-		this->attachToNewSceneNode(parentNode);
+		mNode = this->attachToNewSceneNode(parentNode);
 	}
 	
 	void
@@ -161,17 +163,17 @@ namespace Oni
 	// ===== Private
 	Ogre::SceneNode*
 	Node::attachToNewSceneNode(Ogre::Node* parentNode){
-		Ogre::SceneNode* mNode = mSceneMgr->createSceneNode();
+		Ogre::SceneNode* node = mSceneMgr->createSceneNode();
 		
 		if(parentNode == NULL)
 		{
 			parentNode = mSceneMgr->getRootSceneNode();
 		}
 		
-		parentNode->addChild(mNode);
+		parentNode->addChild(node);
 		
-		mNode->setPosition(0,0,0); // Spawn all objects at the origin
+		node->setPosition(0,0,0); // Spawn all objects at the origin
 		
-		return mNode;
+		return node;
 	}
 }
