@@ -36,11 +36,28 @@ TODO: Create programmable scene manager and programmable camera
 	Allows for changes in the way the scene manager is structured to be handled the ruby level
 	same goes for the camera
 	Wouldn't be super efficient, but would allow for rapid prototyping / livecoding
+	
+	Should probably just manage lifetime of objects at the Ruby level
 
-TODO: Create Oni::Movable, because there is way to much code overlap between Model and Light
+TODO: Create Oni::Movable, because there is way to much code overlap between Node, Model and Light
+	Perhaps not necessarily call it Movable, because it's purpose differs from that of Ogre::Movable, but look into creating this thing regardless
+	
 	This might not help at all, because there's still going to be a bunch of overlap at the C-extension level
+		Should be able to help with that too, if pointers are being cast correctly
+		Can just use cpp interface calls for Movable
+	
+	The base class might actually be Node, because of how the other objects are moved around by being attached to nodes
 
 TODO: Actually pass proper transform space to Ogre::Node in translate method for Light and Model instead of having to switch between three different function calls.
 
+TODO: Create null/empty object.  Useful for grouping meshes together. Really useful when prototyping.
 
-TODO: Allow Oni::Model#setOrientation. Not so useful for gameplay scripting, but useful for level loading, to allow static assets to be rotated in 3D space.
+
+TODO: Consider - Angles should all be in one unit (radians or degrees)
+
+TODO: Create classes to generate basic primitives like lines, etc for use when debugging, or simply visualizing data programatically
+
+TODO: Allow setting of parent node after initialization of the object
+
+
+TODO: Allow control over light groups for even better control over lighting
