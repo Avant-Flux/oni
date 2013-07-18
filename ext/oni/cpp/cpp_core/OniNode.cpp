@@ -36,7 +36,7 @@ namespace Oni
 		// I don't really understand why.  Presumably the scene manager is handling it?
 		// 
 		// It certainly seems like there's a memory leak though
-		// mSceneMgr->destroySceneNode(mNode);
+		mSceneMgr->destroySceneNode(mNode);
 		
 		// std::cout << "DELETING FROM C++ ---- END SECTION" << std::endl;
 	}
@@ -46,7 +46,17 @@ namespace Oni
 	{
 		mSceneMgr = sceneMgr;
 		
-		mNode = this->attachToNewSceneNode(parentNode);
+		mNode = mSceneMgr->createSceneNode(name);
+		
+		
+		if(parentNode == NULL)
+		{
+			parentNode = mSceneMgr->getRootSceneNode();
+		}
+		
+		parentNode->addChild(mNode);
+		
+		mNode->setPosition(0,0,0); // Spawn all objects at the origin
 	}
 	
 	void
@@ -162,18 +172,16 @@ namespace Oni
 	
 	// ===== Private
 	Ogre::SceneNode*
-	Node::attachToNewSceneNode(Ogre::Node* parentNode){
-		Ogre::SceneNode* node = mSceneMgr->createSceneNode();
+	Node::attachToNewSceneNode(Ogre::Node* parentNode){		
+		// if(parentNode == NULL)
+		// {
+		// 	parentNode = mSceneMgr->getRootSceneNode();
+		// }
 		
-		if(parentNode == NULL)
-		{
-			parentNode = mSceneMgr->getRootSceneNode();
-		}
+		// parentNode->addChild(node);
 		
-		parentNode->addChild(node);
+		// node->setPosition(0,0,0); // Spawn all objects at the origin
 		
-		node->setPosition(0,0,0); // Spawn all objects at the origin
-		
-		return node;
+		// return node;
 	}
 }
