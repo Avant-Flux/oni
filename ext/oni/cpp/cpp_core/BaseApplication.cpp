@@ -321,8 +321,11 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
     {
         Ogre::TextureManager::getSingleton().reloadAll();
     }
-    else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
+    else if (arg.key == OIS::KC_F2)
     {
+        // take a screenshot
+        // Currently using F2 like in Minecraft
+        // Don't want to use printscreen because that's the system-level command
         mWindow->writeContentsToTimestampedFile("screenshot", ".jpg");
     }
     else if (arg.key == OIS::KC_ESCAPE)
