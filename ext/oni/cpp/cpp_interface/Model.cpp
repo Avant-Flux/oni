@@ -40,6 +40,7 @@ extern "C" {
 		model->update(dt);
 	}
 	
+	// TODO: Check for potential memory leak
 	const char* Oni_Model_getName(Oni_ModelPtr obj){
 		Oni::Model* model = (Oni::Model*)(obj);
 		
@@ -175,6 +176,16 @@ extern "C" {
 		Oni::Model* model = (Oni::Model*)(obj);
 		
 		model->scale(x,y,z);
+	}
+	
+	void Oni_Model_getScale(Oni_ModelPtr obj, double* vector){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		Ogre::Vector3 scale = model->getScale();
+		
+		vector[0] = scale.x;
+		vector[1] = scale.y;
+		vector[2] = scale.z;
 	}
 	
 	void Oni_Model_setScale(Oni_ModelPtr obj, double x, double y, double z){

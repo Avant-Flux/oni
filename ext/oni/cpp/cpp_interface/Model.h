@@ -57,6 +57,7 @@ extern "C" {
 	double Oni_Model_getRotation(Oni_ModelPtr obj);
 	
 	void Oni_Model_scale(Oni_ModelPtr obj, double x, double y, double z);
+	void Oni_Model_getScale(Oni_ModelPtr obj, double* vector);
 	void Oni_Model_setScale(Oni_ModelPtr obj, double x, double y, double z);
 
 #ifdef __cplusplus

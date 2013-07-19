@@ -268,6 +268,12 @@ namespace Oni
 		mEntity->getParentNode()->scale(x,y,z);
 	}
 	
+	const Ogre::Vector3&
+	Model::getScale()
+	{
+		return mEntity->getParentNode()->getScale();
+	}
+	
 	void
 	Model::setScale(double x, double y, double z)
 	{

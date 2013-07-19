@@ -41,7 +41,7 @@ void Init_Oni_Node(VALUE outer){
 	rb_define_method(klass, "rotation", getRotation, 0);
 	rb_define_method(klass, "rotation=", setRotation, 1);
 	
-	rb_define_method(klass, "scale", scale, 3);
+	rb_define_method(klass, "scale_by", scale, 3);
 	rb_define_method(klass, "scale=", setScale, 1);
 	
 	// TODO: Maybe allow getting children?

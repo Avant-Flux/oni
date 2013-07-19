@@ -41,7 +41,8 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "rotation", getRotation, 0);
 	rb_define_method(klass, "rotation=", setRotation, 1);
 	
-	rb_define_method(klass, "scale", scale, 3);
+	rb_define_method(klass, "scale_by", scale, 3);
+	rb_define_method(klass, "scale", getScale, 0);
 	rb_define_method(klass, "scale=", setScale, 1);
 }
 
@@ -407,6 +408,23 @@ static VALUE scale(VALUE self, VALUE x, VALUE y, VALUE z){
 	Oni_Model_scale(ptr_model, dbl_x, dbl_y, dbl_z);
 	
 	return Qnil;
+}
+
+static VALUE getScale(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	double scale[3];
+	Oni_Model_getScale(ptr_model, scale);
+	
+	
+	VALUE array = rb_ary_new2(3);
+	int i;
+	for(i = 0; i < 3; i++){
+		rb_ary_store(array, i, rb_float_new(scale[i]));
+	}
+	
+	return array;
 }
 
 static VALUE setScale(VALUE self, VALUE scale){

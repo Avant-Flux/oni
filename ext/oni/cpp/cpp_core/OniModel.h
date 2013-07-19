@@ -62,6 +62,7 @@ namespace Oni
 		
 		// Scale
 		void scale(double x, double y, double z);
+		const Ogre::Vector3& getScale();
 		void setScale(double x, double y, double z);
 	
 	protected:

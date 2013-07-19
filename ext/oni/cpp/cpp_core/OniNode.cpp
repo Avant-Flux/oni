@@ -32,10 +32,7 @@ namespace Oni
 		
 		// std::cout << "DELETING FROM C++" << std::endl;
 		
-		// NODE: Don't seem to need to destroy the node?
-		// I don't really understand why.  Presumably the scene manager is handling it?
-		// 
-		// It certainly seems like there's a memory leak though
+		// TODO: Make sure nodes are managed properly if parents are destroyed before children
 		mSceneMgr->destroySceneNode(mNode);
 		
 		// std::cout << "DELETING FROM C++ ---- END SECTION" << std::endl;

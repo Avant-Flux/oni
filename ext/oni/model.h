@@ -46,4 +46,5 @@ static VALUE setRotation(VALUE self, VALUE radians);
 // static VALUE rotateTo(VALUE self, VALUE x, VALUE y, VALUE z);
 
 static VALUE scale(VALUE self, VALUE x, VALUE y, VALUE z);
+static VALUE getScale(VALUE self);
 static VALUE setScale(VALUE self, VALUE scale);

@@ -16,7 +16,7 @@ class Window < Oni::Window
 		@a = Oni::Model.new(self, "Human_Male", "Human_Male.mesh")
 		
 		@a.scale = [4, 5, 3]
-		@a.scale(2,2,2)
+		@a.scale_by(2,2,2)
 	end
 	
 	def update(dt)
