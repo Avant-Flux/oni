@@ -63,6 +63,12 @@ namespace Oni
 	}
 		
 	// Position
+	const Ogre::Vector3&
+	Node::getPosition()
+	{
+		return mNode->getPosition();
+	}
+	
 	void
 	Node::setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z)
 	{

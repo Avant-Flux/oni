@@ -19,6 +19,7 @@ namespace Oni
 		Ogre::SceneNode* getNode(){return mNode;};
 		
 		// Position
+		const Ogre::Vector3& getPosition();
 		void setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z);
 		
 		void translate(Ogre::Real x, Ogre::Real y, Ogre::Real z, Ogre::Node::TransformSpace relativeTo=Ogre::Node::TS_PARENT);

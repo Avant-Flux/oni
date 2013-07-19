@@ -38,6 +38,7 @@ extern "C" {
 	double Oni_Model_getBoundingBoxDepth(Oni_ModelPtr obj);
 	double Oni_Model_getBoundingBoxHeight(Oni_ModelPtr obj);
 	
+	void Oni_Model_getPosition(Oni_ModelPtr obj, double* vector);
 	void Oni_Model_setPosition(Oni_ModelPtr obj, double x, double y, double z);
 	void Oni_Model_translate(Oni_ModelPtr obj, double x, double y, double z, OniTransformSpace ts);
 	

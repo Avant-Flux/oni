@@ -148,6 +148,15 @@ extern "C" {
 		}
 	}
 	
+	void Oni_Model_getPosition(Oni_ModelPtr obj, double* vector){
+		Oni::Model* model = (Oni::Model*)(obj);
+		
+		Ogre::Vector3 position = model->getPosition();
+		
+		vector[0] = position.x;
+		vector[1] = position.y;
+		vector[2] = position.z;
+	}
 	
 	void Oni_Model_setPosition(Oni_ModelPtr obj, double x, double y, double z){
 		Oni::Model* model = (Oni::Model*)(obj);

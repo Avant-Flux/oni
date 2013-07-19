@@ -25,6 +25,7 @@ void Init_Oni_Model(VALUE outer){
 	rb_define_method(klass, "bb_depth", getBoundingBoxDepth, 0);
 	rb_define_method(klass, "bb_height", getBoundingBoxHeight, 0);
 	
+	rb_define_method(klass, "position", getPosition, 0);
 	rb_define_method(klass, "position=", setPosition, 1);
 	rb_define_method(klass, "translate", translate, -1);
 	
@@ -221,6 +222,23 @@ static VALUE getBoundingBoxHeight(VALUE self){
 	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
 	
 	return rb_float_new(Oni_Model_getBoundingBoxHeight(ptr_model));
+}
+
+static VALUE getPosition(VALUE self){
+	Oni_ModelPtr ptr_model;
+	Data_Get_Struct(self, Oni_ModelPtr, ptr_model);
+	
+	double position[3];
+	Oni_Model_getPosition(ptr_model, position);
+	
+	
+	VALUE array = rb_ary_new2(3);
+	int i;
+	for(i = 0; i < 3; i++){
+		rb_ary_store(array, i, rb_float_new(position[i]));
+	}
+	
+	return array;
 }
 
 static VALUE setPosition(VALUE self, VALUE pos)

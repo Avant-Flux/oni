@@ -51,6 +51,16 @@ extern "C" {
 		return (Ogre_NodePtr)(node->getNode());
 	}
 	
+	void Oni_Node_getPosition(Oni_NodePtr obj, double* vector){
+		Oni::Node* node = (Oni::Node*)(obj);
+		
+		Ogre::Vector3 position = node->getPosition();
+		
+		vector[0] = position.x;
+		vector[1] = position.y;
+		vector[2] = position.z;
+	}
+	
 	void Oni_Node_setPosition(Oni_NodePtr obj, double x, double y, double z){
 		Oni::Node* node = (Oni::Node*)(obj);
 		

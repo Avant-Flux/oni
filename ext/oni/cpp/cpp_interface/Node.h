@@ -24,6 +24,7 @@ extern "C" {
 	
 	Ogre_NodePtr Oni_Node_getNode(Oni_NodePtr obj);
 	
+	void Oni_Node_getPosition(Oni_NodePtr obj, double* vector);
 	void Oni_Node_setPosition(Oni_NodePtr obj, double x, double y, double z);
 	void Oni_Node_translate(Oni_NodePtr obj, double x, double y, double z, OniTransformSpace ts);
 	

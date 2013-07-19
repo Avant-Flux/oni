@@ -24,7 +24,7 @@ void Init_Oni_Node(VALUE outer){
 	
 	
 	
-	
+	rb_define_method(klass, "position", getPosition, 0);
 	rb_define_method(klass, "position=", setPosition, 1);
 	rb_define_method(klass, "translate", translate, -1);
 	
@@ -181,6 +181,23 @@ static VALUE getBoundingBoxHeight(VALUE self){
 	
 	// return rb_float_new(Oni_Node_getBoundingBoxHeight(ptr_node));
 	return Qnil;
+}
+
+static VALUE getPosition(VALUE self){
+	Oni_NodePtr ptr_node;
+	Data_Get_Struct(self, Oni_NodePtr, ptr_node);
+	
+	double position[3];
+	Oni_Node_getPosition(ptr_node, position);
+	
+	
+	VALUE array = rb_ary_new2(3);
+	int i;
+	for(i = 0; i < 3; i++){
+		rb_ary_store(array, i, rb_float_new(position[i]));
+	}
+	
+	return array;
 }
 
 static VALUE setPosition(VALUE self, VALUE pos)

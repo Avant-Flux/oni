@@ -172,6 +172,12 @@ namespace Oni
 	}
 	
 	// Position
+	const Ogre::Vector3&
+	Model::getPosition()
+	{
+		return mEntity->getParentNode()->getPosition();
+	}
+	
 	void
 	Model::setPosition(Ogre::Real x, Ogre::Real y, Ogre::Real z)
 	{
